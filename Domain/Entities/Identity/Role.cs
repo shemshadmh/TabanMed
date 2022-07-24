@@ -1,5 +1,4 @@
-﻿using Domain.Entities.Permission;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Entities.Identity
 {
@@ -8,8 +7,6 @@ namespace Domain.Entities.Identity
         public string DisplayName { get; set; } = null!;
         public ICollection<RoleClaim>? Claims { get; set; }
         public ICollection<UserRole>? Users { get; set; }
-
-        public ICollection<RolePermission>? RolePermissions { get; set; }
 
     }
 }

@@ -15,13 +15,26 @@
             public const int PhoneMaxLength = 20;
             public const int PasswordHashMaxLength = 100;
         }
+
+        public static class Role
+        {
+            public const int DisplayNameMaxLength = 100;
+        }
+
+        public static class Permission
+        {
+            public const int ClaimMaxLength = 80;
+            public const int DisplayTextMaxLength = 100;
+        }
         
+
 
         #endregion
 
-        public static class Shared
+            public static class Shared
         {
             public const int GUIDMaxLength = 40;
+            public const string NVarCharColumnType = "nvarchar";
             public const string VarCharColumnType = "varchar";
             public const string SmallIntColumnType = "smallint"; // A small integer. Signed range is from -32768 to 32767. Unsigned range is from 0 to 65535. The size parameter specifies the maximum display width (which is 255)
             public const string TinyIntColumnType = "tinyint"; // A very small integer. Signed range is from -128 to 127. Unsigned range is from 0 to 255. The size parameter specifies the maximum display width (which is 255)

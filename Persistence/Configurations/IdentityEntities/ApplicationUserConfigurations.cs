@@ -1,4 +1,5 @@
 ﻿
+using Application;
 using Common;
 using Domain.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -102,9 +103,9 @@ namespace Persistence.Configurations.IdentityEntities
             // Admin User
             builder.HasData(new ApplicationUser
             {
-                Id = StaticDetails.HatefAdminUserId,
-                UserName = StaticDetails.HatefAdminUsername,
-                Email = "hatef@fibato.com",
+                Id = AppConstants.HatefAdminUserId,
+                UserName = AppConstants.HatefAdminUsername,
+                Email = "hatef@tabanmed.com",
                 PasswordHash = "AQAAAAEAACcQAAAAEDCEjgFnVqs3jS+KYwhsCsNHoR7mV7tQ7/NUHc2bxUc9HjMuXSNCax/I5jPdFBGsVg==",
                 Name = "محمد هاتف",
                 Family = "شمشاد",
@@ -113,34 +114,16 @@ namespace Persistence.Configurations.IdentityEntities
                 LockoutEnabled = true,
                 Created = DateTime.UtcNow,
                 CreatedBy = "Seed",
-                NormalizedUserName = StaticDetails.HatefAdminUsername.ToUpper().Normalize(),
-                NormalizedEmail = "hatef@fibato.com".ToUpper().Normalize(),
-                SecurityStamp = Guid.NewGuid().ToString()
-            },
-            // Admin User
-            new ApplicationUser
-            {
-                Id = StaticDetails.AliAdminUserId,
-                UserName = StaticDetails.AliAdminUsername,
-                Email = "ali@fibato.com",
-                PasswordHash = "AQAAAAEAACcQAAAAEOB0tQZHywYM5PoKys/zWoI8wxZrjzxeKFntJceeLGz/JpSeQ5Z3DFx8/Y4+KgkHUg==",
-                Name = "علی",
-                Family = "آقاخانی",
-                Gender = true,
-                IsOperator = true,
-                LockoutEnabled = true,
-                Created = DateTime.UtcNow,
-                CreatedBy = "Seed",
-                NormalizedEmail = "ali@fibato.com".ToUpper().Normalize(),
-                NormalizedUserName = StaticDetails.AliAdminUsername.ToUpper().Normalize(),
+                NormalizedUserName = AppConstants.HatefAdminUsername.ToUpper().Normalize(),
+                NormalizedEmail = "hatef@tabanmed.com".ToUpper().Normalize(),
                 SecurityStamp = Guid.NewGuid().ToString()
             },
             // System Operator User
             new ApplicationUser
             {
                 Id = "04a76057-948a-4fd1-b9f0-ed36991fcaa5",
-                UserName = "FibatoOperator",
-                Email = "operator@fibato.com",
+                UserName = "tabanmedOperator",
+                Email = "operator@tabanmed.com",
                 PasswordHash = "AQAAAAEAACcQAAAAEGO2+kmYpAenNWk5p1UYgYOMbU3/pUOoc4yRkUma3Zq2Hsc8g9HSWpztF3MozgJdig==",
                 Name = "اپراتور",
                 Family = "فیباتو",
@@ -148,8 +131,8 @@ namespace Persistence.Configurations.IdentityEntities
                 LockoutEnabled = true,
                 Created = DateTime.UtcNow,
                 CreatedBy = "Seed",
-                NormalizedEmail = "operator@fibato.com".ToUpper().Normalize(),
-                NormalizedUserName = "FibatoOperator".ToUpper().Normalize(),
+                NormalizedEmail = "operator@tabanmed.com".ToUpper().Normalize(),
+                NormalizedUserName = "tabanmedOperator".ToUpper().Normalize(),
                 SecurityStamp = Guid.NewGuid().ToString()
             });
         }
