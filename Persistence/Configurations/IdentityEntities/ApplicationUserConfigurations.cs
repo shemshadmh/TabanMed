@@ -14,6 +14,7 @@ namespace Persistence.Configurations.IdentityEntities
             builder.HasKey(user => user.Id);
 
             builder.Property(user => user.Id)
+                .HasColumnType(ModelConstants.Shared.VarCharColumnType)
                 .HasMaxLength(ModelConstants.Shared.GUIDMaxLength)
                 .ValueGeneratedOnAdd();
 
@@ -126,7 +127,7 @@ namespace Persistence.Configurations.IdentityEntities
                 Email = "operator@tabanmed.com",
                 PasswordHash = "AQAAAAEAACcQAAAAEGO2+kmYpAenNWk5p1UYgYOMbU3/pUOoc4yRkUma3Zq2Hsc8g9HSWpztF3MozgJdig==",
                 Name = "اپراتور",
-                Family = "فیباتو",
+                Family = "تابان",
                 IsOperator = true,
                 LockoutEnabled = true,
                 Created = DateTime.UtcNow,
