@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CancelChanges" xml:space="preserve">
+    <value>Cancel Changes</value>
+  </data>
+  <data name="CreateNewRecord" xml:space="preserve">
+    <value>Create New Record</value>
+  </data>
+  <data name="EnName" xml:space="preserve">
+    <value>English Name</value>
+  </data>
+  <data name="FaName" xml:space="preserve">
+    <value>Farsi Name</value>
+  </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="Longitude" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="TransportationCompaniesListPageTitle" xml:space="preserve">
+    <value>Transportation Companies List</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>Zoom</value>
+  </data>
+  <data name="TransportationType" xml:space="preserve">
+    <value>Transportation Type</value>
+  </data>
+  <data name="AirlineType" xml:space="preserve">
+    <value>Airline</value>
+  </data>
+  <data name="BusType" xml:space="preserve">
+    <value>Bus</value>
+  </data>
+  <data name="TrainType" xml:space="preserve">
+    <value>Train</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="ClassName" xml:space="preserve">
+    <value>Class Name</value>
+  </data>
+  <data name="TransportCoLogoFile" xml:space="preserve">
+    <value>Logo File</value>
+  </data>
+  <data name="ShopAttractionType" xml:space="preserve">
+    <value>Shopping Center</value>
+  </data>
+  <data name="RestaurantAttractionType" xml:space="preserve">
+    <value>Restaurant</value>
+  </data>
+  <data name="MuseumAttractionType" xml:space="preserve">
+    <value>Museum</value>
+  </data>
+  <data name="HistoricalPlaceAttractionType" xml:space="preserve">
+    <value>HistoricalPlace</value>
+  </data>
+  <data name="OtherAttractionType" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="AttractionType" xml:space="preserve">
+    <value>Attraction Type</value>
+  </data>
+  <data name="AttractionPlacesListPageTitle" xml:space="preserve">
+    <value>AttractionPlaces List</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="UpdateChanges" xml:space="preserve">
+    <value>Update Changes</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="CEOAgentType" xml:space="preserve">
+    <value>CEO</value>
+  </data>
+  <data name="RepresentativeAgentType" xml:space="preserve">
+    <value>Agency Representative</value>
+  </data>
+  <data name="EmployeeAgentType" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="WorkingHours" xml:space="preserve">
+    <value>Working Hours</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Rate" xml:space="preserve">
+    <value>Rate</value>
+  </data>
+  <data name="AgenciesListTitle" xml:space="preserve">
+    <value>Agencies</value>
+  </data>
+  <data name="HotelLogo" xml:space="preserve">
+    <value>Logo</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="HotelOtherNames" xml:space="preserve">
+    <value>Other Names(split with , character)</value>
+  </data>
+  <data name="HotelRoomCount" xml:space="preserve">
+    <value>Room Count</value>
+  </data>
+  <data name="WebAddress" xml:space="preserve">
+    <value>WebSite</value>
+  </data>
+  <data name="HotelStars" xml:space="preserve">
+    <value>Hotel Stars</value>
+  </data>
+  <data name="NoValue" xml:space="preserve">
+    <value>Empty</value>
+  </data>
+  <data name="DepartureDate" xml:space="preserve">
+    <value>Departure Date</value>
+  </data>
+  <data name="ReturnDate" xml:space="preserve">
+    <value>Return Date</value>
+  </data>
+  <data name="HotelAlbumItem" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="ImageAlt" xml:space="preserve">
+    <value>Image Alt Text</value>
+  </data>
+  <data name="UserFullName" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="CommentText" xml:space="preserve">
+    <value>Comment Body</value>
+  </data>
+  <data name="CommentState" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="HotelFaName" xml:space="preserve">
+    <value>Hotel Persian Name</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="CountSectionUsers" xml:space="preserve">
+    <value>Count Section Users</value>
+  </data>
+  <data name="NotificationText" xml:space="preserve">
+    <value>Message Body</value>
+  </data>
+  <data name="NotificationSubject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="GroupNotificationType" xml:space="preserve">
+    <value>Group Message Type</value>
+  </data>
+  <data name="NotificationSendData" xml:space="preserve">
+    <value>Send Data</value>
+  </data>
+  <data name="NotificationReceiverName" xml:space="preserve">
+    <value>Receiver Name</value>
+  </data>
+  <data name="SectionNotificationType" xml:space="preserve">
+    <value>Section</value>
+  </data>
+  <data name="RoleNotificationType" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="UserNotificationType" xml:space="preserve">
+    <value>User </value>
+  </data>
+  <data name="MessageState" xml:space="preserve">
+    <value>Message State</value>
+  </data>
+  <data name="NotificationSentState" xml:space="preserve">
+    <value>Not Read</value>
+  </data>
+  <data name="NotificationWaitingState" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="NotificationFaildState" xml:space="preserve">
+    <value>Faild</value>
+  </data>
+  <data name="NotificationReadState" xml:space="preserve">
+    <value>Read</value>
+  </data>
+  <data name="CheckAllNotifs" xml:space="preserve">
+    <value>Check all notifications</value>
+  </data>
+  <data name="MessageReceiver" xml:space="preserve">
+    <value>Message Receiver</value>
+  </data>
+</root>

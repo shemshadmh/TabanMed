@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TabanMed.Infrastructure", "TabanMed.Infrastructure\TabanMed.Infrastructure.csproj", "{CC3AECAA-3B66-4069-825C-A406C767CB67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TabanMed.Admin", "TabanMed.Admin\TabanMed.Admin.csproj", "{134F78CA-7674-4158-B1ED-734DFEF9538A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TabanMed.Admin", "TabanMed.Admin\TabanMed.Admin.csproj", "{134F78CA-7674-4158-B1ED-734DFEF9538A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "Resources\Resources.csproj", "{C916F8C7-EA6C-4BCE-BC22-E9AF356039BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{134F78CA-7674-4158-B1ED-734DFEF9538A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{134F78CA-7674-4158-B1ED-734DFEF9538A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{134F78CA-7674-4158-B1ED-734DFEF9538A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C916F8C7-EA6C-4BCE-BC22-E9AF356039BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C916F8C7-EA6C-4BCE-BC22-E9AF356039BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C916F8C7-EA6C-4BCE-BC22-E9AF356039BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C916F8C7-EA6C-4BCE-BC22-E9AF356039BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{BE985EFD-6CCD-4A01-8DE9-4D03D7D8839D} = {BE26971D-EF67-41E2-8FE7-D94F19E19B86}
 		{CC3AECAA-3B66-4069-825C-A406C767CB67} = {BE26971D-EF67-41E2-8FE7-D94F19E19B86}
 		{134F78CA-7674-4158-B1ED-734DFEF9538A} = {40294FD4-12C6-4FF9-BD02-176DF5FACCD9}
+		{C916F8C7-EA6C-4BCE-BC22-E9AF356039BF} = {1DB59894-553A-462F-B039-C1C567C94FC3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2BA5D1A1-03BD-4876-A180-2E5449FB7F9B}

@@ -29,6 +29,7 @@ var app = builder.Build();
 
 app.UseStaticFiles();
 app.UseRouting();
+app.UseRequestLocalization();
 
 app.UseEndpoints(endpoints =>
 {

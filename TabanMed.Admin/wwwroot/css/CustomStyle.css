@@ -1,0 +1,25 @@
+﻿@font-face {
+    font-family: IranSanse;
+    src: url('../fonts/ttf/fanum.ttf');
+}
+
+[dir="rtl"] body{
+    font-family: IranSanse;
+    direction: rtl;
+    overflow-x: hidden;
+}
+
+/*kendo Grid*/
+.k-filter-row > th:first-child, .k-grid tbody td:first-child, .k-grid tfoot td:first-child,
+.k-grid-header th.k-header:first-child {
+    border-left-width: 1px !important;
+}
+
+.k-grouping-header {
+    text-align: center;
+}
+
+#grid .k-grid-header .k-header {
+    font-weight: bold;
+}
+/*end Kendo grid*/

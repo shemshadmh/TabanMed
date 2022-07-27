@@ -14,5 +14,21 @@ namespace Application
         public static string HatefAdminPassword => "AdFiba@1#2$3";
 
         #endregion
+
+        #region ViewData
+
+        public static string ViewDataTitlePageName = "PageTitle";
+        public static string ViewDataControllerName = "ControllerName";
+        public static string ViewDataControllerRoute = "ControllerRoute";
+        public static string ViewDataActionRoute = "ActionRoute";
+
+        #endregion
+
+        #region System Globalization
+
+        public static string FaIrCulture => "fa-IR";
+        public static string EnUsCulture => "en-US";
+
+        #endregion
     }
 }

@@ -3,6 +3,7 @@ using Common;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TabanMed.Infrastructure.Services;
+using TabanMed.Infrastructure.Services.Globalization;
 
 namespace TabanMed.Infrastructure
 {
@@ -19,6 +20,7 @@ namespace TabanMed.Infrastructure
 
             #endregion
 
+            services.ConfigureServicesCultureLocalization();
 
             return services;
         }
