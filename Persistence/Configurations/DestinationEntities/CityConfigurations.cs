@@ -28,6 +28,24 @@ namespace Persistence.Configurations.DestinationEntities
                 .WithMany(country => country.Cities)
                 .HasForeignKey(city => city.CountryId)
                 .OnDelete(DeleteBehavior.NoAction); // do not delete children when parent is deleted
+
+            builder.HasData(new List<City>()
+            {
+                new ()
+                {
+                    Id = 1,
+                    EnName = "Tehran",
+                    FaName = "تهران",
+                    CountryId = 1
+                },
+                new ()
+                {
+                    Id = 2,
+                    EnName = "Mashhad",
+                    FaName = "مشهد",
+                    CountryId = 1
+                }
+            });
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
@@ -11,9 +12,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220727133459_TabanMed_20220727_180441")]
+    partial class TabanMed_20220727_180441
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,22 +50,6 @@ namespace Persistence.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Cities");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = (short)1,
-                            CountryId = (short)1,
-                            EnName = "Tehran",
-                            FaName = "تهران"
-                        },
-                        new
-                        {
-                            Id = (short)2,
-                            CountryId = (short)1,
-                            EnName = "Mashhad",
-                            FaName = "مشهد"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Destination.Country", b =>
@@ -87,14 +73,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = (short)1,
-                            EnName = "Iran",
-                            FaName = "ایران"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Identity.ApplicationUser", b =>
@@ -226,8 +204,8 @@ namespace Persistence.Migrations
                         {
                             Id = "b0a39202-a221-47c7-9d34-dc4479ec33f2",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "7aca6c88-9c88-45b0-b286-4061ebe5b1a2",
-                            Created = new DateTime(2022, 7, 27, 13, 42, 21, 535, DateTimeKind.Utc).AddTicks(8407),
+                            ConcurrencyStamp = "25dddd98-13ff-4e7e-bda9-91e553e65524",
+                            Created = new DateTime(2022, 7, 27, 13, 34, 58, 970, DateTimeKind.Utc).AddTicks(2763),
                             CreatedBy = "Seed",
                             Email = "hatef@tabanmed.com",
                             EmailConfirmed = false,
@@ -241,7 +219,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "HATEFADMIN",
                             PasswordHash = "AQAAAAEAACcQAAAAEDCEjgFnVqs3jS+KYwhsCsNHoR7mV7tQ7/NUHc2bxUc9HjMuXSNCax/I5jPdFBGsVg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1ddc509a-222f-4a19-b5c2-92998d7d33a3",
+                            SecurityStamp = "2615e0bd-5519-408c-90a7-14c47e6d6d78",
                             TwoFactorEnabled = false,
                             UserName = "HatefAdmin"
                         },
@@ -249,8 +227,8 @@ namespace Persistence.Migrations
                         {
                             Id = "04a76057-948a-4fd1-b9f0-ed36991fcaa5",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "a6c10570-76c9-4ee7-849a-8148eee9c739",
-                            Created = new DateTime(2022, 7, 27, 13, 42, 21, 535, DateTimeKind.Utc).AddTicks(8440),
+                            ConcurrencyStamp = "f541ec0f-1dba-403e-bdd8-a03bc5a5a007",
+                            Created = new DateTime(2022, 7, 27, 13, 34, 58, 970, DateTimeKind.Utc).AddTicks(2820),
                             CreatedBy = "Seed",
                             Email = "operator@tabanmed.com",
                             EmailConfirmed = false,
@@ -263,7 +241,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "TABANMEDOPERATOR",
                             PasswordHash = "AQAAAAEAACcQAAAAEGO2+kmYpAenNWk5p1UYgYOMbU3/pUOoc4yRkUma3Zq2Hsc8g9HSWpztF3MozgJdig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3e3ca5c9-387e-431b-8b91-184d606c67b6",
+                            SecurityStamp = "87bf126d-55fc-4f17-9988-caa406276c63",
                             TwoFactorEnabled = false,
                             UserName = "tabanmedOperator"
                         });
@@ -306,7 +284,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "3e2c9b3b-1c5c-41a5-9fe6-9004dcd4b78b",
-                            ConcurrencyStamp = "cc9302fe-8631-4ed4-906d-ef6b2961a4bc",
+                            ConcurrencyStamp = "43b9894d-3b14-453f-b5bc-2b180560952e",
                             DisplayName = "ادمین کل سیستم",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
@@ -314,7 +292,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "6f4024b0-153e-4b8b-a851-5befbdb955f9",
-                            ConcurrencyStamp = "f5384281-057e-4fbb-9896-3ad0a9fc19ac",
+                            ConcurrencyStamp = "0e1d3090-a611-4513-8ecf-ce6079daccfb",
                             DisplayName = "اپراتور سیستم",
                             Name = "SystemOperator",
                             NormalizedName = "SYSTEMOPERATOR"

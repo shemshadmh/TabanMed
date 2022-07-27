@@ -23,6 +23,16 @@ namespace Persistence.Configurations.DestinationEntities
             builder.Property(country => country.FaName)
                 .HasMaxLength(ModelConstants.Country.CountryEnNameMaxLength)
                 .IsRequired();
+
+            builder.HasData(new List<Country>()
+            {
+                new ()
+                {
+                   Id = 1,
+                   EnName = "Iran",
+                   FaName = "ایران"
+                }
+            });
         }
     }
 }
