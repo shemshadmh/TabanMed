@@ -26,12 +26,28 @@
             public const int ClaimMaxLength = 80;
             public const int DisplayTextMaxLength = 100;
         }
-        
+
 
 
         #endregion
 
-            public static class Shared
+        #region Destination
+
+        public static class Country
+        {
+            public const int CountryEnNameMaxLength = 30;
+            public const int CountryFaNameMaxLength = 30;
+        }
+
+        public static class City
+        {
+            public const int CityEnNameMaxLength = 30;
+            public const int CityFaNameMaxLength = 30;
+        }
+
+        #endregion
+
+        public static class Shared
         {
             public const int GUIDMaxLength = 40;
             public const string NVarCharColumnType = "nvarchar";

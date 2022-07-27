@@ -3,6 +3,7 @@ using System.Reflection;
 using Application.Interfaces.Application;
 using Common;
 using Domain.Common;
+using Domain.Entities.Destination;
 using Domain.Entities.Identity;
 using Domain.Entities.Permission;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -27,6 +28,13 @@ namespace Persistence
         #region Permission
 
         public DbSet<Permission> Permission => Set<Permission>();
+
+        #endregion
+
+        #region Destination
+
+        public DbSet<City> Cities => Set<City>();
+        public DbSet<Country> Countries => Set<Country>();
 
         #endregion
 
