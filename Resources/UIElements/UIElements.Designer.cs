@@ -95,5 +95,14 @@ namespace Resources.UIElements {
                 return ResourceManager.GetString("Profile", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Taban Medical Management.
+        /// </summary>
+        public static string TabanMedicalManagement {
+            get {
+                return ResourceManager.GetString("TabanMedicalManagement", resourceCulture);
+            }
+        }
     }
 }

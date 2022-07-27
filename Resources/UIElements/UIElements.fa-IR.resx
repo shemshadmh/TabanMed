@@ -129,4 +129,7 @@
   <data name="Profile" xml:space="preserve">
     <value>پروفایل</value>
   </data>
+  <data name="TabanMedicalManagement" xml:space="preserve">
+    <value>سامانه مدیریت تابان مدیکال</value>
+  </data>
 </root>
