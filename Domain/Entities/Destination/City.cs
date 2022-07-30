@@ -1,4 +1,6 @@
 ﻿
+using Domain.Entities.Hotels;
+
 namespace Domain.Entities.Destination
 {
     public class City 
@@ -13,6 +15,8 @@ namespace Domain.Entities.Destination
         public int CountryId { get; set; }
         public Country Country { get; set; } = null!;
 
+        // Hotels
+        public ICollection<Hotel>? Hotels { get; set; }
 
         #endregion
     }

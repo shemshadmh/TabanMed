@@ -4,6 +4,7 @@ using Application.Interfaces.Application;
 using Common;
 using Domain.Common;
 using Domain.Entities.Destination;
+using Domain.Entities.Hotels;
 using Domain.Entities.Identity;
 using Domain.Entities.Permission;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -38,6 +39,15 @@ namespace Persistence
 
         #endregion
 
+        #region Hotel
+
+        public DbSet<Hotel> Hotels => Set<Hotel>();
+        public DbSet<HotelFacility> HotelFacilities => Set<HotelFacility>();
+        public DbSet<HotelSelectedFacility> HotelSelectedFacilities => Set<HotelSelectedFacility>();
+        public DbSet<HotelImage> HotelImages => Set<HotelImage>();
+
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -47,7 +57,7 @@ namespace Persistence
                 var tableName = entityType.GetTableName();
                 if(tableName!.StartsWith("AspNet"))
                 {
-                    entityType.SetTableName(tableName.Substring(6));
+                    entityType.SetTableName(tableName[6..]);
                 }
             }
 

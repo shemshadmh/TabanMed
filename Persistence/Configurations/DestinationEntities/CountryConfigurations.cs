@@ -17,11 +17,11 @@ namespace Persistence.Configurations.DestinationEntities
 
             builder.Property(country => country.EnName)
                 .HasColumnType(ModelConstants.Shared.VarCharColumnType) // varchar for just english characters
-                .HasMaxLength(ModelConstants.Country.CountryEnNameMaxLength)
+                .HasMaxLength(ModelConstants.Country.EnNameMaxLength)
                 .IsRequired();
 
             builder.Property(country => country.FaName)
-                .HasMaxLength(ModelConstants.Country.CountryEnNameMaxLength)
+                .HasMaxLength(ModelConstants.Country.FaNameMaxLength)
                 .IsRequired();
 
             builder.HasData(new List<Country>()

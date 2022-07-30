@@ -35,21 +35,47 @@
 
         public static class Country
         {
-            public const int CountryEnNameMaxLength = 30;
-            public const int CountryFaNameMaxLength = 30;
+            public const int EnNameMaxLength = 30;
+            public const int FaNameMaxLength = 30;
         }
 
         public static class City
         {
-            public const int CityEnNameMaxLength = 30;
-            public const int CityFaNameMaxLength = 30;
+            public const int EnNameMaxLength = 30;
+            public const int FaNameMaxLength = 30;
         }
 
+        #endregion
+
+        #region Hotel
+
+        public static class Hotel
+        {
+            public const int EnNameMaxLength = 50;
+            public const int FaNameMaxLength = 50;
+            public const int ImageUrlMaxLength = 100;
+            public const int AboutMaxLength = 1000;
+            public const int AddressMaxLength = 1000;
+            public const int CallInformationMaxLength = 300;
+            public const int WebsiteAddressMaxLength = 50;
+        }
+
+        public static class HotelFacility
+        {
+            public const int TitleMaxLength = 50;
+        }
+
+        public static class HotelImage
+        {
+            public const int ImageAltMaxLength = 20;
+        }
+        
         #endregion
 
         public static class Shared
         {
             public const int GUIDMaxLength = 40;
+            public const int ZeroValue = 0;
             public const string NVarCharColumnType = "nvarchar";
             public const string VarCharColumnType = "varchar";
             public const string SmallIntColumnType = "smallint"; // A small integer. Signed range is from -32768 to 32767. Unsigned range is from 0 to 65535. The size parameter specifies the maximum display width (which is 255)
