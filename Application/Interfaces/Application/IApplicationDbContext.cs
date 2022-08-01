@@ -29,5 +29,8 @@ namespace Application.Interfaces.Application
         public DbSet<HotelImage> HotelImages { get;}
 
         #endregion
+
+        public ValueTask DisposeAsync();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken=new());
     }
 }

@@ -30,5 +30,7 @@ namespace Application
         public static string EnUsCulture => "en-US";
 
         #endregion
+
+        public static string TempDataMessageTitle => "Message";
     }
 }

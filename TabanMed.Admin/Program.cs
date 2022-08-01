@@ -19,6 +19,9 @@ builder.Services
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+
+builder.Services.AddKendo();
+
 builder.Services.AddAntiforgery(opts =>
 {
     opts.Cookie.Name = "AntFg";

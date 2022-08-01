@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TabanMed.Admin.Controllers
 {
-    public class DashboardController : Controller
+    public class DashboardController : BaseAdminController
     {
         public IActionResult Index()
         {
