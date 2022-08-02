@@ -20,7 +20,7 @@ namespace TabanMed.Admin.Controllers
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult ChangeCulture(string culture = "fa-IR")
+        public IActionResult ChangeCulture(string culture = "fa")
         {
             try
             {

@@ -69,7 +69,17 @@
         {
             public const int ImageAltMaxLength = 20;
         }
-        
+
+        #endregion
+
+        #region Localization
+
+        public static class Language
+        {
+            public const int NameMaxLength = 10;
+            public const int IsoNameMaxLength = 5;
+        }
+
         #endregion
 
         public static class Shared

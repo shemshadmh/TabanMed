@@ -1,6 +1,7 @@
 ﻿
 using Domain.Entities.Destination;
 using Domain.Entities.Hotels;
+using Domain.Entities.Localization;
 using Domain.Entities.Permission;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +28,12 @@ namespace Application.Interfaces.Application
         public DbSet<HotelFacility> HotelFacilities { get;}
         public DbSet<HotelSelectedFacility> HotelSelectedFacilities { get;}
         public DbSet<HotelImage> HotelImages { get;}
+
+        #endregion
+
+        #region Localization
+
+        public DbSet<Language> Languages { get;}
 
         #endregion
 

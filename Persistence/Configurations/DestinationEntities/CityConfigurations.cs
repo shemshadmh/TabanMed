@@ -10,17 +10,17 @@ namespace Persistence.Configurations.DestinationEntities
     {
         public void Configure(EntityTypeBuilder<City> builder)
         {
-            builder.HasKey(country => country.Id);
+            builder.HasKey(city => city.Id);
 
-            builder.Property(country => country.Id)
+            builder.Property(city => city.Id)
                 .HasColumnType(ModelConstants.Shared.SmallIntColumnType);
 
-            builder.Property(country => country.EnName)
+            builder.Property(city => city.EnName)
                 .HasColumnType(ModelConstants.Shared.VarCharColumnType) // varchar for just english characters
                 .HasMaxLength(ModelConstants.City.EnNameMaxLength)
                 .IsRequired();
 
-            builder.Property(country => country.FaName)
+            builder.Property(city => city.FaName)
                 .HasMaxLength(ModelConstants.City.FaNameMaxLength)
                 .IsRequired();
 

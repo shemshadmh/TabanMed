@@ -1,10 +1,11 @@
 ﻿
+using Domain.Entities.Hotels.Translation;
+
 namespace Domain.Entities.Hotels
 {
     public class HotelFacility
     {
         public int Id { get; set; }
-        public string Title { get; set; } = null!;
 
         #region Relations
 
@@ -15,6 +16,9 @@ namespace Domain.Entities.Hotels
 
         //Hotel Facilities
         public ICollection<HotelSelectedFacility>? HotelSelectedFacilities { get; set; }
+
+        // Hotel Facility Translations
+        public ICollection<HotelFacilityTranslation>? HotelFacilityTranslations { get; set; }
 
         #endregion
     }

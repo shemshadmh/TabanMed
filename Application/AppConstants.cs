@@ -28,6 +28,8 @@ namespace Application
 
         public static string FaIrCulture => "fa-IR";
         public static string EnUsCulture => "en-US";
+        public static string ArIqCulture => "ar-IQ";
+        public static string PrsAfCulture => "prs-AF";
 
         #endregion
 

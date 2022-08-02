@@ -32,10 +32,14 @@ namespace TabanMed.Infrastructure.Services.Globalization
 
                 new CultureInfo(AppConstants.EnUsCulture)
                 {
-                    NumberFormat =
-                    {
-                        CurrencySymbol = "Toman "
-                    }
+                },
+
+                new CultureInfo(AppConstants.ArIqCulture)
+                {
+                },
+
+                new CultureInfo(AppConstants.PrsAfCulture)
+                {
                 },
             };
             services.AddLocalization(options => options.ResourcesPath = "Resources");

@@ -6,6 +6,7 @@ using Domain.Common;
 using Domain.Entities.Destination;
 using Domain.Entities.Hotels;
 using Domain.Entities.Identity;
+using Domain.Entities.Localization;
 using Domain.Entities.Permission;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,12 @@ namespace Persistence
         public DbSet<HotelFacility> HotelFacilities => Set<HotelFacility>();
         public DbSet<HotelSelectedFacility> HotelSelectedFacilities => Set<HotelSelectedFacility>();
         public DbSet<HotelImage> HotelImages => Set<HotelImage>();
+
+        #endregion
+
+        #region Localization
+
+        public DbSet<Language> Languages => Set<Language>();
 
         #endregion
 

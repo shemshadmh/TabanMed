@@ -1,5 +1,4 @@
-﻿using Common;
-using Domain.Entities.Hotels;
+﻿using Domain.Entities.Hotels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,10 +12,6 @@ namespace Persistence.Configurations.HotelEntities
 
             builder.Property(facility => facility.ParentId)
                 .IsRequired(false);
-
-            builder.Property(facility => facility.Title)
-                .HasMaxLength(ModelConstants.HotelFacility.TitleMaxLength)
-                .IsRequired();
 
             //Relations
             builder.HasOne(facility => facility.Parent)
