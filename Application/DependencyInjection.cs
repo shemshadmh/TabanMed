@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Common.Mapster;
+using Application.Common.Mapster.HotelFacilities;
 using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +14,7 @@ namespace Application
             #region Mapster Configurations
 
             var config = new TypeAdapterConfig();
-            config.Scan(Assembly.GetAssembly(typeof(MapsterConfigs))!);
+            config.Scan(Assembly.GetAssembly(typeof(HotelFacilitiesConfigurations))!);
             services.AddSingleton(config);
             services.AddScoped<IMapper, ServiceMapper>();
 

@@ -9,7 +9,7 @@ namespace Application.Dtos.Hotels.HotelFacilities
         public int Id { get; set; }
 
         [Display(ResourceType = typeof(DataDictionary),
-            Name = nameof(DataDictionary.Title))]
+            Name = nameof(DataDictionary.FaTitle))]
         [Required(AllowEmptyStrings = false,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.Required))]
@@ -18,7 +18,7 @@ namespace Application.Dtos.Hotels.HotelFacilities
         public string FaTitle { get; set; } = null!;
 
         [Display(ResourceType = typeof(DataDictionary),
-            Name = nameof(DataDictionary.Title))]
+            Name = nameof(DataDictionary.EnTitle))]
         [Required(AllowEmptyStrings = false,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.Required))]
@@ -27,7 +27,7 @@ namespace Application.Dtos.Hotels.HotelFacilities
         public string EnTitle { get; set; } = null!;
 
         [Display(ResourceType = typeof(DataDictionary),
-            Name = nameof(DataDictionary.Title))]
+            Name = nameof(DataDictionary.ArTitle))]
         [Required(AllowEmptyStrings = false,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.Required))]
@@ -36,7 +36,7 @@ namespace Application.Dtos.Hotels.HotelFacilities
         public string ArTitle { get; set; } = null!;
 
         [Display(ResourceType = typeof(DataDictionary),
-            Name = nameof(DataDictionary.Title))]
+            Name = nameof(DataDictionary.AfTitle))]
         [Required(AllowEmptyStrings = false,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.Required))]

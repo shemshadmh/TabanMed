@@ -1,9 +1,11 @@
 ﻿
+using Application;
 using Application.Common;
 using Application.Dtos.Hotels.HotelFacilities;
 using Application.Interfaces.Application;
 using Application.Interfaces.Hotels;
 using Domain.Entities.Hotels;
+using Domain.Entities.Hotels.Translation;
 using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
@@ -35,9 +37,31 @@ namespace TabanMed.Infrastructure.Services.Hotels
             try
             {
                 var query = _dbContext.HotelFacilities.AsNoTracking()
-                    .Where(facility => facility.ParentId == parentId);
+                    .Include(hotelFacility => hotelFacility.HotelFacilityTranslations)
+                    .Where(hotelFacility => hotelFacility.ParentId == parentId)
+                    .Select(hotelFacility => new HotelFacilityListItem()
+                    {
+                        Id = hotelFacility.Id,
+                        ParentId = hotelFacility.ParentId,
+                        FaTitle = hotelFacility.HotelFacilityTranslations!
+                            .Where(facilityTranslation => facilityTranslation.LanguageId == AppConstants.FaLanguageId)
+                            .Select(facilityTranslation => facilityTranslation.Title)
+                            .Single(),
+                        EnTitle = hotelFacility.HotelFacilityTranslations!
+                            .Where(facilityTranslation => facilityTranslation.LanguageId == AppConstants.EnLanguageId)
+                            .Select(facilityTranslation => facilityTranslation.Title)
+                            .Single(),
+                        ArTitle = hotelFacility.HotelFacilityTranslations!
+                            .Where(facilityTranslation => facilityTranslation.LanguageId == AppConstants.ArLanguageId)
+                            .Select(facilityTranslation => facilityTranslation.Title)
+                            .Single(),
+                        AfTitle = hotelFacility.HotelFacilityTranslations!
+                            .Where(facilityTranslation => facilityTranslation.LanguageId == AppConstants.AfLanguageId)
+                            .Select(facilityTranslation => facilityTranslation.Title)
+                            .Single()
+                    });
 
-                return await _mapper.From(query).AdaptToTypeAsync<List<HotelFacilityListItem>>();
+                return await query.ToListAsync();
             }
             catch(Exception e)
             {
@@ -51,10 +75,38 @@ namespace TabanMed.Infrastructure.Services.Hotels
             var operation = new OperationResult();
             try
             {
-                //if(await _dbContext.HotelFacilities.AnyAsync(facility => facility.Title == facilityDto.Title))
-                //    return operation.Failed(ErrorMessages.DuplicatedRecord);
+                if(await _dbContext.HotelFacilityTranslations.AnyAsync(facilityTranslation =>
+                       facilityTranslation.Title == facilityDto.FaTitle ||
+                       facilityTranslation.Title == facilityDto.EnTitle ||
+                       facilityTranslation.Title == facilityDto.ArTitle ||
+                       facilityTranslation.Title == facilityDto.AfTitle))
+                    return operation.Failed(ErrorMessages.DuplicatedRecord);
 
                 var entity = await _mapper.From(facilityDto).AdaptToTypeAsync<HotelFacility>();
+
+                entity.HotelFacilityTranslations = new List<HotelFacilityTranslation>()
+                {
+                    new()
+                    {
+                        LanguageId = AppConstants.FaLanguageId,
+                        Title = facilityDto.FaTitle
+                    },
+                    new()
+                    {
+                        LanguageId = AppConstants.EnLanguageId,
+                        Title = facilityDto.EnTitle
+                    },
+                    new()
+                    {
+                        LanguageId = AppConstants.ArLanguageId,
+                        Title = facilityDto.ArTitle
+                    },
+                    new()
+                    {
+                        LanguageId = AppConstants.AfLanguageId,
+                        Title = facilityDto.AfTitle
+                    }
+                };
 
                 await _dbContext.HotelFacilities.AddAsync(entity);
                 await _dbContext.SaveChangesAsync();
@@ -70,49 +122,41 @@ namespace TabanMed.Infrastructure.Services.Hotels
             }
         }
 
-        public async Task<OperationResult> CreateFacility(CreateHotelFacilityDto facilityDto)
-        {
-            var operation = new OperationResult();
-            try
-            {
-                //if(await _dbContext.HotelFacilities.AnyAsync(facility => facility.Title == facilityDto.Title))
-                //    return operation.Failed(ErrorMessages.DuplicatedRecord);
-
-                var entity = await _mapper.From(facilityDto).AdaptToTypeAsync<HotelFacility>();
-
-                await _dbContext.HotelFacilities.AddAsync(entity);
-                await _dbContext.SaveChangesAsync();
-
-                _logger.LogWarning("New hotel facility created successfully.[facility:{title},parentId={parentId}]",
-                    facilityDto.Title, facilityDto.ParentId);
-
-                return operation.Succeeded(entity.Id, InformationMessages.SuccessfullySaved);
-            }
-            catch(Exception e)
-            {
-                _logger.LogError(e, "Could not create new hotel facility.[facility:{title}],parentId={parentId}]",
-                    facilityDto.Title, facilityDto.ParentId);
-                return operation.Failed(ErrorMessages.ErrorOccurred);
-            }
-        }
-
         public async Task<OperationResult> UpdateFacility(HotelFacilityListItem facilityDto)
         {
             var operation = new OperationResult();
             try
             {
-                //if(await _dbContext.HotelFacilities
-                //       .AnyAsync(facility => facility.Title == facilityDto.Title
-                //                                                            && facility.Id != facilityDto.Id))
-                //    return operation.Failed(ErrorMessages.DuplicatedRecord);
+                if(await _dbContext.HotelFacilityTranslations.AnyAsync(facilityTranslation =>
+                       (facilityTranslation.Title == facilityDto.FaTitle ||
+                       facilityTranslation.Title == facilityDto.EnTitle ||
+                       facilityTranslation.Title == facilityDto.ArTitle ||
+                       facilityTranslation.Title == facilityDto.AfTitle)
+                       && facilityTranslation.FacilityId != facilityDto.Id))
+                    return operation.Failed(ErrorMessages.DuplicatedRecord);
 
-                var entity = await _mapper.From(facilityDto).AdaptToTypeAsync<HotelFacility>();
+                var translationsList = await _dbContext.HotelFacilityTranslations
+                    .Where(facilityTranslation => facilityTranslation.FacilityId == facilityDto.Id)
+                    .ToListAsync();
 
-                _dbContext.HotelFacilities.Update(entity);
+                foreach (var facilityTranslation in translationsList)
+                {
+                    facilityTranslation.Title = facilityTranslation.LanguageId switch
+                    {
+                        AppConstants.FaLanguageId => facilityDto.FaTitle,
+                        AppConstants.EnLanguageId => facilityDto.EnTitle,
+                        AppConstants.ArLanguageId => facilityDto.ArTitle,
+                        AppConstants.AfLanguageId => facilityDto.AfTitle,
+                        _ => facilityTranslation.Title
+                    };
+                }
+
+                _dbContext.HotelFacilityTranslations.UpdateRange(translationsList);
+                await _dbContext.SaveChangesAsync();
 
                 _logger.LogWarning("Hotel facility updated successfully.[facility:{title}]", facilityDto.EnTitle);
 
-                return operation.Succeeded(entity.Id, InformationMessages.SuccessfullyUpdated);
+                return operation.Succeeded(facilityDto.Id, InformationMessages.SuccessfullyUpdated);
             }
             catch(Exception e)
             {
@@ -121,34 +165,7 @@ namespace TabanMed.Infrastructure.Services.Hotels
             }
         }
 
-        public async Task<OperationResult> UpdateFacility(EditHotelFacilityDto facilityDto)
-        {
-            var operation = new OperationResult();
-            try
-            {
-                //if(await _dbContext.HotelFacilities
-                //       .AnyAsync(facility => facility.Title == facilityDto.Title
-                //                                                            && facility.Id != facilityDto.Id))
-                //    return operation.Failed(ErrorMessages.DuplicatedRecord);
-
-                var entity = await _mapper.From(facilityDto).AdaptToTypeAsync<HotelFacility>();
-
-                _dbContext.HotelFacilities.Update(entity);
-
-                _logger.LogWarning("Hotel facility updated successfully.[facility:{title},parentId={parentId}]",
-                    facilityDto.Title, facilityDto.ParentId);
-
-                return operation.Succeeded(entity.Id, InformationMessages.SuccessfullyUpdated);
-            }
-            catch(Exception e)
-            {
-                _logger.LogError(e, "Could not update hotel facility.[facility:{title},parentId={parentId}]",
-                    facilityDto.Title, facilityDto.ParentId);
-                return operation.Failed(ErrorMessages.ErrorOccurred);
-            }
-        }
-
-        public  ValueTask DisposeAsync()
+        public ValueTask DisposeAsync()
         {
             return _dbContext.DisposeAsync();
         }

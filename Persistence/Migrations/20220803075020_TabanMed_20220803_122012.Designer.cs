@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220801110327_TabanMed_20220801_153312")]
-    partial class TabanMed_20220801_153312
+    [Migration("20220803075020_TabanMed_20220803_122012")]
+    partial class TabanMed_20220803_122012
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -257,7 +257,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("LanguageId");
 
-                    b.ToTable("HotelFacilityTranslation");
+                    b.ToTable("HotelFacilityTranslations");
                 });
 
             modelBuilder.Entity("Domain.Entities.Identity.ApplicationUser", b =>
@@ -389,8 +389,8 @@ namespace Persistence.Migrations
                         {
                             Id = "b0a39202-a221-47c7-9d34-dc4479ec33f2",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "9bf7813f-5dd3-4393-9c3c-c91bab23f11b",
-                            Created = new DateTime(2022, 8, 1, 11, 3, 27, 162, DateTimeKind.Utc).AddTicks(9920),
+                            ConcurrencyStamp = "e6f86475-664e-4925-8120-3d2bf148021f",
+                            Created = new DateTime(2022, 8, 3, 7, 50, 20, 156, DateTimeKind.Utc).AddTicks(5125),
                             CreatedBy = "Seed",
                             Email = "hatef@tabanmed.com",
                             EmailConfirmed = false,
@@ -404,7 +404,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "HATEFADMIN",
                             PasswordHash = "AQAAAAEAACcQAAAAEDCEjgFnVqs3jS+KYwhsCsNHoR7mV7tQ7/NUHc2bxUc9HjMuXSNCax/I5jPdFBGsVg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "af19cd7e-27fd-4dba-9f71-8df4058697f9",
+                            SecurityStamp = "7391ce6f-09bb-46d1-8efd-0263470105bd",
                             TwoFactorEnabled = false,
                             UserName = "HatefAdmin"
                         },
@@ -412,8 +412,8 @@ namespace Persistence.Migrations
                         {
                             Id = "04a76057-948a-4fd1-b9f0-ed36991fcaa5",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "15e9e2bb-1895-42ef-aee5-76f6d8f6d9de",
-                            Created = new DateTime(2022, 8, 1, 11, 3, 27, 162, DateTimeKind.Utc).AddTicks(9951),
+                            ConcurrencyStamp = "3574a14e-d2da-4df5-84b0-e8ad540dab00",
+                            Created = new DateTime(2022, 8, 3, 7, 50, 20, 156, DateTimeKind.Utc).AddTicks(5156),
                             CreatedBy = "Seed",
                             Email = "operator@tabanmed.com",
                             EmailConfirmed = false,
@@ -426,7 +426,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "TABANMEDOPERATOR",
                             PasswordHash = "AQAAAAEAACcQAAAAEGO2+kmYpAenNWk5p1UYgYOMbU3/pUOoc4yRkUma3Zq2Hsc8g9HSWpztF3MozgJdig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "572a8450-4672-4408-9def-36e52f271421",
+                            SecurityStamp = "d337cea1-c079-4d7c-a19b-ec4d43d12ef9",
                             TwoFactorEnabled = false,
                             UserName = "tabanmedOperator"
                         });
@@ -469,7 +469,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "3e2c9b3b-1c5c-41a5-9fe6-9004dcd4b78b",
-                            ConcurrencyStamp = "b2ef603b-6ae5-432e-b26a-a3b328e9199a",
+                            ConcurrencyStamp = "07a8570b-f9a0-4c68-94e3-c60bfff7f732",
                             DisplayName = "ادمین کل سیستم",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
@@ -477,7 +477,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "6f4024b0-153e-4b8b-a851-5befbdb955f9",
-                            ConcurrencyStamp = "6d3c78d0-4722-4d15-98f3-355d9006f401",
+                            ConcurrencyStamp = "83e8305d-0704-445c-9401-07c0342b915f",
                             DisplayName = "اپراتور سیستم",
                             Name = "SystemOperator",
                             NormalizedName = "SYSTEMOPERATOR"
@@ -617,8 +617,8 @@ namespace Persistence.Migrations
 
                     b.Property<string>("IsoName")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("varchar(5)");
+                        .HasMaxLength(7)
+                        .HasColumnType("varchar(7)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -633,25 +633,25 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = (byte)1,
-                            IsoName = "fa",
+                            IsoName = "fa-IR",
                             Name = "فارسی"
                         },
                         new
                         {
                             Id = (byte)2,
-                            IsoName = "en",
+                            IsoName = "en-US",
                             Name = "English"
                         },
                         new
                         {
                             Id = (byte)3,
-                            IsoName = "ar",
+                            IsoName = "ar-IQ",
                             Name = "العربیة"
                         },
                         new
                         {
                             Id = (byte)4,
-                            IsoName = "ps",
+                            IsoName = "prs-AF",
                             Name = "پشتو/دری"
                         });
                 });

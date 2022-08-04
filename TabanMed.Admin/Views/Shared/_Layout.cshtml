@@ -258,7 +258,21 @@
                     </li>
 
                 </secure-content>
-
+                
+                <li class="nav-small-cap">
+                    <i class="mdi mdi-dots-horizontal"></i>
+                    <span class="hide-menu">تنظیمات سیستم</span>
+                </li>
+                
+                <admin-secure-content asp-controller="HotelFacilities" asp-action="Index">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark" asp-controller="HotelFacilities"
+                           asp-action="Index" aria-expanded="false">
+                            <i class="mdi mdi-hexagon-multiple"></i>
+                            <span class="hide-menu">امکانات هتل‌ها</span>
+                        </a>
+                    </li>
+                </admin-secure-content>
 
             </ul>
         </nav>

@@ -77,7 +77,7 @@
         public static class Language
         {
             public const int NameMaxLength = 10;
-            public const int IsoNameMaxLength = 5;
+            public const int IsoNameMaxLength = 7;
         }
 
         #endregion

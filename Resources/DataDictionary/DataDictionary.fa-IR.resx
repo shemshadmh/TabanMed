@@ -156,8 +156,8 @@
   <data name="TrainType" xml:space="preserve">
     <value>قطار</value>
   </data>
-  <data name="Title" xml:space="preserve">
-    <value>عنوان</value>
+  <data name="FaTitle" xml:space="preserve">
+    <value>عنوان فارسی</value>
   </data>
   <data name="ClassName" xml:space="preserve">
     <value>نام کلاس</value>
@@ -317,5 +317,14 @@
   </data>
   <data name="MessageReceiver" xml:space="preserve">
     <value>دریافت کننده</value>
+  </data>
+  <data name="AfTitle" xml:space="preserve">
+    <value>عنوان دری</value>
+  </data>
+  <data name="ArTitle" xml:space="preserve">
+    <value>عنوان عربی</value>
+  </data>
+  <data name="EnTitle" xml:space="preserve">
+    <value>عنوان انگلیسی</value>
   </data>
 </root>

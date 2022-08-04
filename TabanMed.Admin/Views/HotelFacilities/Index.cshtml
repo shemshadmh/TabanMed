@@ -27,13 +27,11 @@
 
 
 <div id="error-area" class="alert alert-danger">
-    <ul id="error_list">
-        <li>بدبخت شدیم</li>
+    <ul class="m-0" id="error_list">
     </ul>
 </div>
 <div id="success-area" class="alert alert-success">
-    <ul id="suc_list">
-        <li>عملیات با موفقیت انجام شد</li>
+    <ul class="m-0" id="suc_list">
     </ul>
 </div>
 
@@ -43,7 +41,13 @@
 <div class="k-rtl">
     @(Html.Kendo().Grid<HotelFacilityListItem>()
         .Name("grid")
-        .Columns(columns => { columns.Bound(facility => facility.Title); })
+        .Columns(columns =>
+        {
+            columns.Bound(facility => facility.FaTitle);
+            columns.Bound(facility => facility.EnTitle);
+            columns.Bound(facility => facility.ArTitle);
+            columns.Bound(facility => facility.AfTitle);
+        })
         .ToolBar(toolbar =>
         {
             toolbar.Create()
@@ -86,19 +90,21 @@
                .Name("grid_#=Id#")
                .Columns(columns =>
                {
-                   columns.Bound(facility => facility.Title);
-                   columns.Bound(facility => facility.IconClassName).Hidden();
-                   columns.Command(c => c.Custom("more")
-                       .Text(" ").IconClass("mdi mdi-dots-vertical font-22")
-                       .Click("FacilityList.methods.actionsPopover")).Width(20);
+                   columns.Bound(facility => facility.FaTitle);
+                   columns.Bound(facility => facility.EnTitle);
+                   columns.Bound(facility => facility.ArTitle);
+                   columns.Bound(facility => facility.AfTitle);
                })
                .ToolBar(toolbar =>
                {
-                   toolbar.Custom().Name("create-facility-btn").Text(DataDictionary.CreateNewRecord)
+                   toolbar.Create().Text(DataDictionary.CreateNewRecord)
                        .HtmlAttributes(new { @class = "btn btn-success", @parentData = "#=Id#" });
+                   toolbar.Save()
+                       .CancelText(DataDictionary.CancelChanges)
+                       .SaveText(DataDictionary.SaveChanges)
+                       .HtmlAttributes(new { @class = "btn btn-warning" });
                })
-               .Editable(editable => editable.Mode(GridEditMode.InLine)
-                   .CreateAt(GridInsertRowPosition.Top))
+               .Editable(editable => editable.Mode(GridEditMode.InCell))
                .Selectable(selectable => selectable
                    .Mode(GridSelectionMode.Single)
                    .Type(GridSelectionType.Row))
@@ -119,9 +125,9 @@
                        model.Field(cityItem => cityItem.Id).Editable(false);
                    })
                    .PageSize(5)
-                   .Read(read =>
-                       read.Action("GetFacilityTitlesList", "HotelFacilities", new { pId = "#=Id#" })
-                           .Type(HttpVerbs.Post)))
+                   .Create(create => create.Action("CreateFacility", "HotelFacilities", new { pId = "#=Id#" }).Type(HttpVerbs.Post))
+                   .Read(read => read.Action("GetFacilityTitlesList", "HotelFacilities", new { pId = "#=Id#" }).Type(HttpVerbs.Post))
+                   .Update(update => update.Action("UpdateFacility", "HotelFacilities", new { pId = "#=Id#" }).Type(HttpVerbs.Post)))
                .ToClientTemplate())
     </script>
     <script type="text/javascript">

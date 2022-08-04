@@ -79,6 +79,15 @@ namespace Resources.DataDictionary {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dari Title.
+        /// </summary>
+        public static string AfTitle {
+            get {
+                return ResourceManager.GetString("AfTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Agencies.
         /// </summary>
         public static string AgenciesListTitle {
@@ -93,6 +102,15 @@ namespace Resources.DataDictionary {
         public static string AirlineType {
             get {
                 return ResourceManager.GetString("AirlineType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arabic Title.
+        /// </summary>
+        public static string ArTitle {
+            get {
+                return ResourceManager.GetString("ArTitle", resourceCulture);
             }
         }
         
@@ -250,11 +268,29 @@ namespace Resources.DataDictionary {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to English Title.
+        /// </summary>
+        public static string EnTitle {
+            get {
+                return ResourceManager.GetString("EnTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Farsi Name.
         /// </summary>
         public static string FaName {
             get {
                 return ResourceManager.GetString("FaName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Farsi Title.
+        /// </summary>
+        public static string FaTitle {
+            get {
+                return ResourceManager.GetString("FaTitle", resourceCulture);
             }
         }
         
@@ -561,15 +597,6 @@ namespace Resources.DataDictionary {
         public static string ShopAttractionType {
             get {
                 return ResourceManager.GetString("ShopAttractionType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title.
-        /// </summary>
-        public static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         

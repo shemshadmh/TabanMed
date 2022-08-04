@@ -1,4 +1,5 @@
 ﻿
+using Application;
 using Common;
 using Domain.Entities.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -29,27 +30,27 @@ namespace Persistence.Configurations.LocalizationEntities
             {
                 new()
                 {
-                    Id = 1,
+                    Id = AppConstants.FaLanguageId,
                     Name = "فارسی",
-                    IsoName = "fa"
+                    IsoName = AppConstants.FaIrCulture
                 },
                 new()
                 {
-                    Id = 2,
+                    Id = AppConstants.EnLanguageId,
                     Name = "English",
-                    IsoName = "en"
+                    IsoName = AppConstants.EnUsCulture
                 },
                 new()
                 {
-                    Id = 3,
+                    Id = AppConstants.ArLanguageId,
                     Name = "العربیة",
-                    IsoName = "ar"
+                    IsoName = AppConstants.ArIqCulture
                 },
                 new()
                 {
-                    Id = 4,
+                    Id = AppConstants.AfLanguageId,
                     Name = "پشتو/دری",
-                    IsoName = "ps"
+                    IsoName = AppConstants.PrsAfCulture
                 },
             });
         }

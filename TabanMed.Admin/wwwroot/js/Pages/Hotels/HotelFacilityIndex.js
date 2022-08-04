@@ -9,40 +9,10 @@
         parentRowData: null
     },
     methods: {
-        actionsPopover: (e) => {
-            $('.popover').popover('hide');
-            FacilityList.fields.KendoGridObject = $("#" + $(e.delegateTarget).attr("id")).data("kendoGrid");
-            FacilityList.fields.currentRowData = FacilityList.fields.KendoGridObject
-                .dataItem($(e.currentTarget).closest("tr"));
-
-            //FacilityList.fields.parentRowData = $("#grid").data("kendoGrid").dataItem($(e.currentTarget).closest("tr"));
-
-            let poop = $(e.currentTarget).popover({
-                placement: "right",
-                content: $("<div class='more-popover-content'>" +
-                    "<a class='edit-facility btn btn-warning btn-block text-white'>ویرایش</a>" +
-                    "</div>"),
-                html: true,
-                trigger: "click",
-                title: "عملیات ها‍",
-            })
-            $(e.currentTarget).popover("show");
-        },
-        editTransportCompleteCallback: (response) => {
-            if (response.responseJSON.IsSucceeded === true) {
-                swal({
-                    title: "عملیات مورد نظر با موفقیت انجام شد", type: "success", timer: 2000, showConfirmButton: false
-                });
-                $("#" + FacilityList.fields.editModalId).modal("hide");
-                FacilityList.methods.reloadKendoGrid();
-            } else {
-                swal("خطا", response.responseJSON.Message, "error");
-            }
-        },
         createFacilityCompleteCallback: (response) => {
             if (response.responseJSON.IsSucceeded === true) {
                 swal({
-                    title: "عملیات مورد نظر با موفقیت انجام شد", type: "success", timer: 2000, showConfirmButton: false
+                    title: "awASDASD مورد نظر با موفقیت انجام شد", type: "success", timer: 2000, showConfirmButton: false
                 });
                 $("#" + FacilityList.fields.createModalId).modal("hide");
                 FacilityList.methods.reloadKendoGrid();
@@ -51,8 +21,9 @@
             }
         },
         createReqHandler: (response) => {
+            
             if (response && !response.Errors) {
-                $("#suc_list").html("<li>عملیات با موفقیت انجام شد</li>");
+                $("#suc_list").html(`<li>${response.UserMessage}</li>`);
                 $("#success-area").fadeIn(2000);
                 setTimeout(() => {
                     $("#success-area").fadeOut(1000);
@@ -64,12 +35,12 @@
             }
             $("#error_list").fadeIn(2000);
             setTimeout(() => {
-                $("#error_list").fadeOut(1000);
+                $("#error-area").fadeOut(1000);
             }, 5000);
         },
         editReqHandler: (response) => {
             if (response && !response.Errors) {
-                $("#suc_list").html("<li>عملیات با موفقیت انجام شد</li>");
+                $("#suc_list").html(`<li>${response.UserMessage}</li>`);
                 $("#success-area").fadeIn(2000);
                 setTimeout(() => {
                     $("#success-area").fadeOut(1000);

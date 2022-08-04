@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Update="DataDictionary\DataDictionary.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataDictionary.resx</DependentUpon>
+    </Compile>
     <Compile Update="UIElements\UIElements.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -15,6 +20,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="DataDictionary\DataDictionary.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="DataDictionary\DataDictionary.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataDictionary.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="UIElements\UIElements.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UIElements.Designer.cs</LastGenOutput>

@@ -5,6 +5,7 @@ using Common;
 using Domain.Common;
 using Domain.Entities.Destination;
 using Domain.Entities.Hotels;
+using Domain.Entities.Hotels.Translation;
 using Domain.Entities.Identity;
 using Domain.Entities.Localization;
 using Domain.Entities.Permission;
@@ -46,6 +47,7 @@ namespace Persistence
         public DbSet<HotelFacility> HotelFacilities => Set<HotelFacility>();
         public DbSet<HotelSelectedFacility> HotelSelectedFacilities => Set<HotelSelectedFacility>();
         public DbSet<HotelImage> HotelImages => Set<HotelImage>();
+        public DbSet<HotelFacilityTranslation> HotelFacilityTranslations => Set<HotelFacilityTranslation>();
 
         #endregion
 
