@@ -123,11 +123,23 @@
   <data name="Dashboard" xml:space="preserve">
     <value>داشبورد</value>
   </data>
+  <data name="HotelFacilities" xml:space="preserve">
+    <value>امکانات هتل</value>
+  </data>
+  <data name="Hotels" xml:space="preserve">
+    <value>هتل‌ها</value>
+  </data>
+  <data name="HotelsList" xml:space="preserve">
+    <value>لیست هتل‌ها</value>
+  </data>
   <data name="Logout" xml:space="preserve">
     <value>خروج از حساب کاربری</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>پروفایل</value>
+  </data>
+  <data name="SystemSettings" xml:space="preserve">
+    <value>تنظیمات سیستم</value>
   </data>
   <data name="TabanMedicalManagement" xml:space="preserve">
     <value>سامانه مدیریت تابان مدیکال</value>

@@ -1,0 +1,39 @@
+﻿@*@using Kendo.Mvc.UI
+@using Feegasht.Application.Contracts.Hotels.Dtos.Hotels
+@model int 
+<link href="~/lib/Kedno/Css/kendo.common.min.css" rel="stylesheet">
+<link href="~/lib/Kedno/Css/kendo.default.min.css" rel="stylesheet">
+<script src="~/lib/Kedno/Js/kendo.all.min.js" asp-append-version="true"></script>
+<script src="~/lib/Kedno/Js/kendo.aspnetmvc.min.js" asp-append-version="true"></script>
+<div class="k-rtl">
+    @(Html.Kendo().Grid<HotelToursDto>()
+        .Name("HotelToursGrid")
+        .Columns(columns =>
+        {
+            columns.Bound(hotelTour => hotelTour.TourId).Hidden();
+            columns.Bound(hotelTour => hotelTour.Title);
+            columns.Bound(hotelTour => hotelTour.Departure);
+            columns.Bound(hotelTour => hotelTour.Return);
+        })
+        .Filterable()
+        .Sortable()
+        .Pageable(pageable => pageable
+            .ButtonCount(5)
+            .Refresh(true)
+            .PageSizes(true))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Events(events => events.Error("error_handler")
+            /*.RequestStart("show_preLoader")
+            .RequestEnd("hide_preLoader")*/)
+            .Model(model => { model.Id(hotelTour => hotelTour.TourId); })
+            .Read(read => read.Action("GetHotelTours", "Hotels",
+                new { id = Model })
+                .Type(HttpVerbs.Post)))
+        .NoRecords(true)
+        )
+</div>
+<script>
+function error_handler(e){
+    }
+</script>*@

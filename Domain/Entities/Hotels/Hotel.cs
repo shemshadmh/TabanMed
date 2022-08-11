@@ -1,18 +1,15 @@
 ﻿
 using Domain.Common;
 using Domain.Entities.Destination;
+using Domain.Entities.Hotels.Translation;
 
 namespace Domain.Entities.Hotels
 {
     public class Hotel : DeletableEntity
     {
         public int Id { get; set; }
-        public string FaName { get; set; } = null!;
-        public string EnName { get; set; } = null!;
         public string ImageUrl { get; set; } = null!;
-        public string? About { get; set; }
         public int Stars { get; set; }
-        public string? Address { get; set; }
         public string? CallInformation { get; set; }
         public string? WebsiteAddress { get; set; }
 
@@ -35,6 +32,9 @@ namespace Domain.Entities.Hotels
 
         // Gallery
         public ICollection<HotelImage>? Gallery { get; set; }
+
+        // Hotel Translations
+        public ICollection<HotelTranslation>? HotelTranslations { get; set; }
 
         #endregion
     }

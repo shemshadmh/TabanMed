@@ -44,6 +44,7 @@ namespace Persistence
         #region Hotel
 
         public DbSet<Hotel> Hotels => Set<Hotel>();
+        public DbSet<HotelTranslation> HotelTranslations => Set<HotelTranslation>();
         public DbSet<HotelFacility> HotelFacilities => Set<HotelFacility>();
         public DbSet<HotelSelectedFacility> HotelSelectedFacilities => Set<HotelSelectedFacility>();
         public DbSet<HotelImage> HotelImages => Set<HotelImage>();

@@ -26,6 +26,7 @@ namespace Application.Interfaces.Application
         #region Hotel
 
         public DbSet<Hotel> Hotels { get;}
+        public DbSet<HotelTranslation> HotelTranslations { get; }
         public DbSet<HotelFacility> HotelFacilities { get;}
         public DbSet<HotelSelectedFacility> HotelSelectedFacilities { get;}
         public DbSet<HotelImage> HotelImages { get;}

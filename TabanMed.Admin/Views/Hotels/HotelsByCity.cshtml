@@ -1,0 +1,142 @@
+﻿@using Kendo.Mvc.UI
+@using Resources.DataDictionary
+@using Application.Dtos.Hotels.Hotels
+@{
+    ViewData[AppConstants.ViewDataTitlePageName] = @UIElements.HotelsList;
+}
+
+@section Styles{
+    <link href="~/lib/Kedno/Css/kendo.common.min.css" rel="stylesheet">
+    <link href="~/lib/Kedno/Css/kendo.default.min.css" rel="stylesheet">
+    <style>
+        .k-filter-row > th:first-child, .k-grid tbody td:first-child, .k-grid tfoot td:first-child,
+        .k-grid-header th.k-header:first-child {
+            border-left-width: 1px !important;
+        }
+
+        .k-grouping-header {
+            text-align: center;
+        }
+
+        #grid .k-grid-header .k-header {
+            font-weight: bold;
+        }
+
+        .co-img {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-size: 55px 60px;
+            background-position: center center;
+            vertical-align: middle;
+            line-height: 32px;
+            box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+            margin-left: 5px;
+            background-repeat:no-repeat;
+        }
+
+        .co-name {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 32px;
+            padding-left: 3px;
+        }
+    </style>
+}
+
+<script src="~/lib/Kedno/Js/kendo.all.min.js" asp-append-version="true"></script>
+<script src="~/lib/Kedno/Js/kendo.aspnetmvc.min.js" asp-append-version="true"></script>
+
+<div id="error-area" class="alert alert-danger">
+    <ul id="error_list">
+        <li>بدبخت شدیم</li>
+    </ul>
+</div>
+
+
+<div class="k-rtl">
+    @(Html.Kendo().Grid<HotelListItemDto>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(hotel => hotel.EnName).Width(340).ClientTemplate(
+                @"<div class='co-img'
+                style='background-image: url(" + Url.Content("#:data.ImageUrl#") +
+                ");'></div><div class='co-name'><strong>#: EnName #</strong></div>");
+            columns.Bound(hotel => hotel.FaName);
+            columns.Bound(hotel => hotel.Stars)
+                .ClientGroupHeaderTemplate("#=value# ستاره").Hidden();
+            columns.Command(c => c.Custom("more")
+                .Text(" ").IconClass("mdi mdi-dots-vertical font-22")).Width(20);
+            //.Click("HotelCity.methods.showPopover")).Width(20);
+        })
+        .ToolBar(toolbar =>
+        {
+            toolbar.Custom()
+                .Name("create-hotel-btn")
+                .Text(DataDictionary.CreateNewRecord)
+                .HtmlAttributes(new { @class = "btn btn-success create-hotel" });
+        })
+        .Selectable(select =>
+            select.Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))
+        .Sortable()
+        .Filterable()
+        .Pageable(pageable => pageable
+            .ButtonCount(5)
+            .Refresh(true)
+            .PageSizes(true))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Events(events => events.Error("error_handler")
+                .RequestStart("show_preLoader")
+                .RequestEnd("hide_preLoader"))
+            .Model(model =>
+            {
+                model.Id(countryItem => countryItem.Id);
+                model.Field(countryItem => countryItem.Id).Editable(false);
+            })
+            .Read(read => read.Action("GetHotels", "Hotels",new{cId = ViewData["cId"]}).Type(HttpVerbs.Post))
+            .Group(groups =>
+                groups.Add(transportCo => transportCo.Stars))
+        )
+        .Resizable(resize => resize.Columns(true)))
+</div>
+
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function() {
+                        $("#error_list").append(`<li>${this}</li>`);
+                    });
+                }
+            });
+            $("#error-area").show();
+        }
+    }
+
+    function show_preLoader() {
+        $(".preloader").show();
+        $("#error_list").html('');
+        $("#error-area").hide();
+    }
+        
+    function hide_preLoader() {
+        $(".preloader").hide();
+    }
+
+</script>
+
+<script src="~/lib/jquery/jquery.unobtrusive-ajax.js" asp-append-version="true"></script>
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    //await Html.RenderPartialAsync("/Views/Hotels/Partials/_CreateHotelPartial.cshtml",new ViewDataDictionary(ViewData){{"cityId",ViewData["cId"]}});
+    //await Html.RenderPartialAsync("/Views/Hotels/Partials/_EditHotelPartial.cshtml",new ViewDataDictionary(ViewData){{"cityId",ViewData["cId"]}});
+}
+
+@*<script src="~/js/Pages/Hotels/HotelByCity.js"></script>
+<script>
+    HotelCity.init();
+</script>*@

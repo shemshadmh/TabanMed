@@ -105,17 +105,9 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("About")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<string>("Address")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
                     b.Property<string>("CallInformation")
                         .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasColumnType("varchar(300)");
 
                     b.Property<short>("CityId")
                         .HasColumnType("smallint");
@@ -134,16 +126,6 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("smalldatetime");
-
-                    b.Property<string>("EnName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<string>("FaName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -173,7 +155,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("WebsiteAddress")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<byte>("Zoom")
                         .HasColumnType("tinyint");
@@ -256,6 +238,34 @@ namespace Persistence.Migrations
                     b.HasIndex("LanguageId");
 
                     b.ToTable("HotelFacilityTranslations");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Hotels.Translation.HotelTranslation", b =>
+                {
+                    b.Property<int>("HotelId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("LanguageId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("About")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("HotelId", "LanguageId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("HotelTranslations");
                 });
 
             modelBuilder.Entity("Domain.Entities.Identity.ApplicationUser", b =>
@@ -387,8 +397,8 @@ namespace Persistence.Migrations
                         {
                             Id = "b0a39202-a221-47c7-9d34-dc4479ec33f2",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "e6f86475-664e-4925-8120-3d2bf148021f",
-                            Created = new DateTime(2022, 8, 3, 7, 50, 20, 156, DateTimeKind.Utc).AddTicks(5125),
+                            ConcurrencyStamp = "5c89d9d7-8749-442b-84bd-384dffa6f470",
+                            Created = new DateTime(2022, 8, 11, 9, 53, 59, 940, DateTimeKind.Utc).AddTicks(7230),
                             CreatedBy = "Seed",
                             Email = "hatef@tabanmed.com",
                             EmailConfirmed = false,
@@ -402,7 +412,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "HATEFADMIN",
                             PasswordHash = "AQAAAAEAACcQAAAAEDCEjgFnVqs3jS+KYwhsCsNHoR7mV7tQ7/NUHc2bxUc9HjMuXSNCax/I5jPdFBGsVg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7391ce6f-09bb-46d1-8efd-0263470105bd",
+                            SecurityStamp = "31ca9a74-8f93-4cc6-8e94-7fee2175f967",
                             TwoFactorEnabled = false,
                             UserName = "HatefAdmin"
                         },
@@ -410,8 +420,8 @@ namespace Persistence.Migrations
                         {
                             Id = "04a76057-948a-4fd1-b9f0-ed36991fcaa5",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "3574a14e-d2da-4df5-84b0-e8ad540dab00",
-                            Created = new DateTime(2022, 8, 3, 7, 50, 20, 156, DateTimeKind.Utc).AddTicks(5156),
+                            ConcurrencyStamp = "7a1699bd-9956-40e6-af15-d2d1991fe7c0",
+                            Created = new DateTime(2022, 8, 11, 9, 53, 59, 940, DateTimeKind.Utc).AddTicks(7270),
                             CreatedBy = "Seed",
                             Email = "operator@tabanmed.com",
                             EmailConfirmed = false,
@@ -424,7 +434,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "TABANMEDOPERATOR",
                             PasswordHash = "AQAAAAEAACcQAAAAEGO2+kmYpAenNWk5p1UYgYOMbU3/pUOoc4yRkUma3Zq2Hsc8g9HSWpztF3MozgJdig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d337cea1-c079-4d7c-a19b-ec4d43d12ef9",
+                            SecurityStamp = "877510d4-bb08-444a-a0eb-9b39648a6de6",
                             TwoFactorEnabled = false,
                             UserName = "tabanmedOperator"
                         });
@@ -467,7 +477,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "3e2c9b3b-1c5c-41a5-9fe6-9004dcd4b78b",
-                            ConcurrencyStamp = "07a8570b-f9a0-4c68-94e3-c60bfff7f732",
+                            ConcurrencyStamp = "d2b997f7-b624-4da8-b5a4-50062162a1a5",
                             DisplayName = "ادمین کل سیستم",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
@@ -475,7 +485,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "6f4024b0-153e-4b8b-a851-5befbdb955f9",
-                            ConcurrencyStamp = "83e8305d-0704-445c-9401-07c0342b915f",
+                            ConcurrencyStamp = "7e0c4ce5-6aa9-47bb-b18c-4b6fb21f32fc",
                             DisplayName = "اپراتور سیستم",
                             Name = "SystemOperator",
                             NormalizedName = "SYSTEMOPERATOR"
@@ -758,6 +768,25 @@ namespace Persistence.Migrations
                     b.Navigation("Language");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Hotels.Translation.HotelTranslation", b =>
+                {
+                    b.HasOne("Domain.Entities.Hotels.Hotel", "Hotel")
+                        .WithMany("HotelTranslations")
+                        .HasForeignKey("HotelId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Localization.Language", "Language")
+                        .WithMany("HotelTranslations")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Hotel");
+
+                    b.Navigation("Language");
+                });
+
             modelBuilder.Entity("Domain.Entities.Identity.RoleClaim", b =>
                 {
                     b.HasOne("Domain.Entities.Identity.Role", "Role")
@@ -836,6 +865,8 @@ namespace Persistence.Migrations
                     b.Navigation("Gallery");
 
                     b.Navigation("HotelSelectedFacilities");
+
+                    b.Navigation("HotelTranslations");
                 });
 
             modelBuilder.Entity("Domain.Entities.Hotels.HotelFacility", b =>
@@ -868,6 +899,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Localization.Language", b =>
                 {
                     b.Navigation("HotelFacilityTranslations");
+
+                    b.Navigation("HotelTranslations");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,0 +1,109 @@
+﻿@*@model Feegasht.Application.Contracts.Hotels.Dtos.Hotels.CreateHotelDto
+<!--hotel-create Modal-->
+<link rel="stylesheet" href="~/css/Pages/FiveStarsStyles.css" asp-append-version="true"/>
+<div class="modal fade " id="create-hotel-modal" tabindex="-1" role="dialog"
+     aria-labelledby="create-hotel-modal-label" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="create-hotel-modal-label">افزودن هتل</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="create-hotel-form" method="post"
+                      data-ajax-complete="HotelCity.methods.createCompleteCallback"
+                      asp-controller="Hotels" asp-action="Create" enctype="multipart/form-data"
+                      data-ajax="true" data-ajax-begin="">
+
+                    <div asp-validation-summary="All"
+                         class="text-danger">
+                    </div>
+                    <input type="hidden" asp-for="Location.Lat" value="0"/>
+                    <input type="hidden" asp-for="Location.Lng" value="0"/>
+                    <input type="hidden" asp-for="Location.Zoom" value="0"/>
+                    <input type="hidden" asp-for="CityId" value="@ViewData["cityId"]"/>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label class="control-label" asp-for="FaName"></label>
+                            <input class="form-control" asp-for="FaName"/>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="control-label" asp-for="EnName"></label>
+                            <input class="form-control" asp-for="EnName"/>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="control-label" asp-for="CallInformation"></label>
+                            <input class="form-control" asp-for="CallInformation"/>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="control-label" asp-for="OtherNames"></label>
+                            <input class="form-control" asp-for="OtherNames"/>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="control-label" asp-for="RoomCount"></label>
+                            <input class="form-control" asp-for="RoomCount"/>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="control-label" asp-for="WebsiteAddress"></label>
+                            <input class="form-control" asp-for="WebsiteAddress"/>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <div class="col-md-12 form-group">
+                                <label class="control-label" asp-for="Stars"></label>
+                                <div class="rate">
+                                    <input type="radio" id="star5" name="Stars" value="5"/>
+                                    <label for="star5" title="text">5 stars</label>
+                                    <input type="radio" id="star4" name="Stars" value="4"/>
+                                    <label for="star4" title="text">4 stars</label>
+                                    <input type="radio" id="star3" name="Stars" value="3"/>
+                                    <label for="star3" title="text">3 stars</label>
+                                    <input type="radio" id="star2" name="Stars" value="2"/>
+                                    <label for="star2" title="text">2 stars</label>
+                                    <input type="radio" id="star1" name="Stars" value="1"/>
+                                    <label for="star1" title="text">1 star</label>
+                                </div>
+                            </div>
+
+                            @*
+                            <input class="form-control" asp-for="Stars"/>*@
+                            @*<div class="col-md-12 form-group">
+                                <label class="control-label" asp-for="About"></label>
+                                <textarea rows="10" class="form-control" asp-for="About"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group preview-container text-center">
+                            <label class="control-label" asp-for="HotelPic"></label>
+                            <div class="form-group">
+                                <img class="show_preview_img w-75"
+                                     src="/images/NoImage.png"/>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control previewImg"
+                                       asp-for="HotelPic"
+                                       oninput="setCustomValidity('')"
+                                       accept=".jpg,.jpeg,.png"
+                                       type="file">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <label class="control-label" asp-for="Address"></label>
+                            <textarea class="form-control" asp-for="Address"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="control-label">موقعیت مکانی</label>
+                            <div id="create-hotel-map" class="create-hotel-map" style="height: 250px"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">انصراف</button>
+                <button type="submit" form="create-hotel-form" class="btn btn-success">ذخیره</button>
+            </div>
+        </div>
+    </div>
+</div>*@
+<!--End hotel-create Modal-->

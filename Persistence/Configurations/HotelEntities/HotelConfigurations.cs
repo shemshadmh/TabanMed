@@ -12,38 +12,23 @@ namespace Persistence.Configurations.HotelEntities
         {
             builder.HasKey(hotel => hotel.Id);
 
-            builder.Property(hotel => hotel.FaName)
-                .HasMaxLength(ModelConstants.Hotel.FaNameMaxLength)
-                .IsRequired();
-
-            builder.Property(hotel => hotel.EnName)
-                .HasColumnType(ModelConstants.Shared.VarCharColumnType) // varchar for just english characters
-                .HasMaxLength(ModelConstants.Hotel.EnNameMaxLength)
-                .IsRequired();
-
             builder.Property(hotel => hotel.ImageUrl)
-                .HasColumnType(ModelConstants.Shared.VarCharColumnType) // varchar for just english characters
+                .HasColumnType(ModelConstants.Shared.VarCharColumnType)
                 .HasMaxLength(ModelConstants.Hotel.ImageUrlMaxLength)
                 .IsRequired();
-
-            builder.Property(hotel => hotel.About)
-                .HasMaxLength(ModelConstants.Hotel.AboutMaxLength)
-                .IsRequired(false);
 
             builder.Property(hotel => hotel.Stars)
                 .HasColumnType(ModelConstants.Shared.TinyIntColumnType)
                 .HasDefaultValue(ModelConstants.Shared.ZeroValue)
                 .IsRequired();
 
-            builder.Property(hotel => hotel.Address)
-                .HasMaxLength(ModelConstants.Hotel.AddressMaxLength)
-                .IsRequired(false);
-
             builder.Property(hotel => hotel.CallInformation)
+                .HasColumnType(ModelConstants.Shared.VarCharColumnType)
                 .HasMaxLength(ModelConstants.Hotel.CallInformationMaxLength)
                 .IsRequired(false);
 
             builder.Property(hotel => hotel.WebsiteAddress)
+                .HasColumnType(ModelConstants.Shared.VarCharColumnType)
                 .HasMaxLength(ModelConstants.Hotel.WebsiteAddressMaxLength)
                 .IsRequired(false);
 

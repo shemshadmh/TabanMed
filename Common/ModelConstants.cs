@@ -51,8 +51,7 @@
 
         public static class Hotel
         {
-            public const int EnNameMaxLength = 50;
-            public const int FaNameMaxLength = 50;
+            public const int NameMaxLength = 50;
             public const int ImageUrlMaxLength = 100;
             public const int AboutMaxLength = 1000;
             public const int AddressMaxLength = 1000;

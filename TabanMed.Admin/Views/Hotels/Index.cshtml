@@ -1,0 +1,34 @@
+﻿@*@model IEnumerable<Feegasht.Application.Contracts.Hotels.Dtos.Hotels.CityWithHotelsCount>
+*@
+
+@{
+    ViewData[AppConstants.ViewDataTitlePageName] = @UIElements.HotelsList;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            @*@foreach(var item in Model)
+            {*@
+                <div class="col-md-4 col-sm-12">
+                    <div class="card card-hover">
+                        <div class="card-header bg-primary text-white">
+                            @*<h4 class="m-b-0 ">@item.CityName</h4>*@
+                            <h4 class="m-b-0 ">تهران</h4>
+                        </div>
+                        @*<div class="card-body">
+                            <h3 class="card-title">تعداد هتل‌های ثبت شده: @item.HotelsCount</h3>
+                            <a asp-action="Index" asp-route-cityId="@item.CityId"
+                           class="btn btn-rounded btn-outline-info float-right">مشاهده هتل‌ها</a>
+                        </div>*@
+                        <div class="card-body">
+                            <h3 class="card-title">تعداد هتل‌های ثبت شده: 0</h3>
+                            <a asp-action="Index" asp-route-cityId="1"
+                               class="btn btn-rounded btn-outline-info float-right">مشاهده هتل‌ها</a>
+                        </div>
+                    </div>
+                </div>
+            @*}*@
+        </div>
+    </div>
+</div>

@@ -11,5 +11,8 @@ namespace Domain.Entities.Localization
 
         // Hotel Facility Translations
         public ICollection<HotelFacilityTranslation>? HotelFacilityTranslations { get; set; }
+
+        // Hotel Translations
+        public ICollection<HotelTranslation>? HotelTranslations { get; set; }
     }
 }

@@ -1,0 +1,51 @@
+﻿@*@model Feegasht.Application.Contracts.Hotels.Dtos.Hotels.AppendToHotelAlbumDto
+<!--hotel-append-album Modal-->
+<div class="modal fade " id="hotel-append-album-modal" tabindex="-1" role="dialog"
+     aria-labelledby="hotel-append-album-modal-label" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="hotel-append-album-modal-label">افزودن عکس به گالری هتل</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="hotel-append-album-form" method="post"
+                      data-ajax-complete="HotelDetails.methods.appendPhotoToAlbumEndCallback"
+                      asp-controller="Hotels" asp-action="AppendToAlbum" enctype="multipart/form-data"
+                      data-ajax="true" data-ajax-begin="">
+
+                    <div asp-validation-summary="All"
+                         class="text-danger">
+                    </div>
+                    <input type="hidden" asp-for="HotelId"/>
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label asp-for="ImageAlt"></label>
+                            <input asp-for="ImageAlt" class="form-control">
+                        </div>
+                        <div class="col-md-12 form-group preview-container text-center">
+                            <div class="form-group">
+                                <img alt="album-image" class="show_preview_img w-75"
+                                     src="/images/NoImage.png"/>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control previewImg"
+                                       asp-for="ImageFile"
+                                       oninput="setCustomValidity('')"
+                                       accept=".jpg,.jpeg,.png"
+                                       type="file">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">انصراف</button>
+                <button type="submit" form="hotel-append-album-form" class="btn btn-success">افزودن</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End hotel-append-album Modal-->*@

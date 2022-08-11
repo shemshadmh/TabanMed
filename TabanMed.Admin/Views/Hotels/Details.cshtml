@@ -1,0 +1,175 @@
+﻿@*@using AdminServiceHost.ViewComponents.HotelAlbum
+@using Feegasht.Application.Contracts.Hotels.Dtos.Hotels
+@using Feegasht.Application.Contracts.Shared.Dtos
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Feegasht.Application.Contracts.Hotels.Dtos.Hotels.HotelDetailsDto
+
+@{
+    ViewData[StaticDetails.ViewDataTitlePageName] = "جزئیات هتل";
+    ViewData[StaticDetails.ViewDataControllerName] = "هتل‌ها";
+    ViewData[StaticDetails.ViewDataControllerRoute] = "Hotels";
+}
+
+
+@if(TempData[StaticDetails.TempDataMessageTitle] != null)
+{
+    <partial name="_PartialNotificationDivision"
+         model="new NotificationDto(Convert.ToBoolean(TempData[StaticDetails.TempDataMessageTitle].ToString().Split('~')[1].Trim()), TempData[StaticDetails.TempDataMessageTitle].ToString().Split('~')[0].Trim())" />
+}
+
+<div class="row">
+    <!-- Column -->
+    <div class="col-lg-4 col-xlg-3 col-md-5">
+        <div class="card">
+            <div class="card-body">
+                <div class="m-t-30">
+                    <img src="@Model.ImageUrl" onerror="PhotoHandler.methods.loadFailed()" class="img-thumbnail w-100">
+                    <h4 class="card-title m-t-10">@Model.FaName</h4>
+                    <h6 class="card-subtitle">@Model.EnName</h6>
+                </div>
+            </div>
+            <div>
+                <div class="card-footer">
+                    <div class="text-left">
+                        <a class="btn btn-primary back-btn text-white">بازگشت</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <!-- Column -->
+    <div class="col-lg-8 col-xlg-9 col-md-7">
+        <div class="card">
+            <!-- Tabs -->
+            <ul class="nav nav-pills custom-pills" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active show" id="pills-timeline-tab" data-toggle="pill" href="#hotel-info"
+                       role="tab" aria-controls="pills-timeline" aria-selected="true">
+                        اطلاعات هتل
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-hotel-tab" data-toggle="pill" href="#hotel-tours"
+                       role="tab" aria-controls="pills-setting" aria-selected="false">
+                        تورهای هتل
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-album-tab" data-toggle="pill" href="#photo-album"
+                       role="tab" aria-controls="pills-setting" aria-selected="false">
+                        آلبوم عکس های هتل
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-facilities-tab" data-toggle="pill" href="#hotel-facilities"
+                       role="tab" aria-controls="pills-setting" aria-selected="false">
+                        امکانات هتل
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-comments-tab" data-toggle="pill" href="#hotel-comments"
+                       role="tab" aria-controls="pills-setting" aria-selected="false">
+                        کامنت های هتل
+                        <span class="badge badge-info">
+                            (<span class="count-pending">@Model.CountPendingComments</span>)
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <!-- Tabs -->
+            <div class="tab-content" id="pills-tabContent">
+
+                <div class="tab-pane fade active show" id="hotel-info" aria-labelledby="pills-timeline-tab">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 col-xs-6 b-r">
+                                <strong>شهر</strong>
+                                <br>
+                                <p class="text-muted">@Model.CityFaName ( @Model.CityEnName )</p>
+                            </div>
+
+                            <div class="col-md-3 col-xs-6 b-r">
+                                <strong>ستاره هتل</strong>
+                                <br>
+                                <p class="text-muted">@Model.Stars</p>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <strong>آدرس وبسایت هتل</strong>
+                                <br>
+                                <p class="text-muted">@Model.WebsiteAddress.PlaceEmptyIfNullOrEmpty()</p>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <strong>آدرس هتل</strong>
+                                <br>
+                                <p class="text-muted">@Model.Address.PlaceEmptyIfNullOrEmpty()</p>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <strong>نمره کاربران</strong>
+                                <br>
+                                <p class="text-muted">@Model.Rate</p>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <strong>تلفن</strong>
+                                <br>
+                                <p class="text-muted">@Model.CallInformation.PlaceEmptyIfNullOrEmpty()</p>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <strong>نام های دیگر</strong>
+                                <br>
+                                <p class="text-muted">@Model.OtherNames.PlaceEmptyIfNullOrEmpty()</p>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <strong>تعداد اتاق</strong>
+                                <br>
+                                <p class="text-muted">@Model.RoomCount</p>
+                            </div>
+                        </div>
+                        <hr>
+                        @Html.Raw(Model.About)
+                    </div>
+                </div>
+                <div class="tab-pane fade mt-3" id="hotel-tours" aria-labelledby="pills-timeline-tab">
+                    <div class="card-body">
+                        <partial name="/Views/Hotels/Partials/_HotelToursPartial.cshtml" model="@Model.Id" />
+                    </div>
+                </div>
+                <div class="tab-pane fade mt-3" id="photo-album" aria-labelledby="pills-timeline-tab">
+                    <div class="card-body">
+                        <vc:hotel-album hotel-id="@Model.Id" />
+                    </div>
+                </div>
+                <div class="tab-pane fade mt-3" id="hotel-facilities" aria-labelledby="pills-timeline-tab">
+                    <div class="card-body">
+                        <vc:hotel-facilities hotel-id="Model.Id" />
+                    </div>
+                </div>
+                <div class="tab-pane fade mt-3" id="hotel-comments" aria-labelledby="pills-timeline-tab">
+                    <div class="card-body">
+                        <partial name="/Views/Hotels/Comments.cshtml" model="Model.Id" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+
+</div>
+
+@section Scripts
+    {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+    <script src="~/lib/jquery/jquery.unobtrusive-ajax.js" asp-append-version="true"></script>
+
+    <partial name="/Views/Hotels/Partials/_AppendToHotelAlbumPartial.cshtml"
+         model="new AppendToHotelAlbumDto { HotelId = Model.Id }" />
+    <vc:edit-hotel-facilities hotel-id="@Model.Id" />
+    <script src="~/js/Pages/Hotels/HotelDetails.js" asp-append-version="true"></script>
+    <script>
+        HotelDetails.init(@Model.Id);
+    </script>
+
+}*@

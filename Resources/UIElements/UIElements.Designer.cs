@@ -79,6 +79,33 @@ namespace Resources.UIElements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hotel Facilities.
+        /// </summary>
+        public static string HotelFacilities {
+            get {
+                return ResourceManager.GetString("HotelFacilities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hotels.
+        /// </summary>
+        public static string Hotels {
+            get {
+                return ResourceManager.GetString("Hotels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hotels List.
+        /// </summary>
+        public static string HotelsList {
+            get {
+                return ResourceManager.GetString("HotelsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logout.
         /// </summary>
         public static string Logout {
@@ -93,6 +120,15 @@ namespace Resources.UIElements {
         public static string Profile {
             get {
                 return ResourceManager.GetString("Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System Settings.
+        /// </summary>
+        public static string SystemSettings {
+            get {
+                return ResourceManager.GetString("SystemSettings", resourceCulture);
             }
         }
         

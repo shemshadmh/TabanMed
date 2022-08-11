@@ -261,7 +261,7 @@
                 
                 <li class="nav-small-cap">
                     <i class="mdi mdi-dots-horizontal"></i>
-                    <span class="hide-menu">تنظیمات سیستم</span>
+                    <span class="hide-menu">@UIElements.SystemSettings</span>
                 </li>
                 
                 <admin-secure-content asp-controller="HotelFacilities" asp-action="Index">
@@ -269,7 +269,22 @@
                         <a class="sidebar-link waves-effect waves-dark" asp-controller="HotelFacilities"
                            asp-action="Index" aria-expanded="false">
                             <i class="mdi mdi-hexagon-multiple"></i>
-                            <span class="hide-menu">امکانات هتل‌ها</span>
+                            <span class="hide-menu">@UIElements.HotelFacilities</span>
+                        </a>
+                    </li>
+                </admin-secure-content>
+                
+                <li class="nav-small-cap">
+                    <i class="mdi mdi-dots-horizontal"></i>
+                    <span class="hide-menu">@UIElements.Hotels</span>
+                </li>
+                
+                <admin-secure-content asp-controller="Hotels" asp-action="Index">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark" asp-controller="Hotels"
+                           asp-action="Index" aria-expanded="false">
+                            <i class="mdi mdi-hotel"></i>
+                            <span class="hide-menu">@UIElements.HotelsList</span>
                         </a>
                     </li>
                 </admin-secure-content>

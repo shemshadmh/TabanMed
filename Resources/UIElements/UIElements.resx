@@ -123,11 +123,23 @@
   <data name="Dashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
+  <data name="HotelFacilities" xml:space="preserve">
+    <value>Hotel Facilities</value>
+  </data>
+  <data name="Hotels" xml:space="preserve">
+    <value>Hotels</value>
+  </data>
+  <data name="HotelsList" xml:space="preserve">
+    <value>Hotels List</value>
+  </data>
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
+  </data>
+  <data name="SystemSettings" xml:space="preserve">
+    <value>System Settings</value>
   </data>
   <data name="TabanMedicalManagement" xml:space="preserve">
     <value>Taban Medical Management</value>

@@ -26,6 +26,7 @@ namespace TabanMed.Admin.TagHelpers.Application
 
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
+            return;
             try
             {
                 output.TagName = null;

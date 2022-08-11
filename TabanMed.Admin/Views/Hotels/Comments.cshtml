@@ -1,0 +1,84 @@
+﻿@*@using Kendo.Mvc.UI
+@using Feegasht.Application.Contracts.Comments.Dtos
+@model int
+
+
+<link href="~/lib/Kedno/Css/kendo.common.min.css" rel="stylesheet">
+<link href="~/lib/Kedno/Css/kendo.default.min.css" rel="stylesheet">
+
+
+<script src="~/lib/Kedno/Js/kendo.all.min.js" asp-append-version="true"></script>
+<script src="~/lib/Kedno/Js/kendo.aspnetmvc.min.js" asp-append-version="true"></script>
+
+<div class="k-rtl">
+    @(Html.Kendo().Grid<CommentListItemsDto>()
+        .Name("grid_Comment")
+        .Columns(columns =>
+        {
+            columns.Bound(hotel => hotel.UserFullname).Width(250);
+            columns.Bound(hotel => hotel.Text).Width(350);
+            columns.Bound(hotel => hotel.Rate).Width(100);
+            columns.Bound(hotel => hotel.IsActive)
+                .ClientTemplate("#=data.IsActive===false?'رد شده':data.IsActive===true?'تایید شده':'در انتظار تعیین وضعیت'#")
+                .ClientGroupHeaderTemplate("#=value===false?'رد شده':value===true?'تایید شده':'در انتظار تعیین وضعیت'#")
+                .Width(50);
+            columns.Bound(hotel => hotel.Id).Hidden();
+            columns.Command(c =>
+            {
+                c.Custom("accept")
+                    .Text("تایید")
+                    .HtmlAttributes(new { @class = "btn-success accept-comment" });
+
+                c.Custom("reject")
+                    .Text("رد")
+                    .HtmlAttributes(new { @class = "btn-danger  reject-comment" });
+            }).Width(150);
+        })
+        .Events(e => e.DataBound("gridDataBound"))
+        .Sortable()
+        .Filterable()
+        .Selectable(select =>
+            select.Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))
+        .Pageable(pageable => pageable
+            .ButtonCount(5)
+            .Refresh(true)
+            .PageSizes(true))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            /*.Events(events => events.Error("error_handler")
+                .RequestStart("show_preLoader")
+                .RequestEnd("hide_preLoader"))*/
+            .Model(model =>
+            {
+                model.Id(countryItem => countryItem.Id);
+                model.Field(countryItem => countryItem.Id).Editable(false);
+            })
+            .Read(read => read.Action("GetHotelsComments",
+                "Hotels", new { id = Model }).Type(HttpVerbs.Post))
+            .Group(group => group.Add(model => model.IsActive))
+        )
+        .Resizable(resize => resize.Columns(true)))
+</div>
+
+
+<script src="~/js/Pages/Hotels/HotelComments.js"></script>
+<script>
+function gridDataBound(e){
+    let grid =this;
+    grid.items().each((i,item )=>{
+        let value=grid.dataItem(item).IsActive;
+        let acceptButton=$(item).find('.accept-comment');
+        let rejectButton=$(item).find('.reject-comment');
+        if (value===true){
+            acceptButton.hide();
+            rejectButton.hide();
+            }
+        else if (value===false){
+            rejectButton.hide();
+            acceptButton.hide();
+        }
+        
+        })
+    }
+    HotelComments.init();
+</script>*@

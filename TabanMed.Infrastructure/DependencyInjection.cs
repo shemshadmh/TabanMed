@@ -25,6 +25,7 @@ namespace TabanMed.Infrastructure
             #region Hotels
 
             services.AddTransient<IHotelFacilityApplication, HotelFacilityApplication>();
+            services.AddTransient<IHotelApplication, HotelApplication>();
 
             #endregion
 
