@@ -403,6 +403,15 @@ namespace Resources.DataDictionary {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Main Image.
+        /// </summary>
+        public static string MainImage {
+            get {
+                return ResourceManager.GetString("MainImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Message Receiver.
         /// </summary>
         public static string MessageReceiver {
@@ -426,6 +435,15 @@ namespace Resources.DataDictionary {
         public static string MuseumAttractionType {
             get {
                 return ResourceManager.GetString("MuseumAttractionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         

@@ -45,6 +45,21 @@ namespace TabanMed.Admin.Controllers
             return Json(await data.ToDataSourceResultAsync(request));
         }
 
+        [HttpGet]
+        public IActionResult Create(int id) 
+            => View(new CreateHotelDto(){CityId = id});
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(int id,[FromForm] CreateHotelDto model)
+        {
+            var response = new Response<bool>();
+            //if(!ModelState.IsValid)
+                return View(model);
+
+            //var operationRes = await _hotelApplication.CreateHotel(model);
+            //return Json(operationRes.IsSucceeded ? response.Succeeded() : response.Failed(operationRes.Message!));
+        }
+
         [HttpGet, Display(Name = "جزییات هتل")]
         public async Task<IActionResult> Details(int id)
         {
@@ -78,16 +93,7 @@ namespace TabanMed.Admin.Controllers
 
         #region Commands
 
-        [HttpPost("create-hotel"), ValidateAntiForgeryToken, AjaxOnly]
-        public async Task<IActionResult> Create([FromForm] CreateHotelDto model)
-        {
-            var response = new Response<bool>();
-            if(!ModelState.IsValid)
-                return Json(response.Failed(ModelState.GetErrorMessages(), ErrorMessages.ModelValidationError));
-
-            var operationRes = await _hotelApplication.CreateHotel(model);
-            return Json(operationRes.IsSucceeded ? response.Succeeded() : response.Failed(operationRes.Message!));
-        }
+        
 
         [HttpPost("edit-hotel"), ValidateAntiForgeryToken, AjaxOnly]
         public async Task<IActionResult> Edit([FromForm] EditHotelDto model)

@@ -327,4 +327,10 @@
   <data name="EnTitle" xml:space="preserve">
     <value>عنوان انگلیسی</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="MainImage" xml:space="preserve">
+    <value>تصویر اصلی</value>
+  </data>
 </root>

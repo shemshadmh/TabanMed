@@ -1,0 +1,85 @@
+﻿@using Resources.DataDictionary
+@model Application.Dtos.Hotels.Hotels.CreateHotelDto
+
+@{
+    ViewData[AppConstants.ViewDataTitlePageName] = "ثبت هتل جدید";
+    ViewData[AppConstants.ViewDataControllerName] = "هتل‌ها";
+    ViewData[AppConstants.ViewDataControllerRoute] = "Hotels";
+}
+
+@section Styles
+    {
+    <link rel="stylesheet" href="~/css/FiveStarsStyles.css" asp-append-version="true" />
+}
+
+    <div class="card">
+        <div class="card-body">
+            <form id="create-hotel-form" method="post"
+              data-ajax-complete="HotelCity.methods.createCompleteCallback"
+              asp-controller="Hotels" asp-action="Create" asp-route-id="@Model.CityId" enctype="multipart/form-data">
+
+                <div asp-validation-summary="All"
+                 class="text-danger">
+                </div>
+
+                <input type="hidden" asp-for="CityId" />
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label class="control-label" asp-for="Name"></label>
+                        <input class="form-control" asp-for="Name" />
+                    </div>
+
+                    <div class="col-md-3 form-group">
+                        <label class="control-label" asp-for="CallInformation"></label>
+                        <input class="form-control" asp-for="CallInformation" />
+                    </div>
+
+                    <div class="col-md-3 form-group">
+                        <label class="control-label" asp-for="WebsiteAddress"></label>
+                        <input class="form-control" asp-for="WebsiteAddress" />
+                    </div>
+
+                    <div class="col-md-3 form-group">
+                        <label class="control-label" asp-for="Stars"></label>
+                        <select class="form-control" asp-for="Stars" asp-items="@(new SelectList(new List<int>(){1,2,3,4,5}))"></select>
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label class="control-label" asp-for="About"></label>
+                        <textarea rows="5" class="form-control" asp-for="About"></textarea>
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label class="control-label" asp-for="Address"></label>
+                        <textarea rows="5" class="form-control" asp-for="Address"></textarea>
+                    </div>
+
+                    <div class="col-md-4 form-group preview-container">
+                        <label class="control-label required" asp-for="HotelPic"></label>
+                        <div class="form-group">
+                            <img class="show_preview_img mw-100 h-50"
+                             src="/images/NoImage.png" />
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control previewImg"
+                               asp-for="HotelPic"
+                               oninput="setCustomValidity('')"
+                               accept=".jpg,.jpeg,.png"
+                               type="file">
+                        </div>
+                    </div>
+
+                    <div class="col form-group">
+                        <button type="submit" class="btn btn-block btn-success">@DataDictionary.CreateNewRecord</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @section Scripts
+    {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }

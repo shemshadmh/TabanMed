@@ -134,4 +134,11 @@ $(function() {
     $(() => {
         $(".k-pager-sm").removeClass("k-pager-sm");
     });
+
+    // Add red star to all labels that has required inputs 
+    $('[data-val-required]').each(function () {
+        $($(this).prev('label')).addClass('required'); //depending on the structure of your fields
+    });
+
 });
+

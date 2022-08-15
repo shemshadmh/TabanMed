@@ -23,3 +23,22 @@
     font-weight: bold;
 }
 /*end Kendo grid*/
+
+
+/* InputsCharacterCounter */
+.required:after {
+    color: red;
+    content: "*";
+}
+
+.characterCount {
+    display: inline-block;
+    font-size: 80%;
+    color: #6a7a8c;
+}
+/* End InputsCharacterCounter */
+
+.show_preview_img {
+    max-height: 200px;
+    max-width: 200px;
+}

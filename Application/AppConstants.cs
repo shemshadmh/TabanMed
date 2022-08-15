@@ -38,5 +38,7 @@ namespace Application
         #endregion
 
         public static string TempDataMessageTitle => "Message";
+
+        public const double MaxTransportCoLogoFileSizeUpload = 3e+6; // 3MB
     }
 }

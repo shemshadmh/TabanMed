@@ -13,14 +13,6 @@ namespace Domain.Entities.Hotels
         public string? CallInformation { get; set; }
         public string? WebsiteAddress { get; set; }
 
-        #region Location
-
-        public double Lat { get; set; }
-        public double Lng { get; set; }
-        public byte Zoom { get; set; }
-
-        #endregion
-
         #region Relations
 
         //Hotel Facilities

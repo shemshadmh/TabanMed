@@ -1,6 +1,8 @@
 ﻿
+using Application;
 using Common;
 using Domain.Entities.Destination;
+using Domain.Entities.Destination.Translation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,22 +17,12 @@ namespace Persistence.Configurations.DestinationEntities
             builder.Property(country => country.Id)
                 .HasColumnType(ModelConstants.Shared.SmallIntColumnType);
 
-            builder.Property(country => country.EnName)
-                .HasColumnType(ModelConstants.Shared.VarCharColumnType) // varchar for just english characters
-                .HasMaxLength(ModelConstants.Country.EnNameMaxLength)
-                .IsRequired();
-
-            builder.Property(country => country.FaName)
-                .HasMaxLength(ModelConstants.Country.FaNameMaxLength)
-                .IsRequired();
 
             builder.HasData(new List<Country>()
             {
                 new ()
                 {
                    Id = 1,
-                   EnName = "Iran",
-                   FaName = "ایران"
                 }
             });
         }

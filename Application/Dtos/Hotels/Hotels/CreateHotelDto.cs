@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using Application.Attributes;
+using Common;
+using Microsoft.AspNetCore.Http;
 using Resources.DataDictionary;
 using Resources.ErrorMessages;
 
@@ -7,23 +9,20 @@ namespace Application.Dtos.Hotels.Hotels;
 public class CreateHotelDto
 {
     [Display(ResourceType = typeof(DataDictionary),
-        Name = nameof(DataDictionary.FaName))]
+        Name = nameof(DataDictionary.Name))]
     [Required(AllowEmptyStrings = false,
         ErrorMessageResourceType = typeof(ErrorMessages),
         ErrorMessageResourceName = nameof(ErrorMessages.Required))]
-    public string FaName { get; set; } = null!;
-
-    [Display(ResourceType = typeof(DataDictionary),
-        Name = nameof(DataDictionary.EnName))]
-    [Required(AllowEmptyStrings = false,
+    [MaxLength(length: ModelConstants.Hotel.NameMaxLength,
         ErrorMessageResourceType = typeof(ErrorMessages),
-        ErrorMessageResourceName = nameof(ErrorMessages.Required))]
-    [RegularExpression("^[A-Za-z ]*$",
-        ErrorMessage = "{0} را به صورت کارکتر انگلیسی وارد کنید !")]
-    public string EnName { get; set; } = null!;
+        ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
+    public string Name { get; set; } = null!;
 
     [Display(ResourceType = typeof(DataDictionary),
         Name = nameof(DataDictionary.About))]
+    [MaxLength(length: ModelConstants.Hotel.AboutMaxLength,
+        ErrorMessageResourceType = typeof(ErrorMessages),
+        ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
     public string? About { get; set; }
 
     [Display(ResourceType = typeof(DataDictionary),
@@ -33,42 +32,38 @@ public class CreateHotelDto
     public int Stars { get; set; }
 
     [Display(ResourceType = typeof(DataDictionary),
-        Name = nameof(DataDictionary.HotelOtherNames))]
-    public string? OtherNames { get; set; }
-
-    [Display(ResourceType = typeof(DataDictionary),
-        Name = nameof(DataDictionary.HotelRoomCount))]
-    public int? RoomCount { get; set; }
-
-    [Display(ResourceType = typeof(DataDictionary),
         Name = nameof(DataDictionary.Address))]
+    [MaxLength(length: ModelConstants.Hotel.AddressMaxLength,
+        ErrorMessageResourceType = typeof(ErrorMessages),
+        ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
     public string? Address { get; set; }
 
     [Display(ResourceType = typeof(DataDictionary),
         Name = nameof(DataDictionary.Phone))]
+    [MaxLength(length: ModelConstants.Hotel.CallInformationMaxLength,
+        ErrorMessageResourceType = typeof(ErrorMessages),
+        ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
     public string? CallInformation { get; set; }
 
     [Display(ResourceType = typeof(DataDictionary),
         Name = nameof(DataDictionary.WebAddress))]
+    [MaxLength(length: ModelConstants.Hotel.WebsiteAddressMaxLength,
+        ErrorMessageResourceType = typeof(ErrorMessages),
+        ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
     public string? WebsiteAddress { get; set; }
 
     [Required(ErrorMessageResourceType = typeof(ErrorMessages),
         ErrorMessageResourceName = nameof(ErrorMessages.Required))]
     public int CityId { get; set; }
 
-    //[Location(ErrorMessageResourceType = typeof(ErrorMessages),
-    //    ErrorMessageResourceName = nameof(ErrorMessages.ChooseLocationOnTheMap))]
-    //public LocationDto Location { get; set; } = null!;
-
-    //[Display(ResourceType = typeof(DataDictionary),
-    //    Name = nameof(DataDictionary.HotelLogo))]
-    //[Required(ErrorMessageResourceType = typeof(ErrorMessages),
-    //    ErrorMessageResourceName = nameof(ErrorMessages.Required))]
-    //[ImageFile]
-    //[FileMaxSizeLimit(StaticDetails.MaxTransportCoLogoFileSizeUpload)]
-    //[FileExtensionsLimit(".jpg,.png,.jpeg", ErrorMessageResourceType = typeof(ErrorMessages),
-    //    ErrorMessageResourceName = nameof(ErrorMessages.FileExtension))]
-    //[DataType(DataType.Upload)]
-
-    //public IFormFile HotelPic { get; set; } = null!;
+    [Display(ResourceType = typeof(DataDictionary),
+        Name = nameof(DataDictionary.MainImage))]
+    [Required(ErrorMessageResourceType = typeof(ErrorMessages),
+        ErrorMessageResourceName = nameof(ErrorMessages.Required))]
+    [ImageFile]
+    [FileMaxSizeLimit(AppConstants.MaxTransportCoLogoFileSizeUpload)]
+    [FileExtensionsLimit(".jpg,.png,.jpeg", ErrorMessageResourceType = typeof(ErrorMessages),
+        ErrorMessageResourceName = nameof(ErrorMessages.FileExtension))]
+    [DataType(DataType.Upload)]
+    public IFormFile HotelPic { get; set; } = null!;
 }

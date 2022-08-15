@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class TabanMed_20220811_142351 : Migration
+    public partial class TabanMed_20220815_193742 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,9 +14,7 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<short>(type: "smallint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FaName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    EnName = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
@@ -129,8 +127,6 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<short>(type: "smallint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FaName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    EnName = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
                     CountryId = table.Column<short>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
@@ -144,12 +140,35 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CountryTranslation",
+                columns: table => new
+                {
+                    CountryId = table.Column<short>(type: "smallint", nullable: false),
+                    LanguageId = table.Column<byte>(type: "tinyint", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CountryTranslation", x => new { x.CountryId, x.LanguageId });
+                    table.ForeignKey(
+                        name: "FK_CountryTranslation_Countries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Countries",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CountryTranslation_Languages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "HotelFacilityTranslations",
                 columns: table => new
                 {
                     FacilityId = table.Column<int>(type: "int", nullable: false),
                     LanguageId = table.Column<byte>(type: "tinyint", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Title = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -273,6 +292,29 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CityTranslation",
+                columns: table => new
+                {
+                    CityId = table.Column<short>(type: "smallint", nullable: false),
+                    LanguageId = table.Column<byte>(type: "tinyint", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CityTranslation", x => new { x.CityId, x.LanguageId });
+                    table.ForeignKey(
+                        name: "FK_CityTranslation_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CityTranslation_Languages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Hotels",
                 columns: table => new
                 {
@@ -280,11 +322,8 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ImageUrl = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     Stars = table.Column<byte>(type: "tinyint", nullable: false, defaultValue: (byte)0),
-                    CallInformation = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true),
+                    CallInformation = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: true),
                     WebsiteAddress = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
-                    Lat = table.Column<double>(type: "float", nullable: false),
-                    Lng = table.Column<double>(type: "float", nullable: false),
-                    Zoom = table.Column<byte>(type: "tinyint", nullable: false),
                     CityId = table.Column<short>(type: "smallint", nullable: false),
                     CreatedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
@@ -350,9 +389,9 @@ namespace Persistence.Migrations
                 {
                     HotelId = table.Column<int>(type: "int", nullable: false),
                     LanguageId = table.Column<byte>(type: "tinyint", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    About = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    About = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -371,8 +410,8 @@ namespace Persistence.Migrations
 
             migrationBuilder.InsertData(
                 table: "Countries",
-                columns: new[] { "Id", "EnName", "FaName" },
-                values: new object[] { (short)1, "Iran", "ایران" });
+                column: "Id",
+                value: (short)1);
 
             migrationBuilder.InsertData(
                 table: "Languages",
@@ -390,8 +429,8 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "DisplayName", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "3e2c9b3b-1c5c-41a5-9fe6-9004dcd4b78b", "d2b997f7-b624-4da8-b5a4-50062162a1a5", "ادمین کل سیستم", "Administrator", "ADMINISTRATOR" },
-                    { "6f4024b0-153e-4b8b-a851-5befbdb955f9", "7e0c4ce5-6aa9-47bb-b18c-4b6fb21f32fc", "اپراتور سیستم", "SystemOperator", "SYSTEMOPERATOR" }
+                    { "3e2c9b3b-1c5c-41a5-9fe6-9004dcd4b78b", "6e3e66c8-6c17-4125-a4be-3c775e024c04", "ادمین کل سیستم", "Administrator", "ADMINISTRATOR" },
+                    { "6f4024b0-153e-4b8b-a851-5befbdb955f9", "278c24d8-e59a-4165-aa3f-b61806f03013", "اپراتور سیستم", "SystemOperator", "SYSTEMOPERATOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -399,17 +438,26 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "BirthDay", "ConcurrencyStamp", "Created", "CreatedBy", "DeletedBy", "DeletedOn", "Email", "EmailConfirmed", "Family", "Gender", "IpAddress", "IsDeleted", "IsOperator", "LastModified", "LastModifiedBy", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePicture", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "04a76057-948a-4fd1-b9f0-ed36991fcaa5", (byte)0, null, "7a1699bd-9956-40e6-af15-d2d1991fe7c0", new DateTime(2022, 8, 11, 9, 53, 59, 940, DateTimeKind.Utc).AddTicks(7270), "Seed", null, null, "operator@tabanmed.com", false, "تابان", null, null, false, true, null, null, true, null, "اپراتور", "OPERATOR@TABANMED.COM", "TABANMEDOPERATOR", "AQAAAAEAACcQAAAAEGO2+kmYpAenNWk5p1UYgYOMbU3/pUOoc4yRkUma3Zq2Hsc8g9HSWpztF3MozgJdig==", null, false, null, "877510d4-bb08-444a-a0eb-9b39648a6de6", false, "tabanmedOperator" },
-                    { "b0a39202-a221-47c7-9d34-dc4479ec33f2", (byte)0, null, "5c89d9d7-8749-442b-84bd-384dffa6f470", new DateTime(2022, 8, 11, 9, 53, 59, 940, DateTimeKind.Utc).AddTicks(7230), "Seed", null, null, "hatef@tabanmed.com", false, "شمشاد", true, null, false, true, null, null, true, null, "محمد هاتف", "HATEF@TABANMED.COM", "HATEFADMIN", "AQAAAAEAACcQAAAAEDCEjgFnVqs3jS+KYwhsCsNHoR7mV7tQ7/NUHc2bxUc9HjMuXSNCax/I5jPdFBGsVg==", null, false, null, "31ca9a74-8f93-4cc6-8e94-7fee2175f967", false, "HatefAdmin" }
+                    { "04a76057-948a-4fd1-b9f0-ed36991fcaa5", (byte)0, null, "09b06172-da8c-4ceb-8c8c-83d81d068961", new DateTime(2022, 8, 15, 15, 7, 50, 675, DateTimeKind.Utc).AddTicks(3262), "Seed", null, null, "operator@tabanmed.com", false, "تابان", null, null, false, true, null, null, true, null, "اپراتور", "OPERATOR@TABANMED.COM", "TABANMEDOPERATOR", "AQAAAAEAACcQAAAAEGO2+kmYpAenNWk5p1UYgYOMbU3/pUOoc4yRkUma3Zq2Hsc8g9HSWpztF3MozgJdig==", null, false, null, "62c069ef-e318-46de-a1b2-70bbceecb1aa", false, "tabanmedOperator" },
+                    { "b0a39202-a221-47c7-9d34-dc4479ec33f2", (byte)0, null, "f86dffff-0d1d-4b58-a972-e5a376d3e4ec", new DateTime(2022, 8, 15, 15, 7, 50, 675, DateTimeKind.Utc).AddTicks(3232), "Seed", null, null, "hatef@tabanmed.com", false, "شمشاد", true, null, false, true, null, null, true, null, "محمد هاتف", "HATEF@TABANMED.COM", "HATEFADMIN", "AQAAAAEAACcQAAAAEDCEjgFnVqs3jS+KYwhsCsNHoR7mV7tQ7/NUHc2bxUc9HjMuXSNCax/I5jPdFBGsVg==", null, false, null, "3d108138-6864-40fa-9659-2399bfb26dfe", false, "HatefAdmin" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Cities",
-                columns: new[] { "Id", "CountryId", "EnName", "FaName" },
+                columns: new[] { "Id", "CountryId" },
                 values: new object[,]
                 {
-                    { (short)1, (short)1, "Tehran", "تهران" },
-                    { (short)2, (short)1, "Mashhad", "مشهد" }
+                    { (short)1, (short)1 },
+                    { (short)2, (short)1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CountryTranslation",
+                columns: new[] { "CountryId", "LanguageId", "Name" },
+                values: new object[,]
+                {
+                    { (short)1, (byte)1, "ایران" },
+                    { (short)1, (byte)2, "Iran" }
                 });
 
             migrationBuilder.InsertData(
@@ -421,10 +469,31 @@ namespace Persistence.Migrations
                     { "3e2c9b3b-1c5c-41a5-9fe6-9004dcd4b78b", "b0a39202-a221-47c7-9d34-dc4479ec33f2" }
                 });
 
+            migrationBuilder.InsertData(
+                table: "CityTranslation",
+                columns: new[] { "CityId", "LanguageId", "Name" },
+                values: new object[,]
+                {
+                    { (short)1, (byte)1, "تهران" },
+                    { (short)1, (byte)2, "Tehran" },
+                    { (short)2, (byte)1, "مشهد" },
+                    { (short)2, (byte)2, "Mashhad" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_CountryId",
                 table: "Cities",
                 column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CityTranslation_LanguageId",
+                table: "CityTranslation",
+                column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CountryTranslation_LanguageId",
+                table: "CountryTranslation",
+                column: "LanguageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HotelFacilities_ParentId",
@@ -498,6 +567,12 @@ namespace Persistence.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CityTranslation");
+
+            migrationBuilder.DropTable(
+                name: "CountryTranslation");
+
             migrationBuilder.DropTable(
                 name: "HotelFacilityTranslations");
 

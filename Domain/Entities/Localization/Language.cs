@@ -1,4 +1,5 @@
 ﻿
+using Domain.Entities.Destination.Translation;
 using Domain.Entities.Hotels.Translation;
 
 namespace Domain.Entities.Localization
@@ -14,5 +15,11 @@ namespace Domain.Entities.Localization
 
         // Hotel Translations
         public ICollection<HotelTranslation>? HotelTranslations { get; set; }
+
+        // CountryTranslation
+        public ICollection<CountryTranslation>? CountryTranslations { get; set; }
+
+        // CityTranslation
+        public ICollection<CityTranslation>? CityTranslations { get; set; }
     }
 }
