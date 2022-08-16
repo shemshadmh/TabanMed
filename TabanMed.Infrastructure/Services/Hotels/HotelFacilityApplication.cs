@@ -90,6 +90,7 @@ namespace TabanMed.Infrastructure.Services.Hotels
                     {
                         LanguageId = AppConstants.FaLanguageId,
                         Title = facilityDto.FaTitle
+                        
                     },
                     new()
                     {
