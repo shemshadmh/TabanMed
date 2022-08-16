@@ -1,5 +1,6 @@
 ﻿
 using Domain.Entities.Destination;
+using Domain.Entities.Destination.Translation;
 using Domain.Entities.Hotels;
 using Domain.Entities.Hotels.Translation;
 using Domain.Entities.Localization;
@@ -20,7 +21,7 @@ namespace Application.Interfaces.Application
 
         public DbSet<City> Cities { get;}
         public DbSet<Country> Countries { get;}
-
+        public DbSet<CountryTranslation> CountriesTranslation { get; }
         #endregion
 
         #region Hotel

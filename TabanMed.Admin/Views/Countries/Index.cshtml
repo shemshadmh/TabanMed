@@ -1,0 +1,166 @@
+﻿@using Application.Dtos.Countries
+@using Kendo.Mvc.UI
+@using Resources.DataDictionary
+@{
+    ViewData[AppConstants.ViewDataTitlePageName] = "کشورها";
+}
+
+
+@section Styles{
+    <link href="~/lib/Kedno/Css/kendo.common.min.css" rel="stylesheet">
+    <link href="~/lib/Kedno/Css/kendo.default.min.css" rel="stylesheet">
+    <style>
+        .k-filter-row > th:first-child, .k-grid tbody td:first-child, .k-grid tfoot td:first-child,
+        .k-grid-header th.k-header:first-child {
+            border-left-width: 1px !important;
+        }
+
+        .k-grouping-header {
+            text-align: center;
+        }
+
+        #grid .k-grid-header .k-header {
+            font-weight: bold;
+        }
+    </style>
+}
+
+
+<div id="error-area" class="alert alert-danger">
+    <ul class="m-0" id="error_list">
+    </ul>
+</div>
+<div id="success-area" class="alert alert-success">
+    <ul class="m-0" id="suc_list">
+    </ul>
+</div>
+
+
+<script src="~/lib/Kedno/Js/kendo.all.min.js" asp-append-version="true"></script>
+<script src="~/lib/Kedno/Js/kendo.aspnetmvc.min.js" asp-append-version="true"></script>
+<div class="k-rtl">
+    @(Html.Kendo().Grid<CountryListItem>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(facility => facility.FaName);
+            columns.Bound(facility => facility.EnName);
+            columns.Bound(facility => facility.ArName);
+            columns.Bound(facility => facility.AfName);
+        })
+        .ToolBar(toolbar =>
+        {
+            toolbar.Create()
+                .Text(DataDictionary.CreateNewRecord)
+                .HtmlAttributes(new { @class = "btn btn-success" });
+            toolbar.Save()
+                .CancelText(DataDictionary.CancelChanges)
+                .SaveText(DataDictionary.SaveChanges)
+                .HtmlAttributes(new { @class = "btn btn-warning" });
+        })
+        .Editable(editable => editable.Mode(GridEditMode.InCell))
+        .Sortable()
+        .Filterable()
+        .Pageable(pageable => pageable
+            .ButtonCount(5)
+            .Refresh(true)
+            .PageSizes(true))
+        @*.ClientDetailTemplateId("facilitiesList")*@
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Events(events => events.Error("error_handler")
+                .RequestStart("show_preLoader")
+                .RequestEnd("FacilityList.methods.reqEnded"))
+            .Model(model =>
+            {
+                model.Id(countryItem => countryItem.Id);
+                model.Field(countryItem => countryItem.Id).Editable(false);
+            })
+            .Create(create => create.Action("CreateCountry", "Countries").Type(HttpVerbs.Post))
+            .Read(read => read.Action("GetCountriesList", "Countries").Type(HttpVerbs.Post))
+            .Update(update => update.Action("UpdateFacility", "Countries").Type(HttpVerbs.Post)))
+        .Resizable(resize => resize.Columns(true)))
+</div>
+
+@section Scripts{
+
+    @*<script id="facilitiesList" type="text/kendo-tmpl">
+
+           @(Html.Kendo().Grid<HotelFacilityListItem>()
+               .Name("grid_#=Id#")
+               .Columns(columns =>
+               {
+                   columns.Bound(facility => facility.FaTitle);
+                   columns.Bound(facility => facility.EnTitle);
+                   columns.Bound(facility => facility.ArTitle);
+                   columns.Bound(facility => facility.AfTitle);
+               })
+               .ToolBar(toolbar =>
+               {
+                   toolbar.Create().Text(DataDictionary.CreateNewRecord)
+                       .HtmlAttributes(new { @class = "btn btn-success", @parentData = "#=Id#" });
+                   toolbar.Save()
+                       .CancelText(DataDictionary.CancelChanges)
+                       .SaveText(DataDictionary.SaveChanges)
+                       .HtmlAttributes(new { @class = "btn btn-warning" });
+               })
+               .Editable(editable => editable.Mode(GridEditMode.InCell))
+               .Selectable(selectable => selectable
+                   .Mode(GridSelectionMode.Single)
+                   .Type(GridSelectionType.Row))
+               .Sortable()
+               .Filterable()
+               .Pageable(pageable => pageable
+                   .ButtonCount(5)
+                   .Refresh(true)
+                   .PageSizes(true))
+               .DataSource(dataSource => dataSource
+                   .Ajax()
+                   .Events(events => events.Error("error_handler")
+                       .RequestStart("show_preLoader")
+                       .RequestEnd("FacilityList.methods.reqEnded"))
+                   .Model(model =>
+                   {
+                       model.Id(cityItem => cityItem.Id);
+                       model.Field(cityItem => cityItem.Id).Editable(false);
+                   })
+                   .PageSize(5)
+                   .Create(create => create.Action("CreateFacility", "HotelFacilities", new { pId = "#=Id#" }).Type(HttpVerbs.Post))
+                   .Read(read => read.Action("GetFacilityTitlesList", "HotelFacilities", new { pId = "#=Id#" }).Type(HttpVerbs.Post))
+                   .Update(update => update.Action("UpdateFacility", "HotelFacilities", new { pId = "#=Id#" }).Type(HttpVerbs.Post)))
+               .ToClientTemplate())
+    </script>*@
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function() {
+                            $("#error_list").html(`<li>${this}</li>`);
+                        });
+                    }
+                });
+                $("#error-area").show();
+            }
+        }
+
+        function show_preLoader() {
+            $(".preloader").show();
+            $("#error_list").html('');
+            $("#error-area").hide();
+            $("#success-area").hide();
+        }
+        
+
+    </script>
+
+    <script src="~/lib/jquery/jquery.unobtrusive-ajax.js" asp-append-version="true"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    
+    <script src="~/js/Pages/Hotels/HotelFacilityIndex.js" asp-append-version="true"></script>
+    <script>
+        FacilityList.init();
+    </script>
+}

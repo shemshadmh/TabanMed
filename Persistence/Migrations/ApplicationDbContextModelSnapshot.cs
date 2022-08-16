@@ -134,7 +134,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("LanguageId");
 
-                    b.ToTable("CountryTranslation");
+                    b.ToTable("CountriesTranslation");
 
                     b.HasData(
                         new
@@ -442,8 +442,8 @@ namespace Persistence.Migrations
                         {
                             Id = "b0a39202-a221-47c7-9d34-dc4479ec33f2",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "f86dffff-0d1d-4b58-a972-e5a376d3e4ec",
-                            Created = new DateTime(2022, 8, 15, 15, 7, 50, 675, DateTimeKind.Utc).AddTicks(3232),
+                            ConcurrencyStamp = "ce493820-3c1d-4500-91e7-005857f51adb",
+                            Created = new DateTime(2022, 8, 16, 12, 43, 30, 629, DateTimeKind.Utc).AddTicks(6833),
                             CreatedBy = "Seed",
                             Email = "hatef@tabanmed.com",
                             EmailConfirmed = false,
@@ -457,7 +457,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "HATEFADMIN",
                             PasswordHash = "AQAAAAEAACcQAAAAEDCEjgFnVqs3jS+KYwhsCsNHoR7mV7tQ7/NUHc2bxUc9HjMuXSNCax/I5jPdFBGsVg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3d108138-6864-40fa-9659-2399bfb26dfe",
+                            SecurityStamp = "507da7d9-dbd3-4660-bb3c-2909d5f2bfd4",
                             TwoFactorEnabled = false,
                             UserName = "HatefAdmin"
                         },
@@ -465,8 +465,8 @@ namespace Persistence.Migrations
                         {
                             Id = "04a76057-948a-4fd1-b9f0-ed36991fcaa5",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "09b06172-da8c-4ceb-8c8c-83d81d068961",
-                            Created = new DateTime(2022, 8, 15, 15, 7, 50, 675, DateTimeKind.Utc).AddTicks(3262),
+                            ConcurrencyStamp = "9c78322a-beeb-4703-8f90-ac7e878cb82b",
+                            Created = new DateTime(2022, 8, 16, 12, 43, 30, 629, DateTimeKind.Utc).AddTicks(6974),
                             CreatedBy = "Seed",
                             Email = "operator@tabanmed.com",
                             EmailConfirmed = false,
@@ -479,7 +479,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "TABANMEDOPERATOR",
                             PasswordHash = "AQAAAAEAACcQAAAAEGO2+kmYpAenNWk5p1UYgYOMbU3/pUOoc4yRkUma3Zq2Hsc8g9HSWpztF3MozgJdig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "62c069ef-e318-46de-a1b2-70bbceecb1aa",
+                            SecurityStamp = "9908be7b-780b-4422-8691-b5c91e933e31",
                             TwoFactorEnabled = false,
                             UserName = "tabanmedOperator"
                         });
@@ -522,7 +522,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "3e2c9b3b-1c5c-41a5-9fe6-9004dcd4b78b",
-                            ConcurrencyStamp = "6e3e66c8-6c17-4125-a4be-3c775e024c04",
+                            ConcurrencyStamp = "37128188-b887-45dc-9bf1-d138ef7a2f3f",
                             DisplayName = "ادمین کل سیستم",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
@@ -530,7 +530,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "6f4024b0-153e-4b8b-a851-5befbdb955f9",
-                            ConcurrencyStamp = "278c24d8-e59a-4165-aa3f-b61806f03013",
+                            ConcurrencyStamp = "9ee523f2-9850-4a2d-a52a-7f8b4a989904",
                             DisplayName = "اپراتور سیستم",
                             Name = "SystemOperator",
                             NormalizedName = "SYSTEMOPERATOR"

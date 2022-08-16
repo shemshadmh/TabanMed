@@ -4,6 +4,7 @@ using Application.Interfaces.Application;
 using Common;
 using Domain.Common;
 using Domain.Entities.Destination;
+using Domain.Entities.Destination.Translation;
 using Domain.Entities.Hotels;
 using Domain.Entities.Hotels.Translation;
 using Domain.Entities.Identity;
@@ -38,6 +39,7 @@ namespace Persistence
 
         public DbSet<City> Cities => Set<City>();
         public DbSet<Country> Countries => Set<Country>();
+        public DbSet<CountryTranslation> CountriesTranslation => Set<CountryTranslation>();
 
         #endregion
 
