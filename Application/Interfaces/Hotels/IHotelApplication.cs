@@ -20,6 +20,6 @@ namespace Application.Interfaces.Hotels
         Task<OperationResult> EditHotelFacilities(EditHotelFacilitiesDto model);
         Task<IEnumerable<HotelFacilityListItem>> GetHotelSelectedFacilities(int hotelId);
         Task<IReadOnlyList<CityWithHotelsCount>?> GetCitiesWithHotels();
-        //Task<CityListItemDto?> GetCityInformation(int cityId);
+        Task<CityWithHotelsCount?> GetCityInformation(int cityId);
     }
 }

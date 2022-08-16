@@ -26,15 +26,15 @@ namespace TabanMed.Admin.Controllers
         public async Task<IActionResult> Index(int? cityId)
         {
             if(cityId == null)
-                return View();
+                return View(await _hotelApplication.GetCitiesWithHotels());
 
-            //var cityDto = await _hotelApplication.GetCityInformation(cityId.Value);
+            var cityDto = await _hotelApplication.GetCityInformation(cityId.Value);
 
-            //if(cityDto is null)
-            //    return NotFound();
+            if(cityDto is null)
+                return NotFound();
 
-            //ViewData["cId"] = cityDto.Id;
-            //ViewData["cName"] = cityDto.FaName;
+            ViewData["cId"] = cityDto.CityId;
+            ViewData["cName"] = cityDto.CityName;
             return View("HotelsByCity");
         }
 

@@ -7,6 +7,7 @@ using Application.Interfaces.Hotels;
 using Domain.Entities.Hotels;
 using Mapster;
 using MapsterMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using Resources.ErrorMessages;
@@ -28,7 +29,7 @@ namespace TabanMed.Infrastructure.Services.Hotels
             _dbContext = dbContext;
             _logger = logger;
             _mapper = mapper;
-            _twoLetterISOLanguageName = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
+            _twoLetterISOLanguageName = Thread.CurrentThread.CurrentUICulture.Name;
         }
 
         public async Task<IReadOnlyList<HotelListItemDto>?> GetHotels(int cityId)
@@ -201,30 +202,51 @@ namespace TabanMed.Infrastructure.Services.Hotels
 
         public async Task<IReadOnlyList<CityWithHotelsCount>?> GetCitiesWithHotels()
         {
-            throw new NotImplementedException();
-            //try
-            //{
-            //    return await _hotelRepository.GetCitiesWithHotels();
-            //}
-            //catch(Exception e)
-            //{
-            //    _logger.LogCritical(e, "Could not get cities with hotels count!!");
-            //    return null;
-            //}
+            
+            try
+            {
+                return await _dbContext.Cities.AsNoTracking()
+                    .Select(city => new CityWithHotelsCount()
+                    {
+                        CityId = city.Id,
+                        HotelsCount = city.Hotels!.Count,
+                        CityName = city.CityTranslations!
+                            .First(cityTranslation 
+                                => cityTranslation.Language.IsoName == _twoLetterISOLanguageName).Name
+
+                    })
+                    .ToListAsync();
+            }
+            catch(Exception e)
+            {
+                _logger.LogCritical(e, "Could not get cities with hotels count!!");
+                return null;
+            }
         }
 
-        //public async Task<CityListItemDto?> GetCityInformation(int cityId)
-        //{
-        //    try
-        //    {
-        //        return await _hotelRepository.GetCityInformation(cityId);
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        _logger.LogCritical(e, "Could not get city informations.[cityId={cityId}]", cityId);
-        //        return null;
-        //    }
-        //}
+        public async Task<CityWithHotelsCount?> GetCityInformation(int cityId)
+        {
+            try
+            {
+                return await _dbContext.Cities.AsNoTracking()
+                    .Where(city => city.Id == cityId)
+                    .Select(city => new CityWithHotelsCount()
+                    {
+                        CityId = city.Id,
+                        HotelsCount = city.Hotels!.Count,
+                        CityName = city.CityTranslations!
+                            .First(cityTranslation
+                                => cityTranslation.Language.IsoName == _twoLetterISOLanguageName).Name
+
+                    })
+                    .SingleOrDefaultAsync();
+            }
+            catch(Exception e)
+            {
+                _logger.LogCritical(e, "Could not get city informations.[cityId={cityId}]", cityId);
+                return null;
+            }
+        }
 
         public async Task<IEnumerable<HotelToursDto>> GetHotelTours(int hotelId)
         {

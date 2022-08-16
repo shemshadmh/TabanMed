@@ -1,9 +1,8 @@
-﻿@using Resources.DataDictionary
-@model Application.Dtos.Hotels.Hotels.CreateHotelDto
+﻿@model Application.Dtos.Hotels.Hotels.CreateHotelDto
 
 @{
-    ViewData[AppConstants.ViewDataTitlePageName] = "ثبت هتل جدید";
-    ViewData[AppConstants.ViewDataControllerName] = "هتل‌ها";
+    ViewData[AppConstants.ViewDataTitlePageName] = UIElements.AddNewHotel;
+    ViewData[AppConstants.ViewDataControllerName] = UIElements.HotelsList;
     ViewData[AppConstants.ViewDataControllerRoute] = "Hotels";
 }
 
@@ -25,32 +24,32 @@
                 <input type="hidden" asp-for="CityId" />
                 <div class="row">
                     <div class="col-md-3 form-group">
-                        <label class="control-label" asp-for="Name"></label>
+                        <label asp-for="Name"></label>
                         <input class="form-control" asp-for="Name" />
                     </div>
 
                     <div class="col-md-3 form-group">
-                        <label class="control-label" asp-for="CallInformation"></label>
+                        <label asp-for="CallInformation"></label>
                         <input class="form-control" asp-for="CallInformation" />
                     </div>
 
                     <div class="col-md-3 form-group">
-                        <label class="control-label" asp-for="WebsiteAddress"></label>
+                        <label asp-for="WebsiteAddress"></label>
                         <input class="form-control" asp-for="WebsiteAddress" />
                     </div>
 
                     <div class="col-md-3 form-group">
-                        <label class="control-label" asp-for="Stars"></label>
+                        <label asp-for="Stars"></label>
                         <select class="form-control" asp-for="Stars" asp-items="@(new SelectList(new List<int>(){1,2,3,4,5}))"></select>
                     </div>
 
                     <div class="col-md-4 form-group">
-                        <label class="control-label" asp-for="About"></label>
+                        <label asp-for="About"></label>
                         <textarea rows="5" class="form-control" asp-for="About"></textarea>
                     </div>
 
                     <div class="col-md-4 form-group">
-                        <label class="control-label" asp-for="Address"></label>
+                        <label asp-for="Address"></label>
                         <textarea rows="5" class="form-control" asp-for="Address"></textarea>
                     </div>
 
@@ -70,7 +69,7 @@
                     </div>
 
                     <div class="col form-group">
-                        <button type="submit" class="btn btn-block btn-success">@DataDictionary.CreateNewRecord</button>
+                        <button type="submit" class="btn btn-block btn-success">@UIElements.AddNewHotel</button>
                     </div>
                 </div>
             </form>

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddNewHotel" xml:space="preserve">
+    <value>افزودن هتل جدید</value>
+  </data>
   <data name="CopyRight" xml:space="preserve">
     <value>ساخته شده با ❤ توسط تیم تابان</value>
   </data>
@@ -143,5 +146,11 @@
   </data>
   <data name="TabanMedicalManagement" xml:space="preserve">
     <value>سامانه مدیریت تابان مدیکال</value>
+  </data>
+  <data name="TheNumberOfRegisteredHotels" xml:space="preserve">
+    <value>تعداد هتل‌های ثبت شده</value>
+  </data>
+  <data name="ViewHotels" xml:space="preserve">
+    <value>مشاهده هتل‌ها</value>
   </data>
 </root>

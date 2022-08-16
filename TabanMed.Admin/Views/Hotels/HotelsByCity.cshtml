@@ -2,7 +2,7 @@
 @using Resources.DataDictionary
 @using Application.Dtos.Hotels.Hotels
 @{
-    ViewData[AppConstants.ViewDataTitlePageName] = @UIElements.HotelsList;
+    ViewData[AppConstants.ViewDataTitlePageName] = $"{UIElements.HotelsList} {ViewData["cName"]}";
 }
 
 @section Styles{
@@ -50,7 +50,6 @@
 
 <div id="error-area" class="alert alert-danger">
     <ul id="error_list">
-        <li>بدبخت شدیم</li>
     </ul>
 </div>
 
@@ -71,7 +70,7 @@
         })
         .ToolBar(toolbar =>
         {
-            toolbar.ClientTemplate($"<a class='btn btn-success text-white' href='/Hotels/Create/1'>{DataDictionary.CreateNewRecord}</a>");
+            toolbar.ClientTemplate($"<a class='btn btn-success text-white' href='/Hotels/Create/{ViewData["cId"]}'>{UIElements.AddNewHotel}</a>");
         })
         .Selectable(select =>
             select.Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))

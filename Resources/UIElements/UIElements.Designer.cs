@@ -61,6 +61,15 @@ namespace Resources.UIElements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new hotel.
+        /// </summary>
+        public static string AddNewHotel {
+            get {
+                return ResourceManager.GetString("AddNewHotel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Made with ❤ by Taban Team.
         /// </summary>
         public static string CopyRight {
@@ -138,6 +147,24 @@ namespace Resources.UIElements {
         public static string TabanMedicalManagement {
             get {
                 return ResourceManager.GetString("TabanMedicalManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number of registered hotels.
+        /// </summary>
+        public static string TheNumberOfRegisteredHotels {
+            get {
+                return ResourceManager.GetString("TheNumberOfRegisteredHotels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View hotels.
+        /// </summary>
+        public static string ViewHotels {
+            get {
+                return ResourceManager.GetString("ViewHotels", resourceCulture);
             }
         }
     }
