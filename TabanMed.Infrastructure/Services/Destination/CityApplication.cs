@@ -1,10 +1,16 @@
 ﻿using Application;
+using Application.Common;
 using Application.Dtos.Cities;
 using Application.Interfaces.Application;
 using Application.Interfaces.Destination;
+using Domain.Entities.Destination;
+using Domain.Entities.Destination.Translation;
+using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Resources.ErrorMessages;
+using Resources.InformationMessages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,8 +79,57 @@ namespace TabanMed.Infrastructure.Services.Destination
 
 
 
+        public async Task<OperationResult> CreateCity(CityListItem cityDto)
+        {
+            var operation = new OperationResult();
+            try
+            {
+                if (await _dbContext.CityTranslations.AnyAsync(cityTranslation =>
+                       cityTranslation.Name == cityDto.FaName ||
+                       cityTranslation.Name == cityDto.EnName ||
+                       cityTranslation.Name == cityDto.ArName ||
+                       cityTranslation.Name == cityDto.AfName))
+                    return operation.Failed(ErrorMessages.DuplicatedRecord);
 
+                var entity = await _mapper.From(cityDto).AdaptToTypeAsync<City>();
+                entity.CountryId = cityDto.CountryId;                    
+                entity.CityTranslations= new List<CityTranslation>()
+                {
+                    new()
+                    {
+                        LanguageId = AppConstants.FaLanguageId,
+                        Name = cityDto.FaName
+                    },
+                    new()
+                    {
+                        LanguageId = AppConstants.EnLanguageId,
+                        Name = cityDto.EnName
+                    },
+                    new()
+                    {
+                        LanguageId = AppConstants.ArLanguageId,
+                        Name = cityDto.ArName
+                    },
+                    new()
+                    {
+                        LanguageId = AppConstants.AfLanguageId,
+                        Name = cityDto.AfName
+                    }
+                };
 
+                await _dbContext.Cities.AddAsync(entity);
+                await _dbContext.SaveChangesAsync();
+
+                _logger.LogWarning("New city created successfully.[city:{title}]", cityDto.EnName);
+
+                return operation.Succeeded(entity.Id, InformationMessages.SuccessfullySaved);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Could not create new city .[city:{title}]", cityDto.EnName);
+                return operation.Failed(ErrorMessages.ErrorOccurred);
+            }
+        }
 
 
 

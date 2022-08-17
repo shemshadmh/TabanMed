@@ -1,4 +1,5 @@
-﻿using Application.Dtos.Cities;
+﻿using Application.Common;
+using Application.Dtos.Cities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Application.Interfaces.Destination
     public  interface ICityApplication : IAsyncDisposable
     {
         Task<IReadOnlyList<CityListItem>?> GetCitiesListAsync(int CountryId);
+        Task<OperationResult> CreateCity(CityListItem cityDto);
     }
 }

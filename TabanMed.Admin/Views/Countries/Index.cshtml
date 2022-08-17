@@ -127,9 +127,9 @@
                        model.Field(cityItem => cityItem.Id).Editable(false);
                    })
                    .PageSize(5)
-                   .Create(create => create.Action("CreateFacility", "cities", new { CountryId = "#=Id#" }).Type(HttpVerbs.Post))
-                   .Read(read => read.Action("GetCitiesList", "cities", new { CountryId = "#=Id#" }).Type(HttpVerbs.Post))
-                   .Update(update => update.Action("UpdateFacility", "cities", new { CountryId = "#=Id#" }).Type(HttpVerbs.Post)))
+                   .Create(create => create.Action("CreateCity", "Cities", new { cId = "#=Id#" }).Type(HttpVerbs.Post))
+                   .Read(read => read.Action("GetCitiesList", "Cities",  new { CountryId= "#=Id#" }).Type(HttpVerbs.Post))
+                   .Update(update => update.Action("UpdateFacility", "Cities", new { CountryId = "#=Id#" }).Type(HttpVerbs.Post)))
                .ToClientTemplate())
     </script>
 
