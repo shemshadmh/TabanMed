@@ -59,8 +59,30 @@ namespace TabanMed.Admin.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateFacility([DataSourceRequest] DataSourceRequest request,
+            CityListItem city)
+        {
+            if (!ModelState.IsValid)
+                return Json(await new[] { city }.ToDataSourceResultAsync(request, ModelState));
 
+            var res = await _cityApplication.UpdateCity(city);
 
+            if (res.IsSucceeded)
+            {
+                city.Id = (int)res.ReturnValue!;
+            }
+            else
+                ModelState.AddModelError("", res.Message!);
+
+            KendoDataSourceResult returnResult =
+                new(await new[] { city }.ToDataSourceResultAsync(request, ModelState))
+                {
+                    UserMessage = res.Message
+                };
+
+            return Json(returnResult);
+        }
 
 
 

@@ -12,5 +12,6 @@ namespace Application.Interfaces.Destination
     {
         Task<IReadOnlyList<CityListItem>?> GetCitiesListAsync(int CountryId);
         Task<OperationResult> CreateCity(CityListItem cityDto);
+        Task<OperationResult> UpdateCity(CityListItem cityDto);
     }
 }

@@ -132,7 +132,47 @@ namespace TabanMed.Infrastructure.Services.Destination
         }
 
 
+        public async Task<OperationResult> UpdateCity(CityListItem cityDto)
+        {
+            var operation = new OperationResult();
+            try
+            {
+                if (await _dbContext.CityTranslations.AnyAsync(cityTranslation =>
+                       (cityTranslation.Name == cityDto.FaName ||
+                       cityTranslation.Name == cityDto.EnName ||
+                       cityTranslation.Name == cityDto.ArName ||
+                       cityTranslation.Name == cityDto.AfName)
+                       && cityTranslation.CityId != cityDto.Id))
+                    return operation.Failed(ErrorMessages.DuplicatedRecord);
 
+                var translationsList = await _dbContext.CityTranslations
+                    .Where(cityTranslation => cityTranslation.CityId == cityDto.Id)
+                    .ToListAsync();
 
+                foreach (var cityTranslation in translationsList)
+                {
+                    cityTranslation.Name = cityTranslation.LanguageId switch
+                    {
+                        AppConstants.FaLanguageId => cityDto.FaName,
+                        AppConstants.EnLanguageId => cityDto.EnName,
+                        AppConstants.ArLanguageId => cityDto.ArName,
+                        AppConstants.AfLanguageId => cityDto.AfName,
+                        _ => cityTranslation.Name
+                    };
+                }
+
+                _dbContext.CityTranslations.UpdateRange(translationsList);
+                await _dbContext.SaveChangesAsync();
+
+                _logger.LogWarning("City updated successfully.[city:{title}]", cityDto.EnName);
+
+                return operation.Succeeded(cityDto.Id, InformationMessages.SuccessfullyUpdated);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Could not update city.[city:{title}]", cityDto.EnName);
+                return operation.Failed(ErrorMessages.ErrorOccurred);
+            }
+        }
     }
 }
