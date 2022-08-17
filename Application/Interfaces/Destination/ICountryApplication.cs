@@ -13,5 +13,6 @@ namespace Application.Interfaces.Destination
     {
         Task<IReadOnlyList<CountryListItem>?> GetCountriesListAsync();
         Task<OperationResult> CreateCountry(CountryListItem countryDto);
+        Task<OperationResult> UpdateCountry(CountryListItem countryDto);
     }
 }

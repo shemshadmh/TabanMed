@@ -20,8 +20,10 @@ namespace Application.Interfaces.Application
         #region Destination
 
         public DbSet<City> Cities { get;}
+        public DbSet<CityTranslation> CityTranslations { get; }
         public DbSet<Country> Countries { get;}
         public DbSet<CountryTranslation> CountriesTranslation { get; }
+
         #endregion
 
         #region Hotel

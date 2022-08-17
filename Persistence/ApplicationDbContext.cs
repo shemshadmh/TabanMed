@@ -38,6 +38,7 @@ namespace Persistence
         #region Destination
 
         public DbSet<City> Cities => Set<City>();
+        public DbSet<CityTranslation> CityTranslations => Set<CityTranslation>();
         public DbSet<Country> Countries => Set<Country>();
         public DbSet<CountryTranslation> CountriesTranslation => Set<CountryTranslation>();
 

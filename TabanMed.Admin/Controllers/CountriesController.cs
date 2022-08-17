@@ -55,5 +55,34 @@ namespace TabanMed.Admin.Controllers
         }
 
 
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateCountry([DataSourceRequest] DataSourceRequest request,
+            CountryListItem country)
+        {
+            if (!ModelState.IsValid)
+                return Json(await new[] { country }.ToDataSourceResultAsync(request, ModelState));
+
+            var res = await _countryApplication.UpdateCountry(country);
+
+            if (res.IsSucceeded)
+            {
+                country.Id = (int)res.ReturnValue!;
+            }
+            else
+                ModelState.AddModelError("", res.Message!);
+
+            KendoDataSourceResult returnResult =
+                new(await new[] { country }.ToDataSourceResultAsync(request, ModelState))
+                {
+                    UserMessage = res.Message
+                };
+
+            return Json(returnResult);
+
+
+
+
+        }
     }
 }

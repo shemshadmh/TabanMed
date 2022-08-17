@@ -1,4 +1,5 @@
-﻿@using Application.Dtos.Countries
+﻿@using Application.Dtos.Cities
+@using Application.Dtos.Countries
 @using Kendo.Mvc.UI
 @using Resources.DataDictionary
 @{
@@ -43,10 +44,10 @@
         .Name("grid")
         .Columns(columns =>
         {
-            columns.Bound(facility => facility.FaName);
-            columns.Bound(facility => facility.EnName);
-            columns.Bound(facility => facility.ArName);
-            columns.Bound(facility => facility.AfName);
+            columns.Bound(country => country.FaName);
+            columns.Bound(country => country.EnName);
+            columns.Bound(country => country.ArName);
+            columns.Bound(country => country.AfName);
         })
         .ToolBar(toolbar =>
         {
@@ -65,7 +66,7 @@
             .ButtonCount(5)
             .Refresh(true)
             .PageSizes(true))
-        @*.ClientDetailTemplateId("facilitiesList")*@
+        .ClientDetailTemplateId("CitiesList")
         .DataSource(dataSource => dataSource
             .Ajax()
             .Events(events => events.Error("error_handler")
@@ -78,22 +79,23 @@
             })
             .Create(create => create.Action("CreateCountry", "Countries").Type(HttpVerbs.Post))
             .Read(read => read.Action("GetCountriesList", "Countries").Type(HttpVerbs.Post))
-            .Update(update => update.Action("UpdateFacility", "Countries").Type(HttpVerbs.Post)))
+            .Update(update => update.Action("UpdateCountry", "Countries").Type(HttpVerbs.Post)))
         .Resizable(resize => resize.Columns(true)))
 </div>
 
 @section Scripts{
 
-    @*<script id="facilitiesList" type="text/kendo-tmpl">
 
-           @(Html.Kendo().Grid<HotelFacilityListItem>()
+    <script id="CitiesList" type="text/kendo-tmpl">
+
+           @(Html.Kendo().Grid<CityListItem>()
                .Name("grid_#=Id#")
                .Columns(columns =>
                {
-                   columns.Bound(facility => facility.FaTitle);
-                   columns.Bound(facility => facility.EnTitle);
-                   columns.Bound(facility => facility.ArTitle);
-                   columns.Bound(facility => facility.AfTitle);
+                   columns.Bound(cities => cities.FaName);
+                   columns.Bound(cities=> cities.EnName);
+                   columns.Bound(cities=> cities.ArName);
+                   columns.Bound(cities => cities.AfName);
                })
                .ToolBar(toolbar =>
                {
@@ -125,11 +127,18 @@
                        model.Field(cityItem => cityItem.Id).Editable(false);
                    })
                    .PageSize(5)
-                   .Create(create => create.Action("CreateFacility", "HotelFacilities", new { pId = "#=Id#" }).Type(HttpVerbs.Post))
-                   .Read(read => read.Action("GetFacilityTitlesList", "HotelFacilities", new { pId = "#=Id#" }).Type(HttpVerbs.Post))
-                   .Update(update => update.Action("UpdateFacility", "HotelFacilities", new { pId = "#=Id#" }).Type(HttpVerbs.Post)))
+                   .Create(create => create.Action("CreateFacility", "cities", new { CountryId = "#=Id#" }).Type(HttpVerbs.Post))
+                   .Read(read => read.Action("GetCitiesList", "cities", new { CountryId = "#=Id#" }).Type(HttpVerbs.Post))
+                   .Update(update => update.Action("UpdateFacility", "cities", new { CountryId = "#=Id#" }).Type(HttpVerbs.Post)))
                .ToClientTemplate())
-    </script>*@
+    </script>
+
+
+
+
+
+
+
     <script type="text/javascript">
         function error_handler(e) {
             if (e.errors) {
