@@ -1,6 +1,7 @@
 ﻿
 using Domain.Entities.Destination.Translation;
 using Domain.Entities.Hotels;
+using Domain.Entities.MedicalCenters;
 
 namespace Domain.Entities.Destination
 {
@@ -19,6 +20,10 @@ namespace Domain.Entities.Destination
 
         // Hotels
         public ICollection<Hotel>? Hotels { get; set; }
+
+        // MedicalCenters
+        public ICollection<MedicalCenter>? MedicalCenters { get; set; }
+
 
         #endregion
     }

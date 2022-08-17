@@ -1,6 +1,7 @@
 ﻿
 using Domain.Entities.Destination.Translation;
 using Domain.Entities.Hotels.Translation;
+using Domain.Entities.MedicalCenters.Translation;
 
 namespace Domain.Entities.Localization
 {
@@ -21,5 +22,8 @@ namespace Domain.Entities.Localization
 
         // CityTranslation
         public ICollection<CityTranslation>? CityTranslations { get; set; }
+
+        // MedicalCenter Translation
+        public ICollection<MedicalCenterTranslation>? MedicalCenterTranslations{ get; set; }
     }
 }

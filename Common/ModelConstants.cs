@@ -79,6 +79,22 @@
 
         #endregion
 
+
+        #region MedicalCenter
+
+        public static class MedicalCenter
+        {
+            public const int NameMaxLength = 50;
+            public const int AgentNameMaxLength = 30;
+            public const int ImageUrlMaxLength = 100;
+            public const int PhoneNumberMaxLength = 20;
+            public const int AgentPhoneNumberMaxLength = 20;
+            public const int AddressMaxLength = 150;
+        }
+        
+
+        #endregion
+
         public static class Shared
         {
             public const int GUIDMaxLength = 40;
