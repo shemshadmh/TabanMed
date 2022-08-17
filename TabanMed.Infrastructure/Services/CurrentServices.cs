@@ -14,7 +14,7 @@ namespace TabanMed.Infrastructure.Services
         }
 
         public string? Username => _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Name);
-        public string? LanguageName { get; }
-        public int? LanguageId { get; }
+        public string LanguageDisplayName => Thread.CurrentThread.CurrentCulture.DisplayName;
+        public int LanguageId => Thread.CurrentThread.CurrentCulture.LCID;
     }
 }

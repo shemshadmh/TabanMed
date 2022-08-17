@@ -3,7 +3,7 @@
     public interface ICurrentServices
     {
         string? Username { get; }
-        string? LanguageName { get; }
-        int? LanguageId { get; }
+        string LanguageDisplayName { get; }
+        int LanguageId { get; }
     }
 }

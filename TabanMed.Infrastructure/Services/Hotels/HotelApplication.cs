@@ -22,18 +22,19 @@ namespace TabanMed.Infrastructure.Services.Hotels
         private readonly ILogger<HotelApplication> _logger;
         private readonly IFileManagerService _fileManagerService;
         private readonly IMapper _mapper;
-        private readonly string _twoLetterISOLanguageName;
+        private readonly ICurrentServices _currentServices;
 
         public HotelApplication(IApplicationDbContext dbContext,
             ILogger<HotelApplication> logger,
             IFileManagerService fileManagerService,
-            IMapper mapper)
+            IMapper mapper,
+            ICurrentServices currentServices)
         {
             _dbContext = dbContext;
             _logger = logger;
             _fileManagerService = fileManagerService;
             _mapper = mapper;
-            _twoLetterISOLanguageName = Thread.CurrentThread.CurrentUICulture.Name;
+            _currentServices = currentServices;
         }
 
         public async Task<IReadOnlyList<HotelListItemDto>?> GetHotels(int cityId)
@@ -219,7 +220,7 @@ namespace TabanMed.Infrastructure.Services.Hotels
                         HotelsCount = city.Hotels!.Count,
                         CityName = city.CityTranslations!
                             .First(cityTranslation 
-                                => cityTranslation.Language.IsoName == _twoLetterISOLanguageName).Name
+                                => cityTranslation.LanguageId == _currentServices.LanguageId).Name
 
                     })
                     .ToListAsync();
@@ -243,7 +244,7 @@ namespace TabanMed.Infrastructure.Services.Hotels
                         HotelsCount = city.Hotels!.Count,
                         CityName = city.CityTranslations!
                             .First(cityTranslation
-                                => cityTranslation.Language.IsoName == _twoLetterISOLanguageName).Name
+                                => cityTranslation.LanguageId == _currentServices.LanguageId).Name
 
                     })
                     .SingleOrDefaultAsync();
