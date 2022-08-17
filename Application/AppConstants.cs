@@ -27,13 +27,13 @@ namespace Application
         #region System Globalization
 
         public const string FaIrCulture = "fa-IR";
-        public const int FaLanguageId = 1;
+        public const int FaLanguageLcid = 1065;
         public const string EnUsCulture = "en-US";
-        public const int EnLanguageId = 2;
+        public const int EnLanguageLcid = 1033;
         public const string ArIqCulture = "ar-IQ";
-        public const int ArLanguageId = 3;
+        public const int ArLanguageLcid = 2049;
         public const string PrsAfCulture = "prs-AF";
-        public const int AfLanguageId = 4;
+        public const int AfLanguageLcid = 1164;
 
         #endregion
 

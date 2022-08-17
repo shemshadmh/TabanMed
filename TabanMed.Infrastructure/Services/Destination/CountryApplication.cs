@@ -50,19 +50,19 @@ namespace TabanMed.Infrastructure.Services.Destination
                     {
                         Id = countries.Id,
                         FaName = countries.CountryTranslations!
-                            .Where(countryTranslation => countryTranslation.LanguageId == AppConstants.FaLanguageId)
+                            .Where(countryTranslation => countryTranslation.LanguageId == AppConstants.FaLanguageLcid)
                             .Select(countryTranslation => countryTranslation.Name)
                             .Single(),
                         EnName = countries.CountryTranslations!
-                            .Where(countryTranslation => countryTranslation.LanguageId == AppConstants.EnLanguageId)
+                            .Where(countryTranslation => countryTranslation.LanguageId == AppConstants.EnLanguageLcid)
                             .Select(countryTranslation => countryTranslation.Name)
                             .Single(),
                         ArName = countries.CountryTranslations!
-                            .Where(countryTranslation => countryTranslation.LanguageId == AppConstants.ArLanguageId)
+                            .Where(countryTranslation => countryTranslation.LanguageId == AppConstants.ArLanguageLcid)
                             .Select(countryTranslation => countryTranslation.Name)
                             .Single(),
                         AfName = countries.CountryTranslations!
-                            .Where(countryTranslation => countryTranslation.LanguageId == AppConstants.AfLanguageId)
+                            .Where(countryTranslation => countryTranslation.LanguageId == AppConstants.AfLanguageLcid)
                             .Select(countryTranslation => countryTranslation.Name)
                             .Single()
                     });
@@ -94,22 +94,22 @@ namespace TabanMed.Infrastructure.Services.Destination
                 {
                     new()
                     {
-                        LanguageId = AppConstants.FaLanguageId,
+                        LanguageId = AppConstants.FaLanguageLcid,
                         Name = countryDto.FaName
                     },
                     new()
                     {
-                        LanguageId = AppConstants.EnLanguageId,
+                        LanguageId = AppConstants.EnLanguageLcid,
                         Name = countryDto.EnName
                     },
                     new()
                     {
-                        LanguageId = AppConstants.ArLanguageId,
+                        LanguageId = AppConstants.ArLanguageLcid,
                         Name = countryDto.ArName
                     },
                     new()
                     {
-                        LanguageId = AppConstants.AfLanguageId,
+                        LanguageId = AppConstants.AfLanguageLcid,
                         Name = countryDto.AfName
                     },
                 };
@@ -149,10 +149,10 @@ namespace TabanMed.Infrastructure.Services.Destination
                 {
                     countryTranslation.Name= countryTranslation.LanguageId switch
                     {
-                        AppConstants.FaLanguageId => countryDto.FaName,
-                        AppConstants.EnLanguageId => countryDto.EnName,
-                        AppConstants.ArLanguageId => countryDto.ArName,
-                        AppConstants.AfLanguageId => countryDto.AfName,
+                        AppConstants.FaLanguageLcid => countryDto.FaName,
+                        AppConstants.EnLanguageLcid => countryDto.EnName,
+                        AppConstants.ArLanguageLcid => countryDto.ArName,
+                        AppConstants.AfLanguageLcid => countryDto.AfName,
                         _ => countryTranslation.Name
                     };
                 }

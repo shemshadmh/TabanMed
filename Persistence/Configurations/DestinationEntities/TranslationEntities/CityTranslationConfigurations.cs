@@ -33,25 +33,25 @@ namespace Persistence.Configurations.DestinationEntities.TranslationEntities
                 new ()
                 {
                     CityId = 1,
-                    LanguageId = AppConstants.FaLanguageId,
+                    LanguageId = AppConstants.FaLanguageLcid,
                     Name = "تهران"
                 },
                 new ()
                 {
                     CityId = 1,
-                    LanguageId = AppConstants.EnLanguageId,
+                    LanguageId = AppConstants.EnLanguageLcid,
                     Name = "Tehran"
                 },
                 new ()
                 {
                     CityId = 2,
-                    LanguageId = AppConstants.FaLanguageId,
+                    LanguageId = AppConstants.FaLanguageLcid,
                     Name = "مشهد"
                 },
                 new ()
                 {
                     CityId = 2,
-                    LanguageId = AppConstants.EnLanguageId,
+                    LanguageId = AppConstants.EnLanguageLcid,
                     Name = "Mashhad"
                 }
             });

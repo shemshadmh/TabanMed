@@ -11,10 +11,10 @@ namespace Persistence.Configurations.LocalizationEntities
     {
         public void Configure(EntityTypeBuilder<Language> builder)
         {
-            builder.HasKey(language => language.Id);
+            builder.HasKey(language => language.Lcid);
 
-            builder.Property(language => language.Id)
-                .HasColumnType(ModelConstants.Shared.TinyIntColumnType);
+            builder.Property(language => language.Lcid)
+                .HasColumnType(ModelConstants.Shared.SmallIntColumnType);
 
             builder.Property(language => language.Name)
                 .HasColumnType(ModelConstants.Shared.NVarCharColumnType)
@@ -30,25 +30,25 @@ namespace Persistence.Configurations.LocalizationEntities
             {
                 new()
                 {
-                    Id = AppConstants.FaLanguageId,
+                    Lcid = AppConstants.FaLanguageLcid,
                     Name = "فارسی",
                     IsoName = AppConstants.FaIrCulture
                 },
                 new()
                 {
-                    Id = AppConstants.EnLanguageId,
+                    Lcid = AppConstants.EnLanguageLcid,
                     Name = "English",
                     IsoName = AppConstants.EnUsCulture
                 },
                 new()
                 {
-                    Id = AppConstants.ArLanguageId,
+                    Lcid = AppConstants.ArLanguageLcid,
                     Name = "العربیة",
                     IsoName = AppConstants.ArIqCulture
                 },
                 new()
                 {
-                    Id = AppConstants.AfLanguageId,
+                    Lcid = AppConstants.AfLanguageLcid,
                     Name = "پشتو/دری",
                     IsoName = AppConstants.PrsAfCulture
                 },

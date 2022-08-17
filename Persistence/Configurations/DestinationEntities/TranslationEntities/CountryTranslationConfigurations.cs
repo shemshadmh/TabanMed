@@ -33,13 +33,13 @@ namespace Persistence.Configurations.DestinationEntities.TranslationEntities
                 new ()
                 {
                     CountryId = 1,
-                    LanguageId = AppConstants.FaLanguageId,
+                    LanguageId = AppConstants.FaLanguageLcid,
                     Name = "ایران"
                 },
                 new ()
                 {
                     CountryId = 1,
-                    LanguageId = AppConstants.EnLanguageId,
+                    LanguageId = AppConstants.EnLanguageLcid,
                     Name = "Iran"
                 }
             });

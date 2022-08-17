@@ -25,6 +25,7 @@ namespace TabanMed.Admin.Controllers
             try
             {
                 var cultureInfo = CultureInfo.GetCultureInfo(culture);
+                var r = Thread.CurrentThread.CurrentCulture;
             }
             catch
             {

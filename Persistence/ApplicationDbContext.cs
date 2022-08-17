@@ -24,7 +24,8 @@ namespace Persistence
         private readonly ICurrentServices _currentServices;
         private readonly IDateTime _dateTime;
 
-        public ApplicationDbContext(ICurrentServices currentServices, IDateTime dateTime)
+        public ApplicationDbContext(ICurrentServices currentServices, IDateTime dateTime,
+            DbContextOptions<ApplicationDbContext> options) : base(options)
         {
             _currentServices = currentServices;
             _dateTime = dateTime;

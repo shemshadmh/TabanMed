@@ -7,7 +7,7 @@ namespace Domain.Entities.Localization
 {
     public class Language
     {
-        public int Id { get; set; }
+        public int Lcid { get; set; }
         public string Name { get; set; } = null!;
         public string IsoName { get; set; } = null!;
 

@@ -76,8 +76,8 @@ namespace Persistence.Migrations
                     b.Property<short>("CityId")
                         .HasColumnType("smallint");
 
-                    b.Property<byte>("LanguageId")
-                        .HasColumnType("tinyint");
+                    b.Property<short>("LanguageId")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -94,25 +94,25 @@ namespace Persistence.Migrations
                         new
                         {
                             CityId = (short)1,
-                            LanguageId = (byte)1,
+                            LanguageId = (short)1065,
                             Name = "تهران"
                         },
                         new
                         {
                             CityId = (short)1,
-                            LanguageId = (byte)2,
+                            LanguageId = (short)1033,
                             Name = "Tehran"
                         },
                         new
                         {
                             CityId = (short)2,
-                            LanguageId = (byte)1,
+                            LanguageId = (short)1065,
                             Name = "مشهد"
                         },
                         new
                         {
                             CityId = (short)2,
-                            LanguageId = (byte)2,
+                            LanguageId = (short)1033,
                             Name = "Mashhad"
                         });
                 });
@@ -122,8 +122,8 @@ namespace Persistence.Migrations
                     b.Property<short>("CountryId")
                         .HasColumnType("smallint");
 
-                    b.Property<byte>("LanguageId")
-                        .HasColumnType("tinyint");
+                    b.Property<short>("LanguageId")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -140,13 +140,13 @@ namespace Persistence.Migrations
                         new
                         {
                             CountryId = (short)1,
-                            LanguageId = (byte)1,
+                            LanguageId = (short)1065,
                             Name = "ایران"
                         },
                         new
                         {
                             CountryId = (short)1,
-                            LanguageId = (byte)2,
+                            LanguageId = (short)1033,
                             Name = "Iran"
                         });
                 });
@@ -270,8 +270,8 @@ namespace Persistence.Migrations
                     b.Property<int>("FacilityId")
                         .HasColumnType("int");
 
-                    b.Property<byte>("LanguageId")
-                        .HasColumnType("tinyint");
+                    b.Property<short>("LanguageId")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -290,8 +290,8 @@ namespace Persistence.Migrations
                     b.Property<int>("HotelId")
                         .HasColumnType("int");
 
-                    b.Property<byte>("LanguageId")
-                        .HasColumnType("tinyint");
+                    b.Property<short>("LanguageId")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("About")
                         .HasMaxLength(300)
@@ -442,8 +442,8 @@ namespace Persistence.Migrations
                         {
                             Id = "b0a39202-a221-47c7-9d34-dc4479ec33f2",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "b4deec65-338c-4808-b620-417ed983bb88",
-                            Created = new DateTime(2022, 8, 17, 11, 24, 11, 598, DateTimeKind.Utc).AddTicks(7803),
+                            ConcurrencyStamp = "6ae1250c-3903-4e0b-838e-3497280c8325",
+                            Created = new DateTime(2022, 8, 17, 11, 42, 52, 951, DateTimeKind.Utc).AddTicks(2823),
                             CreatedBy = "Seed",
                             Email = "hatef@tabanmed.com",
                             EmailConfirmed = false,
@@ -457,7 +457,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "HATEFADMIN",
                             PasswordHash = "AQAAAAEAACcQAAAAEDCEjgFnVqs3jS+KYwhsCsNHoR7mV7tQ7/NUHc2bxUc9HjMuXSNCax/I5jPdFBGsVg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "64f571ee-5473-4c0b-97d4-c74074aae702",
+                            SecurityStamp = "f9383e82-395f-4661-a539-74d1915d577e",
                             TwoFactorEnabled = false,
                             UserName = "HatefAdmin"
                         },
@@ -465,8 +465,8 @@ namespace Persistence.Migrations
                         {
                             Id = "04a76057-948a-4fd1-b9f0-ed36991fcaa5",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "4cf981a3-ee4d-4c01-8c0e-691a727dc2a6",
-                            Created = new DateTime(2022, 8, 17, 11, 24, 11, 598, DateTimeKind.Utc).AddTicks(7965),
+                            ConcurrencyStamp = "63e73e6f-d116-4c10-a5e1-681213e4cae9",
+                            Created = new DateTime(2022, 8, 17, 11, 42, 52, 951, DateTimeKind.Utc).AddTicks(2854),
                             CreatedBy = "Seed",
                             Email = "operator@tabanmed.com",
                             EmailConfirmed = false,
@@ -479,7 +479,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "TABANMEDOPERATOR",
                             PasswordHash = "AQAAAAEAACcQAAAAEGO2+kmYpAenNWk5p1UYgYOMbU3/pUOoc4yRkUma3Zq2Hsc8g9HSWpztF3MozgJdig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "46115aac-2435-430a-a5b2-454ebd739f19",
+                            SecurityStamp = "341151dc-38af-4a54-94f2-356625dc0ef5",
                             TwoFactorEnabled = false,
                             UserName = "tabanmedOperator"
                         });
@@ -522,7 +522,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "3e2c9b3b-1c5c-41a5-9fe6-9004dcd4b78b",
-                            ConcurrencyStamp = "5fbd8bbb-5873-4aa3-9be7-cf825635b400",
+                            ConcurrencyStamp = "3151f71a-f049-4a92-bf3e-0083cf67e255",
                             DisplayName = "ادمین کل سیستم",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
@@ -530,7 +530,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "6f4024b0-153e-4b8b-a851-5befbdb955f9",
-                            ConcurrencyStamp = "80c6cd0d-15b7-490e-9093-7ec689c1c1f5",
+                            ConcurrencyStamp = "ba697b8a-d255-4782-b885-2c845433dc97",
                             DisplayName = "اپراتور سیستم",
                             Name = "SystemOperator",
                             NormalizedName = "SYSTEMOPERATOR"
@@ -662,11 +662,11 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Localization.Language", b =>
                 {
-                    b.Property<byte>("Id")
+                    b.Property<short>("Lcid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("smallint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Lcid"), 1L, 1);
 
                     b.Property<string>("IsoName")
                         .IsRequired()
@@ -678,32 +678,32 @@ namespace Persistence.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Lcid");
 
                     b.ToTable("Languages");
 
                     b.HasData(
                         new
                         {
-                            Id = (byte)1,
+                            Lcid = (short)1065,
                             IsoName = "fa-IR",
                             Name = "فارسی"
                         },
                         new
                         {
-                            Id = (byte)2,
+                            Lcid = (short)1033,
                             IsoName = "en-US",
                             Name = "English"
                         },
                         new
                         {
-                            Id = (byte)3,
+                            Lcid = (short)2049,
                             IsoName = "ar-IQ",
                             Name = "العربیة"
                         },
                         new
                         {
-                            Id = (byte)4,
+                            Lcid = (short)1164,
                             IsoName = "prs-AF",
                             Name = "پشتو/دری"
                         });
@@ -746,8 +746,8 @@ namespace Persistence.Migrations
                     b.Property<int>("MedicalCenterId")
                         .HasColumnType("int");
 
-                    b.Property<byte>("LanguageId")
-                        .HasColumnType("tinyint");
+                    b.Property<short>("LanguageId")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Address")
                         .IsRequired()

@@ -44,19 +44,19 @@ namespace TabanMed.Infrastructure.Services.Hotels
                         Id = hotelFacility.Id,
                         ParentId = hotelFacility.ParentId,
                         FaTitle = hotelFacility.HotelFacilityTranslations!
-                            .Where(facilityTranslation => facilityTranslation.LanguageId == AppConstants.FaLanguageId)
+                            .Where(facilityTranslation => facilityTranslation.LanguageId == AppConstants.FaLanguageLcid)
                             .Select(facilityTranslation => facilityTranslation.Title)
                             .Single(),
                         EnTitle = hotelFacility.HotelFacilityTranslations!
-                            .Where(facilityTranslation => facilityTranslation.LanguageId == AppConstants.EnLanguageId)
+                            .Where(facilityTranslation => facilityTranslation.LanguageId == AppConstants.EnLanguageLcid)
                             .Select(facilityTranslation => facilityTranslation.Title)
                             .Single(),
                         ArTitle = hotelFacility.HotelFacilityTranslations!
-                            .Where(facilityTranslation => facilityTranslation.LanguageId == AppConstants.ArLanguageId)
+                            .Where(facilityTranslation => facilityTranslation.LanguageId == AppConstants.ArLanguageLcid)
                             .Select(facilityTranslation => facilityTranslation.Title)
                             .Single(),
                         AfTitle = hotelFacility.HotelFacilityTranslations!
-                            .Where(facilityTranslation => facilityTranslation.LanguageId == AppConstants.AfLanguageId)
+                            .Where(facilityTranslation => facilityTranslation.LanguageId == AppConstants.AfLanguageLcid)
                             .Select(facilityTranslation => facilityTranslation.Title)
                             .Single()
                     });
@@ -88,23 +88,23 @@ namespace TabanMed.Infrastructure.Services.Hotels
                 {
                     new()
                     {
-                        LanguageId = AppConstants.FaLanguageId,
+                        LanguageId = AppConstants.FaLanguageLcid,
                         Title = facilityDto.FaTitle
                         
                     },
                     new()
                     {
-                        LanguageId = AppConstants.EnLanguageId,
+                        LanguageId = AppConstants.EnLanguageLcid,
                         Title = facilityDto.EnTitle
                     },
                     new()
                     {
-                        LanguageId = AppConstants.ArLanguageId,
+                        LanguageId = AppConstants.ArLanguageLcid,
                         Title = facilityDto.ArTitle
                     },
                     new()
                     {
-                        LanguageId = AppConstants.AfLanguageId,
+                        LanguageId = AppConstants.AfLanguageLcid,
                         Title = facilityDto.AfTitle
                     }
                 };
@@ -144,10 +144,10 @@ namespace TabanMed.Infrastructure.Services.Hotels
                 {
                     facilityTranslation.Title = facilityTranslation.LanguageId switch
                     {
-                        AppConstants.FaLanguageId => facilityDto.FaTitle,
-                        AppConstants.EnLanguageId => facilityDto.EnTitle,
-                        AppConstants.ArLanguageId => facilityDto.ArTitle,
-                        AppConstants.AfLanguageId => facilityDto.AfTitle,
+                        AppConstants.FaLanguageLcid => facilityDto.FaTitle,
+                        AppConstants.EnLanguageLcid => facilityDto.EnTitle,
+                        AppConstants.ArLanguageLcid => facilityDto.ArTitle,
+                        AppConstants.AfLanguageLcid => facilityDto.AfTitle,
                         _ => facilityTranslation.Title
                     };
                 }

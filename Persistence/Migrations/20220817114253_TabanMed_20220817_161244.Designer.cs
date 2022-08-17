@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220815150751_TabanMed_20220815_193742")]
-    partial class TabanMed_20220815_193742
+    [Migration("20220817114253_TabanMed_20220817_161244")]
+    partial class TabanMed_20220817_161244
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -78,8 +78,8 @@ namespace Persistence.Migrations
                     b.Property<short>("CityId")
                         .HasColumnType("smallint");
 
-                    b.Property<byte>("LanguageId")
-                        .HasColumnType("tinyint");
+                    b.Property<short>("LanguageId")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -90,31 +90,31 @@ namespace Persistence.Migrations
 
                     b.HasIndex("LanguageId");
 
-                    b.ToTable("CityTranslation");
+                    b.ToTable("CityTranslations");
 
                     b.HasData(
                         new
                         {
                             CityId = (short)1,
-                            LanguageId = (byte)1,
+                            LanguageId = (short)1065,
                             Name = "تهران"
                         },
                         new
                         {
                             CityId = (short)1,
-                            LanguageId = (byte)2,
+                            LanguageId = (short)1033,
                             Name = "Tehran"
                         },
                         new
                         {
                             CityId = (short)2,
-                            LanguageId = (byte)1,
+                            LanguageId = (short)1065,
                             Name = "مشهد"
                         },
                         new
                         {
                             CityId = (short)2,
-                            LanguageId = (byte)2,
+                            LanguageId = (short)1033,
                             Name = "Mashhad"
                         });
                 });
@@ -124,8 +124,8 @@ namespace Persistence.Migrations
                     b.Property<short>("CountryId")
                         .HasColumnType("smallint");
 
-                    b.Property<byte>("LanguageId")
-                        .HasColumnType("tinyint");
+                    b.Property<short>("LanguageId")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -136,19 +136,19 @@ namespace Persistence.Migrations
 
                     b.HasIndex("LanguageId");
 
-                    b.ToTable("CountryTranslation");
+                    b.ToTable("CountriesTranslation");
 
                     b.HasData(
                         new
                         {
                             CountryId = (short)1,
-                            LanguageId = (byte)1,
+                            LanguageId = (short)1065,
                             Name = "ایران"
                         },
                         new
                         {
                             CountryId = (short)1,
-                            LanguageId = (byte)2,
+                            LanguageId = (short)1033,
                             Name = "Iran"
                         });
                 });
@@ -272,8 +272,8 @@ namespace Persistence.Migrations
                     b.Property<int>("FacilityId")
                         .HasColumnType("int");
 
-                    b.Property<byte>("LanguageId")
-                        .HasColumnType("tinyint");
+                    b.Property<short>("LanguageId")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -292,8 +292,8 @@ namespace Persistence.Migrations
                     b.Property<int>("HotelId")
                         .HasColumnType("int");
 
-                    b.Property<byte>("LanguageId")
-                        .HasColumnType("tinyint");
+                    b.Property<short>("LanguageId")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("About")
                         .HasMaxLength(300)
@@ -444,8 +444,8 @@ namespace Persistence.Migrations
                         {
                             Id = "b0a39202-a221-47c7-9d34-dc4479ec33f2",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "f86dffff-0d1d-4b58-a972-e5a376d3e4ec",
-                            Created = new DateTime(2022, 8, 15, 15, 7, 50, 675, DateTimeKind.Utc).AddTicks(3232),
+                            ConcurrencyStamp = "6ae1250c-3903-4e0b-838e-3497280c8325",
+                            Created = new DateTime(2022, 8, 17, 11, 42, 52, 951, DateTimeKind.Utc).AddTicks(2823),
                             CreatedBy = "Seed",
                             Email = "hatef@tabanmed.com",
                             EmailConfirmed = false,
@@ -459,7 +459,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "HATEFADMIN",
                             PasswordHash = "AQAAAAEAACcQAAAAEDCEjgFnVqs3jS+KYwhsCsNHoR7mV7tQ7/NUHc2bxUc9HjMuXSNCax/I5jPdFBGsVg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3d108138-6864-40fa-9659-2399bfb26dfe",
+                            SecurityStamp = "f9383e82-395f-4661-a539-74d1915d577e",
                             TwoFactorEnabled = false,
                             UserName = "HatefAdmin"
                         },
@@ -467,8 +467,8 @@ namespace Persistence.Migrations
                         {
                             Id = "04a76057-948a-4fd1-b9f0-ed36991fcaa5",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "09b06172-da8c-4ceb-8c8c-83d81d068961",
-                            Created = new DateTime(2022, 8, 15, 15, 7, 50, 675, DateTimeKind.Utc).AddTicks(3262),
+                            ConcurrencyStamp = "63e73e6f-d116-4c10-a5e1-681213e4cae9",
+                            Created = new DateTime(2022, 8, 17, 11, 42, 52, 951, DateTimeKind.Utc).AddTicks(2854),
                             CreatedBy = "Seed",
                             Email = "operator@tabanmed.com",
                             EmailConfirmed = false,
@@ -481,7 +481,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "TABANMEDOPERATOR",
                             PasswordHash = "AQAAAAEAACcQAAAAEGO2+kmYpAenNWk5p1UYgYOMbU3/pUOoc4yRkUma3Zq2Hsc8g9HSWpztF3MozgJdig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "62c069ef-e318-46de-a1b2-70bbceecb1aa",
+                            SecurityStamp = "341151dc-38af-4a54-94f2-356625dc0ef5",
                             TwoFactorEnabled = false,
                             UserName = "tabanmedOperator"
                         });
@@ -524,7 +524,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "3e2c9b3b-1c5c-41a5-9fe6-9004dcd4b78b",
-                            ConcurrencyStamp = "6e3e66c8-6c17-4125-a4be-3c775e024c04",
+                            ConcurrencyStamp = "3151f71a-f049-4a92-bf3e-0083cf67e255",
                             DisplayName = "ادمین کل سیستم",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
@@ -532,7 +532,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "6f4024b0-153e-4b8b-a851-5befbdb955f9",
-                            ConcurrencyStamp = "278c24d8-e59a-4165-aa3f-b61806f03013",
+                            ConcurrencyStamp = "ba697b8a-d255-4782-b885-2c845433dc97",
                             DisplayName = "اپراتور سیستم",
                             Name = "SystemOperator",
                             NormalizedName = "SYSTEMOPERATOR"
@@ -664,11 +664,11 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Localization.Language", b =>
                 {
-                    b.Property<byte>("Id")
+                    b.Property<short>("Lcid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("smallint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Lcid"), 1L, 1);
 
                     b.Property<string>("IsoName")
                         .IsRequired()
@@ -680,35 +680,97 @@ namespace Persistence.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Lcid");
 
                     b.ToTable("Languages");
 
                     b.HasData(
                         new
                         {
-                            Id = (byte)1,
+                            Lcid = (short)1065,
                             IsoName = "fa-IR",
                             Name = "فارسی"
                         },
                         new
                         {
-                            Id = (byte)2,
+                            Lcid = (short)1033,
                             IsoName = "en-US",
                             Name = "English"
                         },
                         new
                         {
-                            Id = (byte)3,
+                            Lcid = (short)2049,
                             IsoName = "ar-IQ",
                             Name = "العربیة"
                         },
                         new
                         {
-                            Id = (byte)4,
+                            Lcid = (short)1164,
                             IsoName = "prs-AF",
                             Name = "پشتو/دری"
                         });
+                });
+
+            modelBuilder.Entity("Domain.Entities.MedicalCenters.MedicalCenter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AgentPhoneNumber")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<short>("CityId")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("MedicalCenters");
+                });
+
+            modelBuilder.Entity("Domain.Entities.MedicalCenters.Translation.MedicalCenterTranslation", b =>
+                {
+                    b.Property<int>("MedicalCenterId")
+                        .HasColumnType("int");
+
+                    b.Property<short>("LanguageId")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("AgentName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("MedicalCenterId", "LanguageId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("MedicalCenterTranslations");
                 });
 
             modelBuilder.Entity("Domain.Entities.Permission.Permission", b =>
@@ -935,11 +997,43 @@ namespace Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Domain.Entities.MedicalCenters.MedicalCenter", b =>
+                {
+                    b.HasOne("Domain.Entities.Destination.City", "City")
+                        .WithMany("MedicalCenters")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("Domain.Entities.MedicalCenters.Translation.MedicalCenterTranslation", b =>
+                {
+                    b.HasOne("Domain.Entities.Localization.Language", "Language")
+                        .WithMany("MedicalCenterTranslations")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.MedicalCenters.MedicalCenter", "MedicalCenter")
+                        .WithMany("MedicalCenterTranslations")
+                        .HasForeignKey("MedicalCenterId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Language");
+
+                    b.Navigation("MedicalCenter");
+                });
+
             modelBuilder.Entity("Domain.Entities.Destination.City", b =>
                 {
                     b.Navigation("CityTranslations");
 
                     b.Navigation("Hotels");
+
+                    b.Navigation("MedicalCenters");
                 });
 
             modelBuilder.Entity("Domain.Entities.Destination.Country", b =>
@@ -994,6 +1088,13 @@ namespace Persistence.Migrations
                     b.Navigation("HotelFacilityTranslations");
 
                     b.Navigation("HotelTranslations");
+
+                    b.Navigation("MedicalCenterTranslations");
+                });
+
+            modelBuilder.Entity("Domain.Entities.MedicalCenters.MedicalCenter", b =>
+                {
+                    b.Navigation("MedicalCenterTranslations");
                 });
 #pragma warning restore 612, 618
         }
