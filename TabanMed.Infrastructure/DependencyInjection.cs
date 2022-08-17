@@ -5,6 +5,7 @@ using Common;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TabanMed.Infrastructure.Services;
+using TabanMed.Infrastructure.Services.Application;
 using TabanMed.Infrastructure.Services.Destination;
 using TabanMed.Infrastructure.Services.Globalization;
 using TabanMed.Infrastructure.Services.Hotels;
@@ -19,8 +20,9 @@ namespace TabanMed.Infrastructure
 
             #region Application Services
 
-            services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<ICurrentServices, CurrentServices>();
             services.AddTransient<IDateTime, MachineDateTime>();
+            services.AddScoped<IFileManagerService, FileManagerService>();
 
             #endregion
 

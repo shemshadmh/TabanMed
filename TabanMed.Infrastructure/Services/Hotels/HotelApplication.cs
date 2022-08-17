@@ -1,4 +1,5 @@
 ﻿
+using Application;
 using Application.Common;
 using Application.Dtos.Hotels.HotelFacilities;
 using Application.Dtos.Hotels.Hotels;
@@ -19,15 +20,18 @@ namespace TabanMed.Infrastructure.Services.Hotels
     {
         private readonly IApplicationDbContext _dbContext;
         private readonly ILogger<HotelApplication> _logger;
+        private readonly IFileManagerService _fileManagerService;
         private readonly IMapper _mapper;
         private readonly string _twoLetterISOLanguageName;
 
         public HotelApplication(IApplicationDbContext dbContext,
             ILogger<HotelApplication> logger,
+            IFileManagerService fileManagerService,
             IMapper mapper)
         {
             _dbContext = dbContext;
             _logger = logger;
+            _fileManagerService = fileManagerService;
             _mapper = mapper;
             _twoLetterISOLanguageName = Thread.CurrentThread.CurrentUICulture.Name;
         }
@@ -52,33 +56,36 @@ namespace TabanMed.Infrastructure.Services.Hotels
         {
             var operation = new OperationResult();
             var savedPhotoPath = string.Empty;
-            return operation.Succeeded();
-            //try
-            //{
-            //    if(await _hotelRepository.ExistsAsync(hotel => hotel.EnName.ToUpper() == model.EnName.ToUpper() ||
-            //                                                    hotel.FaName == model.FaName))
-            //        return operation.Failed(ErrorMessages.DuplicatedRecord);
+            try
+            {
+                if(await _dbContext.HotelTranslations.AnyAsync(hotelTranslation =>
+                       hotelTranslation.Name == model.Name))
+                    return operation.Failed(ErrorMessages.DuplicatedRecord);
 
-            //    var entity = await _mapper.From(model).AdaptToTypeAsync<Hotel>();
+                
 
-            //    savedPhotoPath = await _fileManagerService
-            //        .SaveAsync(model.HotelPic, StaticDetails.HotelsPhotoPath, true, true);
+                savedPhotoPath = await _fileManagerService
+                    .SaveFileAsync(model.HotelPic, AppConstants.HotelsPhotoPath, true, true);
 
-            //    if(string.IsNullOrEmpty(savedPhotoPath))
-            //        return operation.Failed(ErrorMessages.CouldNotSavePic);
+                if(string.IsNullOrEmpty(savedPhotoPath))
+                    return operation.Failed(ErrorMessages.CouldNotSavePic);
 
-            //    entity.ImageUrl = $"/{savedPhotoPath}";
-            //    await _hotelRepository.AddAsync(entity, true);
-            //    return operation.Succeeded(InformationMessages.SuccessfullySaved);
-            //}
-            //catch(Exception e)
-            //{
-            //    if(!string.IsNullOrEmpty(savedPhotoPath))
-            //        await _fileManagerService.DeleteOperationAsync(savedPhotoPath);
+                var entity = await _mapper.From(model).AdaptToTypeAsync<Hotel>();
+                entity.ImageUrl = savedPhotoPath;
 
-            //    _logger.LogCritical(e, "couldnt Create hotel");
-            //    return operation.Failed(ErrorMessages.ErrorOccurred);
-            //}
+                await _dbContext.Hotels.AddAsync(entity);
+                await _dbContext.SaveChangesAsync();
+
+                return operation.Succeeded(InformationMessages.SuccessfullySaved);
+            }
+            catch(Exception e)
+            {
+                if(!string.IsNullOrEmpty(savedPhotoPath))
+                    await _fileManagerService.DeleteFileAsync(savedPhotoPath);
+
+                _logger.LogCritical(e, "Could not create hotel");
+                return operation.Failed(ErrorMessages.ErrorOccurred);
+            }
 
         }
 

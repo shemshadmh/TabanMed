@@ -61,7 +61,7 @@ public class CreateHotelDto
     [Required(ErrorMessageResourceType = typeof(ErrorMessages),
         ErrorMessageResourceName = nameof(ErrorMessages.Required))]
     [ImageFile]
-    [FileMaxSizeLimit(AppConstants.MaxTransportCoLogoFileSizeUpload)]
+    [FileMaxSizeLimit(AppConstants.MaxHotelLogoFileSizeUpload)]
     [FileExtensionsLimit(".jpg,.png,.jpeg", ErrorMessageResourceType = typeof(ErrorMessages),
         ErrorMessageResourceName = nameof(ErrorMessages.FileExtension))]
     [DataType(DataType.Upload)]

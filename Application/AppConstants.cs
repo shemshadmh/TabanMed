@@ -37,8 +37,37 @@ namespace Application
 
         #endregion
 
+        #region Files
+
+        public static string HotelsPhotoPath => "images/Hotels";
+        public static string RootFilesPath => $"wwwroot";
+        public static string ThumbnailPath => "Thumbnails";
+
+        public const int ThumbNailHeight = 90;
+        public const int ThumbnailWidth = 90;
+
+        #endregion
+
         public static string TempDataMessageTitle => "Message";
 
-        public const double MaxTransportCoLogoFileSizeUpload = 3e+6; // 3MB
+        public const double MaxHotelLogoFileSizeUpload = 3e+6; // 3MB
+
+        #region Methods
+
+        public static string ThrowIfNullOrEmpty(this string str, string paramName, bool allowWhiteSpaces = false)
+        {
+            if(allowWhiteSpaces)
+            {
+                return string.IsNullOrEmpty(str)
+                    ? throw new ArgumentNullException($"{paramName} can not be null, empty or contain whitespaces !")
+                    : str;
+            }
+
+            return string.IsNullOrWhiteSpace(str)
+                ? throw new ArgumentNullException($"{paramName} can not be null or empty!")
+                : str;
+        }
+
+        #endregion
     }
 }

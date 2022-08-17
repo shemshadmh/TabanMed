@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Application.Common;
 using Application.Dtos.Hotels.Hotels;
+using Application.Extensions;
 using Application.Interfaces.Hotels;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -52,12 +53,28 @@ namespace TabanMed.Admin.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int id,[FromForm] CreateHotelDto model)
         {
-            var response = new Response<bool>();
-            //if(!ModelState.IsValid)
+            if (id != model.CityId)
+                return NotFound();
+            
+            if(!ModelState.IsValid)
                 return View(model);
 
-            //var operationRes = await _hotelApplication.CreateHotel(model);
-            //return Json(operationRes.IsSucceeded ? response.Succeeded() : response.Failed(operationRes.Message!));
+            if(!model.HotelPic.IsValidImage())
+            {
+                ModelState.AddModelError(String.Empty, ErrorMessages.IsNotAValidImageFile);
+                return View(model);
+            }
+
+            var res = await _hotelApplication.CreateHotel(model);
+
+            if (!res.IsSucceeded)
+            {
+                ModelState.AddModelError(String.Empty, res.Message!);
+                return View(model);
+            }
+
+            TempDataMessage(res.Message!, res.IsSucceeded);
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet, Display(Name = "جزییات هتل")]

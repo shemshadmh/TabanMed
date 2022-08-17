@@ -29,6 +29,38 @@ builder.Services.AddAntiforgery(opts =>
 });
 
 var app = builder.Build();
+using IServiceScope scope = app.Services.CreateScope();
+
+
+#region Static Folders Ckeck
+
+var webEnv = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
+
+try
+{
+    var pathList = new List<string>
+    {
+        AppConstants.HotelsPhotoPath,
+        Path.Combine(AppConstants.HotelsPhotoPath,AppConstants.ThumbnailPath)
+    };
+
+    foreach(var item in pathList)
+    {
+        var fullPath = Path.Combine(webEnv.WebRootPath, item);
+        if(!Directory.Exists(fullPath))
+            Directory.CreateDirectory(fullPath);
+    }
+
+
+    Log.Information("storage directories check succeeded.");
+}
+catch(Exception ex)
+{
+    Log.Fatal(ex, "An error occurred while validating fibato admin storage directories.");
+    Log.CloseAndFlush();
+}
+
+#endregion
 
 app.UseStaticFiles();
 app.UseRouting();

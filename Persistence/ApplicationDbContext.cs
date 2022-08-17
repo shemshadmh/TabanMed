@@ -19,13 +19,12 @@ namespace Persistence
     public sealed class ApplicationDbContext : IdentityDbContext<ApplicationUser, Role, string, UserClaim,
         UserRole, UserLogin, RoleClaim, UserToken>, IApplicationDbContext
     {
-        private readonly ICurrentUserService _currentUserService;
+        private readonly ICurrentServices _currentServices;
         private readonly IDateTime _dateTime;
 
-        public ApplicationDbContext(ICurrentUserService currentUserService, IDateTime dateTime,
-            DbContextOptions<ApplicationDbContext> options) : base(options)
+        public ApplicationDbContext(ICurrentServices currentServices, IDateTime dateTime)
         {
-            _currentUserService = currentUserService;
+            _currentServices = currentServices;
             _dateTime = dateTime;
         }
 
@@ -133,7 +132,7 @@ namespace Persistence
                 switch(entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = _currentUserService.Username ?? "Seed";
+                        entry.Entity.CreatedBy = _currentServices.Username ?? "Seed";
                         entry.Entity.Created = _dateTime.UtcNow;
                         break;
                 }
@@ -144,7 +143,7 @@ namespace Persistence
                 switch(entry.State)
                 {
                     case EntityState.Modified:
-                        entry.Entity.LastModifiedBy = _currentUserService.Username;
+                        entry.Entity.LastModifiedBy = _currentServices.Username;
                         entry.Entity.LastModified = _dateTime.UtcNow;
                         break;
                 }
@@ -159,7 +158,7 @@ namespace Persistence
                         break;
 
                     case EntityState.Deleted:
-                        entry.Entity.DeletedBy = _currentUserService.Username;
+                        entry.Entity.DeletedBy = _currentServices.Username;
                         entry.Entity.DeletedOn = _dateTime.UtcNow;
                         entry.Entity.IsDeleted = true;
                         entry.State = EntityState.Modified;
@@ -172,18 +171,18 @@ namespace Persistence
                 switch(entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = _currentUserService.Username ?? "seed";
+                        entry.Entity.CreatedBy = _currentServices.Username ?? "seed";
                         entry.Entity.Created = _dateTime.UtcNow;
                         entry.Entity.IsDeleted = false;
                         break;
 
                     case EntityState.Modified:
-                        entry.Entity.LastModifiedBy = _currentUserService.Username;
+                        entry.Entity.LastModifiedBy = _currentServices.Username;
                         entry.Entity.LastModified = _dateTime.UtcNow;
                         break;
 
                     case EntityState.Deleted:
-                        entry.Entity.DeletedBy = _currentUserService.Username;
+                        entry.Entity.DeletedBy = _currentServices.Username;
                         entry.Entity.DeletedOn = _dateTime.UtcNow;
                         entry.Entity.IsDeleted = true;
                         entry.State = EntityState.Modified;
