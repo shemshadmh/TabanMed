@@ -13,7 +13,7 @@ $(document).ready(function () {
 });
 
 function CharactersCount() {
-    debugger;
+    //debugger;
     let textField = event.target;
     let count = $(textField).val().length;
     let counterContainer = $(textField).prev();

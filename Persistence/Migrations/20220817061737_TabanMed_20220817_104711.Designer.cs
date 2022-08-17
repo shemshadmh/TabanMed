@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
@@ -11,9 +12,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220817061737_TabanMed_20220817_104711")]
+    partial class TabanMed_20220817_104711
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -442,8 +444,8 @@ namespace Persistence.Migrations
                         {
                             Id = "b0a39202-a221-47c7-9d34-dc4479ec33f2",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "b4deec65-338c-4808-b620-417ed983bb88",
-                            Created = new DateTime(2022, 8, 17, 11, 24, 11, 598, DateTimeKind.Utc).AddTicks(7803),
+                            ConcurrencyStamp = "f9f8186d-a366-4572-bcbb-62a8b1c0e8f5",
+                            Created = new DateTime(2022, 8, 17, 6, 17, 35, 929, DateTimeKind.Utc).AddTicks(6044),
                             CreatedBy = "Seed",
                             Email = "hatef@tabanmed.com",
                             EmailConfirmed = false,
@@ -457,7 +459,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "HATEFADMIN",
                             PasswordHash = "AQAAAAEAACcQAAAAEDCEjgFnVqs3jS+KYwhsCsNHoR7mV7tQ7/NUHc2bxUc9HjMuXSNCax/I5jPdFBGsVg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "64f571ee-5473-4c0b-97d4-c74074aae702",
+                            SecurityStamp = "75098838-a099-47ac-834c-cf1fd8c9c808",
                             TwoFactorEnabled = false,
                             UserName = "HatefAdmin"
                         },
@@ -465,8 +467,8 @@ namespace Persistence.Migrations
                         {
                             Id = "04a76057-948a-4fd1-b9f0-ed36991fcaa5",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "4cf981a3-ee4d-4c01-8c0e-691a727dc2a6",
-                            Created = new DateTime(2022, 8, 17, 11, 24, 11, 598, DateTimeKind.Utc).AddTicks(7965),
+                            ConcurrencyStamp = "8e6d3b9c-9c36-469e-b6ce-5b57f4129056",
+                            Created = new DateTime(2022, 8, 17, 6, 17, 35, 929, DateTimeKind.Utc).AddTicks(6097),
                             CreatedBy = "Seed",
                             Email = "operator@tabanmed.com",
                             EmailConfirmed = false,
@@ -479,7 +481,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "TABANMEDOPERATOR",
                             PasswordHash = "AQAAAAEAACcQAAAAEGO2+kmYpAenNWk5p1UYgYOMbU3/pUOoc4yRkUma3Zq2Hsc8g9HSWpztF3MozgJdig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "46115aac-2435-430a-a5b2-454ebd739f19",
+                            SecurityStamp = "1cd5b53b-67d9-4fb1-91b4-d2d21589eed0",
                             TwoFactorEnabled = false,
                             UserName = "tabanmedOperator"
                         });
@@ -522,7 +524,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "3e2c9b3b-1c5c-41a5-9fe6-9004dcd4b78b",
-                            ConcurrencyStamp = "5fbd8bbb-5873-4aa3-9be7-cf825635b400",
+                            ConcurrencyStamp = "d086aec4-d4d8-4d4c-a763-eff901bb2d94",
                             DisplayName = "ادمین کل سیستم",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
@@ -530,7 +532,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "6f4024b0-153e-4b8b-a851-5befbdb955f9",
-                            ConcurrencyStamp = "80c6cd0d-15b7-490e-9093-7ec689c1c1f5",
+                            ConcurrencyStamp = "00abbd9e-5c2b-4a3f-b62f-1810c8cbf36c",
                             DisplayName = "اپراتور سیستم",
                             Name = "SystemOperator",
                             NormalizedName = "SYSTEMOPERATOR"
@@ -707,68 +709,6 @@ namespace Persistence.Migrations
                             IsoName = "prs-AF",
                             Name = "پشتو/دری"
                         });
-                });
-
-            modelBuilder.Entity("Domain.Entities.MedicalCenters.MedicalCenter", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("AgentPhoneNumber")
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<short>("CityId")
-                        .HasColumnType("smallint");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.ToTable("MedicalCenters");
-                });
-
-            modelBuilder.Entity("Domain.Entities.MedicalCenters.Translation.MedicalCenterTranslation", b =>
-                {
-                    b.Property<int>("MedicalCenterId")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("LanguageId")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("AgentName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("MedicalCenterId", "LanguageId");
-
-                    b.HasIndex("LanguageId");
-
-                    b.ToTable("MedicalCenterTranslations");
                 });
 
             modelBuilder.Entity("Domain.Entities.Permission.Permission", b =>
@@ -995,43 +935,11 @@ namespace Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Entities.MedicalCenters.MedicalCenter", b =>
-                {
-                    b.HasOne("Domain.Entities.Destination.City", "City")
-                        .WithMany("MedicalCenters")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("City");
-                });
-
-            modelBuilder.Entity("Domain.Entities.MedicalCenters.Translation.MedicalCenterTranslation", b =>
-                {
-                    b.HasOne("Domain.Entities.Localization.Language", "Language")
-                        .WithMany("MedicalCenterTranslations")
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.MedicalCenters.MedicalCenter", "MedicalCenter")
-                        .WithMany("MedicalCenterTranslations")
-                        .HasForeignKey("MedicalCenterId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Language");
-
-                    b.Navigation("MedicalCenter");
-                });
-
             modelBuilder.Entity("Domain.Entities.Destination.City", b =>
                 {
                     b.Navigation("CityTranslations");
 
                     b.Navigation("Hotels");
-
-                    b.Navigation("MedicalCenters");
                 });
 
             modelBuilder.Entity("Domain.Entities.Destination.Country", b =>
@@ -1086,13 +994,6 @@ namespace Persistence.Migrations
                     b.Navigation("HotelFacilityTranslations");
 
                     b.Navigation("HotelTranslations");
-
-                    b.Navigation("MedicalCenterTranslations");
-                });
-
-            modelBuilder.Entity("Domain.Entities.MedicalCenters.MedicalCenter", b =>
-                {
-                    b.Navigation("MedicalCenterTranslations");
                 });
 #pragma warning restore 612, 618
         }

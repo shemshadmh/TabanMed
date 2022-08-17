@@ -126,6 +126,9 @@
   <data name="Dashboard" xml:space="preserve">
     <value>داشبورد</value>
   </data>
+  <data name="Destinations" xml:space="preserve">
+    <value>مقاصد</value>
+  </data>
   <data name="HotelFacilities" xml:space="preserve">
     <value>امکانات هتل</value>
   </data>

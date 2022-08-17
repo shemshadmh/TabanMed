@@ -35,6 +35,11 @@ namespace TabanMed.Infrastructure
             #region Countries
             services.AddTransient<ICountryApplication, CountryApplication>();
             #endregion
+            #region Cities
+            services.AddTransient<ICityApplication, CityApplication>();
+
+            #endregion
+
 
             services.ConfigureServicesCultureLocalization();
 

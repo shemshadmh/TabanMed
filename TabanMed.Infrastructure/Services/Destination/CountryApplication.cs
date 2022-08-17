@@ -129,7 +129,47 @@ namespace TabanMed.Infrastructure.Services.Destination
         }
 
 
+        public async Task<OperationResult> UpdateCountry(CountryListItem countryDto)
+        {
+            var operation = new OperationResult();
+            try
+            {
+                if (await _dbContext.CountriesTranslation.AnyAsync(countryTranslation =>
+                       (countryTranslation.Name == countryDto.FaName ||
+                       countryTranslation.Name == countryDto.EnName ||
+                       countryTranslation.Name == countryDto.ArName ||
+                       countryTranslation.Name == countryDto.AfName)
+                        && countryTranslation.CountryId != countryDto.Id))
+                    return operation.Failed(ErrorMessages.DuplicatedRecord);
+                var translationsList = await _dbContext.CountriesTranslation
+                    .Where(countryTranslation => countryTranslation.CountryId == countryDto.Id)
+                    .ToListAsync();
 
+                foreach (var countryTranslation in translationsList)
+                {
+                    countryTranslation.Name= countryTranslation.LanguageId switch
+                    {
+                        AppConstants.FaLanguageId => countryDto.FaName,
+                        AppConstants.EnLanguageId => countryDto.EnName,
+                        AppConstants.ArLanguageId => countryDto.ArName,
+                        AppConstants.AfLanguageId => countryDto.AfName,
+                        _ => countryTranslation.Name
+                    };
+                }
+
+                _dbContext.CountriesTranslation.UpdateRange(translationsList);
+                await _dbContext.SaveChangesAsync();
+
+                _logger.LogWarning("country updated successfully.[country:{title}]", countryDto.EnName);
+
+                return operation.Succeeded(countryDto.Id, InformationMessages.SuccessfullyUpdated);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Could not update country.[country:{title}]", countryDto.EnName);
+                return operation.Failed(ErrorMessages.ErrorOccurred);
+            }
+        }
 
     }
 }

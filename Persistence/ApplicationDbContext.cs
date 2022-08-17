@@ -9,6 +9,8 @@ using Domain.Entities.Hotels;
 using Domain.Entities.Hotels.Translation;
 using Domain.Entities.Identity;
 using Domain.Entities.Localization;
+using Domain.Entities.MedicalCenters;
+using Domain.Entities.MedicalCenters.Translation;
 using Domain.Entities.Permission;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +39,7 @@ namespace Persistence
         #region Destination
 
         public DbSet<City> Cities => Set<City>();
+        public DbSet<CityTranslation> CityTranslations => Set<CityTranslation>();
         public DbSet<Country> Countries => Set<Country>();
         public DbSet<CountryTranslation> CountriesTranslation => Set<CountryTranslation>();
 
@@ -50,6 +53,13 @@ namespace Persistence
         public DbSet<HotelSelectedFacility> HotelSelectedFacilities => Set<HotelSelectedFacility>();
         public DbSet<HotelImage> HotelImages => Set<HotelImage>();
         public DbSet<HotelFacilityTranslation> HotelFacilityTranslations => Set<HotelFacilityTranslation>();
+
+        #endregion
+
+        #region MedicalCenter
+        public DbSet<MedicalCenter> MedicalCenters => Set<MedicalCenter>();
+        public DbSet<MedicalCenterTranslation> MedicalCenterTranslations=> Set<MedicalCenterTranslation>();
+
 
         #endregion
 
