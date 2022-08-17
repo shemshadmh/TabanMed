@@ -126,6 +126,9 @@
   <data name="Dashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
+  <data name="Destinations" xml:space="preserve">
+    <value>Destinations</value>
+  </data>
   <data name="HotelFacilities" xml:space="preserve">
     <value>Hotel Facilities</value>
   </data>

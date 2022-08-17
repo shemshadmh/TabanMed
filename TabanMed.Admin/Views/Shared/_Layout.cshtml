@@ -275,6 +275,18 @@
                     </li>
                 </admin-secure-content>
                 
+
+                <admin-secure-content asp-controller="Countries" asp-action="Index">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark" asp-controller="Countries"
+                           asp-action="Index" aria-expanded="false">
+                            <i class="mdi mdi-map-marker"></i>
+                            <span class="hide-menu">@UIElements.Destinations</span>
+                        </a>
+                    </li>
+                </admin-secure-content>
+
+
                 <li class="nav-small-cap">
                     <i class="mdi mdi-dots-horizontal"></i>
                     <span class="hide-menu">@UIElements.Hotels</span>
@@ -289,6 +301,11 @@
                         </a>
                     </li>
                 </admin-secure-content>
+
+
+                
+
+
 
             </ul>
         </nav>
