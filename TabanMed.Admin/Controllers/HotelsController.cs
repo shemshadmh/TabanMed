@@ -74,7 +74,7 @@ namespace TabanMed.Admin.Controllers
             }
 
             TempDataMessage(res.Message!, res.IsSucceeded);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index),new { cityId = model.CityId});
         }
 
         [HttpGet, Display(Name = "جزییات هتل")]

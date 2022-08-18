@@ -6,6 +6,7 @@ using Application.Dtos.Hotels.Hotels;
 using Application.Interfaces.Application;
 using Application.Interfaces.Hotels;
 using Domain.Entities.Hotels;
+using Domain.Entities.Hotels.Translation;
 using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
@@ -41,10 +42,16 @@ namespace TabanMed.Infrastructure.Services.Hotels
         {
             try
             {
-                var query = _dbContext.Hotels
-                    .Where(hotel => hotel.CityId == cityId);
-
-                return await _mapper.From(query).AdaptToTypeAsync<List<HotelListItemDto>>();
+                return await _dbContext.HotelTranslations.AsNoTracking()
+                    .Where(hotelTranslation => hotelTranslation.LanguageId == _currentServices.LanguageId)
+                    .Select(hotelTranslation => new HotelListItemDto()
+                    {
+                        Id = hotelTranslation.HotelId,
+                        Name = hotelTranslation.Name,
+                        Stars = hotelTranslation.Hotel.Stars,
+                        ImageUrl = hotelTranslation.Hotel.ImageUrl
+                    })
+                    .ToListAsync();
             }
             catch(Exception e)
             {
@@ -63,8 +70,6 @@ namespace TabanMed.Infrastructure.Services.Hotels
                        hotelTranslation.Name == model.Name))
                     return operation.Failed(ErrorMessages.DuplicatedRecord);
 
-                
-
                 savedPhotoPath = await _fileManagerService
                     .SaveFileAsync(model.HotelPic, AppConstants.HotelsPhotoPath, true, true);
 
@@ -74,8 +79,21 @@ namespace TabanMed.Infrastructure.Services.Hotels
                 var entity = await _mapper.From(model).AdaptToTypeAsync<Hotel>();
                 entity.ImageUrl = savedPhotoPath;
 
+                entity.HotelTranslations = new List<HotelTranslation>()
+                {
+                    new ()
+                    {
+                        LanguageId = _currentServices.LanguageId,
+                        Name = model.Name,
+                        About = model.About,
+                        Address = model.Address
+                    }
+                };
+
                 await _dbContext.Hotels.AddAsync(entity);
                 await _dbContext.SaveChangesAsync();
+
+                _logger.LogWarning("New hotel created!");
 
                 return operation.Succeeded(InformationMessages.SuccessfullySaved);
             }
