@@ -40,8 +40,14 @@ try
 {
     var pathList = new List<string>
     {
+        // Hotel
         AppConstants.HotelsPhotoPath,
-        Path.Combine(AppConstants.HotelsPhotoPath,AppConstants.ThumbnailPath)
+        Path.Combine(AppConstants.HotelsPhotoPath,AppConstants.ThumbnailPath),
+
+        // MedicalCenters
+        AppConstants.MedicalCentersPhotoPath,
+        Path.Combine(AppConstants.MedicalCentersPhotoPath,AppConstants.ThumbnailPath)
+
     };
 
     foreach(var item in pathList)

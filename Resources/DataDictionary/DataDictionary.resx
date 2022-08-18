@@ -333,4 +333,10 @@
   <data name="MainImage" xml:space="preserve">
     <value>Main Image</value>
   </data>
+  <data name="AgentName" xml:space="preserve">
+    <value>Agent Name</value>
+  </data>
+  <data name="AgentPhoneNumber" xml:space="preserve">
+    <value>Agent Phone</value>
+  </data>
 </root>

@@ -333,4 +333,10 @@
   <data name="MainImage" xml:space="preserve">
     <value>تصویر اصلی</value>
   </data>
+  <data name="AgentName" xml:space="preserve">
+    <value>نام نماینده</value>
+  </data>
+  <data name="AgentPhoneNumber" xml:space="preserve">
+    <value>شماره نماینده</value>
+  </data>
 </root>
