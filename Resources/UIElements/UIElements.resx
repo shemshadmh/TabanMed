@@ -132,6 +132,9 @@
   <data name="Destinations" xml:space="preserve">
     <value>Destinations</value>
   </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
   <data name="HotelFacilities" xml:space="preserve">
     <value>Hotel Facilities</value>
   </data>

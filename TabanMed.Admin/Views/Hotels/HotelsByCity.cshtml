@@ -66,14 +66,20 @@
     .Name("grid")
     .Columns(columns =>
     {
-    columns.Bound(hotel => hotel.Name).Width(340).ClientTemplate(
-    @"<div class='co-img'
-    style='background-image: url(" + Url.Content("#:data.ImageUrl#") +
-    ");'></div><div class='co-name'><strong>#: Name #</strong></div>");
+    columns.Bound(hotel => hotel.Name)
+        .Width(340)
+        .ClientTemplate(
+            @"<div class='co-img'
+            style='background-image: url(" + Url.Content("#:data.ImageUrl#") +
+            ");'></div><div class='co-name'><strong>#: Name #</strong></div>");
     columns.Bound(hotel => hotel.Stars)
     .ClientGroupHeaderTemplate("#=value# ستاره").Hidden();
-    columns.Command(c => c.Custom("more")
-    .Text(" ").IconClass("mdi mdi-eye font-22").Template(@"<a class='btn btn-success text-white' href='/Hotels/Create/'>{UIElements.AddNewHotel}</a>")).Width(20);
+    columns.Bound(hotel => hotel.Id)
+        .ClientTemplate($"<a class='btn btn-success text-white' href='{Url.Action("Details")}/#:Id#'>{UIElements.Details}</a>")
+        .Width(20)
+        .ClientHeaderTemplate(" ")
+        .Filterable(false)
+        .Sortable(false);
     })
     .ToolBar(toolbar =>
     {
