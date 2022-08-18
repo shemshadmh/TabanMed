@@ -97,6 +97,24 @@ namespace Resources.DataDictionary {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agent Name.
+        /// </summary>
+        public static string AgentName {
+            get {
+                return ResourceManager.GetString("AgentName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agent Phone.
+        /// </summary>
+        public static string AgentPhoneNumber {
+            get {
+                return ResourceManager.GetString("AgentPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Airline.
         /// </summary>
         public static string AirlineType {

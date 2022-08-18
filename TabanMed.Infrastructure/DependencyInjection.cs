@@ -10,7 +10,7 @@ using TabanMed.Infrastructure.Services.Application;
 using TabanMed.Infrastructure.Services.Destination;
 using TabanMed.Infrastructure.Services.Globalization;
 using TabanMed.Infrastructure.Services.Hotels;
-using TabanMed.Infrastructure.Services.MedicalCenter;
+using TabanMed.Infrastructure.Services.MedicalCenters;
 
 namespace TabanMed.Infrastructure
 {

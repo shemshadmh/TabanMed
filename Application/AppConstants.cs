@@ -40,6 +40,7 @@ namespace Application
         #region Files
 
         public static string HotelsPhotoPath => "images/Hotels";
+        public static string MedicalCentersPhotoPath => "images/MedicalCenters";
         public static string RootFilesPath => $"wwwroot";
         public static string ThumbnailPath => "Thumbnails";
 
@@ -51,6 +52,7 @@ namespace Application
         public static string TempDataMessageTitle => "Message";
 
         public const double MaxHotelLogoFileSizeUpload = 3e+6; // 3MB
+        public const double MaxMedicalCenterPicFileSizeUpload = 3e+6; // 3MB
 
         #region Methods
 
