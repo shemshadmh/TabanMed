@@ -3,7 +3,6 @@ using Application.Interfaces.Destination;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 using TabanMed.Admin.Extensions;
 
 namespace TabanMed.Admin.Controllers
@@ -16,11 +15,6 @@ namespace TabanMed.Admin.Controllers
             _cityApplication = cityApplication;
         }
 
-
-        [HttpGet, Display(Name = "لیست شهرها")]
-        public IActionResult Index() => View();
-
-
         [HttpPost]
         public async Task<IActionResult> GetCitiesList([DataSourceRequest] DataSourceRequest request,
             int CountryId)
@@ -28,9 +22,6 @@ namespace TabanMed.Admin.Controllers
             var data = await _cityApplication.GetCitiesListAsync(CountryId);
             return Json(await data.ToDataSourceResultAsync(request));
         }
-
-
-
 
         [HttpPost]
         public async Task<IActionResult> CreateCity([DataSourceRequest] DataSourceRequest request,
@@ -58,7 +49,6 @@ namespace TabanMed.Admin.Controllers
             return Json(returnResult);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> UpdateFacility([DataSourceRequest] DataSourceRequest request,
             CityListItem city)
@@ -83,9 +73,6 @@ namespace TabanMed.Admin.Controllers
 
             return Json(returnResult);
         }
-
-
-
 
     }
 }
