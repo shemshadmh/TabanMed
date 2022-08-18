@@ -106,6 +106,15 @@ namespace Resources.UIElements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string Details {
+            get {
+                return ResourceManager.GetString("Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hotel Facilities.
         /// </summary>
         public static string HotelFacilities {
