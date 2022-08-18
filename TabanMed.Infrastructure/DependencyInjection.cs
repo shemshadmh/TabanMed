@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces.Application;
 using Application.Interfaces.Destination;
 using Application.Interfaces.Hotels;
+using Application.Interfaces.MedicalCenters;
 using Common;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,7 @@ using TabanMed.Infrastructure.Services.Application;
 using TabanMed.Infrastructure.Services.Destination;
 using TabanMed.Infrastructure.Services.Globalization;
 using TabanMed.Infrastructure.Services.Hotels;
+using TabanMed.Infrastructure.Services.MedicalCenter;
 
 namespace TabanMed.Infrastructure
 {
@@ -40,6 +42,11 @@ namespace TabanMed.Infrastructure
 
             #endregion
 
+            #region Medical Center
+
+            services.AddTransient<IMedicalCenterApplication, MedicalCenterApplication>();
+
+            #endregion
 
             services.ConfigureServicesCultureLocalization();
 

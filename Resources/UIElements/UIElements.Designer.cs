@@ -70,6 +70,15 @@ namespace Resources.UIElements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new medical nenter.
+        /// </summary>
+        public static string AddNewMedicalCenter {
+            get {
+                return ResourceManager.GetString("AddNewMedicalCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Made with ❤ by Taban Team.
         /// </summary>
         public static string CopyRight {
@@ -133,6 +142,24 @@ namespace Resources.UIElements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MedicalCenter.
+        /// </summary>
+        public static string MedicalCenter {
+            get {
+                return ResourceManager.GetString("MedicalCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medical Center List.
+        /// </summary>
+        public static string MedicalCenterList {
+            get {
+                return ResourceManager.GetString("MedicalCenterList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profile.
         /// </summary>
         public static string Profile {
@@ -169,11 +196,29 @@ namespace Resources.UIElements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The number of registeres medical center.
+        /// </summary>
+        public static string TheNumberOfRegisteresMedicalCenter {
+            get {
+                return ResourceManager.GetString("TheNumberOfRegisteresMedicalCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View hotels.
         /// </summary>
         public static string ViewHotels {
             get {
                 return ResourceManager.GetString("ViewHotels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View medical center.
+        /// </summary>
+        public static string ViewMedicalCenter {
+            get {
+                return ResourceManager.GetString("ViewMedicalCenter", resourceCulture);
             }
         }
     }

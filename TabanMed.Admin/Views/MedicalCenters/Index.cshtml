@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Application.Dtos.MedicalCenters.CityWithMedicalCenterCount>
+
+
+@{
+    ViewData[AppConstants.ViewDataTitlePageName] = @UIElements.MedicalCenterList;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            @foreach(var item in Model)
+            {
+                <div class="col-md-4 col-sm-12">
+                    <div class="card card-hover">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="m-b-0 ">@item.CityName</h4>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">@UIElements.TheNumberOfRegisteresMedicalCenter : @item.MedicalCenterCount</h3>
+                            <a asp-action="Index" asp-route-cityId="@item.CityId"
+                               class="btn btn-rounded btn-outline-info float-right">@UIElements.ViewMedicalCenter</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

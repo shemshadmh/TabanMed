@@ -120,6 +120,9 @@
   <data name="AddNewHotel" xml:space="preserve">
     <value>Add new hotel</value>
   </data>
+  <data name="AddNewMedicalCenter" xml:space="preserve">
+    <value>Add new medical nenter</value>
+  </data>
   <data name="CopyRight" xml:space="preserve">
     <value>Made with ❤ by Taban Team</value>
   </data>
@@ -141,6 +144,12 @@
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="MedicalCenter" xml:space="preserve">
+    <value>MedicalCenter</value>
+  </data>
+  <data name="MedicalCenterList" xml:space="preserve">
+    <value>Medical Center List</value>
+  </data>
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
   </data>
@@ -153,7 +162,13 @@
   <data name="TheNumberOfRegisteredHotels" xml:space="preserve">
     <value>The number of registered hotels</value>
   </data>
+  <data name="TheNumberOfRegisteresMedicalCenter" xml:space="preserve">
+    <value>The number of registeres medical center</value>
+  </data>
   <data name="ViewHotels" xml:space="preserve">
     <value>View hotels</value>
+  </data>
+  <data name="ViewMedicalCenter" xml:space="preserve">
+    <value>View medical center</value>
   </data>
 </root>

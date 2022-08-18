@@ -120,6 +120,9 @@
   <data name="AddNewHotel" xml:space="preserve">
     <value>افزودن هتل جدید</value>
   </data>
+  <data name="AddNewMedicalCenter" xml:space="preserve">
+    <value>افزودن مرکز درمانی جدید</value>
+  </data>
   <data name="CopyRight" xml:space="preserve">
     <value>ساخته شده با ❤ توسط تیم تابان</value>
   </data>
@@ -141,6 +144,12 @@
   <data name="Logout" xml:space="preserve">
     <value>خروج از حساب کاربری</value>
   </data>
+  <data name="MedicalCenter" xml:space="preserve">
+    <value>مراکز درمانی</value>
+  </data>
+  <data name="MedicalCenterList" xml:space="preserve">
+    <value>لیست مراکز درمانی</value>
+  </data>
   <data name="Profile" xml:space="preserve">
     <value>پروفایل</value>
   </data>
@@ -153,7 +162,13 @@
   <data name="TheNumberOfRegisteredHotels" xml:space="preserve">
     <value>تعداد هتل‌های ثبت شده</value>
   </data>
+  <data name="TheNumberOfRegisteresMedicalCenter" xml:space="preserve">
+    <value>تعداد مراکز درمانی ثبت شده</value>
+  </data>
   <data name="ViewHotels" xml:space="preserve">
     <value>مشاهده هتل‌ها</value>
+  </data>
+  <data name="ViewMedicalCenter" xml:space="preserve">
+    <value>مشاهده مراکز درمانی</value>
   </data>
 </root>
