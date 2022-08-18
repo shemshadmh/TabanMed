@@ -79,5 +79,24 @@ namespace TabanMed.Admin.Controllers
             TempDataMessage(res.Message!, res.IsSucceeded);
             return RedirectToAction(nameof(Index), new { cityId = model.CityId });
         }
+
+
+        
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            if (id <= 0)
+                return BadRequest();
+
+            var medicalCenterDto = await _medicalCenterApplication.GetMedicalCenterDetails(id);
+
+            if (medicalCenterDto is null)
+                return NotFound();
+
+            return View(model: medicalCenterDto);
+        }
+
+
+
     }
 }

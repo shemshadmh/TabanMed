@@ -123,6 +123,9 @@
   <data name="AddNewMedicalCenter" xml:space="preserve">
     <value>افزودن مرکز درمانی جدید</value>
   </data>
+  <data name="City" xml:space="preserve">
+    <value>شهر</value>
+  </data>
   <data name="CopyRight" xml:space="preserve">
     <value>ساخته شده با ❤ توسط تیم تابان</value>
   </data>

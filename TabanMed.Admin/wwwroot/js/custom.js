@@ -142,3 +142,7 @@ $(function() {
 
 });
 
+$(document).on("click", ".back-btn", () => {
+    history.back();
+
+})

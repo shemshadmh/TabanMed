@@ -86,15 +86,20 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
             }
         }
 
-
         public async Task<IReadOnlyList<MedicalCenterListItemDto>?> GetMedicalCenter(int cityId)
         {
             try
             {
-                var query = _dbContext.MedicalCenters
-                    .Where(medicalcenter => medicalcenter.CityId == cityId);
-
-                return await _mapper.From(query).AdaptToTypeAsync<List<MedicalCenterListItemDto>>();
+                return await _dbContext.MedicalCenterTranslations.AsNoTracking()
+                    .Where(medicalcenterTranslation => medicalcenterTranslation.LanguageId == _currentServices.LanguageId)
+                    .Select(medicalcenterTranslation => new MedicalCenterListItemDto()
+                    {
+                        Id = medicalcenterTranslation.MedicalCenterId,
+                        Name = medicalcenterTranslation.Name,
+                        
+                        ImageUrl = medicalcenterTranslation.MedicalCenter.ImageUrl
+                    })
+                    .ToListAsync();
             }
             catch (Exception e)
             {
@@ -102,7 +107,6 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
                 return null;
             }
         }
-
 
         public async Task<OperationResult> CreateMedicalCenter(CreateMedicalCenterDto model)
         {
@@ -153,7 +157,46 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
 
         }
 
+        public async Task<MedicalCenterDetailsDto?> GetMedicalCenterDetails(int id)
+        {
 
+            try
+            {
+                var query = await _dbContext.MedicalCenters.AsNoTracking()
+                    .Include(medicalCenter => medicalCenter.MedicalCenterTranslations)
+                    .Include((medicalCenter => medicalCenter.City))
+                    .Where(medicalCenter => medicalCenter.Id == id)
+                    .Select(medicalCenter => new MedicalCenterDetailsDto()
+                    {
+                        Id = medicalCenter.Id,
+                        ImageUrl = medicalCenter.ImageUrl,
+                        PhoneNumber = medicalCenter.PhoneNumber,
+                        AgentPhoneNumber = medicalCenter.AgentPhoneNumber,
+                        MedicalCenterTranslations = medicalCenter.MedicalCenterTranslations!
+                            .Select(medicalCenterTranslation => new MedicalCenterTranslationsDto()
+                            {
+                                AgentName = medicalCenterTranslation.AgentName,
+                                Name = medicalCenterTranslation.Name,
+                                Address = medicalCenterTranslation.Address,
+                                LanguageId = medicalCenterTranslation.LanguageId
+                            })
+                            .ToList()
+                    }).SingleOrDefaultAsync();
+
+                //query!.CityName = _dbContext.MedicalCenters.AsNoTracking()
+                //    .Include(medicalCenter => medicalCenter.City)
+                //    .FirstOrDefault((medicalCenter => medicalCenter.Id == id))!
+                //    .City.CityTranslations!.FirstOrDefault(medicalCenter => medicalCenter.LanguageId == _currentServices.LanguageId)!.Name;
+
+                return query;
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Get medical center Details failed![medicalcenterid={id}]", id.ToString());
+                return null;
+            }
+        }
 
 
     }

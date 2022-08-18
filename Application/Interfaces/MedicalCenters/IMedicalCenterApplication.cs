@@ -10,5 +10,6 @@ namespace Application.Interfaces.MedicalCenters
         Task<CityWithMedicalCenterCount?> GetCityInformation(int cityId);
         Task<IReadOnlyList<MedicalCenterListItemDto>?> GetMedicalCenter(int cityId);
         Task<OperationResult> CreateMedicalCenter(CreateMedicalCenterDto model);
+        Task<MedicalCenterDetailsDto?> GetMedicalCenterDetails(int id);
     }
 }

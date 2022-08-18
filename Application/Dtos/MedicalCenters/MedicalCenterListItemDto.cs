@@ -18,5 +18,6 @@ namespace Application.Dtos.MedicalCenters
         public string PhoneNumber { get; set; } = null!;
         public string? AgentPhoneNumber { get; set; }
         public string ImageUrl { get; set; } = null!;
+
     }
 }

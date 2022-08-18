@@ -49,12 +49,12 @@
     <script src="~/lib/Kedno/Js/kendo.all.min.js" asp-append-version="true"></script>
     <script src="~/lib/Kedno/Js/kendo.aspnetmvc.min.js" asp-append-version="true"></script>
 
-@if(TempData[AppConstants.TempDataMessageTitle] != null)
-    {
+    @if (TempData[AppConstants.TempDataMessageTitle] != null)
+{
 
-        <partial name="_PartialNotificationDivision" model="new NotificationDto(Convert.ToBoolean(TempData[AppConstants.TempDataMessageTitle]!.ToString()!.Split('~')[1].Trim()),
+    <partial name="_PartialNotificationDivision" model="new NotificationDto(Convert.ToBoolean(TempData[AppConstants.TempDataMessageTitle]!.ToString()!.Split('~')[1].Trim()),
         TempData[AppConstants.TempDataMessageTitle]!.ToString()!.Split('~')[0].Trim())" />
-    }
+}
 
 <div id="error-area" class="alert alert-danger">
     <ul id="error_list">
@@ -70,11 +70,10 @@
     columns.Bound(medicalcenter => medicalcenter.Name).Width(340).ClientTemplate(
     @"<div class='co-img'
     style='background-image: url(" + Url.Content("#:data.ImageUrl#") +
-    ");'></div><div class='co-name'><strong>#: Name #</strong></div>");
-    columns.Bound(medicalcenter => medicalcenter.PhoneNumber)
-    .ClientGroupHeaderTemplate("#=value# ستاره").Hidden();
+    ");'></div><div class='co-name'><strong>#: data.Name #</strong></div>");
+
     columns.Command(c => c.Custom("more")
-    .Text(" ").IconClass("mdi mdi-eye font-22").Template($@"<a class='btn btn-success text-white' href='/MedicalCenters/Create/'>{UIElements.AddNewMedicalCenter}</a>")).Width(20);
+    .Text(" ").IconClass("mdi mdi-eye font-22").Template($@"<a class='btn btn-success text-white' href='/MedicalCenters/Create/'>{UIElements.Details}</a>")).Width(20);
     })
     .ToolBar(toolbar =>
     {
@@ -98,10 +97,9 @@
     model.Id(countryItem => countryItem.Id);
     model.Field(countryItem => countryItem.Id).Editable(false);
     })
-    .Read(read => read.Action("GetMedicalCenter", "MedicalCenters",new{cId = ViewData["cId"]}).Type(HttpVerbs.Post))
-    .Group(groups =>
-    groups.Add(transportCo => transportCo.PhoneNumber))
-    )
+    .Read(read =>
+    read.Action("GetMedicalCenter", "MedicalCenters",
+    new{cId = ViewData["cId"]}).Type(HttpVerbs.Post)))
     .Resizable(resize => resize.Columns(true)))
 </div>
 
