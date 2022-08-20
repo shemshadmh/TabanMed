@@ -1,9 +1,11 @@
 ﻿
 using Application;
 using Application.Common;
+using Application.Dtos.Hotels.Hotels;
 using Application.Dtos.MedicalCenters;
 using Application.Interfaces.Application;
 using Application.Interfaces.MedicalCenters;
+using Domain.Entities.Hotels;
 using Domain.Entities.MedicalCenters;
 using Domain.Entities.MedicalCenters.Translation;
 using Mapster;
@@ -17,13 +19,14 @@ using TabanMed.Infrastructure.Services.Hotels;
 
 namespace TabanMed.Infrastructure.Services.MedicalCenters
 {
-    public  class MedicalCenterApplication: IMedicalCenterApplication
+    public class MedicalCenterApplication : IMedicalCenterApplication
     {
         private readonly IApplicationDbContext _dbContext;
         private readonly ILogger<HotelFacilityApplication> _logger;
         private readonly IMapper _mapper;
         private readonly ICurrentServices _currentServices;
         private readonly IFileManagerService _fileManagerService;
+
         public MedicalCenterApplication(IApplicationDbContext dbContext,
             ILogger<HotelFacilityApplication> logger,
             IMapper mapper,
@@ -91,12 +94,13 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
             try
             {
                 return await _dbContext.MedicalCenterTranslations.AsNoTracking()
-                    .Where(medicalcenterTranslation => medicalcenterTranslation.LanguageId == _currentServices.LanguageId)
+                    .Where(medicalcenterTranslation =>
+                        medicalcenterTranslation.LanguageId == _currentServices.LanguageId)
                     .Select(medicalcenterTranslation => new MedicalCenterListItemDto()
                     {
                         Id = medicalcenterTranslation.MedicalCenterId,
                         Name = medicalcenterTranslation.Name,
-                        
+
                         ImageUrl = medicalcenterTranslation.MedicalCenter.ImageUrl
                     })
                     .ToListAsync();
@@ -126,11 +130,11 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
                     return operation.Failed(ErrorMessages.CouldNotSavePic);
 
                 var entity = await _mapper.From(model).AdaptToTypeAsync<MedicalCenter>();
-                entity.ImageUrl = savedPhotoPath;
+                entity.ImageUrl = $"/{savedPhotoPath}";
 
                 entity.MedicalCenterTranslations = new List<MedicalCenterTranslation>()
                 {
-                    new ()
+                    new()
                     {
                         LanguageId = _currentServices.LanguageId,
                         Name = model.Name,
@@ -162,9 +166,8 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
 
             try
             {
-                var query = await _dbContext.MedicalCenters.AsNoTracking()
-                    .Include(medicalCenter => medicalCenter.MedicalCenterTranslations)
-                    .Include((medicalCenter => medicalCenter.City))
+                var medicalCenterDetailsDto = await _dbContext.MedicalCenters.AsNoTracking()
+                    //.Include(medicalCenter => medicalCenter.MedicalCenterTranslations)
                     .Where(medicalCenter => medicalCenter.Id == id)
                     .Select(medicalCenter => new MedicalCenterDetailsDto()
                     {
@@ -172,8 +175,9 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
                         ImageUrl = medicalCenter.ImageUrl,
                         PhoneNumber = medicalCenter.PhoneNumber,
                         AgentPhoneNumber = medicalCenter.AgentPhoneNumber,
-                        MedicalCenterTranslations = medicalCenter.MedicalCenterTranslations!
-                            .Select(medicalCenterTranslation => new MedicalCenterTranslationsDto()
+                        CityId = medicalCenter.CityId,
+                        MedicalCenterForEditDetailsDto = medicalCenter.MedicalCenterTranslations!
+                            .Select(medicalCenterTranslation => new MedicalCenterForEditDetailsDto()
                             {
                                 AgentName = medicalCenterTranslation.AgentName,
                                 Name = medicalCenterTranslation.Name,
@@ -183,21 +187,120 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
                             .ToList()
                     }).SingleOrDefaultAsync();
 
-                //query!.CityName = _dbContext.MedicalCenters.AsNoTracking()
-                //    .Include(medicalCenter => medicalCenter.City)
-                //    .FirstOrDefault((medicalCenter => medicalCenter.Id == id))!
-                //    .City.CityTranslations!.FirstOrDefault(medicalCenter => medicalCenter.LanguageId == _currentServices.LanguageId)!.Name;
+                medicalCenterDetailsDto!.CityName= _dbContext.CityTranslations.AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.CityId == medicalCenterDetailsDto.CityId
+                                              && x.LanguageId== _currentServices.LanguageId)!.Result!.Name;
 
-                return query;
+                return medicalCenterDetailsDto;
 
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Get medical center Details failed![medicalcenterid={id}]", id.ToString());
+                _logger.LogError(e, "Get medical center Details failed![medicalCenterId={id}]", id.ToString());
                 return null;
             }
         }
 
 
+
+        public async Task<MedicalCenterForEditDetailsDto?> GetMedicalCenterForEditAsync(int medicalCenterId, int langId)
+        {
+            try
+            {
+                //TODO check exist or not
+                var medicalCenterDto = await _dbContext.MedicalCenterTranslations.AsNoTracking()
+                    .Where(medicalTranslation => medicalTranslation.MedicalCenterId == medicalCenterId
+                                                 && medicalTranslation.LanguageId == langId)
+                    .Select(medicalTranslation => new MedicalCenterForEditDetailsDto()
+                    {
+                        MedicalCenterId = medicalCenterId,
+                        LanguageName = langId.GetLanguageName(),
+                        LanguageId = langId,
+                        Name = medicalTranslation.Name,
+                        Address = medicalTranslation.Address,
+                        AgentName = medicalTranslation.AgentName
+                    })
+                    .SingleOrDefaultAsync();
+                if (medicalCenterDto is null)
+                    return new MedicalCenterForEditDetailsDto()
+                    {
+                        MedicalCenterId = medicalCenterId,
+                        LanguageName = langId.GetLanguageName(),
+                        LanguageId = langId,
+                        Name = string.Empty,
+                        Address = string.Empty,
+                        AgentName = string.Empty
+                    };
+
+                return medicalCenterDto;
+
+
+
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Get medical center Details failed![medicalcenterid={id}]",
+                    medicalCenterId.ToString());
+                return null;
+            }
+        }
+
+
+        public async Task<OperationResult> EditMedicalCenterAsync(MedicalCenterForEditDetailsDto medicalCenterDto)
+        {
+            var operation = new OperationResult();
+            try
+            {
+                var medicalCenter = await _dbContext.MedicalCenters.AsNoTracking()
+                    .FirstOrDefaultAsync(medicalCenter =>
+                        medicalCenter.Id == medicalCenterDto.MedicalCenterId);
+
+                // check for exist
+                if (medicalCenter is null)
+                    return operation.Failed(ErrorMessages.ItemNotFound);
+
+                var medicalCenterTranslation = await _dbContext.MedicalCenterTranslations.AsNoTracking()
+                    .FirstOrDefaultAsync(medicalCenterTranslation =>
+                        medicalCenterTranslation.LanguageId ==
+                        medicalCenterDto.LanguageId 
+                        && medicalCenterTranslation.MedicalCenterId== medicalCenterDto.MedicalCenterId);
+                //if medicalCenterTranslation null ==> create it
+                if (medicalCenterTranslation is null)
+                {
+                    var newMedicalCenterTranslation = new MedicalCenterTranslation
+                    {
+                        LanguageId = medicalCenterDto.LanguageId,
+                        Name = medicalCenterDto.Name,
+                        AgentName = medicalCenterDto.AgentName,
+                        Address = medicalCenterDto.Address,
+                        MedicalCenterId = medicalCenterDto.MedicalCenterId
+                    };
+
+                    await _dbContext.MedicalCenterTranslations.AddAsync(newMedicalCenterTranslation);
+                    await _dbContext.SaveChangesAsync();
+                }
+                else
+                {
+                    medicalCenterTranslation.Name = medicalCenterDto.Name;
+                    medicalCenterTranslation.AgentName = medicalCenterDto.AgentName;
+                    medicalCenterTranslation.Address = medicalCenterDto.Address;
+
+                    _dbContext.MedicalCenterTranslations.Update(medicalCenterTranslation);
+                    await _dbContext.SaveChangesAsync();
+                }
+
+                return operation.Succeeded(InformationMessages.SuccessfullyUpdated);
+            }
+            catch
+            {
+                return operation.Failed(ErrorMessages.ErrorOccurred);
+            }
+
+
+
+        }
     }
 }
+
+

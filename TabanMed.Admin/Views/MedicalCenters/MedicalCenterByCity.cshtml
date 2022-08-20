@@ -72,12 +72,16 @@
     style='background-image: url(" + Url.Content("#:data.ImageUrl#") +
     ");'></div><div class='co-name'><strong>#: data.Name #</strong></div>");
 
-    columns.Command(c => c.Custom("more")
-    .Text(" ").IconClass("mdi mdi-eye font-22").Template($@"<a class='btn btn-success text-white' href='/MedicalCenters/Create/'>{UIElements.Details}</a>")).Width(20);
+    columns.Bound(medicalCenter => medicalCenter.Id)
+    .ClientTemplate($"<a class='btn btn-success text-white' href='{Url.Action("Details")}/#:Id#'>{UIElements.Details}</a>")
+        .ClientHeaderTemplate(" ")
+        .Filterable(false)
+        .Sortable(false)
+        .Width(20);
     })
     .ToolBar(toolbar =>
     {
-    toolbar.ClientTemplate($"<a class='btn btn-success text-white' href='/MedicalCenters/Create/{ViewData["cId"]}'>{UIElements.AddNewMedicalCenter}</a>");
+    toolbar.ClientTemplate($"<a class='btn btn-success text-white' href='{Url.Action("Create")}/{ViewData["cId"]}'>{UIElements.AddNewMedicalCenter}</a>");
     })
     .Selectable(select =>
     select.Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))

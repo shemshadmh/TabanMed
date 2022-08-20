@@ -143,6 +143,7 @@ $(function() {
 });
 
 $(document).on("click", ".back-btn", () => {
+    debugger;
     history.back();
 
 })

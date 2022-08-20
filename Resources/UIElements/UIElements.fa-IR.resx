@@ -123,11 +123,17 @@
   <data name="AddNewMedicalCenter" xml:space="preserve">
     <value>افزودن مرکز درمانی جدید</value>
   </data>
+  <data name="Arabic" xml:space="preserve">
+    <value>عربی</value>
+  </data>
   <data name="City" xml:space="preserve">
     <value>شهر</value>
   </data>
   <data name="CopyRight" xml:space="preserve">
     <value>ساخته شده با ❤ توسط تیم تابان</value>
+  </data>
+  <data name="Dari" xml:space="preserve">
+    <value>دری</value>
   </data>
   <data name="Dashboard" xml:space="preserve">
     <value>داشبورد</value>
@@ -137,6 +143,15 @@
   </data>
   <data name="Details" xml:space="preserve">
     <value>جزئیات</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>انگلیسی</value>
+  </data>
+  <data name="Farsi" xml:space="preserve">
+    <value>فارسی</value>
   </data>
   <data name="HotelFacilities" xml:space="preserve">
     <value>امکانات هتل</value>

@@ -12,8 +12,9 @@ namespace Application.Dtos.MedicalCenters
         public string ImageUrl { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
         public string? AgentPhoneNumber { get; set; }
+        public int CityId { get; set; }
         public string CityName { get; set; } = null!;
-        public ICollection<MedicalCenterTranslationsDto> MedicalCenterTranslations { get; set; }
+        public ICollection<MedicalCenterForEditDetailsDto>? MedicalCenterForEditDetailsDto { get; set; }
 
 
     }

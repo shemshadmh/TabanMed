@@ -79,6 +79,15 @@ namespace Resources.UIElements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Arabic.
+        /// </summary>
+        public static string Arabic {
+            get {
+                return ResourceManager.GetString("Arabic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.
         /// </summary>
         public static string City {
@@ -93,6 +102,15 @@ namespace Resources.UIElements {
         public static string CopyRight {
             get {
                 return ResourceManager.GetString("CopyRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dari.
+        /// </summary>
+        public static string Dari {
+            get {
+                return ResourceManager.GetString("Dari", resourceCulture);
             }
         }
         
@@ -120,6 +138,33 @@ namespace Resources.UIElements {
         public static string Details {
             get {
                 return ResourceManager.GetString("Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string English {
+            get {
+                return ResourceManager.GetString("English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Farsi.
+        /// </summary>
+        public static string Farsi {
+            get {
+                return ResourceManager.GetString("Farsi", resourceCulture);
             }
         }
         

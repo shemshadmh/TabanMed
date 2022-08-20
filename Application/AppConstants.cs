@@ -1,4 +1,6 @@
 ﻿
+using Resources.UIElements;
+
 namespace Application
 {
     public static class AppConstants
@@ -68,6 +70,18 @@ namespace Application
             return string.IsNullOrWhiteSpace(str)
                 ? throw new ArgumentNullException($"{paramName} can not be null or empty!")
                 : str;
+        }
+
+        public static string GetLanguageName(this int languageId)
+        {
+            return languageId switch
+            {
+                FaLanguageLcid => UIElements.Farsi,
+                EnLanguageLcid => UIElements.English,
+                ArLanguageLcid => UIElements.Arabic,
+                AfLanguageLcid => UIElements.Dari,
+                _ => String.Empty
+            };
         }
 
         #endregion

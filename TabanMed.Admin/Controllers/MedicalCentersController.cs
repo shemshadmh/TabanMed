@@ -19,7 +19,6 @@ namespace TabanMed.Admin.Controllers
             _medicalCenterApplication = medicalCenterApplication;
         }
 
-
         [Display(Name = "لیست مراکز درمانی"), HttpGet]
         public async Task<IActionResult> Index(int? cityId)
         {
@@ -38,16 +37,12 @@ namespace TabanMed.Admin.Controllers
 
         }
 
-
-
-
         [HttpPost]
         public async Task<IActionResult> GetMedicalCenter([DataSourceRequest] DataSourceRequest request, int cId = 1) // 1 => tehran
         {
             var data = await _medicalCenterApplication.GetMedicalCenter(cId);
             return Json(await data.ToDataSourceResultAsync(request));
         }
-
 
         [HttpGet]
         public IActionResult Create(int id)
@@ -79,8 +74,6 @@ namespace TabanMed.Admin.Controllers
             TempDataMessage(res.Message!, res.IsSucceeded);
             return RedirectToAction(nameof(Index), new { cityId = model.CityId });
         }
-
-
         
         [HttpGet]
         public async Task<IActionResult> Details(int id)
@@ -96,7 +89,36 @@ namespace TabanMed.Admin.Controllers
             return View(model: medicalCenterDto);
         }
 
+        
+        [HttpGet]
+        public async Task<IActionResult> Edit(int medicalCenterId,int langId)
+        {
+            var medicalCenter = await _medicalCenterApplication.GetMedicalCenterForEditAsync(medicalCenterId, langId);
 
+            if (medicalCenter is null)
+                return NotFound();
+
+            return View(model: medicalCenter);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(MedicalCenterForEditDetailsDto medicalCenterDto)
+        {
+            if (!ModelState.IsValid)
+                return View(medicalCenterDto);
+
+            var result = await _medicalCenterApplication.EditMedicalCenterAsync(medicalCenterDto);
+
+            if (!result.IsSucceeded)
+            {
+                ModelState.AddModelError(String.Empty, result.Message!);
+                return View(medicalCenterDto);
+            }
+
+            TempDataMessage(result.Message!, result.IsSucceeded);
+            return RedirectToAction(nameof(Details), new { id = medicalCenterDto.MedicalCenterId });
+
+        }
 
     }
 }

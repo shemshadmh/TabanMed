@@ -11,5 +11,9 @@ namespace Application.Interfaces.MedicalCenters
         Task<IReadOnlyList<MedicalCenterListItemDto>?> GetMedicalCenter(int cityId);
         Task<OperationResult> CreateMedicalCenter(CreateMedicalCenterDto model);
         Task<MedicalCenterDetailsDto?> GetMedicalCenterDetails(int id);
+        Task<MedicalCenterForEditDetailsDto?> GetMedicalCenterForEditAsync(int medicalCenterId, int langId);
+        Task<OperationResult> EditMedicalCenterAsync(MedicalCenterForEditDetailsDto medicalCenterDto);
+
+
     }
 }

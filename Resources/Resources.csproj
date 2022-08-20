@@ -39,6 +39,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>InformationMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="UIElements\UIElements.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="UIElements\UIElements.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UIElements.Designer.cs</LastGenOutput>
