@@ -1,6 +1,7 @@
 ﻿@model MedicalCenterDetailsDto
 @using Application.Dtos.Application
 @using Application.Dtos.MedicalCenters
+@using Application.Extensions
 @using Resources.DataDictionary
 @{
     ViewData[AppConstants.ViewDataTitlePageName] = UIElements.Details;
@@ -8,38 +9,34 @@
     ViewData[AppConstants.ViewDataControllerRoute] = "MedicalCenters";
 }
 
-
-
-
 @if(TempData[AppConstants.TempDataMessageTitle] != null)
 {
 
     <partial name="_PartialNotificationDivision" model="new NotificationDto(Convert.ToBoolean(TempData[AppConstants.TempDataMessageTitle]!.ToString()!.Split('~')[1].Trim()),
     TempData[AppConstants.TempDataMessageTitle]!.ToString()!.Split('~')[0].Trim())" />
-    }
+}
+
 <div class="row">
     <!-- Column -->
-    <div class="col-lg-4 col-xlg-3 col-md-5">
+    <div class="col-lg-4 col-md-5">
         <div class="card">
             <div class="card-body">
-                <center class="m-t-30">
-                    <img src="@Model.ImageUrl" class="img-thumbnail w-100">
-                    <br/>
-                    <strong>@DataDictionary.Phone</strong>:
-                    <label class="card-title m-t-10">@Model.PhoneNumber</label>
-                    <br/>
-                    <strong>@DataDictionary.AgentPhoneNumber</strong>:
-                    <label class="card-title m-t-10">@Model.AgentPhoneNumber</label>
-                    <br />
-                    <strong>@UIElements.City</strong>:
-                    <label class="card-title m-t-10">@Model.CityName</label>
-                </center>
-                
+                <img src="@Model.ImageUrl" class="img-thumbnail w-100 mb-4">
+                <br />
+                <strong>@UIElements.City</strong>:
+                <label class="card-title m-t-10">@Model.CityName</label>
+                <br />
+                <strong>@UIElements.MedicalCenterPhone</strong>:
+                <label class="card-title m-t-10">@Model.PhoneNumber</label>
+                <br />
+                <strong>@UIElements.MedicalCenterAgentPhoneNumber</strong>:
+                <label class="card-title m-t-10">@Model.AgentPhoneNumber.NotingRegisteredIfNull()</label>
             </div>
             <div>
                 <div class="card-footer">
                     <div class="text-left">
-                        <a  href="javascript:void(0)" class="back-btn btn btn-primary">بازگشت</a>
+                        <a asp-controller="MedicalCenters" asp-action="EditBasics" asp-route-Id="@Model.Id" class="btn btn-warning">@UIElements.Edit</a>
+                        <a asp-controller="MedicalCenters" asp-action="Index" asp-route-cityId="@Model.CityId" class="btn btn-primary">@UIElements.Back</a>
                     </div>
                 </div>
             </div>
@@ -47,113 +44,139 @@
     </div>
     <!-- Column -->
     <!-- Column -->
-    <div class="col-lg-8 col-xlg-9 col-md-7">
-        <div class="card">
+    <div class="col-lg-8 col-md-7">
+        <div class="card mb-0">
             <div class="card-body">
                 <!-- Tabs -->
-            <ul class="nav nav-pills custom-pills" id="pills-tab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active show" id="pills-timeline-tab" data-toggle="pill" href="#Fa" role="tab" aria-controls="pills-timeline" aria-selected="true">@UIElements.Farsi</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#En" role="tab" aria-controls="pills-setting" aria-selected="false">@UIElements.English</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#Ar" role="tab" aria-controls="pills-setting" aria-selected="false">@UIElements.Arabic</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#Af" role="tab" aria-controls="pills-setting" aria-selected="false">@UIElements.Dari</a>
-                </li>
-            </ul>
-            <!-- Tabs -->
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade active show" id="Fa" aria-labelledby="pills-timeline-tab">
-                    <div class="card-body">
-                        <div class="col-md-3 col-xs-6 b-r">
-                            <strong>@DataDictionary.Name</strong>
-                            <br>
-                            <p class="text-muted">@Model.MedicalCenterForEditDetailsDto.FirstOrDefault((medicalCenter=>medicalCenter.LanguageId==AppConstants.FaLanguageLcid))?.Name</p>
-                        </div>
-                        <div class="col-md-3 col-xs-6 b-r">
-                            <strong>@DataDictionary.Address</strong>
-                            <br>
-                            <p class="text-muted">@Model.MedicalCenterForEditDetailsDto.FirstOrDefault((medicalCenter=>medicalCenter.LanguageId==AppConstants.FaLanguageLcid))?.Address</p>
-                        </div>
-                        <div class="col-md-3 col-xs-6 b-r">
-                            <strong>@DataDictionary.AgentName</strong>
-                            <br>
-                            <p class="text-muted">@Model.MedicalCenterForEditDetailsDto.FirstOrDefault((medicalCenter=>medicalCenter.LanguageId==AppConstants.FaLanguageLcid))?.AgentName</p>
-                        </div>
-                    </div>
-                    <a class="btn btn-warning" asp-action="Edit" asp-route-medicalCenterId="@Model.Id" asp-route-langId="@AppConstants.FaLanguageLcid" >ویرایش</a>
-                </div>
-                
-                <div class="tab-pane fade" id="En" aria-labelledby="pills-timeline-tab">
-                    <div class="card-body">
-                        <div class="col-md-3 col-xs-6 b-r">
-                            <strong>@DataDictionary.Name</strong>
-                            <br>
-                            <p class="text-muted">@Model.MedicalCenterForEditDetailsDto.FirstOrDefault((medicalCenter => medicalCenter.LanguageId == AppConstants.EnLanguageLcid))?.Name</p>
-                        </div>
-                        <div class="col-md-3 col-xs-6 b-r">
-                            <strong>@DataDictionary.Address</strong>
-                            <br>
-                            <p class="text-muted">@Model.MedicalCenterForEditDetailsDto.FirstOrDefault((medicalCenter => medicalCenter.LanguageId == AppConstants.EnLanguageLcid))?.Address</p>
-                        </div>
-                        <div class="col-md-3 col-xs-6 b-r">
-                            <strong>@DataDictionary.AgentName</strong>
-                            <br>
-                            <p class="text-muted">@Model.MedicalCenterForEditDetailsDto.FirstOrDefault((medicalCenter=>medicalCenter.LanguageId==AppConstants.EnLanguageLcid))?.AgentName</p>
-                        </div>
-                    </div>
-                    <a class="btn btn-warning" asp-action="Edit" asp-route-medicalCenterId="@Model.Id" asp-route-langId="@AppConstants.EnLanguageLcid">ویرایش</a>
-                </div>
-                
-                <div class="tab-pane fade" id="Ar" aria-labelledby="pills-timeline-tab">
-                    <div class="card-body">
-                        <div class="col-md-3 col-xs-6 b-r">
-                            <strong>@DataDictionary.Name</strong>
-                            <br>
-                            <p class="text-muted">@Model.MedicalCenterForEditDetailsDto.FirstOrDefault((medicalCenter => medicalCenter.LanguageId == AppConstants.ArLanguageLcid))?.Name</p>
-                        </div>
-                        <div class="col-md-3 col-xs-6 b-r">
-                            <strong>@DataDictionary.Address</strong>
-                            <br>
-                            <p class="text-muted">@Model.MedicalCenterForEditDetailsDto.FirstOrDefault((medicalCenter => medicalCenter.LanguageId == AppConstants.ArLanguageLcid))?.Address</p>
-                        </div>
-                        <div class="col-md-3 col-xs-6 b-r">
-                            <strong>@DataDictionary.AgentName</strong>
-                            <br>
-                            <p class="text-muted">@Model.MedicalCenterForEditDetailsDto.FirstOrDefault((medicalCenter=>medicalCenter.LanguageId==AppConstants.ArLanguageLcid))?.AgentName</p>
-                        </div>
-                    </div>
-                    <a class="btn btn-warning" asp-action="Edit" asp-route-medicalCenterId="@Model.Id" asp-route-langId="@AppConstants.ArLanguageLcid">ویرایش</a>
-                </div>
-
-                <div class="tab-pane fade" id="Af" aria-labelledby="pills-timeline-tab">
-                    <div class="card-body">
-                        <div class="col-md-3 col-xs-6 b-r">
-                            <strong>@DataDictionary.Name</strong>
-                            <br>
-                            <p class="text-muted">@Model.MedicalCenterForEditDetailsDto.FirstOrDefault((medicalCenter => medicalCenter.LanguageId == AppConstants.AfLanguageLcid))?.Name</p>
-                        </div>
-                        <div class="col-md-3 col-xs-6 b-r">
-                            <strong>@DataDictionary.Address</strong>
-                            <br>
-                            <p class="text-muted">@Model.MedicalCenterForEditDetailsDto.FirstOrDefault((medicalCenter => medicalCenter.LanguageId == AppConstants.AfLanguageLcid))?.Address</p>
-                        </div>
-                        <div class="col-md-3 col-xs-6 b-r">
-                            <strong>@DataDictionary.AgentName</strong>
-                            <br>
-                            <p class="text-muted">@Model.MedicalCenterForEditDetailsDto.FirstOrDefault((medicalCenter=>medicalCenter.LanguageId==AppConstants.AfLanguageLcid))?.AgentName</p>
-                        </div>
-                    </div>
-                    <a class="btn btn-warning" asp-action="Edit" asp-route-medicalCenterId="@Model.Id" asp-route-langId="@AppConstants.AfLanguageLcid">ویرایش</a>
-                </div>
-            
-            </div>
+                <ul class="nav nav-pills custom-pills" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active show" id="pills-timeline-tab" data-toggle="pill" href="#Fa" role="tab" aria-controls="pills-timeline" aria-selected="true">@UIElements.Farsi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#En" role="tab" aria-controls="pills-setting" aria-selected="false">@UIElements.English</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#Ar" role="tab" aria-controls="pills-setting" aria-selected="false">@UIElements.Arabic</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#Af" role="tab" aria-controls="pills-setting" aria-selected="false">@UIElements.Dari</a>
+                    </li>
+                </ul>
             </div>
         </div>
+        <!-- Tabs -->
+        <div class="tab-content" id="pills-tabContent">
+
+            <div class="tab-pane fade active show" id="Fa" aria-labelledby="pills-timeline-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <strong>@UIElements.MedicalCenterName</strong>
+                                <br>
+                                <p class="text-muted">@(Model.MedicalCenterForEditDetailsDto!.FirstOrDefault(medicalCenter => medicalCenter.LanguageId == AppConstants.FaLanguageLcid)?.Name ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                            <div class="col-md-3">
+                                <strong>@UIElements.MedicalCenterAgentName</strong>
+                                <br>
+                                <p class="text-muted">@(Model.MedicalCenterForEditDetailsDto!.FirstOrDefault(medicalCenter => medicalCenter.LanguageId == AppConstants.FaLanguageLcid)?.AgentName.NotingRegisteredIfNull() ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>@UIElements.MedicalCenterAddress</strong>
+                                <br>
+                                <p class="text-muted">@(Model.MedicalCenterForEditDetailsDto!.FirstOrDefault(medicalCenter => medicalCenter.LanguageId == AppConstants.FaLanguageLcid)?.Address ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-medicalCenterId="@Model.Id" asp-route-langId="@AppConstants.FaLanguageLcid">@UIElements.Edit</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="En" aria-labelledby="pills-timeline-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <strong>@UIElements.MedicalCenterName</strong>
+                                <br>
+                                <p class="text-muted">@(Model.MedicalCenterForEditDetailsDto!.FirstOrDefault(medicalCenter => medicalCenter.LanguageId == AppConstants.EnLanguageLcid)?.Name ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                            <div class="col-md-3">
+                                <strong>@UIElements.MedicalCenterAgentName</strong>
+                                <br>
+                                <p class="text-muted">@(Model.MedicalCenterForEditDetailsDto!.FirstOrDefault(medicalCenter => medicalCenter.LanguageId == AppConstants.EnLanguageLcid)?.AgentName.NotingRegisteredIfNull() ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>@UIElements.MedicalCenterAddress</strong>
+                                <br>
+                                <p class="text-muted">@(Model.MedicalCenterForEditDetailsDto!.FirstOrDefault(medicalCenter => medicalCenter.LanguageId == AppConstants.EnLanguageLcid)?.Address ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-medicalCenterId="@Model.Id" asp-route-langId="@AppConstants.EnLanguageLcid">@UIElements.Edit</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="Ar" aria-labelledby="pills-timeline-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <strong>@UIElements.MedicalCenterName</strong>
+                                <br>
+                                <p class="text-muted">@(Model.MedicalCenterForEditDetailsDto!.FirstOrDefault(medicalCenter => medicalCenter.LanguageId == AppConstants.ArLanguageLcid)?.Name ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                            <div class="col-md-3">
+                                <strong>@UIElements.MedicalCenterAgentName</strong>
+                                <br>
+                                <p class="text-muted">@(Model.MedicalCenterForEditDetailsDto!.FirstOrDefault(medicalCenter => medicalCenter.LanguageId == AppConstants.ArLanguageLcid)?.AgentName.NotingRegisteredIfNull() ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>@UIElements.MedicalCenterAddress</strong>
+                                <br>
+                                <p class="text-muted">@(Model.MedicalCenterForEditDetailsDto!.FirstOrDefault(medicalCenter => medicalCenter.LanguageId == AppConstants.ArLanguageLcid)?.Address ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-medicalCenterId="@Model.Id" asp-route-langId="@AppConstants.ArLanguageLcid">@UIElements.Edit</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="Af" aria-labelledby="pills-timeline-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <strong>@UIElements.MedicalCenterName</strong>
+                                <br>
+                                <p class="text-muted">@(Model.MedicalCenterForEditDetailsDto!.FirstOrDefault(medicalCenter => medicalCenter.LanguageId == AppConstants.AfLanguageLcid)?.Name ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                            <div class="col-md-3">
+                                <strong>@UIElements.MedicalCenterAgentName</strong>
+                                <br>
+                                <p class="text-muted">@(Model.MedicalCenterForEditDetailsDto!.FirstOrDefault(medicalCenter => medicalCenter.LanguageId == AppConstants.AfLanguageLcid)?.AgentName.NotingRegisteredIfNull() ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>@UIElements.MedicalCenterAddress</strong>
+                                <br>
+                                <p class="text-muted">@(Model.MedicalCenterForEditDetailsDto!.FirstOrDefault(medicalCenter => medicalCenter.LanguageId == AppConstants.AfLanguageLcid)?.Address ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-medicalCenterId="@Model.Id" asp-route-langId="@AppConstants.AfLanguageLcid">@UIElements.Edit</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
     <!-- Column -->
 

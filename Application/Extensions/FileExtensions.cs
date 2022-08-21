@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Net.Mime;
 using Microsoft.AspNetCore.Http;
 
 namespace Application.Extensions

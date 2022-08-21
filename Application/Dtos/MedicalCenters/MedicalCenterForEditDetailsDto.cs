@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using Common;
 using Resources.DataDictionary;
 using Resources.ErrorMessages;
@@ -12,6 +7,8 @@ namespace Application.Dtos.MedicalCenters
 {
     public  class MedicalCenterForEditDetailsDto
     {
+        [Required(ErrorMessageResourceType = typeof(ErrorMessages),
+            ErrorMessageResourceName = nameof(ErrorMessages.Required))]
         public int MedicalCenterId { get; set; }
 
         public string? LanguageName { get; set; }
@@ -38,9 +35,6 @@ namespace Application.Dtos.MedicalCenters
 
         [Display(ResourceType = typeof(DataDictionary),
             Name = nameof(DataDictionary.AgentName))]
-        [Required(AllowEmptyStrings = false,
-            ErrorMessageResourceType = typeof(ErrorMessages),
-            ErrorMessageResourceName = nameof(ErrorMessages.Required))]
         [MaxLength(length: ModelConstants.MedicalCenter.AgentNameMaxLength,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]

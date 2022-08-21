@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using Application.Attributes;
 using Common;
 using Microsoft.AspNetCore.Http;
@@ -34,8 +29,6 @@ namespace Application.Dtos.MedicalCenters
             ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
         public string PhoneNumber { get; set; } = null!;
 
-
-
         [Display(ResourceType = typeof(DataDictionary),
             Name = nameof(DataDictionary.AgentName))]
         [MaxLength(length: ModelConstants.MedicalCenter.AgentNameMaxLength,
@@ -43,17 +36,12 @@ namespace Application.Dtos.MedicalCenters
             ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
         public string? AgentName { get; set; }
 
-
-
-
         [Display(ResourceType = typeof(DataDictionary),
             Name = nameof(DataDictionary.AgentPhoneNumber))]
         [MaxLength(length: ModelConstants.MedicalCenter.AgentPhoneNumberMaxLength,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
         public string? AgentPhoneNumber { get; set; }
-
-
 
         [Display(ResourceType = typeof(DataDictionary),
             Name = nameof(DataDictionary.Address))]
@@ -63,8 +51,6 @@ namespace Application.Dtos.MedicalCenters
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
         public string Address { get; set; } = null!;
-
-
 
         [Display(ResourceType = typeof(DataDictionary),
             Name = nameof(DataDictionary.MainImage))]
@@ -76,7 +62,6 @@ namespace Application.Dtos.MedicalCenters
             ErrorMessageResourceName = nameof(ErrorMessages.FileExtension))]
         [DataType(DataType.Upload)]
         public IFormFile MedicalCenterPic { get; set; } = null!;
-
 
         [Required(ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.Required))]

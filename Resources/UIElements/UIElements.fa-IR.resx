@@ -126,6 +126,9 @@
   <data name="Arabic" xml:space="preserve">
     <value>عربی</value>
   </data>
+  <data name="Back" xml:space="preserve">
+    <value>بازگشت</value>
+  </data>
   <data name="City" xml:space="preserve">
     <value>شهر</value>
   </data>
@@ -168,8 +171,26 @@
   <data name="MedicalCenter" xml:space="preserve">
     <value>مراکز درمانی</value>
   </data>
+  <data name="MedicalCenterAddress" xml:space="preserve">
+    <value>آدرس مرکز درمانی</value>
+  </data>
+  <data name="MedicalCenterAgentName" xml:space="preserve">
+    <value>نام نماینده مرکز درمانی</value>
+  </data>
+  <data name="MedicalCenterAgentPhoneNumber" xml:space="preserve">
+    <value>شماره تماس نماینده مرکز درمانی</value>
+  </data>
   <data name="MedicalCenterList" xml:space="preserve">
     <value>لیست مراکز درمانی</value>
+  </data>
+  <data name="MedicalCenterName" xml:space="preserve">
+    <value>نام مرکز درمانی</value>
+  </data>
+  <data name="MedicalCenterPhone" xml:space="preserve">
+    <value>تلفن مرکز درمانی</value>
+  </data>
+  <data name="NotingRegistered" xml:space="preserve">
+    <value>موردی ثبت نشده!</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>پروفایل</value>

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common;
-using Domain.Entities.Hotels;
+﻿using Common;
 using Domain.Entities.MedicalCenters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -15,28 +9,28 @@ namespace Persistence.Configurations.MedicalCenterEntities
     {
         public void Configure(EntityTypeBuilder<MedicalCenter> builder)
         {
-            builder.HasKey(medicalcenter => medicalcenter.Id);
+            builder.HasKey(medicalCenter => medicalCenter.Id);
 
-            builder.Property(medicalcenter => medicalcenter.ImageUrl)
+            builder.Property(medicalCenter => medicalCenter.ImageUrl)
                 .HasColumnType(ModelConstants.Shared.VarCharColumnType)
                 .HasMaxLength(ModelConstants.MedicalCenter.ImageUrlMaxLength)
                 .IsRequired();
 
-            builder.Property(medicalcenter => medicalcenter.PhoneNumber)
+            builder.Property(medicalCenter => medicalCenter.PhoneNumber)
                 .HasColumnType(ModelConstants.Shared.VarCharColumnType)
                 .HasMaxLength(ModelConstants.MedicalCenter.PhoneNumberMaxLength)
                 .IsRequired();
 
-            builder.Property(medicalcenter => medicalcenter.AgentPhoneNumber)
+            builder.Property(medicalCenter => medicalCenter.AgentPhoneNumber)
                 .HasColumnType(ModelConstants.Shared.VarCharColumnType)
                 .HasMaxLength(ModelConstants.MedicalCenter.AgentPhoneNumberMaxLength)
                 .IsRequired(false);
 
 
             // Relations
-            builder.HasOne(medicalcenter => medicalcenter.City)
+            builder.HasOne(medicalCenter => medicalCenter.City)
                 .WithMany(city => city.MedicalCenters)
-                .HasForeignKey(Medicalcenter => Medicalcenter.CityId)
+                .HasForeignKey(medicalCenter => medicalCenter.CityId)
                 .OnDelete(DeleteBehavior.NoAction);
 
 

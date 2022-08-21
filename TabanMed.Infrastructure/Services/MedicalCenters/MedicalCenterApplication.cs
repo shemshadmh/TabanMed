@@ -94,14 +94,14 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
             try
             {
                 return await _dbContext.MedicalCenterTranslations.AsNoTracking()
-                    .Where(medicalcenterTranslation =>
-                        medicalcenterTranslation.LanguageId == _currentServices.LanguageId)
-                    .Select(medicalcenterTranslation => new MedicalCenterListItemDto()
+                    .Where(medicalCenterTranslation =>
+                        medicalCenterTranslation.LanguageId == _currentServices.LanguageId)
+                    .Select(medicalCenterTranslation => new MedicalCenterListItemDto()
                     {
-                        Id = medicalcenterTranslation.MedicalCenterId,
-                        Name = medicalcenterTranslation.Name,
+                        Id = medicalCenterTranslation.MedicalCenterId,
+                        Name = medicalCenterTranslation.Name,
 
-                        ImageUrl = medicalcenterTranslation.MedicalCenter.ImageUrl
+                        ImageUrl = medicalCenterTranslation.MedicalCenter.ImageUrl
                     })
                     .ToListAsync();
             }
@@ -130,7 +130,7 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
                     return operation.Failed(ErrorMessages.CouldNotSavePic);
 
                 var entity = await _mapper.From(model).AdaptToTypeAsync<MedicalCenter>();
-                entity.ImageUrl = $"/{savedPhotoPath}";
+                entity.ImageUrl = savedPhotoPath;
 
                 entity.MedicalCenterTranslations = new List<MedicalCenterTranslation>()
                 {
@@ -172,7 +172,7 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
                     .Select(medicalCenter => new MedicalCenterDetailsDto()
                     {
                         Id = medicalCenter.Id,
-                        ImageUrl = medicalCenter.ImageUrl,
+                        ImageUrl = Path.Combine(Path.AltDirectorySeparatorChar.ToString(), medicalCenter.ImageUrl),
                         PhoneNumber = medicalCenter.PhoneNumber,
                         AgentPhoneNumber = medicalCenter.AgentPhoneNumber,
                         CityId = medicalCenter.CityId,

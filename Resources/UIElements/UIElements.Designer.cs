@@ -88,6 +88,15 @@ namespace Resources.UIElements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        public static string Back {
+            get {
+                return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.
         /// </summary>
         public static string City {
@@ -214,11 +223,65 @@ namespace Resources.UIElements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Medical center address.
+        /// </summary>
+        public static string MedicalCenterAddress {
+            get {
+                return ResourceManager.GetString("MedicalCenterAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medical center agent name.
+        /// </summary>
+        public static string MedicalCenterAgentName {
+            get {
+                return ResourceManager.GetString("MedicalCenterAgentName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medical center agent phone number.
+        /// </summary>
+        public static string MedicalCenterAgentPhoneNumber {
+            get {
+                return ResourceManager.GetString("MedicalCenterAgentPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Medical Center List.
         /// </summary>
         public static string MedicalCenterList {
             get {
                 return ResourceManager.GetString("MedicalCenterList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medical center name.
+        /// </summary>
+        public static string MedicalCenterName {
+            get {
+                return ResourceManager.GetString("MedicalCenterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medical center phone.
+        /// </summary>
+        public static string MedicalCenterPhone {
+            get {
+                return ResourceManager.GetString("MedicalCenterPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Noting Registered.
+        /// </summary>
+        public static string NotingRegistered {
+            get {
+                return ResourceManager.GetString("NotingRegistered", resourceCulture);
             }
         }
         

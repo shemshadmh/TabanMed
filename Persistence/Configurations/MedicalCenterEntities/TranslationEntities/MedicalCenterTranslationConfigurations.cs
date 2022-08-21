@@ -25,8 +25,8 @@ namespace Persistence.Configurations.MedicalCenterEntities.TranslationEntities
 
             builder.Property(translation => translation.AgentName)
                 .HasColumnType(ModelConstants.Shared.NVarCharColumnType)
-                .HasMaxLength(ModelConstants.MedicalCenter.AgentPhoneNumberMaxLength)
-                .IsRequired();
+                .HasMaxLength(ModelConstants.MedicalCenter.AgentNameMaxLength)
+                .IsRequired(false);
 
             //Relation
 
