@@ -88,6 +88,15 @@ namespace Resources.ErrorMessages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not remove pic.
+        /// </summary>
+        public static string CouldNotRemovePic {
+            get {
+                return ResourceManager.GetString("CouldNotRemovePic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Couldnt Save Photo .
         /// </summary>
         public static string CouldNotSavePic {
@@ -102,6 +111,15 @@ namespace Resources.ErrorMessages {
         public static string DuplicatedRecord {
             get {
                 return ResourceManager.GetString("DuplicatedRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter {0}  just in english characters.
+        /// </summary>
+        public static string EnterJustEnglishCharacters {
+            get {
+                return ResourceManager.GetString("EnterJustEnglishCharacters", resourceCulture);
             }
         }
         
@@ -183,6 +201,15 @@ namespace Resources.ErrorMessages {
         public static string MaxLength {
             get {
                 return ResourceManager.GetString("MaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medical center not found!.
+        /// </summary>
+        public static string MedicalCenterNotFound {
+            get {
+                return ResourceManager.GetString("MedicalCenterNotFound", resourceCulture);
             }
         }
         

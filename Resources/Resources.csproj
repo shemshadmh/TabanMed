@@ -12,6 +12,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>DataDictionary.resx</DependentUpon>
     </Compile>
+    <Compile Update="ErrorMessages\ErrorMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ErrorMessages.resx</DependentUpon>
+    </Compile>
     <Compile Update="InformationMessages\InformationMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -31,6 +36,13 @@
     <EmbeddedResource Update="DataDictionary\DataDictionary.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DataDictionary.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ErrorMessages\ErrorMessages.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ErrorMessages\ErrorMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="InformationMessages\InformationMessages.fa-IR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -1,0 +1,63 @@
+﻿@model Application.Dtos.MedicalCenters.MedicalCenterDetailsBasicsDto
+
+@{
+    ViewData[AppConstants.ViewDataTitlePageName] = UIElements.Edit;
+    ViewData[AppConstants.ViewDataControllerName] = UIElements.MedicalCenterList;
+    ViewData[AppConstants.ViewDataControllerRoute] = "MedicalCenters";
+}
+
+<div class="card">
+    <div class="card-body">
+        <form id="create-hotel-form" method="post"
+              asp-controller="MedicalCenters" asp-action="EditBasics" asp-route-id="@Model.Id" enctype="multipart/form-data">
+
+            <div asp-validation-summary="All"
+                 class="text-danger">
+            </div>
+
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ImageUrl" />
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <div class="col form-group">
+                        <label asp-for="PhoneNumber"></label>
+                        <input class="form-control" asp-for="PhoneNumber" />
+                    </div>
+
+                    <div class="col form-group">
+                        <label asp-for="AgentPhoneNumber"></label>
+                        <input class="form-control" asp-for="AgentPhoneNumber" />
+                    </div>
+                </div>
+                <div class="col-md-6 form-group preview-container">
+                    <label class="control-label" asp-for="MedicalCenterPic"></label>
+                    <div class="form-group">
+                        <img class="show_preview_img mw-100 h-50"
+                             src="@Model.ImageUrl" />
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control previewImg"
+                               asp-for="MedicalCenterPic"
+                               oninput="setCustomValidity('')"
+                               accept=".jpg,.jpeg,.png"
+                               type="file">
+                    </div>
+                </div>
+
+            </div>
+            <div class="col form-group">
+                <button type="submit" class="btn btn-block btn-warning">@UIElements.Edit</button>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <a asp-controller="MedicalCenters" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">@UIElements.Back</a>
+    </div>
+    </div>
+
+    @section Scripts
+    {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }

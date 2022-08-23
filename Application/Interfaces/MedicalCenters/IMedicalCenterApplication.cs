@@ -13,7 +13,7 @@ namespace Application.Interfaces.MedicalCenters
         Task<MedicalCenterDetailsDto?> GetMedicalCenterDetails(int id);
         Task<MedicalCenterForEditDetailsDto?> GetMedicalCenterForEditAsync(int medicalCenterId, int langId);
         Task<OperationResult> EditMedicalCenterAsync(MedicalCenterForEditDetailsDto medicalCenterDto);
-
-
+        Task<MedicalCenterDetailsBasicsDto?> GetMedicalCenterBasicsDetails(int id);
+        Task<OperationResult> EditMedicalCenterBasicsAsync(MedicalCenterDetailsBasicsDto model);
     }
 }

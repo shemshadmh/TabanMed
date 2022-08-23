@@ -163,7 +163,6 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
 
         public async Task<MedicalCenterDetailsDto?> GetMedicalCenterDetails(int id)
         {
-
             try
             {
                 var medicalCenterDetailsDto = await _dbContext.MedicalCenters.AsNoTracking()
@@ -201,8 +200,6 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
             }
         }
 
-
-
         public async Task<MedicalCenterForEditDetailsDto?> GetMedicalCenterForEditAsync(int medicalCenterId, int langId)
         {
             try
@@ -233,10 +230,6 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
                     };
 
                 return medicalCenterDto;
-
-
-
-
             }
             catch (Exception e)
             {
@@ -245,8 +238,7 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
                 return null;
             }
         }
-
-
+        
         public async Task<OperationResult> EditMedicalCenterAsync(MedicalCenterForEditDetailsDto medicalCenterDto)
         {
             var operation = new OperationResult();
@@ -297,8 +289,78 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
                 return operation.Failed(ErrorMessages.ErrorOccurred);
             }
 
+        }
 
+        public async Task<MedicalCenterDetailsBasicsDto?> GetMedicalCenterBasicsDetails(int id)
+        {
+            try
+            {
+                return await _dbContext.MedicalCenters.AsNoTracking()
+                    .Where(medicalCenter => medicalCenter.Id == id)
+                    .Select(medicalCenter => new MedicalCenterDetailsBasicsDto()
+                    {
+                        Id = medicalCenter.Id,
+                        PhoneNumber = medicalCenter.PhoneNumber,
+                        AgentPhoneNumber = medicalCenter.AgentPhoneNumber,
+                        ImageUrl = Path.Combine(Path.AltDirectorySeparatorChar.ToString(), medicalCenter.ImageUrl)
+                    })
+                    .SingleOrDefaultAsync();
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e, "Get medical center basics details failed![medicalCenterId={id}]", id.ToString());
+                return null;
+            }
+        }
 
+        public async Task<OperationResult> EditMedicalCenterBasicsAsync(MedicalCenterDetailsBasicsDto model)
+        {
+            var operation = new OperationResult();
+            var savedPhotoPath = string.Empty;
+            try
+            {
+                var medicalCenter = await _dbContext.MedicalCenters.FindAsync(model.Id);
+
+                if(medicalCenter is null)
+                    return operation.Failed(ErrorMessages.MedicalCenterNotFound);
+
+                if (model.MedicalCenterPic is not null)
+                {
+                    // Save new image file
+                    savedPhotoPath = await _fileManagerService
+                        .SaveFileAsync(model.MedicalCenterPic, AppConstants.MedicalCentersPhotoPath, true, true);
+
+                    if(string.IsNullOrEmpty(savedPhotoPath))
+                        return operation.Failed(ErrorMessages.CouldNotSavePic);
+
+                    // Delete previous image
+                    var deleteResult =
+                        await _fileManagerService.DeleteFileAsync(
+                            Path.Combine(AppConstants.RootFilesPath, medicalCenter.ImageUrl),true);
+                    if(!deleteResult)
+                        return operation.Failed(ErrorMessages.CouldNotRemovePic);
+
+                    medicalCenter.ImageUrl = savedPhotoPath;
+                }
+
+                medicalCenter.AgentPhoneNumber = model.AgentPhoneNumber;
+                medicalCenter.PhoneNumber = model.PhoneNumber;
+
+                _dbContext.MedicalCenters.Update(medicalCenter);
+                await _dbContext.SaveChangesAsync();
+
+                _logger.LogWarning("Medical center base information updated![medicalCenterId={}]",medicalCenter.Id);
+
+                return operation.Succeeded(InformationMessages.SuccessfullyUpdated);
+            }
+            catch(Exception e)
+            {
+                if(!string.IsNullOrEmpty(savedPhotoPath))
+                    await _fileManagerService.DeleteFileAsync(savedPhotoPath);
+
+                _logger.LogCritical(e, "Could not update medical center[medicalCenterId={}]", model.Id);
+                return operation.Failed(ErrorMessages.ErrorOccurred);
+            }
         }
     }
 }

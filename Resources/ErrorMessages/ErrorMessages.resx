@@ -163,10 +163,10 @@
   <data name="TwoFactorAuthDisabled" xml:space="preserve">
     <value>Two-factor authentication is disabled. To continue, you must first enable this item</value>
   </data>
-    <data name="UserNotFound" xml:space="preserve">
+  <data name="UserNotFound" xml:space="preserve">
     <value>User Not Found!</value>
   </data>
-    <data name="YouLockedOut" xml:space="preserve">
+  <data name="YouLockedOut" xml:space="preserve">
     <value>You are limited for a while, please try again in a few minutes</value>
   </data>
   <data name="YouNotAllowed" xml:space="preserve">
@@ -181,16 +181,25 @@
   <data name="FileExtension" xml:space="preserve">
     <value>Uploaded file Format Is not Valid. Valid Formats Are {0}</value>
   </data>
-    <data name="IsNotAValidImageFile" xml:space="preserve">
+  <data name="IsNotAValidImageFile" xml:space="preserve">
     <value>Uploaded photo is not a valid image file</value>
   </data>
-    <data name="ChooseLocationOnTheMap" xml:space="preserve">
+  <data name="ChooseLocationOnTheMap" xml:space="preserve">
     <value>Please Choose a Location On The Map</value>
   </data>
-    <data name="NoRegisterdFacility" xml:space="preserve">
+  <data name="NoRegisterdFacility" xml:space="preserve">
     <value>There is no Registered hotel facility in the system</value>
   </data>
-    <data name="FileSizeLimit" xml:space="preserve">
+  <data name="FileSizeLimit" xml:space="preserve">
     <value>Uploaded file size is higher than {0} Mb</value>
+  </data>
+  <data name="MedicalCenterNotFound" xml:space="preserve">
+    <value>Medical center not found!</value>
+  </data>
+  <data name="CouldNotRemovePic" xml:space="preserve">
+    <value>Could not remove pic</value>
+  </data>
+  <data name="EnterJustEnglishCharacters" xml:space="preserve">
+    <value>Enter {0}  just in english characters</value>
   </data>
 </root>

@@ -9,5 +9,23 @@ namespace Application.Extensions
         {
             return string.IsNullOrEmpty(text) ? UIElements.NotingRegistered : text;
         }
+
+        public static string ToEnglishNumbers(this string input)
+        {
+            string englishNumbers = "";
+
+            for(int i = 0; i < input.Length; i++)
+            {
+                if(char.IsDigit(input[i]))
+                {
+                    englishNumbers += char.GetNumericValue(input, i);
+                }
+                else
+                {
+                    englishNumbers += input[i].ToString();
+                }
+            }
+            return englishNumbers;
+        }
     }
 }

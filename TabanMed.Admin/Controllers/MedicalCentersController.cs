@@ -33,8 +33,6 @@ namespace TabanMed.Admin.Controllers
             ViewData["cId"] = cityDto.CityId;
             ViewData["cName"] = cityDto.CityName;
             return View("MedicalCenterByCity");
-
-
         }
 
         [HttpPost]
@@ -118,6 +116,49 @@ namespace TabanMed.Admin.Controllers
             TempDataMessage(result.Message!, result.IsSucceeded);
             return RedirectToAction(nameof(Details), new { id = medicalCenterDto.MedicalCenterId });
 
+        }
+
+        public async Task<IActionResult> EditBasics(int id)
+        {
+            if(id <= 0)
+                return BadRequest();
+
+            var medicalCenterDto = await _medicalCenterApplication.GetMedicalCenterBasicsDetails(id);
+
+            if(medicalCenterDto is null)
+                return NotFound();
+
+            return View(model: medicalCenterDto);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditBasics(int id, [FromForm] MedicalCenterDetailsBasicsDto model)
+        {
+            if(id != model.Id)
+                return NotFound();
+
+            if(!ModelState.IsValid)
+                return View(model);
+
+            if (model.MedicalCenterPic is not null)
+            {
+                if(!model.MedicalCenterPic.IsValidImage())
+                {
+                    ModelState.AddModelError(string.Empty, ErrorMessages.IsNotAValidImageFile);
+                    return View(model);
+                }
+            }
+
+            var res = await _medicalCenterApplication.EditMedicalCenterBasicsAsync(model);
+
+            if(!res.IsSucceeded)
+            {
+                ModelState.AddModelError(string.Empty, res.Message!);
+                return View(model);
+            }
+
+            TempDataMessage(res.Message!, res.IsSucceeded);
+            return RedirectToAction(nameof(Details), new { id = model.Id });
         }
 
     }

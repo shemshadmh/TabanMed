@@ -27,6 +27,9 @@ namespace Application.Dtos.MedicalCenters
         [MaxLength(length: ModelConstants.MedicalCenter.PhoneNumberMaxLength,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
+        [RegularExpression(AppConstants.EnglishRegex,
+            ErrorMessageResourceType = typeof(ErrorMessages),
+            ErrorMessageResourceName = nameof(ErrorMessages.EnterJustEnglishCharacters))]
         public string PhoneNumber { get; set; } = null!;
 
         [Display(ResourceType = typeof(DataDictionary),
@@ -41,6 +44,9 @@ namespace Application.Dtos.MedicalCenters
         [MaxLength(length: ModelConstants.MedicalCenter.AgentPhoneNumberMaxLength,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
+        [RegularExpression(AppConstants.EnglishRegex,
+            ErrorMessageResourceType = typeof(ErrorMessages),
+            ErrorMessageResourceName = nameof(ErrorMessages.EnterJustEnglishCharacters))]
         public string? AgentPhoneNumber { get; set; }
 
         [Display(ResourceType = typeof(DataDictionary),

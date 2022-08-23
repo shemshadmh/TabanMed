@@ -1,4 +1,5 @@
 ﻿
+using System.Text.RegularExpressions;
 using Resources.UIElements;
 
 namespace Application
@@ -56,6 +57,14 @@ namespace Application
         public const double MaxHotelLogoFileSizeUpload = 3e+6; // 3MB
         public const double MaxMedicalCenterPicFileSizeUpload = 3e+6; // 3MB
 
+        #region Regex
+
+        public const string EnglishRegex = @"^[A-Za-z\d_-]+$";
+        private static readonly Regex PersianDateRegex = new Regex(@"^(\d{4})\/(0?[1-9]|1[012])\/(0?[1-9]|[12][0-9]|3[01])$", RegexOptions.Compiled);
+        private static readonly Regex PhoneNumberRegex = new Regex(@"^09[0|1|2|3|9][0-9]{8}$", RegexOptions.Compiled);
+
+        #endregion
+
         #region Methods
 
         public static string ThrowIfNullOrEmpty(this string str, string paramName, bool allowWhiteSpaces = false)
@@ -83,6 +92,10 @@ namespace Application
                 _ => String.Empty
             };
         }
+
+        public static bool IsValidPhoneNumber(this string input) 
+            => PhoneNumberRegex.IsMatch(input);
+        
 
         #endregion
     }
