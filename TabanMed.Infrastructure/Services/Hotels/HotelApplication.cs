@@ -43,9 +43,10 @@ namespace TabanMed.Infrastructure.Services.Hotels
             try
             {
                 return await _dbContext.HotelTranslations.AsNoTracking()
+                    .Include(hotelTranslation=> hotelTranslation.Hotel)
                     .Where(hotelTranslation =>
                         hotelTranslation.LanguageId == _currentServices.LanguageId
-                        )
+                        &&hotelTranslation.Hotel.CityId == cityId)
                     .Select(hotelTranslation => new HotelListItemDto()
                     {
                         Id = hotelTranslation.HotelId,

@@ -94,8 +94,10 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
             try
             {
                 return await _dbContext.MedicalCenterTranslations.AsNoTracking()
+                    .Include(medicalCenterTranslation=> medicalCenterTranslation.MedicalCenter)
                     .Where(medicalCenterTranslation =>
-                        medicalCenterTranslation.LanguageId == _currentServices.LanguageId)
+                        medicalCenterTranslation.LanguageId == _currentServices.LanguageId
+                        && medicalCenterTranslation.MedicalCenter.CityId == cityId)
                     .Select(medicalCenterTranslation => new MedicalCenterListItemDto()
                     {
                         Id = medicalCenterTranslation.MedicalCenterId,
