@@ -42,7 +42,7 @@ namespace TabanMed.Admin.Controllers
             return Json(await data.ToDataSourceResultAsync(request));
         }
 
-        [HttpGet]
+        [Display(Name = "افزودن مرکز درمانی جدید"),HttpGet]
         public IActionResult Create(int id)
             => View(new CreateMedicalCenterDto() { CityId = id });
 
@@ -73,7 +73,7 @@ namespace TabanMed.Admin.Controllers
             return RedirectToAction(nameof(Index), new { cityId = model.CityId });
         }
         
-        [HttpGet]
+        [Display(Name = "جزئیات مرکز درمانی"),HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             if (id <= 0)
@@ -88,7 +88,7 @@ namespace TabanMed.Admin.Controllers
         }
 
         
-        [HttpGet]
+        [Display(Name = "ویرایش مرکز درمانی"), HttpGet]
         public async Task<IActionResult> Edit(int medicalCenterId,int langId)
         {
             var medicalCenter = await _medicalCenterApplication.GetMedicalCenterForEditAsync(medicalCenterId, langId);

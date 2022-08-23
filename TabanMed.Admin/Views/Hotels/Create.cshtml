@@ -60,7 +60,7 @@
                              src="/images/NoImage.png" />
                         </div>
                         <div class="form-group">
-                            <input class="form-control previewImg"
+                            <input id="inputfile" class="form-control previewImg"
                                asp-for="HotelPic"
                                oninput="setCustomValidity('')"
                                accept=".jpg,.jpeg,.png"
@@ -75,10 +75,12 @@
             </form>
         </div>
     </div>
-
     @section Scripts
     {
+        
         @{
             await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
     }
+    
+                               

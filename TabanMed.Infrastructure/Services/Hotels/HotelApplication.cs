@@ -43,7 +43,9 @@ namespace TabanMed.Infrastructure.Services.Hotels
             try
             {
                 return await _dbContext.HotelTranslations.AsNoTracking()
-                    .Where(hotelTranslation => hotelTranslation.LanguageId == _currentServices.LanguageId)
+                    .Where(hotelTranslation =>
+                        hotelTranslation.LanguageId == _currentServices.LanguageId
+                        )
                     .Select(hotelTranslation => new HotelListItemDto()
                     {
                         Id = hotelTranslation.HotelId,
@@ -107,6 +109,54 @@ namespace TabanMed.Infrastructure.Services.Hotels
             }
 
         }
+      
+        public async Task<HotelDetailsDto?> GetHotelDetails(int id)
+        {
+            try
+            {
+                var hotelDetailsDto = await _dbContext.Hotels.AsNoTracking()
+                    //.Include(medicalCenter => medicalCenter.MedicalCenterTranslations)
+                    .Where(hotel => hotel.Id == id)
+                    .Select(hotel => new HotelDetailsDto()
+                    {
+                        Id = hotel.Id,
+                        ImageUrl = Path.Combine(Path.AltDirectorySeparatorChar.ToString(), hotel.ImageUrl),
+                        Stars = hotel.Stars,
+                        CallInformation = hotel.CallInformation,
+                        WebsiteAddress = hotel.WebsiteAddress,
+                        CityId = hotel.CityId,
+                        HotelTranslationDto = hotel.HotelTranslations!
+                            .Select(hotelTranslation => new HotelTranslationDto()
+                            {
+                                Name = hotelTranslation.Name,
+                                Address = hotelTranslation.Address,
+                                LanguageId = hotelTranslation.LanguageId,
+                                About = hotelTranslation.About
+                            })
+                            .ToList()
+                    }).SingleOrDefaultAsync();
+
+                hotelDetailsDto!.CityName = _dbContext.CityTranslations.AsNoTracking()
+                    .FirstOrDefaultAsync(cityTranslation =>
+                        cityTranslation.CityId == hotelDetailsDto.CityId
+                        && cityTranslation.LanguageId == _currentServices.LanguageId)!.Result!.Name;
+                
+                //hotelDetailsDto!.CountryName = _dbContext.CountriesTranslation.AsNoTracking()
+                //    .FirstOrDefaultAsync(countryTranslation =>
+                //        countryTranslation.CountryId == hotelDetailsDto.CityId
+                //        && countryTranslation.LanguageId == _currentServices.LanguageId)!.Result!.Name;
+
+
+                return hotelDetailsDto;
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Get hotel Details failed![hotelId={id}]", id.ToString());
+                return null;
+            }
+
+        }
 
         public async Task<OperationResult> EditHotel(EditHotelDto model)
         {
@@ -157,74 +207,104 @@ namespace TabanMed.Infrastructure.Services.Hotels
             //}
         }
 
-        public async Task<OperationResult> DeleteHotel(DeleteHotelDto model)
+
+        public async Task<HotelTranslationForEditDto?> GetHotelForEditAsync(int hotelId, int languageId)
+        {
+            try
+            {
+                if (!await _dbContext.Hotels.AsNoTracking()
+                        .AnyAsync(hotel => hotel.Id == hotelId))
+                {
+                    return null;
+                }
+
+                var hotelTranslationDto = await _dbContext.HotelTranslations.AsNoTracking()
+                    .Where(hotelTranslation => hotelTranslation.HotelId == hotelId
+                                               && hotelTranslation.LanguageId == languageId)
+                    .Select(hotelTranslation => new HotelTranslationForEditDto()
+                    {
+                        HotelId = hotelId,
+                        LanguageName = languageId.GetLanguageName(),
+                        LanguageId = languageId,
+                        Name = hotelTranslation.Name,
+                        Address = hotelTranslation.Address,
+                        About = hotelTranslation.About
+                    })
+                    .SingleOrDefaultAsync();
+                
+                if (hotelTranslationDto is null)
+                    return new HotelTranslationForEditDto()
+                    {
+                        HotelId = hotelId,
+                        LanguageName = languageId.GetLanguageName(),
+                        LanguageId = languageId,
+                        Name = string.Empty,
+                        Address = string.Empty,
+                        About = string.Empty
+                    };
+
+                return hotelTranslationDto;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Get hotel Details failed![hotelId={id}]",
+                    hotelId.ToString());
+                return null;
+            }
+        }
+
+
+        public async Task<OperationResult> EditHotelAsync(HotelTranslationForEditDto hotelTranslationDto)
         {
             var operation = new OperationResult();
-            return operation.Succeeded();
-            //try
-            //{
-            //    if(!await _hotelRepository.ExistsAsync(hotel => hotel.Id == model.Id))
-            //        return operation.Failed(ErrorMessages.ItemNotFound);
+            try
+            {
+                var hotel = await _dbContext.Hotels.AsNoTracking()
+                    .FirstOrDefaultAsync(hotel =>
+                        hotel.Id == hotelTranslationDto.HotelId);
 
-            //    var hotelEntity = await _hotelRepository.GetAsync(hotel => hotel.Id == model.Id, true)
-            //        .Result.FirstOrDefaultAsync();
+                // check for exist
+                if (hotel is null)
+                    return operation.Failed(ErrorMessages.ItemNotFound);
 
-            //    var photoUrl = hotelEntity!.ImageUrl;
-            //    await _hotelRepository.DeleteAsync(hotelEntity, true);
-            //    //If it was necessary to delete image uncomment these lines 
+                var hotelTranslation = await _dbContext.HotelTranslations.AsNoTracking()
+                    .FirstOrDefaultAsync(hotelTranslation =>
+                        hotelTranslation.LanguageId == hotelTranslationDto.LanguageId
+                        && hotelTranslation.HotelId == hotelTranslationDto.HotelId);
+                //if hotelTranslation is null ==> create it
+                if (hotelTranslation is null)
+                {
+                    var newHotelTranslation = new HotelTranslation()
+                    {
+                        LanguageId = hotelTranslationDto.LanguageId,
+                        Name = hotelTranslationDto.Name,
+                        Address = hotelTranslationDto.Address,
+                        About = hotelTranslationDto.About,
+                        HotelId = hotelTranslationDto.HotelId
+                    };
 
-            //    /*
-            //    if (!string.IsNullOrEmpty(photoUrl))
-            //        await _fileManagerService
-            //            .DeleteOperationAsync($"{StaticDetails.RootFilesPath}//{photoUrl}", true);
-            //            */
+                    await _dbContext.HotelTranslations.AddAsync(newHotelTranslation);
+                    await _dbContext.SaveChangesAsync();
+                }
+                else
+                {
+                    hotelTranslation.Name = hotelTranslationDto.Name;
+                    hotelTranslation.About = hotelTranslationDto.About;
+                    hotelTranslation.Address = hotelTranslationDto.Address;
 
-            //    return operation.Succeeded();
-            //}
-            //catch(Exception e)
-            //{
-            //    _logger.LogCritical(e, "Could not Delete Hotel !!");
-            //    return operation.Failed(ErrorMessages.ErrorOccurred);
-            //}
+                    _dbContext.HotelTranslations.Update(hotelTranslation);
+                    await _dbContext.SaveChangesAsync();
+                }
+
+                return operation.Succeeded(InformationMessages.SuccessfullyUpdated);
+            }
+            catch
+            {
+                return operation.Failed(ErrorMessages.ErrorOccurred);
+            }
+
         }
 
-        public async Task<HotelDetailsDto?> GetHotelDetails(int id)
-        {
-            throw new NotImplementedException();
-            //var entity = await (await _hotelRepository
-            //        .GetAsync(hotel => hotel.Id == id,
-            //            includes: hotel => hotel.Include(hotelDto => hotelDto.City)
-            //        ))
-            //    .FirstOrDefaultAsync();
-            //var mappedEntity = await _mapper.From(entity).AdaptToTypeAsync<HotelDetailsDto>();
-            //mappedEntity.CountPendingComments = await _commentRepository.CountAsync(comment => comment.EntityId == id &&
-            //    comment.Type == EntityType.Hotel &&
-            //    comment.IsActive == null);
-
-            //return mappedEntity;
-        }
-
-        public async Task<IEnumerable<HotelFacilityListItem>> GetHotelSelectedFacilities(int hotelId)
-        {
-            throw new NotImplementedException();
-            //var result = new List<HotelFacilityListItem>();
-
-            //var parentFacilities = await _hotelFacilityRepository
-            //    .GetAsync(facility => facility.ParentId == null, true);
-            //var mappedParentFacilities = await _mapper.From(parentFacilities)
-            //    .AdaptToTypeAsync<List<HotelFacilityListItem>>();
-
-            //var selectedFacilitiesQuery = await _selectedFacilitiesRepository
-            //    .GetAsync(selectedFacility => selectedFacility.HotelId == hotelId,
-            //        includes: facility => facility
-            //            .Include(selectedFacility => selectedFacility.HotelFacility));
-            //var mappedSelectedFacilities = await _mapper.From(selectedFacilitiesQuery)
-            //    .AdaptToTypeAsync<List<HotelFacilityListItem>>();
-
-            //result.AddRange(mappedParentFacilities);
-            //result.AddRange(mappedSelectedFacilities);
-            //return result;
-        }
 
         public async Task<IReadOnlyList<CityWithHotelsCount>?> GetCitiesWithHotels()
         {
@@ -274,203 +354,80 @@ namespace TabanMed.Infrastructure.Services.Hotels
             }
         }
 
-        public async Task<IEnumerable<HotelToursDto>> GetHotelTours(int hotelId)
+        public async Task<HotelDetailsBasicsDto?> GetHotelBasicsDetails(int id)
         {
-            throw new NotImplementedException();
-            //var query = (await _hotelRepository.GetAsync(hotel => hotel.Id == hotelId,
-            //        includes: hotel => hotel.Include(hotelDto => hotelDto.PackageSelectedHotels!)
-            //            .ThenInclude(package => package.TourPackageHotel)
-            //            .ThenInclude(packageHotel => packageHotel.TourDate)
-            //            .ThenInclude(tourDate => tourDate.TourPackage)))
-            //    .SelectMany(hotel => hotel.PackageSelectedHotels!);
-            //var data = await _mapper.From(query).AdaptToTypeAsync<IEnumerable<HotelToursDto>>();
-            //return data;
+            try
+            {
+                return await _dbContext.Hotels.AsNoTracking()
+                    .Where(hotel => hotel.Id == id)
+                    .Select(hotel => new HotelDetailsBasicsDto()
+                    {
+                        Id = hotel.Id,
+                        CallInformation = hotel.CallInformation,
+                        Stars = hotel.Stars,
+                        WebsiteAddress = hotel.WebsiteAddress,
+                        ImageUrl = Path.Combine(Path.AltDirectorySeparatorChar.ToString(), hotel.ImageUrl)
+                    })
+                    .SingleOrDefaultAsync();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Get hotel basics details failed![hotelId={id}]", id.ToString());
+                return null;
+            }
         }
 
-        public async Task<IEnumerable<HotelAlbumDto>> GetHotelAlbum(int hotelId)
+        public async Task<OperationResult> EditHotelBasicsAsync(HotelDetailsBasicsDto model)
         {
-            throw new NotImplementedException();
-            //var query = (await _hotelRepository.GetAsync(hotel => hotel.Id == hotelId,
-            //        includes: hotel => hotel.Include(image => image.Gallery!)))
-            //    .SelectMany(hotel => hotel.Gallery!);
-            //var data = await _mapper.From(query).AdaptToTypeAsync<IEnumerable<HotelAlbumDto>>();
-            //return data;
+            var operation = new OperationResult();
+            var savedPhotoPath = string.Empty;
+            try
+            {
+                var hotel = await _dbContext.Hotels.FindAsync(model.Id);
+
+                if (hotel is null)
+                    return operation.Failed(ErrorMessages.HotelNotFound);
+
+                if (model.HotelPic is not null)
+                {
+                    // Save new image file
+                    savedPhotoPath = await _fileManagerService
+                        .SaveFileAsync(model.HotelPic, AppConstants.HotelsPhotoPath, true, true);
+
+                    if (string.IsNullOrEmpty(savedPhotoPath))
+                        return operation.Failed(ErrorMessages.CouldNotSavePic);
+
+                    // Delete previous image
+                    var deleteResult =
+                        await _fileManagerService.DeleteFileAsync(
+                            Path.Combine(AppConstants.RootFilesPath, hotel.ImageUrl), true);
+                    if (!deleteResult)
+                        return operation.Failed(ErrorMessages.CouldNotRemovePic);
+
+                    hotel.ImageUrl = savedPhotoPath;
+                }
+
+                hotel.CallInformation= model.CallInformation;
+                hotel.Stars= model.Stars;
+                hotel.WebsiteAddress = model.WebsiteAddress;
+
+                _dbContext.Hotels.Update(hotel);
+                await _dbContext.SaveChangesAsync();
+
+                _logger.LogWarning("Hotel base information updated![hotelId={}]", hotel.Id);
+
+                return operation.Succeeded(InformationMessages.SuccessfullyUpdated);
+            }
+            catch (Exception e)
+            {
+                if (!string.IsNullOrEmpty(savedPhotoPath))
+                    await _fileManagerService.DeleteFileAsync(savedPhotoPath);
+
+                _logger.LogCritical(e, "Could not update hotel[hotelId={}]", model.Id);
+                return operation.Failed(ErrorMessages.ErrorOccurred);
+            }
         }
 
-        public async Task<OperationResult> AppendToHotelAlbum(AppendToHotelAlbumDto model)
-        {
-            throw new NotImplementedException();
-            //var operation = new OperationResult();
-            //var savedPhotoPath = "";
-            //try
-            //{
-            //    if(!await _hotelRepository.ExistsAsync(hotel => hotel.Id == model.HotelId))
-            //        operation.Failed(ErrorMessages.HotelNotFound);
-
-            //    var entity = await _mapper.From(model).AdaptToTypeAsync<HotelImage>();
-            //    savedPhotoPath = await _fileManagerService
-            //        .SaveAsync(model.ImageFile, StaticDetails.HotelsPhotoPath, true, true);
-
-            //    if(string.IsNullOrEmpty(savedPhotoPath))
-            //        return operation.Failed(ErrorMessages.CouldNotSavePic);
-
-            //    entity.ImageUrl = $"/{savedPhotoPath}";
-            //    await _hotelImageRepository.AddAsync(entity, true);
-            //    return operation.Succeeded(entity.ImageUrl);
-            //}
-            //catch(Exception e)
-            //{
-            //    _logger.LogCritical(e, "Could not append image to hotel album");
-            //    if(!string.IsNullOrEmpty(savedPhotoPath))
-            //        await _fileManagerService
-            //            .DeleteOperationAsync(StaticDetails.RootFilesPath + "//" + savedPhotoPath, true);
-
-            //    return operation.Failed(ErrorMessages.ErrorOccurred);
-            //}
-        }
-
-        public async Task<OperationResult> RemoveFromHotelAlbum(RemoveFromHotelAlbumDto model)
-        {
-            throw new NotImplementedException();
-            //var operation = new OperationResult();
-            //try
-            //{
-            //    var entity = await _hotelImageRepository.GetAsync(image =>
-            //            image.HotelId == model.HotelId && image.ImageUrl == model.PhotoUrl, false)
-            //        .Result.FirstOrDefaultAsync();
-            //    if(entity is null)
-            //        return operation.Failed(ErrorMessages.ItemNotFound);
-            //    await _hotelImageRepository.DeleteAsync(entity, true);
-            //    await _fileManagerService.DeleteOperationAsync(StaticDetails.RootFilesPath + "//" + entity.ImageUrl,
-            //        true);
-            //    return operation.Succeeded();
-            //}
-            //catch(Exception e)
-            //{
-            //    _logger.LogCritical(e, "error occurred while deleting photo album");
-            //    return operation.Failed(ErrorMessages.ErrorOccurred);
-            //}
-        }
-
-        public async Task<EditHotelFacilitiesDto> GetHotelFacilitiesForEdit(int hotelId)
-        {
-            throw new NotImplementedException();
-            //var allHotelFacilities = await _hotelFacilityRepository
-            //    .GetAsync(null,
-            //        includes: facility => facility
-            //            .Include(facilityItem => facilityItem.Parent!));
-
-            //var selectedFacilitiesByHotel = await _hotelRepository.GetHotelFacilityIds(hotelId);
-            //var facilityListForCheckBox = await allHotelFacilities
-            //    .Select(facility => new HotelFacilityForCheckBox()
-            //    {
-            //        DisplayName = facility.Title,
-            //        Value = facility.Id,
-            //        IsSelected = selectedFacilitiesByHotel != null && selectedFacilitiesByHotel.Contains(facility.Id),
-            //        ParentId = facility.ParentId,
-            //        ParentDisplay = facility.Parent != null ? facility.Parent.Title : null
-            //    }).ToListAsync();
-            //var res = new EditHotelFacilitiesDto
-            //{
-            //    AllFacilities = facilityListForCheckBox,
-            //    HotelId = hotelId
-            //};
-            //return res;
-        }
-
-        public async Task<OperationResult> EditHotelFacilities(EditHotelFacilitiesDto model)
-        {
-            throw new NotImplementedException();
-            //// var watch = Stopwatch.StartNew();
-            //var operation = new OperationResult();
-            //try
-            //{
-            //    var listToRemove = await _selectedFacilitiesRepository
-            //        .GetAsync(facility => facility.HotelId == model.HotelId, false);
-            //    if(await listToRemove.AnyAsync())
-            //        await _selectedFacilitiesRepository.DeleteRangeAsync(listToRemove, true);
-
-            //    foreach(var facilityId in model.SelectedHotelFacilities)
-            //    {
-            //        /*if (!await _selectedFacilitiesRepository
-            //                .ExistsAsync(fa => fa.HotelId == model.HotelId &&
-            //                                   fa.HotelFacilityId == facilityId))*/
-            //        await _selectedFacilitiesRepository
-            //            .AddAsync(new HotelSelectedFacility()
-            //            {
-            //                HotelId = model.HotelId,
-            //                HotelFacilityId = facilityId
-            //            }, true);
-            //    }
-
-            //    /*watch.Stop();
-            //    _logger.LogInformation("it took [{WatchElapsedMilliseconds}]ms", watch.ElapsedMilliseconds);*/
-            //    return operation.Succeeded();
-            //}
-            //catch(Exception e)
-            //{
-            //    _logger.LogCritical(e, "could not edit hotel facilities");
-            //    return operation.Failed(ErrorMessages.ErrorOccurred);
-            //}
-        }
-
-        //public async Task<IEnumerable<CommentListItemsDto>> GetAllHotelComments(int hotelId)
-        //{
-
-        //    var query = await _commentRepository
-        //        .GetAsync(comment => comment.EntityId == hotelId && comment.Type == EntityType.Hotel,
-        //            orderBy: comments => comments.OrderBy(comment => comment.IsActive)
-        //            , includeString: null);
-        //    return await _mapper.From(query).AdaptToTypeAsync<IEnumerable<CommentListItemsDto>>();
-        //}
-
-        //public async Task<OperationResult> RejectHotelComment(int id)
-        //{
-        //    var operation = new OperationResult();
-        //    try
-        //    {
-        //        var hotelComment = await (await _commentRepository
-        //                .GetAsync(comment => comment.Id == id &&
-        //                                     comment.Type == EntityType.Hotel, true))
-        //            .FirstOrDefaultAsync();
-
-        //        if(hotelComment == null)
-        //            operation.Failed(ErrorMessages.ItemNotFound);
-
-        //        hotelComment!.IsActive = false;
-        //        await _commentRepository.UpdateAsync(hotelComment, true);
-        //        return operation.Succeeded();
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        _logger.LogCritical(e, "could not reject comment");
-        //        return operation.Failed(ErrorMessages.ErrorOccurred);
-        //    }
-        //}
-
-        //public async Task<OperationResult> AcceptHotelComment(int id)
-        //{
-        //    var operation = new OperationResult();
-        //    try
-        //    {
-        //        var hotelComment = await (await _commentRepository
-        //                .GetAsync(comment => comment.Id == id &&
-        //                                     comment.Type == EntityType.Hotel, true))
-        //            .FirstOrDefaultAsync();
-
-        //        if(hotelComment == null)
-        //            operation.Failed(ErrorMessages.ItemNotFound);
-
-        //        hotelComment!.IsActive = true;
-        //        await _commentRepository.UpdateAsync(hotelComment, true);
-        //        return operation.Succeeded();
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        _logger.LogCritical(e, "could not accept comment");
-        //        return operation.Failed(ErrorMessages.ErrorOccurred);
-        //    }
-        //}
         public async ValueTask DisposeAsync()
         {
             await _dbContext.DisposeAsync();

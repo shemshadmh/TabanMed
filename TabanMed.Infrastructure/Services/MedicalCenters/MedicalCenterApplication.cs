@@ -204,7 +204,12 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
         {
             try
             {
-                //TODO check exist or not
+                if (!await _dbContext.MedicalCenters.AsNoTracking()
+                        .AnyAsync(medicalCenter => medicalCenter.Id == medicalCenterId))
+                {
+                    return null;
+                }
+
                 var medicalCenterDto = await _dbContext.MedicalCenterTranslations.AsNoTracking()
                     .Where(medicalTranslation => medicalTranslation.MedicalCenterId == medicalCenterId
                                                  && medicalTranslation.LanguageId == langId)

@@ -1,0 +1,66 @@
+﻿@model HotelDetailsBasicsDto
+@using Application.Dtos.Hotels.Hotels
+@{
+    ViewData[AppConstants.ViewDataTitlePageName] = UIElements.Edit;
+    ViewData[AppConstants.ViewDataControllerName] = UIElements.HotelsList;
+    ViewData[AppConstants.ViewDataControllerRoute] = "Hotel";
+}
+
+<div class="card">
+    <div class="card-body">
+        <form id="create-hotel-form" method="post"
+              asp-controller="Hotels" asp-action="EditBasics" asp-route-id="@Model.Id" enctype="multipart/form-data">
+
+            <div asp-validation-summary="All"
+                 class="text-danger">
+            </div>
+
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ImageUrl" />
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <div class="col form-group">
+                        <label asp-for="CallInformation"></label>
+                        <input class="form-control" asp-for="CallInformation" />
+                    </div>
+                    <div class="col form-group">
+                        <label asp-for="WebsiteAddress"></label>
+                        <input class="form-control" asp-for="WebsiteAddress" />
+                    </div>
+                    <div class="col form-group">
+                        <label asp-for="Stars"></label>
+                        <select class="form-control" asp-for="Stars" asp-items="@(new SelectList(new List<int>(){1,2,3,4,5}))"></select>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group preview-container">
+                    <label class="control-label" asp-for="HotelPic"></label>
+                    <div class="form-group">
+                        <img class="show_preview_img mw-100 h-50"
+                             src="@Model.ImageUrl" />
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control previewImg"
+                               asp-for="HotelPic"
+                               oninput="setCustomValidity('')"
+                               accept=".jpg,.jpeg,.png"
+                               type="file">
+                    </div>
+                </div>
+
+            </div>
+            <div class="col form-group">
+                <button type="submit" class="btn btn-block btn-warning">@UIElements.Edit</button>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <a asp-controller="Hotels" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">@UIElements.Back</a>
+    </div>
+    </div>
+
+    @section Scripts
+    {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }

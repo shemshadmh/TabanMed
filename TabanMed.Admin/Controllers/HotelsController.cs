@@ -87,96 +87,88 @@ namespace TabanMed.Admin.Controllers
             return View(data);
         }
 
-        [HttpPost("hotel-tours/{id:int}")]
-        public async Task<IActionResult> GetHotelTours([DataSourceRequest] DataSourceRequest request, int id)
+        [Display(Name = "ویرایش هتل"), HttpGet]
+        public async Task<IActionResult> Edit(int hotelId, int languageId)
         {
-            var data = await _hotelApplication.GetHotelTours(id);
-            return Json(await data.ToDataSourceResultAsync(request));
+            var hotel = await _hotelApplication.GetHotelForEditAsync(hotelId, languageId);
+
+            if (hotel is null)
+                return NotFound();
+
+            return View(model: hotel);
         }
 
-        [HttpGet, ValidateAntiForgeryToken, AjaxOnly]
-        public Task<IActionResult> GetHotelAlbums(int hotelId) =>
-            Task.FromResult<IActionResult>(ViewComponent("HotelAlbum", new { hotelId }));
-
-        [HttpPost("hotels-comments")]
-        public async Task<IActionResult> GetHotelsComments([DataSourceRequest] DataSourceRequest request, int id)
+        [HttpPost]
+        public async Task<IActionResult> Edit(HotelTranslationForEditDto hotelTranslationDto)
         {
-            //var data = await _hotelApplication.GetAllHotelComments(id);
-            //return Json(await data.ToDataSourceResultAsync(request));
-            return Ok();
+            if (!ModelState.IsValid)
+                return View(hotelTranslationDto);
+
+            var result = await _hotelApplication.EditHotelAsync(hotelTranslationDto);
+
+            if (!result.IsSucceeded)
+            {
+                ModelState.AddModelError(String.Empty, result.Message!);
+                return View(hotelTranslationDto);
+            }
+
+            TempDataMessage(result.Message!, result.IsSucceeded);
+            return RedirectToAction(nameof(Details), new { id = hotelTranslationDto.HotelId });
+
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditBasics(int id)
+        {
+            if (id <= 0)
+                return BadRequest();
+
+            var medicalCenterDto = await _hotelApplication.GetHotelBasicsDetails(id);
+
+            if (medicalCenterDto is null)
+                return NotFound();
+
+            return View(model: medicalCenterDto);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditBasics(int id, [FromForm] HotelDetailsBasicsDto model)
+        {
+            if (id != model.Id)
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if (model.HotelPic is not null)
+            {
+                if (!model.HotelPic.IsValidImage())
+                {
+                    ModelState.AddModelError(string.Empty, ErrorMessages.IsNotAValidImageFile);
+                    return View(model);
+                }
+            }
+
+            var res = await _hotelApplication.EditHotelBasicsAsync(model);
+
+            if (!res.IsSucceeded)
+            {
+                ModelState.AddModelError(string.Empty, res.Message!);
+                return View(model);
+            }
+
+            TempDataMessage(res.Message!, res.IsSucceeded);
+            return RedirectToAction(nameof(Details), new { id = model.Id });
+        }
+
+
+
+
+
 
         #endregion
 
-        #region Commands
 
-        
-
-        [HttpPost("edit-hotel"), ValidateAntiForgeryToken, AjaxOnly]
-        public async Task<IActionResult> Edit([FromForm] EditHotelDto model)
-        {
-            var response = new Response<bool>();
-            if(!ModelState.IsValid)
-                return Json(response.Failed(ModelState.GetErrorMessages(), ErrorMessages.ModelValidationError));
-
-            var operationRes = await _hotelApplication.EditHotel(model);
-            return Json(operationRes.IsSucceeded ? response.Succeeded() : response.Failed(operationRes.Message!));
-        }
-
-        [HttpPost("delete-hotel"), ValidateAntiForgeryToken, AjaxOnly]
-        public async Task<IActionResult> Delete([FromBody] DeleteHotelDto model)
-        {
-            var response = new Response<bool>();
-            if(!ModelState.IsValid)
-                return Json(response.Failed(ModelState.GetErrorMessages(),
-                    ErrorMessages.ModelValidationError));
-
-            var operationRes = await _hotelApplication.DeleteHotel(model);
-            return Json(operationRes.IsSucceeded ? response.Succeeded() : response.Failed(ErrorMessages.ErrorOccurred));
-        }
-
-        [HttpPost("append-image"), ValidateAntiForgeryToken, AjaxOnly]
-        public async Task<IActionResult> AppendToAlbum([FromForm] AppendToHotelAlbumDto model)
-        {
-            var response = new Response<string>();
-            if(!ModelState.IsValid)
-                return Json(response.Failed(ModelState.GetErrorMessages(),
-                    ErrorMessages.ModelValidationError));
-
-            var operation = await _hotelApplication.AppendToHotelAlbum(model);
-            return Json(operation.IsSucceeded
-                ? response.Succeeded((string)operation.ReturnValue!, "")
-                : response.Failed(ErrorMessages.ErrorOccurred));
-        }
-
-
-        [HttpPost, ValidateAntiForgeryToken, AjaxOnly]
-        public async Task<IActionResult> RemoveHotelAlbum([FromBody] RemoveFromHotelAlbumDto model)
-        {
-            var response = new Response<bool>();
-            if(!ModelState.IsValid)
-                return Json(response.Failed(ErrorMessages.ErrorOccurred));
-
-            var operation = await _hotelApplication.RemoveFromHotelAlbum(model);
-
-            return Json(operation.IsSucceeded
-                ? response.Succeeded()
-                : response.Failed(operation.Message!));
-        }
-
-        [HttpPost("edit-hotel-facilities"), ValidateAntiForgeryToken, AjaxOnly]
-        public async Task<IActionResult> EditHotelFacilities([FromForm] EditHotelFacilitiesDto model)
-        {
-            var response = new Response<bool>();
-            if(!ModelState.IsValid)
-                return Json(response.Failed(ModelState.GetErrorMessages(), ErrorMessages.ModelValidationError));
-
-            var operation = await _hotelApplication.EditHotelFacilities(model);
-            return Json(operation.IsSucceeded
-                ? response.Succeeded()
-                : response.Failed(operation.Message!));
-        }
-
-        #endregion
     }
 }

@@ -1,20 +1,20 @@
-﻿@*@using AdminServiceHost.ViewComponents.HotelAlbum
-@using Feegasht.Application.Contracts.Hotels.Dtos.Hotels
-@using Feegasht.Application.Contracts.Shared.Dtos
-@using Microsoft.AspNetCore.Mvc.TagHelpers
-@model Feegasht.Application.Contracts.Hotels.Dtos.Hotels.HotelDetailsDto
+﻿@using Application.Dtos.Application
+@using Application.Dtos.Hotels.Hotels
+@using Application.Extensions
+@model HotelDetailsDto
 
 @{
-    ViewData[StaticDetails.ViewDataTitlePageName] = "جزئیات هتل";
-    ViewData[StaticDetails.ViewDataControllerName] = "هتل‌ها";
-    ViewData[StaticDetails.ViewDataControllerRoute] = "Hotels";
+    ViewData[AppConstants.ViewDataTitlePageName] = UIElements.Details;
+    ViewData[AppConstants.ViewDataControllerName] = UIElements.HotelsList;
+    ViewData[AppConstants.ViewDataControllerRoute] = "Hotels";
 }
 
 
-@if(TempData[StaticDetails.TempDataMessageTitle] != null)
+@if (TempData[AppConstants.TempDataMessageTitle] != null)
 {
-    <partial name="_PartialNotificationDivision"
-         model="new NotificationDto(Convert.ToBoolean(TempData[StaticDetails.TempDataMessageTitle].ToString().Split('~')[1].Trim()), TempData[StaticDetails.TempDataMessageTitle].ToString().Split('~')[0].Trim())" />
+
+    <partial name="_PartialNotificationDivision" model="new NotificationDto(Convert.ToBoolean(TempData[AppConstants.TempDataMessageTitle]!.ToString()!.Split('~')[1].Trim()),
+    TempData[AppConstants.TempDataMessageTitle]!.ToString()!.Split('~')[0].Trim())" />
 }
 
 <div class="row">
@@ -24,17 +24,31 @@
             <div class="card-body">
                 <div class="m-t-30">
                     <img src="@Model.ImageUrl" onerror="PhotoHandler.methods.loadFailed()" class="img-thumbnail w-100">
-                    <h4 class="card-title m-t-10">@Model.FaName</h4>
-                    <h6 class="card-subtitle">@Model.EnName</h6>
+                    <br />
+                    <strong>@UIElements.CountOfStars</strong>:
+                    <label class="card-title m-t-10">@Model.Stars</label>
+                    <br />
+                    <strong>@UIElements.HotelPhone</strong>:
+                    <label class="card-title m-t-10">@(Model.CallInformation ?? string.Empty.NotingRegisteredIfNull())</label>
+                    <br />
+                    <strong>@UIElements.WebsiteAddress</strong>:
+                    <label class="card-title m-t-10">@(Model.WebsiteAddress ?? string.Empty.NotingRegisteredIfNull())</label>
+                    <br />
+                    <strong>@UIElements.City</strong>:
+                    <label class="card-title m-t-10">@Model.CityName </label>
+                    <br />
+
                 </div>
             </div>
             <div>
                 <div class="card-footer">
                     <div class="text-left">
-                        <a class="btn btn-primary back-btn text-white">بازگشت</a>
+                        <a asp-controller="Hotels" asp-action="EditBasics" asp-route-id="@Model.Id" class="btn btn-warning">@UIElements.Edit</a>
+                        <a asp-controller="Hotels" asp-action="Index" asp-route-cityId="@Model.CityId" class="btn btn-primary">@UIElements.Back</a>
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
     <!-- Column -->
@@ -44,111 +58,159 @@
             <!-- Tabs -->
             <ul class="nav nav-pills custom-pills" id="pills-tab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active show" id="pills-timeline-tab" data-toggle="pill" href="#hotel-info"
+                    <a class="nav-link active show" id="pills-setting-tab" data-toggle="pill" href="#Fa"
                        role="tab" aria-controls="pills-timeline" aria-selected="true">
-                        اطلاعات هتل
+                        @UIElements.Farsi
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-hotel-tab" data-toggle="pill" href="#hotel-tours"
+                    <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#En"
                        role="tab" aria-controls="pills-setting" aria-selected="false">
-                        تورهای هتل
+                        @UIElements.English
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-album-tab" data-toggle="pill" href="#photo-album"
+                    <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#Ar"
                        role="tab" aria-controls="pills-setting" aria-selected="false">
-                        آلبوم عکس های هتل
+                        @UIElements.Arabic
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-facilities-tab" data-toggle="pill" href="#hotel-facilities"
+                    <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#Af"
                        role="tab" aria-controls="pills-setting" aria-selected="false">
-                        امکانات هتل
+                        @UIElements.Dari
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-comments-tab" data-toggle="pill" href="#hotel-comments"
-                       role="tab" aria-controls="pills-setting" aria-selected="false">
-                        کامنت های هتل
-                        <span class="badge badge-info">
-                            (<span class="count-pending">@Model.CountPendingComments</span>)
-                        </span>
-                    </a>
-                </li>
+
             </ul>
             <!-- Tabs -->
             <div class="tab-content" id="pills-tabContent">
 
-                <div class="tab-pane fade active show" id="hotel-info" aria-labelledby="pills-timeline-tab">
+                <div class="tab-pane mt-3 fade active show" id="Fa" aria-labelledby="pills-timeline-tab">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3 col-xs-6 b-r">
-                                <strong>شهر</strong>
+                            <div class="col-md-4">
+                                <strong>@UIElements.HotelName</strong>
                                 <br>
-                                <p class="text-muted">@Model.CityFaName ( @Model.CityEnName )</p>
-                            </div>
-
-                            <div class="col-md-3 col-xs-6 b-r">
-                                <strong>ستاره هتل</strong>
-                                <br>
-                                <p class="text-muted">@Model.Stars</p>
-                            </div>
-                            <div class="col-md-3 col-xs-6">
-                                <strong>آدرس وبسایت هتل</strong>
-                                <br>
-                                <p class="text-muted">@Model.WebsiteAddress.PlaceEmptyIfNullOrEmpty()</p>
-                            </div>
-                            <div class="col-md-3 col-xs-6">
-                                <strong>آدرس هتل</strong>
-                                <br>
-                                <p class="text-muted">@Model.Address.PlaceEmptyIfNullOrEmpty()</p>
-                            </div>
-                            <div class="col-md-3 col-xs-6">
-                                <strong>نمره کاربران</strong>
-                                <br>
-                                <p class="text-muted">@Model.Rate</p>
-                            </div>
-                            <div class="col-md-3 col-xs-6">
-                                <strong>تلفن</strong>
-                                <br>
-                                <p class="text-muted">@Model.CallInformation.PlaceEmptyIfNullOrEmpty()</p>
-                            </div>
-                            <div class="col-md-3 col-xs-6">
-                                <strong>نام های دیگر</strong>
-                                <br>
-                                <p class="text-muted">@Model.OtherNames.PlaceEmptyIfNullOrEmpty()</p>
-                            </div>
-                            <div class="col-md-3 col-xs-6">
-                                <strong>تعداد اتاق</strong>
-                                <br>
-                                <p class="text-muted">@Model.RoomCount</p>
+                                <p class="text-muted">@(Model.HotelTranslationDto!.FirstOrDefault(hoteltranslation => hoteltranslation.LanguageId == AppConstants.FaLanguageLcid)?.Name ?? string.Empty.NotingRegisteredIfNull())</p>
                             </div>
                         </div>
-                        <hr>
-                        @Html.Raw(Model.About)
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>@UIElements.HotelAbout</strong>
+                                <br>
+                                <p class="text-muted">@(Model.HotelTranslationDto!.FirstOrDefault(hoteltranslation => hoteltranslation.LanguageId == AppConstants.FaLanguageLcid)?.About ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>@UIElements.Address</strong>
+                                <br>
+                                <p class="text-muted">@(Model.HotelTranslationDto!.FirstOrDefault(hoteltranslation => hoteltranslation.LanguageId == AppConstants.FaLanguageLcid)?.Address ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card-footer">
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-hotelId="@Model.Id" asp-route-languageId="@AppConstants.FaLanguageLcid">@UIElements.Edit</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="tab-pane fade mt-3" id="hotel-tours" aria-labelledby="pills-timeline-tab">
+
+                <div class="tab-pane fade mt-3" id="En" aria-labelledby="pills-timeline-tab">
                     <div class="card-body">
-                        <partial name="/Views/Hotels/Partials/_HotelToursPartial.cshtml" model="@Model.Id" />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>@UIElements.HotelName</strong>
+                                <br>
+                                <p class="text-muted">@(Model.HotelTranslationDto!.FirstOrDefault(hoteltranslation => hoteltranslation.LanguageId == AppConstants.EnLanguageLcid)?.Name ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>@UIElements.HotelAbout</strong>
+                                <br>
+                                <p class="text-muted">@(Model.HotelTranslationDto!.FirstOrDefault(hoteltranslation => hoteltranslation.LanguageId == AppConstants.EnLanguageLcid)?.About ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>@UIElements.Address</strong>
+                                <br>
+                                <p class="text-muted">@(Model.HotelTranslationDto!.FirstOrDefault(hoteltranslation => hoteltranslation.LanguageId == AppConstants.EnLanguageLcid)?.Address ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card-footer">
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-hotelId="@Model.Id" asp-route-languageId="@AppConstants.EnLanguageLcid">@UIElements.Edit</a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <div class="tab-pane fade mt-3" id="photo-album" aria-labelledby="pills-timeline-tab">
+
+                <div class="tab-pane fade mt-3" id="Ar" aria-labelledby="pills-timeline-tab">
                     <div class="card-body">
-                        <vc:hotel-album hotel-id="@Model.Id" />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>@UIElements.HotelName</strong>
+                                <br>
+                                <p class="text-muted">@(Model.HotelTranslationDto!.FirstOrDefault(hoteltranslation => hoteltranslation.LanguageId == AppConstants.ArLanguageLcid)?.Name ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>@UIElements.HotelAbout</strong>
+                                <br>
+                                <p class="text-muted">@(Model.HotelTranslationDto!.FirstOrDefault(hoteltranslation => hoteltranslation.LanguageId == AppConstants.ArLanguageLcid)?.About ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>@UIElements.Address</strong>
+                                <br>
+                                <p class="text-muted">@(Model.HotelTranslationDto!.FirstOrDefault(hoteltranslation => hoteltranslation.LanguageId == AppConstants.ArLanguageLcid)?.Address ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card-footer">
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-hotelId="@Model.Id" asp-route-languageId="@AppConstants.ArLanguageLcid">@UIElements.Edit</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="tab-pane fade mt-3" id="hotel-facilities" aria-labelledby="pills-timeline-tab">
+                
+                <div class="tab-pane fade mt-3" id="Af" aria-labelledby="pills-timeline-tab">
                     <div class="card-body">
-                        <vc:hotel-facilities hotel-id="Model.Id" />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>@UIElements.HotelName</strong>
+                                <br>
+                                <p class="text-muted">@(Model.HotelTranslationDto!.FirstOrDefault(hoteltranslation => hoteltranslation.LanguageId == AppConstants.AfLanguageLcid)?.Name ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>@UIElements.HotelAbout</strong>
+                                <br>
+                                <p class="text-muted">@(Model.HotelTranslationDto!.FirstOrDefault(hoteltranslation => hoteltranslation.LanguageId == AppConstants.AfLanguageLcid)?.About ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>@UIElements.Address</strong>
+                                <br>
+                                <p class="text-muted">@(Model.HotelTranslationDto!.FirstOrDefault(hoteltranslation => hoteltranslation.LanguageId == AppConstants.AfLanguageLcid)?.Address ?? string.Empty.NotingRegisteredIfNull())</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card-footer">
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-hotelId="@Model.Id" asp-route-languageId="@AppConstants.AfLanguageLcid">@UIElements.Edit</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="tab-pane fade mt-3" id="hotel-comments" aria-labelledby="pills-timeline-tab">
-                    <div class="card-body">
-                        <partial name="/Views/Hotels/Comments.cshtml" model="Model.Id" />
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -172,4 +234,4 @@
         HotelDetails.init(@Model.Id);
     </script>
 
-}*@
+}

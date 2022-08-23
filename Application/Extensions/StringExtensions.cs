@@ -10,8 +10,10 @@ namespace Application.Extensions
             return string.IsNullOrEmpty(text) ? UIElements.NotingRegistered : text;
         }
 
-        public static string ToEnglishNumbers(this string input)
+        public static string ToEnglishNumbers(this string? input)
         {
+            if (string.IsNullOrEmpty(input))
+                return "";
             string englishNumbers = "";
 
             for(int i = 0; i < input.Length; i++)

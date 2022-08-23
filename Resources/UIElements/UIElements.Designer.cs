@@ -79,6 +79,15 @@ namespace Resources.UIElements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Arabic.
         /// </summary>
         public static string Arabic {
@@ -111,6 +120,15 @@ namespace Resources.UIElements {
         public static string CopyRight {
             get {
                 return ResourceManager.GetString("CopyRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Count Of Stars.
+        /// </summary>
+        public static string CountOfStars {
+            get {
+                return ResourceManager.GetString("CountOfStars", resourceCulture);
             }
         }
         
@@ -178,11 +196,38 @@ namespace Resources.UIElements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hotel about.
+        /// </summary>
+        public static string HotelAbout {
+            get {
+                return ResourceManager.GetString("HotelAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hotel Facilities.
         /// </summary>
         public static string HotelFacilities {
             get {
                 return ResourceManager.GetString("HotelFacilities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hotel name.
+        /// </summary>
+        public static string HotelName {
+            get {
+                return ResourceManager.GetString("HotelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hotel phone.
+        /// </summary>
+        public static string HotelPhone {
+            get {
+                return ResourceManager.GetString("HotelPhone", resourceCulture);
             }
         }
         
@@ -345,6 +390,15 @@ namespace Resources.UIElements {
         public static string ViewMedicalCenter {
             get {
                 return ResourceManager.GetString("ViewMedicalCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Website address.
+        /// </summary>
+        public static string WebsiteAddress {
+            get {
+                return ResourceManager.GetString("WebsiteAddress", resourceCulture);
             }
         }
     }

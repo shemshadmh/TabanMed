@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Domain/Entities/Localization/Language.cs
+/TabanMed.Admin/wwwroot/images/Hotels/Thumbnails
+/TabanMed.Admin/wwwroot/images/Hotels

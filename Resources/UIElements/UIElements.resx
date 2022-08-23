@@ -123,6 +123,9 @@
   <data name="AddNewMedicalCenter" xml:space="preserve">
     <value>Add new medical nenter</value>
   </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
   <data name="Arabic" xml:space="preserve">
     <value>Arabic</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="CopyRight" xml:space="preserve">
     <value>Made with ❤ by Taban Team</value>
+  </data>
+  <data name="CountOfStars" xml:space="preserve">
+    <value>Count Of Stars</value>
   </data>
   <data name="Dari" xml:space="preserve">
     <value>Dari</value>
@@ -156,8 +162,17 @@
   <data name="Farsi" xml:space="preserve">
     <value>Farsi</value>
   </data>
+  <data name="HotelAbout" xml:space="preserve">
+    <value>Hotel about</value>
+  </data>
   <data name="HotelFacilities" xml:space="preserve">
     <value>Hotel Facilities</value>
+  </data>
+  <data name="HotelName" xml:space="preserve">
+    <value>Hotel name</value>
+  </data>
+  <data name="HotelPhone" xml:space="preserve">
+    <value>Hotel phone</value>
   </data>
   <data name="Hotels" xml:space="preserve">
     <value>Hotels</value>
@@ -212,5 +227,8 @@
   </data>
   <data name="ViewMedicalCenter" xml:space="preserve">
     <value>View medical center</value>
+  </data>
+  <data name="WebsiteAddress" xml:space="preserve">
+    <value>Website address</value>
   </data>
 </root>
