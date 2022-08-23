@@ -18,6 +18,10 @@ namespace Domain.Entities.MedicalCenters
 
         // City Translations
         public ICollection<MedicalCenterTranslation>? MedicalCenterTranslations { get; set; }
+
+        //MedicalCenterMedicalSrvice
+        public ICollection<MedicalCenterMedicalService>? MedicalCenterMedicalServices { get; set; }
+
         #endregion
     }
 }

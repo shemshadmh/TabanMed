@@ -61,6 +61,10 @@
         {
             public const int TitleMaxLength = 30;
         }
+        public static class MedicalService
+        {
+            public const int TitleMaxLength = 30;
+        }
 
         public static class HotelImage
         {

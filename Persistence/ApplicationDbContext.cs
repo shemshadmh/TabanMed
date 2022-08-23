@@ -60,6 +60,9 @@ namespace Persistence
         #region MedicalCenter
         public DbSet<MedicalCenter> MedicalCenters => Set<MedicalCenter>();
         public DbSet<MedicalCenterTranslation> MedicalCenterTranslations=> Set<MedicalCenterTranslation>();
+        public DbSet<MedicalCenterMedicalService> MedicalCenterMedicalServices=> Set<MedicalCenterMedicalService>();
+        public DbSet<MedicalService> MedicalServices=> Set<MedicalService>();
+        public DbSet<MedicalServiceTranslation> MedicalServiceTranslations=> Set<MedicalServiceTranslation>();
 
 
         #endregion

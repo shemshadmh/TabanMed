@@ -25,5 +25,8 @@ namespace Domain.Entities.Localization
 
         // MedicalCenter Translation
         public ICollection<MedicalCenterTranslation>? MedicalCenterTranslations{ get; set; }
+
+        // Medical Serviec Translations
+        public ICollection<MedicalServiceTranslation>? MedicalServiceTranslations { get; set; }
     }
 }

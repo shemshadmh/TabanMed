@@ -43,6 +43,12 @@ namespace Application.Interfaces.Application
 
         public DbSet<MedicalCenter> MedicalCenters { get; }
         public DbSet<MedicalCenterTranslation> MedicalCenterTranslations { get; }
+        public DbSet<MedicalCenterMedicalService> MedicalCenterMedicalServices { get; }
+        public DbSet<MedicalService> MedicalServices { get; }
+        public DbSet<MedicalServiceTranslation> MedicalServiceTranslations { get; }
+
+
+        
 
         #endregion
 
