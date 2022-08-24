@@ -204,6 +204,12 @@
   <data name="MedicalCenterPhone" xml:space="preserve">
     <value>تلفن مرکز درمانی</value>
   </data>
+  <data name="MedicalServices" xml:space="preserve">
+    <value>خدمات درمانی</value>
+  </data>
+  <data name="MedicalServicesList" xml:space="preserve">
+    <value>لیست خدمات درمانی</value>
+  </data>
   <data name="NotingRegistered" xml:space="preserve">
     <value>موردی ثبت نشده!</value>
   </data>

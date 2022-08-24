@@ -45,6 +45,7 @@ namespace TabanMed.Infrastructure
             #region Medical Center
 
             services.AddTransient<IMedicalCenterApplication, MedicalCenterApplication>();
+            services.AddTransient<IMedicalServiceApplication, MedicalServiceApplication>();
 
             #endregion
 

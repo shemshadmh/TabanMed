@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
@@ -11,9 +12,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220824072510_TabanMed_20220824_115415")]
+    partial class TabanMed_20220824_115415
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -442,8 +444,8 @@ namespace Persistence.Migrations
                         {
                             Id = "b0a39202-a221-47c7-9d34-dc4479ec33f2",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "3908b5af-ce0b-4bd6-bcd2-a9a8e671deef",
-                            Created = new DateTime(2022, 8, 24, 7, 27, 44, 700, DateTimeKind.Utc).AddTicks(9730),
+                            ConcurrencyStamp = "b27fd5fb-8753-4fd4-9b52-c462cfef71eb",
+                            Created = new DateTime(2022, 8, 24, 7, 25, 8, 345, DateTimeKind.Utc).AddTicks(3785),
                             CreatedBy = "Seed",
                             Email = "hatef@tabanmed.com",
                             EmailConfirmed = false,
@@ -457,7 +459,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "HATEFADMIN",
                             PasswordHash = "AQAAAAEAACcQAAAAEDCEjgFnVqs3jS+KYwhsCsNHoR7mV7tQ7/NUHc2bxUc9HjMuXSNCax/I5jPdFBGsVg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2aa31d4d-3675-4bf6-b2a7-f4dae94c996d",
+                            SecurityStamp = "100984b0-de84-4c13-ad9f-22df013fd90c",
                             TwoFactorEnabled = false,
                             UserName = "HatefAdmin"
                         },
@@ -465,8 +467,8 @@ namespace Persistence.Migrations
                         {
                             Id = "04a76057-948a-4fd1-b9f0-ed36991fcaa5",
                             AccessFailedCount = (byte)0,
-                            ConcurrencyStamp = "87a9709f-9bc1-44f7-a34b-53b68fad8292",
-                            Created = new DateTime(2022, 8, 24, 7, 27, 44, 700, DateTimeKind.Utc).AddTicks(9796),
+                            ConcurrencyStamp = "c30cc6c5-8a2f-4d37-8d3f-04aacd20c94c",
+                            Created = new DateTime(2022, 8, 24, 7, 25, 8, 345, DateTimeKind.Utc).AddTicks(3913),
                             CreatedBy = "Seed",
                             Email = "operator@tabanmed.com",
                             EmailConfirmed = false,
@@ -479,7 +481,7 @@ namespace Persistence.Migrations
                             NormalizedUserName = "TABANMEDOPERATOR",
                             PasswordHash = "AQAAAAEAACcQAAAAEGO2+kmYpAenNWk5p1UYgYOMbU3/pUOoc4yRkUma3Zq2Hsc8g9HSWpztF3MozgJdig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "217e1f45-16f8-49ae-b5e9-419c044169bb",
+                            SecurityStamp = "f4c2b6f7-a179-4f3d-960c-5a8b5f0023ba",
                             TwoFactorEnabled = false,
                             UserName = "tabanmedOperator"
                         });
@@ -522,7 +524,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "3e2c9b3b-1c5c-41a5-9fe6-9004dcd4b78b",
-                            ConcurrencyStamp = "725000ad-13c1-4c5c-863c-c3254d8143df",
+                            ConcurrencyStamp = "0db282e0-dac3-4386-b3be-ff972d5140ed",
                             DisplayName = "ادمین کل سیستم",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
@@ -530,7 +532,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "6f4024b0-153e-4b8b-a851-5befbdb955f9",
-                            ConcurrencyStamp = "b8817d69-45c7-43b6-9e5b-aef667186c23",
+                            ConcurrencyStamp = "ff0a5719-67b9-4f8e-acc6-c45a2b401f45",
                             DisplayName = "اپراتور سیستم",
                             Name = "SystemOperator",
                             NormalizedName = "SYSTEMOPERATOR"

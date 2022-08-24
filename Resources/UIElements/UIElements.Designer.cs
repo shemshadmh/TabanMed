@@ -322,6 +322,24 @@ namespace Resources.UIElements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Medical Services.
+        /// </summary>
+        public static string MedicalServices {
+            get {
+                return ResourceManager.GetString("MedicalServices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medical Services List.
+        /// </summary>
+        public static string MedicalServicesList {
+            get {
+                return ResourceManager.GetString("MedicalServicesList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Noting Registered.
         /// </summary>
         public static string NotingRegistered {

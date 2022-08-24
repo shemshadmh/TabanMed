@@ -204,6 +204,12 @@
   <data name="MedicalCenterPhone" xml:space="preserve">
     <value>Medical center phone</value>
   </data>
+  <data name="MedicalServices" xml:space="preserve">
+    <value>Medical Services</value>
+  </data>
+  <data name="MedicalServicesList" xml:space="preserve">
+    <value>Medical Services List</value>
+  </data>
   <data name="NotingRegistered" xml:space="preserve">
     <value>Noting Registered</value>
   </data>
