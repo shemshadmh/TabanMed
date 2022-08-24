@@ -81,6 +81,12 @@
                         @UIElements.Dari
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#HotelFacility"
+                       role="tab" aria-controls="pills-setting" aria-selected="false">
+                        @UIElements.HotelFacilities
+                    </a>
+                </li>
 
             </ul>
             <!-- Tabs -->
@@ -210,8 +216,22 @@
                         </div>
                     </div>
                 </div>
-
+                
+                <div class="tab-pane fade mt-3" id="HotelFacility" aria-labelledby="pills-timeline-tab">
+                    <div class="card-body">
+                        <div class="tab-pane  mt-3" id="hotel-facilities" aria-labelledby="pills-timeline-tab">
+                            <div class="card-body">
+                                <vc:hotel-facilities hotel-id="Model.Id" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
+            
+            
+            
+           
         </div>
     </div>
     <!-- Column -->
@@ -230,6 +250,7 @@
          model="new AppendToHotelAlbumDto { HotelId = Model.Id }" />
     <vc:edit-hotel-facilities hotel-id="@Model.Id" />
     <script src="~/js/Pages/Hotels/HotelDetails.js" asp-append-version="true"></script>
+    <script src="~/js/Pages/Hotels/HotelFacilityIndex.js" asp-append-version="true"></script>
     <script>
         HotelDetails.init(@Model.Id);
     </script>

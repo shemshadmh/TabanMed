@@ -1,0 +1,33 @@
+﻿@using Resources.ErrorMessages
+@using Application.Extensions
+@model IEnumerable<Application.Dtos.Hotels.HotelFacilities.HotelFacilityForCheckBox>
+
+@if (Model != null && Model.Any(facility=>facility.ParentId != null))
+{
+    
+    foreach (var category in Model
+        .Where(c => c.ParentId == null))
+    {
+        
+        @if (Model.Any(c => c.ParentId == category.Value))
+        {
+            <h5>@category.Title</h5>
+            foreach (var facility in Model.Where(c => c.ParentId == category.Value))
+            {
+                <ul class="">
+                    <li class="">
+                        <i class=""></i> @facility.Title
+                    </li>
+                </ul>
+            }
+            <hr/>
+        }
+        
+        
+    }
+}
+else
+{
+    <h6>@string.Empty.NotingRegisteredIfNull()</h6>
+}
+<a class="btn btn-warning edit-hotel-Facilities text-white">ویرایش امکانات هتل</a>

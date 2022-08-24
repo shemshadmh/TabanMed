@@ -429,6 +429,164 @@ namespace TabanMed.Infrastructure.Services.Hotels
             }
         }
 
+
+        public async Task<IEnumerable<HotelFacilityForCheckBox>> GetHotelSelectedFacilities(int hotelId)
+        {
+            try
+            {
+                var result = new List<HotelFacilityForCheckBox>();
+
+                var parentFacilities = await  _dbContext.HotelFacilities
+                    .Where(facility => facility.ParentId == null)
+                    .Select(facility=>new HotelFacilityForCheckBox()
+                    {
+                        Title = facility.HotelFacilityTranslations!
+                                    .Where(facilityTranslation => facilityTranslation.LanguageId == _currentServices.LanguageId)
+                                    .Select(facilityTranslation => facilityTranslation.Title)
+                                    .Single(),
+
+                        Value = facility.HotelFacilityTranslations!
+                                    .Where(facilityTranslation => facilityTranslation.LanguageId == _currentServices.LanguageId)
+                                    .Select(facilityTranslation => facilityTranslation.FacilityId)
+                                    .Single(),
+
+                        ParentId = facility.ParentId
+
+                    })
+                    .ToListAsync();
+
+                var selectedFacilitiesQuery = await _dbContext.HotelSelectedFacilities
+                    .Include(selectedFacility => selectedFacility.HotelFacility)
+                    .Where(selectedFacility => selectedFacility.HotelId == hotelId)
+                    .Select(facility => new HotelFacilityForCheckBox()
+                    {
+                        Title = facility.HotelFacility.HotelFacilityTranslations!
+                            .Where(facilityTranslation => facilityTranslation.LanguageId == _currentServices.LanguageId)
+                            .Select(facilityTranslation => facilityTranslation.Title)
+                            .Single(),
+
+                        Value = facility.HotelFacility.HotelFacilityTranslations!
+                            .Where(facilityTranslation => facilityTranslation.LanguageId == _currentServices.LanguageId)
+                            .Select(facilityTranslation => facilityTranslation.FacilityId)
+                            .Single(),
+
+                        ParentId = facility.HotelFacility.ParentId
+
+                    })
+                    .ToListAsync();
+
+                result.AddRange(parentFacilities);
+                result.AddRange(selectedFacilitiesQuery);
+                return result;
+            }
+
+            catch (Exception e)
+            {
+                _logger.LogCritical(e, "Could not GetHotelSelectedFacilities[hotelId={}]",hotelId);
+                return null;
+            }
+
+        }
+        
+        public async Task<EditHotelFacilitiesDto> GetHotelFacilitiesForEdit(int hotelId)
+        {
+            try
+            {
+                var allHotelFacilities = await _dbContext.HotelFacilities.AsNoTracking()
+                .Include(hotelFacility => hotelFacility.HotelFacilityTranslations)
+                .Select(hotelFacilityTranslation => new HotelFacilityForCheckBox()
+                {
+
+                    Title = hotelFacilityTranslation.HotelFacilityTranslations!
+                        .Where(facilityTranslation => facilityTranslation.LanguageId == _currentServices.LanguageId)
+                        .Select(facilityTranslation => facilityTranslation.Title)
+                        .Single(),
+
+                    Value = hotelFacilityTranslation.HotelFacilityTranslations!
+                        .Where(facilityTranslation => facilityTranslation.LanguageId == _currentServices.LanguageId)
+                        .Select(facilityTranslation => facilityTranslation.FacilityId)
+                        .Single(),
+
+                    ParentId = hotelFacilityTranslation.ParentId
+
+                })
+                .ToListAsync();
+
+                var selectedFacilitiesByHotel = await _dbContext.HotelSelectedFacilities
+                    .Include(selectedFacility => selectedFacility.HotelFacility)
+                    .Where(selectedFacility => selectedFacility.HotelId == hotelId)
+                    .Select(facility => facility.HotelFacilityId)
+                    .ToListAsync();
+
+                var facilityListForCheckBox = allHotelFacilities
+                    .Select(facility => new HotelFacilityForCheckBox()
+                    {
+                        Title = facility.Title,
+                        Value = facility.Value,
+                        IsSelected = selectedFacilitiesByHotel != null && selectedFacilitiesByHotel.Contains(facility.Value),
+                        ParentId = facility.ParentId,
+
+                    }).ToList();
+                var res = new EditHotelFacilitiesDto
+                {
+                    AllFacilities = facilityListForCheckBox,
+                    HotelId = hotelId
+                };
+                return res;
+            }
+
+            catch (Exception e)
+            {
+                _logger.LogCritical(e, "Could not GetHotelFacilitiesForEdit [hotelId={}]", hotelId);
+                return null;
+            }
+
+
+        }
+
+
+        public async Task<OperationResult> EditHotelFacilities(EditHotelFacilitiesDto model)
+        {
+            
+            var operation = new OperationResult();
+            try
+            {
+                var listToRemove =  _dbContext.HotelSelectedFacilities.AsNoTracking()
+                    .Where(facility => facility.HotelId == model.HotelId);
+                if (await listToRemove.AnyAsync())
+                {
+                    _dbContext.HotelSelectedFacilities.RemoveRange(listToRemove);
+                    await _dbContext.SaveChangesAsync();
+                }
+
+                foreach (var facilityId in model.SelectedHotelFacilities)
+                {
+                    /*if (!await _selectedFacilitiesRepository
+                            .ExistsAsync(fa => fa.HotelId == model.HotelId &&
+                                               fa.HotelFacilityId == facilityId))*/
+                    await _dbContext.HotelSelectedFacilities
+                        .AddAsync(new HotelSelectedFacility()
+                        {
+                            HotelId = model.HotelId,
+                            HotelFacilityId = facilityId
+                        });
+                    
+                }
+                await _dbContext.SaveChangesAsync();
+                /*watch.Stop();
+                _logger.LogInformation("it took [{WatchElapsedMilliseconds}]ms", watch.ElapsedMilliseconds);*/
+                return operation.Succeeded();
+            }
+            catch (Exception e)
+            {
+                _logger.LogCritical(e, "could not edit hotel facilities");
+                return operation.Failed(ErrorMessages.ErrorOccurred);
+            }
+        }
+
+
+
+
         public async ValueTask DisposeAsync()
         {
             await _dbContext.DisposeAsync();

@@ -1,0 +1,58 @@
+﻿@using Resources.ErrorMessages
+@model Application.Dtos.Hotels.Hotels.EditHotelFacilitiesDto
+<div class="modal fade " id="edit-hotel-facilities-modal" tabindex="-1" role="dialog"
+     aria-labelledby="edit-hotel-facilities-modal-label" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="edit-hotel-facilities-modal-label">افزودن امکانات هتل</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div asp-validation-summary="All"
+                     class="text-danger">
+                </div>
+                @if (Model?.AllFacilities != null && Model.AllFacilities.Count > 0)
+                {
+                    <form asp-controller="Hotels" asp-action="EditHotelFacilities" method="post"
+                          id="hotel-facility-edit-form"
+                          data-ajax="true" data-ajax-begin=""
+                          data-ajax-complete="HotelDetails.methods.createFacilityCompleteCallback">
+                        <input type="hidden" asp-for="HotelId"/>
+                        <div class="row">
+                            @foreach (var parent in Model.AllFacilities!.Where(facility => facility.ParentId == null))
+                            {
+                                <div class="col-md-6">
+                                    <h5>@parent.Title</h5>
+                                    @foreach (var facility in Model.AllFacilities.Where(all => all.ParentId == parent.Value))
+                                    {
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="facility_@facility.Value"
+                                                   value="@facility.Value" name="SelectedHotelFacilities"
+                                                   @(facility.IsSelected ? "checked" : "")>
+                                            <label class="custom-control-label" for="facility_@facility.Value">
+                                                @facility.Title
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <div>
+                        @ErrorMessages.NoRegisterdFacility
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">انصراف</button>
+                <button type="submit" form="hotel-facility-edit-form" class="btn btn-success">ذخیره</button>
+            </div>
+        </div>
+    </div>
+</div>

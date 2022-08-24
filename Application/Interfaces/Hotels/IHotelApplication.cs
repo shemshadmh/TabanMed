@@ -19,5 +19,9 @@ namespace Application.Interfaces.Hotels
 
         Task<OperationResult> EditHotelBasicsAsync(HotelDetailsBasicsDto model);
 
+        Task<IEnumerable<HotelFacilityForCheckBox>> GetHotelSelectedFacilities(int hotelId);
+        Task<EditHotelFacilitiesDto> GetHotelFacilitiesForEdit(int hotelId);
+        Task<OperationResult> EditHotelFacilities(EditHotelFacilitiesDto model);
+
     }
 }
