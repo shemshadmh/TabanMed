@@ -201,4 +201,13 @@
   <data name="EnterJustEnglishCharacters" xml:space="preserve">
     <value>{0} را به صورا انگلیسی وارد کنید</value>
   </data>
+  <data name="YouAreLimitedForATime" xml:space="preserve">
+    <value>شما برای مدتی محدود شده اید، لطفا پس از چند دقیقه مجددا تلاش کنید !</value>
+  </data>
+  <data name="AccessDeniedOrLimited" xml:space="preserve">
+    <value>شما اجازه دسترسی ندارید و یا منبع محدود شده است!</value>
+  </data>
+  <data name="WrongUserNameOrPassword" xml:space="preserve">
+    <value>نام کاربری یا رمز عبور اشتباه است</value>
+  </data>
 </root>

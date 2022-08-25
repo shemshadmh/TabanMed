@@ -202,4 +202,13 @@
   <data name="EnterJustEnglishCharacters" xml:space="preserve">
     <value>Enter {0}  just in english characters</value>
   </data>
+  <data name="YouAreLimitedForATime" xml:space="preserve">
+    <value>You are limited for a few minutes , try again later.</value>
+  </data>
+  <data name="AccessDeniedOrLimited" xml:space="preserve">
+    <value>you are not authorized !</value>
+  </data>
+  <data name="WrongUserNameOrPassword" xml:space="preserve">
+    <value>Wrong password or userName</value>
+  </data>
 </root>

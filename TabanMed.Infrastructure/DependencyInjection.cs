@@ -18,6 +18,7 @@ using TabanMed.Infrastructure.Services.Destination;
 using TabanMed.Infrastructure.Services.Globalization;
 using TabanMed.Infrastructure.Services.Hotels;
 using TabanMed.Infrastructure.Services.MedicalCenters;
+using TabanMed.Infrastructure.Services.Users;
 
 namespace TabanMed.Infrastructure
 {
@@ -26,6 +27,12 @@ namespace TabanMed.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services,
             IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
+            #region users
+
+            services.AddScoped<IUserApplication, UsersApplication>();
+
+            #endregion
+
             #region Application Services
 
             services.AddScoped<ICurrentServices, CurrentServices>();

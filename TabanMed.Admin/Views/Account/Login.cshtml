@@ -1,0 +1,126 @@
+﻿@using Application.Dtos.Application
+@model Application.Dtos.Account.LoginSystemUserDto
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/Administration/assets/images/favicon.png">
+    <title>سامانه مدیریت تابان | ورود</title>
+    <!-- Custom CSS -->
+    <link href="/css/style.min.css" rel="stylesheet">
+    <link href="/css/customStyle.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <div class="preloader">
+            <div class="lds-ripple">
+                <div class="lds-pos"></div>
+                <div class="lds-pos"></div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Login box.scss -->
+        <!-- ============================================================== -->
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(/Administration/assets/images/big/auth-bg.jpg) no-repeat center center;">
+            <div class="auth-box">
+                <div id="loginform">
+                    <div class="logo">
+                        <span class=login-logo><img src="/Administration/assets/images/logo.png" alt="logo" /></span>
+                        <h5 class="font-medium m-b-20">ورود به پنل مدیریت</h5>
+                    </div>
+                    <!-- Form -->
+                    <div class="row">
+                        <div class="col-12">
+                            <form class="form-horizontal m-t-20 login_form" asp-action="Login" method="post">
+
+                                @if (TempData[AppConstants.TempDataMessageTitle] != null)
+                                {
+                                    <partial name="_PartialNotificationDivision" model="new NotificationDto(Convert.ToBoolean(TempData[AppConstants.TempDataMessageTitle].ToString().Split('~')[1].Trim()),TempData[AppConstants.TempDataMessageTitle].ToString().Split('~')[0].Trim())" />
+                                }
+
+                                <div class="text-danger validation-summary-valid" data-valmsg-summary="true">
+                                    <ul>
+                                        <li style="display: none"></li>
+                                    </ul>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="ti-user"></i></span>
+                                    </div>
+                                    <input class="form-control form-control-lg" placeholder="نام کاربری" type="text" data-val="true" data-val-maxlength="حداکثر تعداد کارکتر  نام کاربری باید 20 باشد!" data-val-maxlength-max="20" data-val-regex="نام کاربری را به صورت کارکتر انگلیسی وارد کنید !" data-val-regex-pattern="^[A-Za-z ]*$" data-val-required="نام کاربری الزامی است!" id="UserName" maxlength="20" name="UserName">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon2"><i class="ti-pencil"></i></span>
+                                    </div>
+                                    <input class="form-control form-control-lg" placeholder="رمز عبور" type="password" data-val="true" data-val-minlength="حداقل تعداد کارکتر  رمز عبور باید 8 باشد!" data-val-minlength-min="8" data-val-required="رمز عبور الزامی است!" id="Password" name="Password">
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" asp-for="RememberMe">
+                                            <label class="custom-control-label" asp-for="RememberMe">مرا به خاطر بسپار</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group text-center">
+                                    <div class="col-xs-12 p-b-20">
+                                        <input type="hidden" id="response" name="response" value="0" />
+                                        <button class="btn btn-block btn-lg btn-info g-recaptcha" data-sitekey="6LdQ9cIeAAAAACXw6RyTTxs_eVgQRIvMGVVaFENM" data-callback='onSubmit' type="button">ورود به حساب کاربری</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- All Required js -->
+    <!-- ============================================================== -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    @* <script src="/lib/popper.js/dist/umd/popper.min.js"></script> *@
+    <script src="/lib/bootstrap/bootstrap.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugin js -->
+    <!-- ============================================================== -->
+    <script>
+            $('[data-toggle="tooltip"]').tooltip();
+            $(".preloader").fadeOut();
+            function onSubmit(res) {
+            $('input[name="response"]').val(res);
+            $('form.login_form').submit();
+        }
+    </script>
+</body>
+
+</html>
