@@ -1,0 +1,60 @@
+﻿@using Application.Dtos.Application
+
+
+@{
+    ViewData[AppConstants.ViewDataTitlePageName] = "کاربران سیستمی";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.css"/>
+}
+
+@if (TempData[AppConstants.TempDataMessageTitle] != null)
+{
+
+    <partial name="_PartialNotificationDivision" model="new NotificationDto(Convert.ToBoolean(TempData[AppConstants.TempDataMessageTitle].ToString().Split('~')[1].Trim()),
+    TempData[AppConstants.TempDataMessageTitle].ToString().Split('~')[0].Trim())" />
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div>
+
+                    <table id="dt_config" class="table m-t-30 no-wrap table-hover footable table-striped">
+
+                        <thead>
+                            <tr>
+                                <th class="footable-sortable">id<span class="footable-sort-indicator"></span></th>
+                                <th class="footable-sortable">fullname<span class="footable-sort-indicator"></span></th>
+                                <th class="footable-sortable">rolesAndLabels<span class="footable-sort-indicator"></span></th>
+                                <th class="footable-sortable">createdOn<span class="footable-sort-indicator"></span></th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <td colspan="2">
+                                <a asp-action="Create" class="btn btn-info btn-rounded text-white">افزودن کاربر جدید</a>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts
+{
+    @*<script src="/Administration/assets/extra-libs/DataTables/datatables.min.js"></script>*@
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.js"></script>
+    <script src="~/Administration/dist/js/panel/SystemUsersJs.js" asp-append-version="true"></script>
+}
+
+
+

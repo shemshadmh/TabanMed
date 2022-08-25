@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.Dtos.Account
+namespace TabanAgency.Domain.Dtos.SystemUsers
 {
     public class LoginSystemUserDto
     {

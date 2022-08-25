@@ -1,0 +1,64 @@
+﻿@using Application.Dtos.Application
+@model TabanAgency.Domain.Dtos.SystemUsers.EditUserRolesDto
+
+@{
+    ViewData[AppConstants.ViewDataTitlePageName] = "ویرایش نقش‌های کاربر";
+    ViewData[AppConstants.ViewDataControllerName] = "کاربران سیستمی";
+    ViewData[AppConstants.ViewDataControllerRoute] = "SystemUsers";
+    int i = 1;
+}
+
+
+@if (TempData[AppConstants.TempDataMessageTitle] != null)
+{
+    <partial name="_PartialNotificationDivision" model="new NotificationDto(Convert.ToBoolean(TempData[AppConstants.TempDataMessageTitle].ToString().Split('~')[1].Trim()), TempData[AppConstants.TempDataMessageTitle].ToString().Split('~')[0].Trim())"/>
+    }
+
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-4 col-xlg-3 col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <center class="m-t-30">
+                        <img src="~/Administration/assets/images/users/UserIcon.png" class="rounded-circle" width="150">
+                        <h4 class="card-title m-t-10">@Model.Fullname</h4>
+                        <h6 class="card-subtitle">@Model.Username&#64;</h6>
+                    </center>
+                </div>
+                <div>
+                    <hr>
+                    <div class="card-footer">
+                        <div class="text-left">
+                            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">بازگشت</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="col-lg-8 col-xlg-9 col-md-7">
+            <form asp-action="EditUserRoles" method="post" class="needs-validation">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">نقش های کاربر</h4>
+                        <input type="hidden" readonly name="userId" value="@Model.Id"/>
+                        @foreach (var item in Model.Roles)
+                        {
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="roles" id="@item.DisplayName" value="@item.RoleId" @(Model.UserRoles.Any(s => s == item.RoleId) ? "checked" : "")>
+                                <label class="custom-control-label" for="@item.DisplayName">@item.DisplayName</label>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-left">
+                            <button type="submit" class="btn btn-success">ثبت</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- Column -->
+    </div>

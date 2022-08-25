@@ -1,12 +1,12 @@
 ﻿using Application;
 using Application.Common;
-using Application.Dtos.Account;
 using Domain.Entities.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Resources.ErrorMessages;
+using TabanAgency.Domain.Dtos.SystemUsers;
 
 namespace TabanMed.Admin.Controllers;
 
