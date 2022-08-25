@@ -1,6 +1,8 @@
 using Application;
+using Application.Interfaces.Initializer;
 using Persistence;
 using Serilog;
+using TabanMed.Admin.Controllers;
 using TabanMed.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,7 +31,25 @@ builder.Services.AddAntiforgery(opts =>
 
 var app = builder.Build();
 using IServiceScope scope = app.Services.CreateScope();
+#region Database Initializer
 
+var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+
+// databases
+try
+{
+    await dbInitializer.Initialize(typeof(BaseAdminController), app.Environment.IsDevelopment());
+    Log.Information("Application db Initialized successfully on Environment {env}.",
+        app.Environment.IsDevelopment() ? "Development" : "Production");
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Application Db Initializer Failed! Please Check migrations or database connection!");
+    Log.CloseAndFlush();
+    // stop application
+}
+
+#endregion
 
 #region Static Folders Ckeck
 
