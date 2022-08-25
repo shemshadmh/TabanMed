@@ -9,56 +9,58 @@ using Domain.Entities.MedicalCenters.Translation;
 using Domain.Entities.Permission;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Interfaces.Application
+namespace Application.Interfaces.Application;
+
+public interface IApplicationDbContext
 {
-    public interface IApplicationDbContext
-    {
-        #region Permission
+    DbSet<TEntity> Set<TEntity>()
+        where TEntity : class;
+    
+    #region Permission
 
-        DbSet<Permission> Permission { get;}
+    DbSet<Permission> Permission { get;}
 
-        #endregion
+    #endregion
 
-        #region Destination
+    #region Destination
 
-        public DbSet<City> Cities { get;}
-        public DbSet<CityTranslation> CityTranslations { get; }
-        public DbSet<Country> Countries { get;}
-        public DbSet<CountryTranslation> CountriesTranslation { get; }
+    public DbSet<City> Cities { get;}
+    public DbSet<CityTranslation> CityTranslations { get; }
+    public DbSet<Country> Countries { get;}
+    public DbSet<CountryTranslation> CountriesTranslation { get; }
 
-        #endregion
+    #endregion
 
-        #region Hotel
+    #region Hotel
 
-        public DbSet<Hotel> Hotels { get;}
-        public DbSet<HotelTranslation> HotelTranslations { get; }
-        public DbSet<HotelFacility> HotelFacilities { get;}
-        public DbSet<HotelSelectedFacility> HotelSelectedFacilities { get;}
-        public DbSet<HotelImage> HotelImages { get;}
-        public DbSet<HotelFacilityTranslation> HotelFacilityTranslations { get;}
+    public DbSet<Hotel> Hotels { get;}
+    public DbSet<HotelTranslation> HotelTranslations { get; }
+    public DbSet<HotelFacility> HotelFacilities { get;}
+    public DbSet<HotelSelectedFacility> HotelSelectedFacilities { get;}
+    public DbSet<HotelImage> HotelImages { get;}
+    public DbSet<HotelFacilityTranslation> HotelFacilityTranslations { get;}
 
-        #endregion
+    #endregion
 
-        #region MedicalCenter
+    #region MedicalCenter
 
-        public DbSet<MedicalCenter> MedicalCenters { get; }
-        public DbSet<MedicalCenterTranslation> MedicalCenterTranslations { get; }
-        public DbSet<MedicalCenterMedicalService> MedicalCenterMedicalServices { get; }
-        public DbSet<MedicalService> MedicalServices { get; }
-        public DbSet<MedicalServiceTranslation> MedicalServiceTranslations { get; }
+    public DbSet<MedicalCenter> MedicalCenters { get; }
+    public DbSet<MedicalCenterTranslation> MedicalCenterTranslations { get; }
+    public DbSet<MedicalCenterMedicalService> MedicalCenterMedicalServices { get; }
+    public DbSet<MedicalService> MedicalServices { get; }
+    public DbSet<MedicalServiceTranslation> MedicalServiceTranslations { get; }
 
 
         
 
-        #endregion
+    #endregion
 
-        #region Localization
+    #region Localization
 
-        public DbSet<Language> Languages { get;}
+    public DbSet<Language> Languages { get;}
 
-        #endregion
+    #endregion
 
-        public ValueTask DisposeAsync();
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken=new());
-    }
+    public ValueTask DisposeAsync();
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken=new());
 }
