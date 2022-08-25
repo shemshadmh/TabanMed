@@ -1,4 +1,3 @@
-
 using Application;
 using Persistence;
 using Serilog;
@@ -13,7 +12,7 @@ builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
 
 builder.Services
     .AddPersistence(builder.Configuration)
-    .AddInfrastructure(builder.Configuration)
+    .AddInfrastructure(builder.Configuration, builder.Environment)
     .AddApplication();
 
 builder.Services.AddHttpContextAccessor();
@@ -42,25 +41,24 @@ try
     {
         // Hotel
         AppConstants.HotelsPhotoPath,
-        Path.Combine(AppConstants.HotelsPhotoPath,AppConstants.ThumbnailPath),
+        Path.Combine(AppConstants.HotelsPhotoPath, AppConstants.ThumbnailPath),
 
         // MedicalCenters
         AppConstants.MedicalCentersPhotoPath,
-        Path.Combine(AppConstants.MedicalCentersPhotoPath,AppConstants.ThumbnailPath)
-
+        Path.Combine(AppConstants.MedicalCentersPhotoPath, AppConstants.ThumbnailPath)
     };
 
-    foreach(var item in pathList)
+    foreach (var item in pathList)
     {
         var fullPath = Path.Combine(webEnv.WebRootPath, item);
-        if(!Directory.Exists(fullPath))
+        if (!Directory.Exists(fullPath))
             Directory.CreateDirectory(fullPath);
     }
 
 
     Log.Information("storage directories check succeeded.");
 }
-catch(Exception ex)
+catch (Exception ex)
 {
     Log.Fatal(ex, "An error occurred while validating fibato admin storage directories.");
     Log.CloseAndFlush();
