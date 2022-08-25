@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces.Application;
 using Application.Interfaces.Permissions;
+using Domain.Entities.Identity;
 using Domain.Entities.Permission;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -17,9 +18,27 @@ public class PermissionApplication : IPermissionApplication
         _dbContext = dbContext;
     }
 
-    public Task<bool> HasAccess(string claim, List<string> roles)
+    public async Task<bool> HasAccess(string claim, List<string> roles)
     {
-        throw new NotImplementedException();
+        try
+        {
+            if (string.IsNullOrEmpty(claim) || roles == null || !roles.Any())
+                return false;
+
+            var roleIds = await _dbContext.Set<Role>()
+                .AsNoTracking()
+                .Where(x => roles.Any(u => u == x.Name))
+                .Select(x => x.Id)
+                .ToListAsync();
+            var hasAccess = await _dbContext.Set<RoleClaim>().AsNoTracking()
+                .AnyAsync(roleClaim => roleIds.Contains(roleClaim.RoleId) && roleClaim.ClaimValue == claim);
+            return hasAccess;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "couldn't check Has Permission Access.");
+            return false;
+        }
     }
 
     public Task<bool> IsOperator(string username)
