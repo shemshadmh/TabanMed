@@ -1,16 +1,16 @@
-﻿HotelDetails = {
+﻿MedicalServiceDetaile = {
     fields: {
         
-        editHotelFacilitiesModalId: "edit-hotel-facilities-modal",
+        editMedcialServiceModalId: "edit-medical-service-modal",
         
     },
     methods: {
-        createFacilityCompleteCallback: (response) => {
+        createmedicalServiceCompleteCallback: (response) => {
             if (response.responseJSON.IsSucceeded === true) {
                 swal({
                     title: " تغیرات مورد نظر با موفقیت انجام شد", type: "success", timer: 2000, showConfirmButton: false
                 });
-                $("#" + HotelDetails.fields.editHotelFacilitiesModalId).modal("hide");
+                $("#" + MedicalServiceDetaile.fields.editMedcialServiceModalId).modal("hide");
                 window.location.reload();
             } else {
                 swal("خطا", response.responseJSON.Message, "error");
@@ -22,10 +22,10 @@
     },
     eventListeners: () => {
         $(document).on("click", ".edit-hotel-Facilities", (e) => {
-            $("#" + HotelDetails.fields.editHotelFacilitiesModalId).modal("show")
+            $("#" + MedicalServiceDetaile.fields.editMedcialServiceModalId).modal("show")
         });
     },
     init: () => {
-        HotelDetails.eventListeners();
+        MedicalServiceDetaile.eventListeners();
     }
 }

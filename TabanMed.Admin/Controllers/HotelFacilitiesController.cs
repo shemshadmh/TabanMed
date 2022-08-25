@@ -1,9 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Application.Common;
 using Application.Dtos.Hotels.HotelFacilities;
+using Application.Dtos.Hotels.Hotels;
 using Application.Interfaces.Hotels;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
+using Resources.ErrorMessages;
+using TabanMed.Admin.Attributes;
 using TabanMed.Admin.Extensions;
 
 namespace TabanMed.Admin.Controllers
@@ -78,5 +82,20 @@ namespace TabanMed.Admin.Controllers
 
             return Json(returnResult);
         }
+
+
+        [HttpPost("edit-hotel-facilities"), ValidateAntiForgeryToken, AjaxOnly]
+        public async Task<IActionResult> EditHotelFacilities([FromForm] EditHotelFacilitiesDto model)
+        {
+            var response = new Response<bool>();
+            if (!ModelState.IsValid)
+                return Json(response.Failed(ModelState.GetErrorMessages(), ErrorMessages.ModelValidationError));
+
+            var operation = await _hotelFacilityApplication.EditHotelFacilities(model);
+            return Json(operation.IsSucceeded
+                ? response.Succeeded()
+                : response.Failed(operation.Message!));
+        }
+
     }
 }

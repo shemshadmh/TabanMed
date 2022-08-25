@@ -163,19 +163,7 @@ namespace TabanMed.Admin.Controllers
         }
 
 
-        [HttpPost("edit-hotel-facilities"), ValidateAntiForgeryToken, AjaxOnly]
-        public async Task<IActionResult> EditHotelFacilities([FromForm] EditHotelFacilitiesDto model)
-        {
-            var response = new Response<bool>();
-            if (!ModelState.IsValid)
-                return Json(response.Failed(ModelState.GetErrorMessages(), ErrorMessages.ModelValidationError));
-
-            var operation = await _hotelApplication.EditHotelFacilities(model);
-            return Json(operation.IsSucceeded
-                ? response.Succeeded()
-                : response.Failed(operation.Message!));
-        }
-
+        
 
 
         #endregion

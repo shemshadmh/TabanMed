@@ -12,5 +12,9 @@ namespace Application.Interfaces.MedicalCenters
         Task<OperationResult> CreateMedicalService(MedicalServiceListItemDto medicalServiceDto);
 
         Task<OperationResult> UpdateMedicalService(MedicalServiceListItemDto medicalServiceDto);
+
+        Task<IEnumerable<MedicalServiceForCheckBox>> GetSelectedMedicalService(int medicalCenterId);
+        Task<EditMedicalServiceDto> GetMedicalServiceForEdit(int medicalCenterId);
+        Task<OperationResult> EditMedicalServices(EditMedicalServiceDto model);
     }
 }

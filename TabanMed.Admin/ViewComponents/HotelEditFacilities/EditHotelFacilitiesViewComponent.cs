@@ -5,16 +5,16 @@ namespace TabanMed.Admin.ViewComponents.HotelEditFacilities
 {
     public class EditHotelFacilitiesViewComponent:ViewComponent
     {
-        private readonly IHotelApplication _hotelApplication;
+        private readonly IHotelFacilityApplication _hotelFacilityApplication;
 
-        public EditHotelFacilitiesViewComponent(IHotelApplication hotelApplication)
+        public EditHotelFacilitiesViewComponent(IHotelFacilityApplication hotelFacilityApplication)
         {
-            _hotelApplication = hotelApplication;
+            _hotelFacilityApplication = hotelFacilityApplication;
         }
 
         public async Task<IViewComponentResult> InvokeAsync(int hotelId)
         {
-            var data = await _hotelApplication.GetHotelFacilitiesForEdit(hotelId);
+            var data = await _hotelFacilityApplication.GetHotelFacilitiesForEdit(hotelId);
             return View(data);
         }
     }

@@ -1,0 +1,59 @@
+﻿@using Resources.ErrorMessages
+@model Application.Dtos.MedicalCenters.MedicalServices.EditMedicalServiceDto
+<div class="modal fade " id="edit-medical-service-modal" tabindex="-1" role="dialog"
+     aria-labelledby="edit-medical-service-modal-label" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="edit-medical-services-modal-label">افزودن خدمات درمانی</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div asp-validation-summary="All"
+                     class="text-danger">
+                </div>
+                @if (Model?.AllMedicalService != null && Model.AllMedicalService.Count > 0)
+                {
+                    <form asp-controller="MedicalServices" asp-action="EditMedicalService" method="post"
+                          id="medicla-service-edit-form"
+                          data-ajax="true" data-ajax-begin=""
+                          data-ajax-complete="MedicalServiceDetaile.methods.createmedicalServiceCompleteCallback">
+                        <input type="hidden" asp-for="MedicalCenterId"/>
+                        <div class="row">
+                            @foreach (var parent in Model.AllMedicalService!.Where(medicalService => medicalService.ParentId == null))
+                            {
+                                <div class="col-md-6">
+                                    <h5>@parent.Title</h5>
+                                    @foreach (var medicalService in Model.AllMedicalService.Where(all => all.ParentId == parent.Value))
+                                    {
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="facility_@medicalService.Value"
+                                                   value="@medicalService.Value" name="SelectedMedicalServices"
+                                                   @(medicalService.IsSelected ? "checked" : "")>
+                                            <label class="custom-control-label" for="facility_@medicalService.Value">
+                                                @medicalService.Title
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <div>
+                        @ErrorMessages.NoRegisterdFacility
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">انصراف</button>
+                <button type="submit" form="medicla-service-edit-form" class="btn btn-success">ذخیره</button>
+            </div>
+        </div>
+    </div>
+</div>
+

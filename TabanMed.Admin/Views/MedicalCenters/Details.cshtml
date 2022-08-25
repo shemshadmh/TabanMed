@@ -61,6 +61,9 @@
                     <li class="nav-item">
                         <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#Af" role="tab" aria-controls="pills-setting" aria-selected="false">@UIElements.Dari</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#MedicalServices" role="tab" aria-controls="pills-setting" aria-selected="false">@UIElements.MedicalServices</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -174,10 +177,34 @@
                     </div>
                 </div>
             </div>
-
+            
+            <div class="tab-pane fade" id="MedicalServices" aria-labelledby="pills-timeline-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <vc:medical-services medical-center-id="Model.Id" />
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
     <!-- Column -->
 
 </div>
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+    <script src="~/lib/jquery/jquery.unobtrusive-ajax.js" asp-append-version="true"></script>
+
+    
+    <vc:edit-medical-service medical-center-id="@Model.Id" />
+    <script src="~/js/Pages/MedicalServices/MedicalServicesIndex.js" asp-append-version="true"></script>
+    <script src="~/js/Pages/MedicalServices/MedicalServiceDetaile.js" asp-append-version="true"></script>
+    <script>
+        MedicalServiceDetaile.init(@Model.Id);
+    </script>
+
+}
