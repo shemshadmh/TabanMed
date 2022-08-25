@@ -71,7 +71,7 @@
             .Ajax()
             .Events(events => events.Error("error_handler")
                 .RequestStart("show_preLoader")
-                .RequestEnd("FacilityList.methods.reqEnded"))
+                .RequestEnd("reqEnd"))
             .Model(model =>
             {
                 model.Id(countryItem => countryItem.Id);
@@ -93,8 +93,8 @@
                .Columns(columns =>
                {
                    columns.Bound(cities => cities.FaName);
-                   columns.Bound(cities=> cities.EnName);
-                   columns.Bound(cities=> cities.ArName);
+                   columns.Bound(cities => cities.EnName);
+                   columns.Bound(cities => cities.ArName);
                    columns.Bound(cities => cities.AfName);
                })
                .ToolBar(toolbar =>
@@ -120,7 +120,7 @@
                    .Ajax()
                    .Events(events => events.Error("error_handler")
                        .RequestStart("show_preLoader")
-                       .RequestEnd("FacilityList.methods.reqEnded"))
+                       .RequestEnd("reqEnd"))
                    .Model(model =>
                    {
                        model.Id(cityItem => cityItem.Id);
@@ -128,7 +128,7 @@
                    })
                    .PageSize(5)
                    .Create(create => create.Action("CreateCity", "Cities", new { cId = "#=Id#" }).Type(HttpVerbs.Post))
-                   .Read(read => read.Action("GetCitiesList", "Cities",  new { CountryId= "#=Id#" }).Type(HttpVerbs.Post))
+                   .Read(read => read.Action("GetCitiesList", "Cities", new { CountryId = "#=Id#" }).Type(HttpVerbs.Post))
                    .Update(update => update.Action("UpdateFacility", "Cities", new { CountryId = "#=Id#" }).Type(HttpVerbs.Post)))
                .ToClientTemplate())
     </script>
@@ -159,6 +159,10 @@
             $("#error-area").hide();
             $("#success-area").hide();
         }
+        function reqEnd(){
+            $(".preloader").hide();
+
+            }
         
 
     </script>
@@ -167,9 +171,6 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
     
-    <script src="~/js/Pages/Hotels/HotelFacilityIndex.js" asp-append-version="true"></script>
-    <script>
-        FacilityList.init();
-    </script>
 }

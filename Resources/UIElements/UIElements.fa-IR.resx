@@ -123,6 +123,9 @@
   <data name="AddNewMedicalCenter" xml:space="preserve">
     <value>افزودن مرکز درمانی جدید</value>
   </data>
+  <data name="AddNewTourService" xml:space="preserve">
+    <value>افزودن خدمات تور جدید</value>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>آدرس</value>
   </data>
@@ -227,6 +230,12 @@
   </data>
   <data name="TheNumberOfRegisteresMedicalCenter" xml:space="preserve">
     <value>تعداد مراکز درمانی ثبت شده</value>
+  </data>
+  <data name="TourService" xml:space="preserve">
+    <value>خدمات تور</value>
+  </data>
+  <data name="TourServiceList" xml:space="preserve">
+    <value>لیست خدمات تور</value>
   </data>
   <data name="ViewHotels" xml:space="preserve">
     <value>مشاهده هتل‌ها</value>

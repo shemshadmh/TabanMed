@@ -3,6 +3,7 @@ using Application.Interfaces.Application;
 using Application.Interfaces.Destination;
 using Application.Interfaces.Hotels;
 using Application.Interfaces.MedicalCenters;
+using Application.Interfaces.TourServices;
 using Application.Interfaces.Users;
 using Common;
 using Microsoft.AspNetCore.Authentication;
@@ -18,6 +19,7 @@ using TabanMed.Infrastructure.Services.Destination;
 using TabanMed.Infrastructure.Services.Globalization;
 using TabanMed.Infrastructure.Services.Hotels;
 using TabanMed.Infrastructure.Services.MedicalCenters;
+using TabanMed.Infrastructure.Services.TourServices;
 
 namespace TabanMed.Infrastructure
 {
@@ -57,6 +59,12 @@ namespace TabanMed.Infrastructure
 
             services.AddTransient<IMedicalCenterApplication, MedicalCenterApplication>();
             services.AddTransient<IMedicalServiceApplication, MedicalServiceApplication>();
+
+            #endregion
+
+            #region TourService
+            services.AddTransient<ITourServiceApplication, TourServiceApplication>();
+
 
             #endregion
 

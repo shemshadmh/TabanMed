@@ -70,7 +70,7 @@
             .Ajax()
             .Events(events => events.Error("error_handler")
                 .RequestStart("show_preLoader")
-                .RequestEnd("FacilityList.methods.reqEnded"))
+                .RequestEnd("reqEnd"))
             .Model(model =>
             {
                 model.Id(countryItem => countryItem.Id);
@@ -118,7 +118,7 @@
                    .Ajax()
                    .Events(events => events.Error("error_handler")
                        .RequestStart("show_preLoader")
-                       .RequestEnd("FacilityList.methods.reqEnded"))
+                       .RequestEnd("reqEnd"))
                    .Model(model =>
                    {
                        model.Id(cityItem => cityItem.Id);
@@ -151,6 +151,11 @@
             $("#success-area").hide();
         }
         
+        function reqEnd(){
+            $(".preloader").hide();
+
+            }
+        
 
     </script>
 
@@ -158,8 +163,5 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    <script src="~/js/Pages/Hotels/HotelFacilityIndex.js" asp-append-version="true"></script>
-    <script>
-        FacilityList.init();
-    </script>
+    
 }

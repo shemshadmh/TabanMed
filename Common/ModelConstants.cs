@@ -73,6 +73,20 @@
 
         #endregion
 
+        #region TourService
+        public static class TourService
+        {
+            public const int TitleMaxLength = 30;
+            public const int PriceMaxLength = 6;
+            public const int DescriptionlMaxLength = 3000;
+            
+       
+        }
+
+
+
+        #endregion
+
         #region Localization
 
         public static class Language
@@ -109,6 +123,7 @@
             public const string TinyIntColumnType = "tinyint"; // A very small integer. Signed range is from -128 to 127. Unsigned range is from 0 to 255. The size parameter specifies the maximum display width (which is 255)
             public const string FloatColumnType = "float";
             public const string SmallDatetimeColumnType = "smalldatetime"; // smalldatetime: From January 1, 1900 to June 6, 2079 with an accuracy of 1 minutes
+            public const string DecimalColumnType = "decimal(6,2)"; //$
         }
     }
 }

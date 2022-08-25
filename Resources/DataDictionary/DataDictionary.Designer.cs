@@ -79,6 +79,15 @@ namespace Resources.DataDictionary {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dari Description.
+        /// </summary>
+        public static string AfDescription {
+            get {
+                return ResourceManager.GetString("AfDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dari Title.
         /// </summary>
         public static string AfTitle {
@@ -120,6 +129,15 @@ namespace Resources.DataDictionary {
         public static string AirlineType {
             get {
                 return ResourceManager.GetString("AirlineType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arabic Description.
+        /// </summary>
+        public static string ArDescription {
+            get {
+                return ResourceManager.GetString("ArDescription", resourceCulture);
             }
         }
         
@@ -277,6 +295,15 @@ namespace Resources.DataDictionary {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to English Description.
+        /// </summary>
+        public static string EnDescription {
+            get {
+                return ResourceManager.GetString("EnDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English Name.
         /// </summary>
         public static string EnName {
@@ -291,6 +318,15 @@ namespace Resources.DataDictionary {
         public static string EnTitle {
             get {
                 return ResourceManager.GetString("EnTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Farsi Description.
+        /// </summary>
+        public static string FaDescription {
+            get {
+                return ResourceManager.GetString("FaDescription", resourceCulture);
             }
         }
         
@@ -565,6 +601,15 @@ namespace Resources.DataDictionary {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        public static string Price {
+            get {
+                return ResourceManager.GetString("Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rate.
         /// </summary>
         public static string Rate {
@@ -633,6 +678,15 @@ namespace Resources.DataDictionary {
         public static string ShopAttractionType {
             get {
                 return ResourceManager.GetString("ShopAttractionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tour Service Title.
+        /// </summary>
+        public static string TourServiceTitle {
+            get {
+                return ResourceManager.GetString("TourServiceTitle", resourceCulture);
             }
         }
         

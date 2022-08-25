@@ -12,6 +12,8 @@ using Domain.Entities.Localization;
 using Domain.Entities.MedicalCenters;
 using Domain.Entities.MedicalCenters.Translation;
 using Domain.Entities.Permission;
+using Domain.Entities.TourServices;
+using Domain.Entities.TourServices.Translation;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -70,6 +72,14 @@ namespace Persistence
         #region Localization
 
         public DbSet<Language> Languages => Set<Language>();
+
+        #endregion
+
+        #region TourService
+
+        public DbSet<TourService> TourServices => Set<TourService>();
+        public DbSet<TourServiceTranslation> TourServiceTranslations => Set<TourServiceTranslation>();
+
 
         #endregion
 

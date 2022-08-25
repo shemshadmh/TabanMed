@@ -339,4 +339,22 @@
   <data name="AgentPhoneNumber" xml:space="preserve">
     <value>Agent Phone</value>
   </data>
+  <data name="TourServiceTitle" xml:space="preserve">
+    <value>Tour Service Title</value>
+  </data>
+  <data name="AfDescription" xml:space="preserve">
+    <value>Dari Description</value>
+  </data>
+  <data name="ArDescription" xml:space="preserve">
+    <value>Arabic Description</value>
+  </data>
+  <data name="EnDescription" xml:space="preserve">
+    <value>English Description</value>
+  </data>
+  <data name="FaDescription" xml:space="preserve">
+    <value>Farsi Description</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
 </root>

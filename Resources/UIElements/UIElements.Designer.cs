@@ -79,6 +79,15 @@ namespace Resources.UIElements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New Tour Service.
+        /// </summary>
+        public static string AddNewTourService {
+            get {
+                return ResourceManager.GetString("AddNewTourService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string Address {
@@ -390,6 +399,24 @@ namespace Resources.UIElements {
         public static string TheNumberOfRegisteresMedicalCenter {
             get {
                 return ResourceManager.GetString("TheNumberOfRegisteresMedicalCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tour Service.
+        /// </summary>
+        public static string TourService {
+            get {
+                return ResourceManager.GetString("TourService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tour Service List.
+        /// </summary>
+        public static string TourServiceList {
+            get {
+                return ResourceManager.GetString("TourServiceList", resourceCulture);
             }
         }
         

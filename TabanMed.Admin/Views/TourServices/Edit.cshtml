@@ -1,0 +1,96 @@
+﻿@model Application.Dtos.TourServices.TourServicesForEditDto
+
+@{
+    ViewData[AppConstants.ViewDataTitlePageName] = UIElements.Edit;
+    ViewData[AppConstants.ViewDataControllerName] = UIElements.TourServiceList;
+    ViewData[AppConstants.ViewDataControllerRoute] = "TourSevices";
+}
+
+@section Styles
+    {
+    <link rel="stylesheet" href="~/css/FiveStarsStyles.css" asp-append-version="true" />
+}
+
+    <div class="card">
+        <div class="card-body">
+            <form id="create-hotel-form" method="post"
+              data-ajax-complete="HotelCity.methods.createCompleteCallback"
+              asp-controller="TourServices" asp-action="Edit"  enctype="multipart/form-data">
+
+                <div asp-validation-summary="All"
+                 class="text-danger">
+                </div>
+
+                <input type="hidden" asp-for="Id"/>
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label asp-for="FaTitle"></label>
+                        <input class="form-control" asp-for="FaTitle" />
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label asp-for="FaDescription"></label>
+                        <textarea rows="5" class="form-control" asp-for="FaDescription"></textarea>
+                    </div>
+                    
+                    <div class="col-md-3 form-group">
+                        <label asp-for="Price"></label>
+                        <input class="form-control" asp-for="Price" />
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label asp-for="EnTitle"></label>
+                        <input class="form-control" asp-for="EnTitle" />
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label asp-for="EnDescription"></label>
+                        <textarea rows="5" class="form-control" asp-for="EnDescription"></textarea>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label asp-for="ArTitle "></label>
+                        <input class="form-control" asp-for="ArTitle" />
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label asp-for="ArDescription"></label>
+                        <textarea rows="5" class="form-control" asp-for="ArDescription"></textarea>
+                    </div>
+                    
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label asp-for="AfTitle"></label>
+                        <input class="form-control" asp-for="AfTitle" />
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label asp-for="AfDescription"></label>
+                        <textarea rows="5" class="form-control" asp-for="AfDescription"></textarea>
+                    </div>
+                    
+                </div>
+                
+                <div class="row">
+                    <div class="col form-group">
+                        <button type="submit" class="btn btn-block btn-success">@UIElements.Edit</button>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    @section Scripts
+    {
+        
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+    

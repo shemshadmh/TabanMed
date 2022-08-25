@@ -7,6 +7,8 @@ using Domain.Entities.Localization;
 using Domain.Entities.MedicalCenters;
 using Domain.Entities.MedicalCenters.Translation;
 using Domain.Entities.Permission;
+using Domain.Entities.TourServices;
+using Domain.Entities.TourServices.Translation;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Interfaces.Application;
@@ -51,15 +53,17 @@ public interface IApplicationDbContext
     public DbSet<MedicalServiceTranslation> MedicalServiceTranslations { get; }
 
 
-        
+
 
     #endregion
 
-    #region Localization
-
-    public DbSet<Language> Languages { get;}
+    #region TourService
+    public DbSet<TourService> TourServices { get; }
+    public DbSet<TourServiceTranslation> TourServiceTranslations { get; }
 
     #endregion
+
+
 
     public ValueTask DisposeAsync();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken=new());
