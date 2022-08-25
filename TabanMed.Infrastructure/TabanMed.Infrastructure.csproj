@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Senders\" />
+    <Folder Include="Services\PolicyHandler" />
   </ItemGroup>
 
   <ItemGroup>

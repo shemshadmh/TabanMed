@@ -1,0 +1,141 @@
+﻿@using Application.Dtos.Application
+@using Resources.ErrorMessages
+@model TabanAgency.Domain.Dtos.SystemUsers.RoleDetailsDto
+
+@{
+    ViewData[AppConstants.ViewDataTitlePageName] = "جزئیات نقش سیستمی";
+    ViewData[AppConstants.ViewDataControllerName] = "نقش های سیستمی";
+    ViewData[AppConstants.ViewDataControllerRoute] = "SystemRoles";
+    int i = 1;
+    string EditDisplayName = "ویرایش عنوان";
+}
+
+@section Styles
+{
+    <link href="/Administration/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" asp-append-version="true" rel="stylesheet">
+}
+
+@if (TempData[AppConstants.TempDataMessageTitle] != null)
+{
+    <partial name="_PartialNotificationDivision" model="new NotificationDto(Convert.ToBoolean(TempData[AppConstants.TempDataMessageTitle].ToString().Split('~')[1].Trim()), TempData[AppConstants.TempDataMessageTitle].ToString().Split('~')[0].Trim())"/>
+    }
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">اطلاعات نقش</h4>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+
+                            <small class="text-muted">نام نقش سیستمی</small>
+                            <h5>@Model.RoleName</h5>
+
+                            <small class="text-muted">عنوان نمایشی نقش سیستمی</small>
+                            <h5>
+                                @Model.RoleDisplayName <i onclick="ContentModal()" class="mdi mdi-pencil-box-outline text-warning font-18"></i>
+                            </h5>
+
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">دسترسی های نقش</h4>
+
+                                    <table id="dt_config" class="table m-t-30 no-wrap table-hover footable table-striped">
+
+                                        @if (Model.RolePermissions.Any())
+                                        {
+                                            <thead class="bg-dark text-white">
+                                            <tr>
+                                                <th class="footable-sortable">ردیف<span class="footable-sort-indicator"></span></th>
+                                                <th class="footable-sortable">دسترسی ها<span class="footable-sort-indicator"></span></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach (var item in Model.RolePermissions)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <span class="footable-toggle"></span>@(i++)
+                                                    </td>
+                                                    <td>
+                                                        <a class="link">
+                                                            @item
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <a asp-action="EditRolePermissions" asp-route-id="@Model.RoleId" class="btn btn-warning btn-rounded text-white">ویرایش دسترسی های نقش</a>
+                                                </td>
+                                            </tr>
+                                            </tfoot>
+                                        }
+                                        else
+                                        {
+                                            <tbody>
+                                            <tr>
+                                                <div class="alert alert-info">
+                                                    @* <strong>@ErrorMessages.em.NothingHasBeenRegistered</strong> *@
+                                                </div>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <a asp-action="EditRolePermissions" asp-route-id="@Model.RoleId" class="btn btn-info btn-rounded text-white">دسترسی های نقش</a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        }
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="text-left">
+                        <a asp-action="Index" class="btn btn-primary">بازگشت</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* <partial name="_ContentModal" model="new ContentModalDto(EditDisplayName, nameof(SystemRolesController), nameof(SystemRolesController.EditRoleDisplayName), Model.RoleId)"/> *@
+
+
+    @section Scripts
+    {
+        <script src="/Administration/assets/extra-libs/DataTables/datatables.min.js" asp-append-version="true"></script>
+        <script>
+        $(document).ready(function () {
+            $('#dt_config').DataTable({
+                paging: false,
+                "language": {
+                    "lengthMenu": "تعداد نمایش در صفحه: _MENU_",
+                    "zeroRecords": "متاسفانه موردی یافت نشد!",
+                    "info": "نمایش صفحه _PAGE_ از _PAGES_",
+                    "infoEmpty": "رکوردی ثبت نشده است !",
+                    "infoFiltered": "(فیلتر شده از میان _MAX_ رکورد)",
+                    "search": "جستجو :",
+                    "paginate": {
+                        "first": "اولین",
+                        "last": "آخرین",
+                        "next": "بعدی",
+                        "previous": "قبلی"
+                    }
+                },
+                scrollY: 100
+            });
+
+        });
+
+
+    </script>
+    }
+

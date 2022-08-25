@@ -53,6 +53,7 @@ namespace Application
         #endregion
 
         public static string TempDataMessageTitle => "Message";
+        public static string DynamicPermission => nameof(DynamicPermission);
 
         public const double MaxHotelLogoFileSizeUpload = 3e+6; // 3MB
         public const double MaxMedicalCenterPicFileSizeUpload = 3e+6; // 3MB

@@ -1,0 +1,78 @@
+﻿@{
+    ViewData[AppConstants.ViewDataTitlePageName] = "افزودن نقش جدید";
+    ViewData[AppConstants.ViewDataControllerName] = "نقش های سیستمی";
+    ViewData[AppConstants.ViewDataControllerRoute] = "SystemRoles";
+    List<PermissionListItemDto> permissions = ViewData["permissions"] as List<PermissionListItemDto>;
+}
+
+@using TabanAgency.Domain.Dtos.SystemUsers
+@model CreateRoleDto
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">اطلاعات نقش</h4>
+                <form asp-action="Create" method="post" class="m-t-20 needs-validation" novalidate>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+
+                            <div asp-validation-summary="All"
+                                 class="text-danger"></div>
+
+                            <div class="form-group">
+                                <span class="characterCount">(<span class="typed-length">0</span>/<span class="max-length">0</span>)</span>
+
+                                @* <input asp-for="DisplayName" class="form-control" placeholder="@InformationMessages.EnterRoleDisplayName"> *@
+                            </div>
+
+                            <div class="form-group">
+                                <span class="characterCount">(<span class="typed-length">0</span>/<span class="max-length">0</span>)</span>
+
+                                @* <input asp-for="Name" class="form-control" placeholder="@InformationMessages.EnterRoleName"> *@
+                            </div>
+
+                            <div class="form-actions">
+                                <div class="text-left">
+                                    <button type="submit" class="btn btn-success">ثبت</button>
+                                    <button type="reset" class="btn btn-dark">بازنشانی</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">دسترسی های نقش سیستمی</h4>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input select-all" name="all-permissions"
+                                            id="select-all-permissions" value="">
+                                        <label class="custom-control-label" for="select-all-permissions">انتخاب همه</label>
+                                    </div>
+                                    @foreach (var item in permissions)
+                                    {
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" name="Permissions" id="@item.Claim" value="@item.Claim">
+                                            <label class="custom-control-label" for="@item.Claim">@item.DisplayName</label>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="text-left">
+                    <a asp-action="Index" class="btn btn-primary">بازگشت</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts
+{
+<partial name="_ValidationScriptsPartial" />
+}

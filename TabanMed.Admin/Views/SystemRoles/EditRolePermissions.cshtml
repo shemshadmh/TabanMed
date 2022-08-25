@@ -1,0 +1,49 @@
+﻿@model TabanAgency.Domain.Dtos.SystemUsers.RolePermissionsForEdit
+
+@{
+    ViewData[AppConstants.ViewDataTitlePageName] = "ویرایش دسترسی‌های نقش";
+    ViewData[AppConstants.ViewDataControllerName] = "نقش های سیستمی";
+    ViewData[AppConstants.ViewDataControllerRoute] = "SystemRoles";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">دسترسی‌های نقش @Model.SystemRoleListItemDto.DisplayName</h4>
+
+                <form asp-action="EditRolePermissions" method="post" class="m-t-20 needs-validation">
+
+                    <div asp-validation-summary="All"
+                         class="text-danger"></div>
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input select-all" name="all-permissions"
+                               id="select-all-permissions" value="">
+                        <label class="custom-control-label" for="select-all-permissions">انتخاب همه</label>
+                    </div>
+                    @foreach (var item in Model.PermissionListItems)
+                    {
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="Permissions" id="@item.Claim" value="@item.Claim" @(Model.Selected.Any(c => item.Claim == c) ? "checked" : "")>
+                            <label class="custom-control-label" for="@item.Claim">@item.DisplayName</label>
+                        </div>
+                    }
+
+
+                    <div class="form-actions">
+                        <div class="text-left">
+                            <button type="submit" class="btn btn-success">ثبت</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="card-footer">
+                <div class="text-left">
+                    <a asp-action="Details" asp-route-id="@Model.SystemRoleListItemDto.RoleId" class="btn btn-primary">بازگشت</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

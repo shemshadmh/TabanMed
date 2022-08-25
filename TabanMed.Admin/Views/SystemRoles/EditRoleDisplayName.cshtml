@@ -1,0 +1,38 @@
+﻿@model TabanAgency.Domain.Dtos.SystemUsers.EditRoleDto
+
+@{
+    Layout = null;
+}
+
+<form role="form"
+      class="form-control border-0"
+      asp-action="EditRoleDisplayName"
+      method="post"
+      id="pageForm">
+
+    <div class="card-body">
+
+        <div class="row">
+            <div asp-validation-summary="All"
+                 class="text-danger"
+                 style="direction: rtl"></div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <input type="hidden" asp-for="RoleId"/>
+                    <label>عنوان نمایشی نقش سیستمی</label>
+                                <span class="characterCount">(<span class="typed-length">0</span>/<span class="max-length">0</span>)</span>
+
+                    <input class="form-control"
+                           asp-for="DisplayName"/>
+                 </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card-footer">
+        <button type="button" onclick="SubmitForm()" class="btn btn-success waves-effect waves-light">ثبت</button>
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">بستن</button>
+    </div>
+</form>

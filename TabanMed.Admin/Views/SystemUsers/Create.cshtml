@@ -1,0 +1,93 @@
+﻿@model TabanAgency.Domain.Dtos.SystemUsers.CreateUserDto
+@using TabanAgency.Domain.Dtos.SystemUsers
+
+@{
+    ViewData[AppConstants.ViewDataTitlePageName] = "افزودن کاربر جدید";
+    ViewData[AppConstants.ViewDataControllerName] = "کاربران سیستمی";
+    ViewData[AppConstants.ViewDataControllerRoute] = "SystemUsers";
+    List<SystemRoleListItemDto> roles = ViewData["Roles"] as List<SystemRoleListItemDto>;
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">اطلاعات کاربر</h4>
+                <form asp-action="Create" method="post" class="m-t-20 needs-validation" novalidate>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+
+                            <div asp-validation-summary="All"
+                                 class="text-danger"></div>
+
+                            <div class="form-group">
+                                <label asp-for="Name"></label>
+                                <span class="characterCount">(<span class="typed-length">0</span>/<span class="max-length">0</span>)</span>
+
+                                <input asp-for="Name" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Family"></label>
+                                <span class="characterCount">(<span class="typed-length">0</span>/<span class="max-length">0</span>)</span>
+
+                                <input asp-for="Family" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Username"></label>
+                                <span class="characterCount">(<span class="typed-length">0</span>/<span class="max-length">0</span>)</span>
+
+                                <input asp-for="Username" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Password"></label>
+                                <input asp-for="Password" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="RePassword"></label>
+                                <input asp-for="RePassword" class="form-control" />
+                            </div>
+
+                            <div class="form-actions">
+                                <div class="text-left">
+                                    <button type="submit" class="btn btn-success">ثبت</button>
+                                    <button type="reset" class="btn btn-dark">بازنشانی</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">نقش های کاربر</h4>
+
+                                    @foreach (var item in roles)
+                                    {
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" name="Roles" id="@item.DisplayName" value="@item.RoleId">
+                                            <label class="custom-control-label" for="@item.DisplayName">@item.DisplayName</label>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="text-left">
+                    <a asp-action="Index" class="btn btn-primary">بازگشت</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts
+{
+<partial name="_ValidationScriptsPartial" />
+}
