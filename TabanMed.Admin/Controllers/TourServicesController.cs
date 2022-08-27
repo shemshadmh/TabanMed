@@ -24,7 +24,7 @@ namespace TabanMed.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> GetTourServices([DataSourceRequest] DataSourceRequest request) // 1 => tehran
         {
-            var data = await _tourServiceApplication.GetTourServices();
+            var data = await _tourServiceApplication.GetTourServicesAsync();
             return Json(await data.ToDataSourceResultAsync(request));
         }
 
@@ -37,7 +37,7 @@ namespace TabanMed.Admin.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var res = await _tourServiceApplication.CreateMedicalService(model);
+            var res = await _tourServiceApplication.CreateTourServiceAsync(model);
 
             if (!res.IsSucceeded)
             {
@@ -52,7 +52,7 @@ namespace TabanMed.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
-            var tourService = await _tourServiceApplication.GetTourServiceDetails(Id);
+            var tourService = await _tourServiceApplication.GetTourServiceDetailsAsync(Id);
             
             if (tourService is null)
                 return NotFound();
