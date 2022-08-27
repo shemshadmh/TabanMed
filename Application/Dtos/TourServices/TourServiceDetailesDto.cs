@@ -3,7 +3,7 @@ using Resources.DataDictionary;
 
 namespace Application.Dtos.TourServices
 {
-    public class TourServiceDetailesDto
+    public class TourServiceListItemDto
     {
         public int Id { get; set; }
         [Display(ResourceType = typeof(DataDictionary),

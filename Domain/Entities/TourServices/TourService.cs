@@ -7,7 +7,7 @@ namespace Domain.Entities.TourServices
     {
         public int Id { get; set; }
 
-        public decimal Price { get; set; } 
+        public int Price { get; set; } 
 
         #region Relations
         //Translation

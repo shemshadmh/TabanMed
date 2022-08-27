@@ -11,15 +11,14 @@ namespace Persistence.Configurations.TourServicesEntities.TranslationEntities
     {
         public void Configure(EntityTypeBuilder<TourServiceTranslation> builder)
         {
-
             builder.HasKey(translation => new { translation.TourServiceId, translation.LanguageId });
 
-            builder.Property(tourservice => tourservice.Title)
+            builder.Property(tourService => tourService.Title)
                 .HasMaxLength(ModelConstants.TourService.TitleMaxLength)
                 .IsRequired();
 
-            builder.Property(tourservice => tourservice.Description)
-                .HasMaxLength(ModelConstants.TourService.DescriptionlMaxLength)
+            builder.Property(tourService => tourService.Description)
+                .HasMaxLength(ModelConstants.TourService.DescriptionMaxLength)
                 .IsRequired(false);
 
             builder.HasOne(translation => translation.TourService)

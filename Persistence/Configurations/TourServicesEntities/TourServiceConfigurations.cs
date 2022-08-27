@@ -17,10 +17,8 @@ namespace Persistence.Configurations.TourServicesEntities
             builder.HasKey(tourService => tourService.Id);
 
             builder.Property(tourService => tourService.Price)
-                .HasColumnType(ModelConstants.Shared.DecimalColumnType)
+                .HasColumnType(ModelConstants.Shared.SmallIntColumnType)
                 .IsRequired(true);
-
-            
         }
     }
 }

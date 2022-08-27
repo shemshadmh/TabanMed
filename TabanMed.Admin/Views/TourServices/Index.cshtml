@@ -63,15 +63,15 @@
 
 
 <div class="k-rtl">
-    @(Html.Kendo().Grid<TourServiceDetailesDto>()
+    @(Html.Kendo().Grid<TourServiceListItemDto>()
     .Name("grid")
     .Columns(columns =>
     {
         columns.Bound(tourService => tourService.Title);
         columns.Bound(tourService => tourService.Description);
         columns.Bound(tourService => tourService.Price);
-        columns.Bound(hotel => hotel.Id)
-            .ClientTemplate($"<a class='btn btn-success text-white' href='{Url.Action("Edit")}/#:Id#'>{UIElements.Edit}</a>")
+        columns.Bound(tourService => tourService.Id)
+            .ClientTemplate($"<a class='btn btn-warning text-white' href='{Url.Action("Edit")}/#:Id#'>{UIElements.Edit}</a>")
             .Width(20)
             .ClientHeaderTemplate(" ")
             .Filterable(false)
@@ -79,7 +79,7 @@
     })
     .ToolBar(toolbar =>
     {
-    toolbar.ClientTemplate($"<a class='btn btn-success text-white' href='/TourServices/Create'>{UIElements.AddNewTourService}</a>");
+    toolbar.ClientTemplate($"<a class='btn btn-success text-white' href='{Url.Action("Create")}'>{UIElements.AddNewTourService}</a>");
     })
     .Selectable(select =>
     select.Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))
