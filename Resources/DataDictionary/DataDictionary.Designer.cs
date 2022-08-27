@@ -610,6 +610,15 @@ namespace Resources.DataDictionary {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Price in dollar.
+        /// </summary>
+        public static string PriceInDollar {
+            get {
+                return ResourceManager.GetString("PriceInDollar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rate.
         /// </summary>
         public static string Rate {

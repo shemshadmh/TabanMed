@@ -357,4 +357,7 @@
   <data name="Price" xml:space="preserve">
     <value>قیمت</value>
   </data>
+  <data name="PriceInDollar" xml:space="preserve">
+    <value>قیمت به دلار</value>
+  </data>
 </root>

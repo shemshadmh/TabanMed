@@ -28,13 +28,12 @@ namespace TabanMed.Admin.Controllers
             return Json(await data.ToDataSourceResultAsync(request));
         }
 
-        [HttpGet]
+        [HttpGet, Display(Name = "افزودن خدمات تور")]
         public IActionResult Create() => View();
 
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([FromForm] TourServicesForEditDto model)
         {
-           
             if (!ModelState.IsValid)
                 return View(model);
 

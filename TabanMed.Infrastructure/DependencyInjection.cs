@@ -24,6 +24,10 @@ using TabanMed.Infrastructure.Services.Globalization;
 using TabanMed.Infrastructure.Services.Hotels;
 using TabanMed.Infrastructure.Services.Initializer;
 using TabanMed.Infrastructure.Services.MedicalCenters;
+using TabanMed.Infrastructure.Services.Permissions;
+using TabanMed.Infrastructure.Services.PolicyHandler.DynamicPermission;
+using TabanMed.Infrastructure.Services.TourServices;
+using TabanMed.Infrastructure.Services.Users;
 
 namespace TabanMed.Infrastructure;
 
@@ -76,8 +80,14 @@ public static class DependencyInjection
 
         #endregion
 
-            services.ConfigureServicesCultureLocalization();
-            services.AddApplicationCookieConfiguration(webHostEnvironment);
+        #region TourServices
+
+        services.AddTransient<ITourServiceApplication, TourServiceApplication>();
+            
+        #endregion
+
+        services.ConfigureServicesCultureLocalization();
+        services.AddApplicationCookieConfiguration(webHostEnvironment);
 
         services.AddScoped<IAuthorizationHandler, DynamicPermissionHandler>();
 

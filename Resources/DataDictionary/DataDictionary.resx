@@ -357,4 +357,7 @@
   <data name="Price" xml:space="preserve">
     <value>Price</value>
   </data>
+  <data name="PriceInDollar" xml:space="preserve">
+    <value>Price in dollar</value>
+  </data>
 </root>

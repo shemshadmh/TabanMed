@@ -35,7 +35,7 @@ namespace TabanMed.Infrastructure.Services.TourServices
             _mapper = mapper;
             _currentServices = currentServices;
         }
-        public async Task<IReadOnlyList<TourServiceDetailesDto>?> GetTourServices()
+        public async Task<IReadOnlyList<TourServiceDetailesDto>?> GetTourServicesAsync()
         {
             try
             {
@@ -59,7 +59,7 @@ namespace TabanMed.Infrastructure.Services.TourServices
             }
         }
 
-        public async Task<OperationResult> CreateMedicalService(TourServicesForEditDto createTourServiceDto)
+        public async Task<OperationResult> CreateTourServiceAsync(TourServicesForEditDto createTourServiceDto)
         {
             var operation = new OperationResult();
             try
@@ -113,7 +113,7 @@ namespace TabanMed.Infrastructure.Services.TourServices
             }
         }
 
-        public async Task<TourServicesForEditDto> GetTourServiceDetails(int tourServiceId)
+        public async Task<TourServicesForEditDto> GetTourServiceDetailsAsync(int tourServiceId)
         {
             try
             {

@@ -80,7 +80,7 @@ namespace Application.Dtos.TourServices
         public string? AfDescription { get; set; }
 
         [Display(ResourceType = typeof(DataDictionary),
-            Name = nameof(DataDictionary.Price))]
+            Name = nameof(DataDictionary.PriceInDollar))]
         [Required(AllowEmptyStrings = false,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.Required))]

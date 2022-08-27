@@ -7,9 +7,9 @@ namespace Application.Interfaces.TourServices
 {
     public interface ITourServiceApplication
     {
-        Task<IReadOnlyList<TourServiceDetailesDto>?> GetTourServices();
-        Task<OperationResult> CreateMedicalService(TourServicesForEditDto createTourServiceDto);
-        Task<TourServicesForEditDto> GetTourServiceDetails(int tourServiceId);
+        Task<IReadOnlyList<TourServiceDetailesDto>?> GetTourServicesAsync();
+        Task<OperationResult> CreateTourServiceAsync(TourServicesForEditDto createTourServiceDto);
+        Task<TourServicesForEditDto> GetTourServiceDetailsAsync(int tourServiceId);
         Task<OperationResult> EditTourServiceAsync(TourServicesForEditDto model);
     }
 }
