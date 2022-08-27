@@ -15,11 +15,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Resources.ErrorMessages;
 using Resources.InformationMessages;
-using TabanMed.Infrastructure.Services.Hotels;
 
 namespace TabanMed.Infrastructure.Services.TourServices
 {
-    public class TourServiceApplication: ITourServiceApplication
+    public class TourServiceApplication : ITourServiceApplication
     {
         private readonly IApplicationDbContext _dbContext;
         private readonly ILogger<TourServiceApplication> _logger;
@@ -35,15 +34,15 @@ namespace TabanMed.Infrastructure.Services.TourServices
             _mapper = mapper;
             _currentServices = currentServices;
         }
-        public async Task<IReadOnlyList<TourServiceDetailesDto>?> GetTourServicesAsync()
+        public async Task<IReadOnlyList<TourServiceListItemDto>?> GetTourServicesAsync()
         {
             try
             {
                 return await _dbContext.TourServiceTranslations.AsNoTracking()
-                    .Include(tourServiceTranslation=> tourServiceTranslation.TourService)
+                    .Include(tourServiceTranslation => tourServiceTranslation.TourService)
                     .Where(tourServiceTranslation =>
                         tourServiceTranslation.LanguageId == _currentServices.LanguageId)
-                    .Select(tourServiceTranslation => new TourServiceDetailesDto()
+                    .Select(tourServiceTranslation => new TourServiceListItemDto()
                     {
                         Id = tourServiceTranslation.TourServiceId,
                         Title = tourServiceTranslation.Title,
@@ -54,18 +53,21 @@ namespace TabanMed.Infrastructure.Services.TourServices
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Get Tour Service list failed![tourServiceId={}]", 0);
+                _logger.LogError(e, "Get Tour Service list failed!");
                 return null;
             }
         }
 
-        public async Task<OperationResult> CreateTourServiceAsync(TourServicesForEditDto createTourServiceDto)
+        public async Task<OperationResult> CreateTourServiceAsync(CreateTourServicesDto createTourServiceDto)
         {
             var operation = new OperationResult();
             try
             {
                 if (await _dbContext.TourServiceTranslations.AnyAsync(tourServiceTranslation =>
-                        tourServiceTranslation.Title == createTourServiceDto.FaTitle))
+                        tourServiceTranslation.Title == createTourServiceDto.FaTitle ||
+                        tourServiceTranslation.Title == createTourServiceDto.EnTitle ||
+                        tourServiceTranslation.Title == createTourServiceDto.ArTitle ||
+                        tourServiceTranslation.Title == createTourServiceDto.AfTitle))
                     return operation.Failed(ErrorMessages.DuplicatedRecord);
 
                 var entity = await _mapper.From(createTourServiceDto).AdaptToTypeAsync<TourService>();
@@ -97,34 +99,33 @@ namespace TabanMed.Infrastructure.Services.TourServices
                         Description = createTourServiceDto.AfDescription,
                     }
                 };
-                entity.Price = createTourServiceDto.Price;
 
                 await _dbContext.TourServices.AddAsync(entity);
                 await _dbContext.SaveChangesAsync();
 
-                _logger.LogWarning("New tour service created successfully.[tourService:{title}]", createTourServiceDto.FaTitle);
+                _logger.LogWarning("New tour service created successfully.");
 
                 return operation.Succeeded(entity.Id, InformationMessages.SuccessfullySaved);
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Could not create newtour service.[tourService:{title}]", createTourServiceDto.FaTitle);
+                _logger.LogError(e, "Could not create new tour service!");
                 return operation.Failed(ErrorMessages.ErrorOccurred);
             }
         }
 
-        public async Task<TourServicesForEditDto> GetTourServiceDetailsAsync(int tourServiceId)
+        public async Task<EditTourServicesDto?> GetTourServiceDetailsAsync(int tourServiceId)
         {
             try
             {
-                if (await _dbContext.TourServices.AnyAsync(tourService =>
-                        tourService.Id == tourServiceId)==false)
-                    return  new TourServicesForEditDto() { };
+                if (!await _dbContext.TourServices.AnyAsync(tourService =>
+                        tourService.Id == tourServiceId))
+                    return null;
 
                 return await _dbContext.TourServices.AsNoTracking()
                     .Include(tourService => tourService.TourServiceTranslation)
                     .Where(tourService => tourService.Id == tourServiceId)
-                    .Select(tourService => new TourServicesForEditDto()
+                    .Select(tourService => new EditTourServicesDto()
                     {
                         Id = tourService.Id,
                         Price = tourService.Price,
@@ -166,18 +167,18 @@ namespace TabanMed.Infrastructure.Services.TourServices
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Get Tour Service list failed![tourServiceId={}]", 0);
-                return new TourServicesForEditDto() { };
+                _logger.LogError(e, "Get Tour Service list failed![tourServiceId={tourServiceId}]", tourServiceId);
+                return null;
             }
         }
 
-        public async Task<OperationResult> EditTourServiceAsync(TourServicesForEditDto model)
+        public async Task<OperationResult> EditTourServiceAsync(EditTourServicesDto model)
         {
             var operation = new OperationResult();
             try
             {
                 var tourService = await _dbContext.TourServices.AsNoTracking()
-                    .Include(tourServices=> tourServices.TourServiceTranslation)
+                    .Include(tourServices => tourServices.TourServiceTranslation)
                     .FirstOrDefaultAsync(tourService =>
                         tourService.Id == model.Id);
 
@@ -186,30 +187,30 @@ namespace TabanMed.Infrastructure.Services.TourServices
                     return operation.Failed(ErrorMessages.ItemNotFound);
 
                 #region Update prop
-              
+
                 tourService.Price = model.Price;
-                
+
                 tourService.TourServiceTranslation!
                     .FirstOrDefault(x =>
                         x.LanguageId == AppConstants.FaLanguageLcid)!.Title = model.FaTitle;
                 tourService.TourServiceTranslation!
                     .FirstOrDefault(x =>
                         x.LanguageId == AppConstants.FaLanguageLcid)!.Description = model.FaDescription;
-               
+
                 tourService.TourServiceTranslation!
                     .FirstOrDefault(x =>
                         x.LanguageId == AppConstants.EnLanguageLcid)!.Title = model.EnTitle;
                 tourService.TourServiceTranslation!
                     .FirstOrDefault(x =>
                         x.LanguageId == AppConstants.EnLanguageLcid)!.Description = model.EnDescription;
-                 
+
                 tourService.TourServiceTranslation!
                     .FirstOrDefault(x =>
                         x.LanguageId == AppConstants.ArLanguageLcid)!.Title = model.ArTitle;
                 tourService.TourServiceTranslation!
                     .FirstOrDefault(x =>
                         x.LanguageId == AppConstants.ArLanguageLcid)!.Description = model.ArDescription;
-                
+
                 tourService.TourServiceTranslation!
                     .FirstOrDefault(x =>
                         x.LanguageId == AppConstants.AfLanguageLcid)!.Title = model.AfTitle;
@@ -219,13 +220,14 @@ namespace TabanMed.Infrastructure.Services.TourServices
                 #endregion
 
                 _dbContext.TourServices.Update(tourService);
-                
+
                 await _dbContext.SaveChangesAsync();
 
                 return operation.Succeeded(InformationMessages.SuccessfullyUpdated);
             }
-            catch
+            catch(Exception e)
             {
+                _logger.LogError(e, "Get Tour Service list failed![tourServiceId={tourServiceId}]", model.Id);
                 return operation.Failed(ErrorMessages.ErrorOccurred);
             }
 

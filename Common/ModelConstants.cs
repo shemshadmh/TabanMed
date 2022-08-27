@@ -76,14 +76,9 @@
         #region TourService
         public static class TourService
         {
-            public const int TitleMaxLength = 30;
-            public const int PriceMaxLength = 6;
-            public const int DescriptionlMaxLength = 3000;
-            
-       
+            public const int TitleMaxLength = 35;
+            public const int DescriptionMaxLength = 150;
         }
-
-
 
         #endregion
 

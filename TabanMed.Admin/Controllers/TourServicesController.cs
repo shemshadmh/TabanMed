@@ -32,7 +32,7 @@ namespace TabanMed.Admin.Controllers
         public IActionResult Create() => View();
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([FromForm] TourServicesForEditDto model)
+        public async Task<IActionResult> Create([FromForm] CreateTourServicesDto model)
         {
             if (!ModelState.IsValid)
                 return View(model);
@@ -50,9 +50,9 @@ namespace TabanMed.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int Id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var tourService = await _tourServiceApplication.GetTourServiceDetailsAsync(Id);
+            var tourService = await _tourServiceApplication.GetTourServiceDetailsAsync(id);
             
             if (tourService is null)
                 return NotFound();
@@ -62,7 +62,7 @@ namespace TabanMed.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(TourServicesForEditDto hotelServicesForEditDtoDto)
+        public async Task<IActionResult> Edit(EditTourServicesDto hotelServicesForEditDtoDto)
         {
             if (!ModelState.IsValid)
                 return View(hotelServicesForEditDtoDto);
@@ -79,8 +79,5 @@ namespace TabanMed.Admin.Controllers
             return RedirectToAction(nameof(Index));
 
         }
-
-
-
     }
 }

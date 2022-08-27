@@ -1,16 +1,12 @@
-﻿
-
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Common;
 using Resources.DataDictionary;
 using Resources.ErrorMessages;
 
 namespace Application.Dtos.TourServices
 {
-    public class TourServicesForEditDto
+    public class CreateTourServicesDto
     {
-        public int Id { get; set; }
-
         [Display(ResourceType = typeof(DataDictionary),
             Name = nameof(DataDictionary.FaTitle))]
         [Required(AllowEmptyStrings = false,
@@ -23,7 +19,7 @@ namespace Application.Dtos.TourServices
 
         [Display(ResourceType = typeof(DataDictionary),
             Name = nameof(DataDictionary.FaDescription))]
-        [MaxLength(length: ModelConstants.TourService.DescriptionlMaxLength,
+        [MaxLength(length: ModelConstants.TourService.DescriptionMaxLength,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
         public string? FaDescription { get; set; }
@@ -36,11 +32,11 @@ namespace Application.Dtos.TourServices
         [MaxLength(length: ModelConstants.TourService.TitleMaxLength,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
-        public string  EnTitle { get; set; } = null!;
+        public string EnTitle { get; set; } = null!;
 
         [Display(ResourceType = typeof(DataDictionary),
             Name = nameof(DataDictionary.EnDescription))]
-        [MaxLength(length: ModelConstants.TourService.DescriptionlMaxLength,
+        [MaxLength(length: ModelConstants.TourService.DescriptionMaxLength,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
         public string? EnDescription { get; set; }
@@ -53,11 +49,11 @@ namespace Application.Dtos.TourServices
         [MaxLength(length: ModelConstants.TourService.TitleMaxLength,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
-        public string  ArTitle { get; set; } = null!;
+        public string ArTitle { get; set; } = null!;
 
         [Display(ResourceType = typeof(DataDictionary),
             Name = nameof(DataDictionary.ArDescription))]
-        [MaxLength(length: ModelConstants.TourService.DescriptionlMaxLength,
+        [MaxLength(length: ModelConstants.TourService.DescriptionMaxLength,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
         public string? ArDescription { get; set; }
@@ -70,11 +66,11 @@ namespace Application.Dtos.TourServices
         [MaxLength(length: ModelConstants.TourService.TitleMaxLength,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
-        public string  AfTitle { get; set; } = null!;
+        public string AfTitle { get; set; } = null!;
 
         [Display(ResourceType = typeof(DataDictionary),
             Name = nameof(DataDictionary.AfTitle))]
-        [MaxLength(length: ModelConstants.TourService.DescriptionlMaxLength,
+        [MaxLength(length: ModelConstants.TourService.DescriptionMaxLength,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
         public string? AfDescription { get; set; }
@@ -84,9 +80,9 @@ namespace Application.Dtos.TourServices
         [Required(AllowEmptyStrings = false,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.Required))]
-        [Range(0.01,999999.99,
+        [Range(0, 32760,
             ErrorMessageResourceType = typeof(ErrorMessages),
             ErrorMessageResourceName = nameof(ErrorMessages.Required))]
-        public decimal Price { get; set; }
+        public int Price { get; set; }
     }
 }
