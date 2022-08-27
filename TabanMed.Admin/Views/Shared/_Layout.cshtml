@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     var supportRtl = Thread.CurrentThread.CurrentUICulture.TextInfo.IsRightToLeft;
     var twoLetterIsoLanguageName = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 }
@@ -21,13 +20,13 @@
     <!-- Custom CSS -->
     <link href="~/lib/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" asp-append-version="true"/>
     <link href="~/lib/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css" rel="stylesheet" asp-append-version="true"/>
-    
+
     <!-- Custom CSS -->
     <link href="~/css/style.min.css" rel="stylesheet" asp-append-version="true">
     <link href="~/css/CustomStyle.css" rel="stylesheet" asp-append-version="true">
-    
+
     <script src="~/lib/jquery/jquery.min.js" asp-append-version="true"></script>
-    
+
     @await RenderSectionAsync("Styles", false)
 
 </head>
@@ -134,7 +133,7 @@
                                             </h5>
                                         </div>
                                     </a>
-                                    
+
                                     <a asp-controller="Dashboard" asp-action="ChangeCulture" asp-route-culture="ar-IQ" class="p-3">
                                         <div class="mail-contnet">
                                             <h5 class="message-title">
@@ -143,7 +142,7 @@
                                             </h5>
                                         </div>
                                     </a>
-                                    
+
                                     <a asp-controller="Dashboard" asp-action="ChangeCulture" asp-route-culture="prs-AF" class="p-3">
                                         <div class="mail-contnet">
                                             <h5 class="message-title">
@@ -246,7 +245,7 @@
 
 
                 <admin-secure-content asp-controller="Home"
-                                asp-action="Index">
+                                      asp-action="Index">
 
                     <li class="sidebar-item">
                         <a class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -259,12 +258,46 @@
                     </li>
 
                 </admin-secure-content>
-                
+
+
+                <li class="nav-small-cap">
+                    <i class="mdi mdi-dots-horizontal"></i>
+                    <span class="hide-menu">سیستم مدیریت</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                        <i class="mdi mdi-account"></i>
+                        <span class="hide-menu">کاربران و دسترسی‌ها</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse  first-level">
+                        <secure-content asp-area="Admin"
+                                        asp-controller="SystemUsers"
+                                        asp-action="Index">
+                            <li class="sidebar-item">
+                                <a  asp-controller="SystemUsers" asp-action="Index" class="sidebar-link">
+                                    <i class="mdi mdi-account-settings-variant"></i>
+                                    <span class="hide-menu">کاربران سیستمی</span>
+                                </a>
+                            </li>
+                        </secure-content>
+                        <secure-content asp-area="Admin"
+                                        asp-controller="SystemRoles"
+                                        asp-action="Index">
+                            <li class="sidebar-item">
+                                <a asp-controller="SystemRoles" asp-action="Index" class="sidebar-link">
+                                    <i class="mdi mdi-account-card-details"></i>
+                                    <span class="hide-menu">نقش‌های کاربر</span>
+                                </a>
+                            </li>
+                        </secure-content>
+                    </ul>
+                </li>
+
                 <li class="nav-small-cap">
                     <i class="mdi mdi-dots-horizontal"></i>
                     <span class="hide-menu">@UIElements.SystemSettings</span>
                 </li>
-                
+
                 <admin-secure-content asp-controller="HotelFacilities" asp-action="Index">
                     <li class="sidebar-item">
                         <a class="sidebar-link waves-effect waves-dark" asp-controller="HotelFacilities"
@@ -274,7 +307,7 @@
                         </a>
                     </li>
                 </admin-secure-content>
-                
+
 
                 <admin-secure-content asp-controller="Countries" asp-action="Index">
                     <li class="sidebar-item">
@@ -285,7 +318,7 @@
                         </a>
                     </li>
                 </admin-secure-content>
-                
+
                 <admin-secure-content asp-controller="MedicalServices" asp-action="Index">
                     <li class="sidebar-item">
                         <a class="sidebar-link waves-effect waves-dark" asp-controller="MedicalServices"
@@ -305,13 +338,13 @@
                         </a>
                     </li>
                 </admin-secure-content>
-                
+
 
                 <li class="nav-small-cap">
                     <i class="mdi mdi-dots-horizontal"></i>
                     <span class="hide-menu">@UIElements.Hotels</span>
                 </li>
-                
+
                 <admin-secure-content asp-controller="Hotels" asp-action="Index">
                     <li class="sidebar-item">
                         <a class="sidebar-link waves-effect waves-dark" asp-controller="Hotels"
@@ -321,15 +354,13 @@
                         </a>
                     </li>
                 </admin-secure-content>
-                
-                
-                
+
 
                 <li class="nav-small-cap">
                     <i class="mdi mdi-dots-horizontal"></i>
                     <span class="hide-menu">@UIElements.MedicalCenter</span>
                 </li>
-                
+
                 <admin-secure-content asp-controller="MedicalCenters" asp-action="Index">
                     <li class="sidebar-item">
                         <a class="sidebar-link waves-effect waves-dark" asp-controller="MedicalCenters"
@@ -339,9 +370,6 @@
                         </a>
                     </li>
                 </admin-secure-content>
-
-                
-
 
 
             </ul>
@@ -419,7 +447,6 @@
 <div class="chat-windows"></div>
 <!-- ============================================================== -->
 <!-- All Jquery -->
-
 
 
 <!-- ============================================================== -->

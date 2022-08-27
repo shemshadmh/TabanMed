@@ -6,6 +6,7 @@ using Application.Interfaces.Hotels;
 using Application.Interfaces.Initializer;
 using Application.Interfaces.MedicalCenters;
 using Application.Interfaces.Permissions;
+using Application.Interfaces.SystemRoles;
 using Application.Interfaces.TourServices;
 using Application.Interfaces.Users;
 using Common;
@@ -26,6 +27,7 @@ using TabanMed.Infrastructure.Services.Initializer;
 using TabanMed.Infrastructure.Services.MedicalCenters;
 using TabanMed.Infrastructure.Services.Permissions;
 using TabanMed.Infrastructure.Services.PolicyHandler.DynamicPermission;
+using TabanMed.Infrastructure.Services.SystemRoles;
 using TabanMed.Infrastructure.Services.TourServices;
 using TabanMed.Infrastructure.Services.Users;
 
@@ -37,7 +39,13 @@ public static class DependencyInjection
         IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
     {
         services.AddScoped<IDbInitializer, DbInitializer>();
+
+        #region RoleAndPermission
+
         services.AddScoped<IPermissionInitializer, PermissionInitializer>();
+        services.AddScoped<ISystemRoleServices, SystemRoleServices>();
+
+        #endregion
 
         #region users
 
@@ -83,7 +91,7 @@ public static class DependencyInjection
         #region TourServices
 
         services.AddTransient<ITourServiceApplication, TourServiceApplication>();
-            
+
         #endregion
 
         services.ConfigureServicesCultureLocalization();

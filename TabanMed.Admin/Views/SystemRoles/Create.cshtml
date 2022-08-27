@@ -21,15 +21,16 @@
                                  class="text-danger"></div>
 
                             <div class="form-group">
-                                <span class="characterCount">(<span class="typed-length">0</span>/<span class="max-length">0</span>)</span>
-
-                                @* <input asp-for="DisplayName" class="form-control" placeholder="@InformationMessages.EnterRoleDisplayName"> *@
+                                @* <span class="characterCount">(<span class="typed-length">0</span>/<span class="max-length">0</span>)</span> *@
+                                <label asp-for="DisplayName" class=""></label>
+                                <input asp-for="DisplayName" class="form-control" placeholder="">
                             </div>
 
                             <div class="form-group">
-                                <span class="characterCount">(<span class="typed-length">0</span>/<span class="max-length">0</span>)</span>
+                                @* <span class="characterCount">(<span class="typed-length">0</span>/<span class="max-length">0</span>)</span> *@
+                                <label asp-for="Name" class=""></label>
 
-                                @* <input asp-for="Name" class="form-control" placeholder="@InformationMessages.EnterRoleName"> *@
+                                <input asp-for="Name" class="form-control" placeholder="">
                             </div>
 
                             <div class="form-actions">
