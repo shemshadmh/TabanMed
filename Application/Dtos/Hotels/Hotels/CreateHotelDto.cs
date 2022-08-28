@@ -66,4 +66,11 @@ public class CreateHotelDto
         ErrorMessageResourceName = nameof(ErrorMessages.FileExtension))]
     [DataType(DataType.Upload)]
     public IFormFile HotelPic { get; set; } = null!;
+
+    [Display(ResourceType = typeof(DataDictionary),
+        Name = nameof(DataDictionary.PriceInDollar))]
+    [Required(AllowEmptyStrings = false,
+        ErrorMessageResourceType = typeof(ErrorMessages),
+        ErrorMessageResourceName = nameof(ErrorMessages.Required))]
+    public int Price { get; set; }
 }

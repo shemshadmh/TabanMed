@@ -73,9 +73,14 @@ namespace Application.Dtos.MedicalCenters
             ErrorMessageResourceName = nameof(ErrorMessages.Required))]
         public int CityId { get; set; }
 
+        [Display(ResourceType = typeof(DataDictionary),
+            Name = nameof(DataDictionary.PriceInDollar))]
+        [Required(AllowEmptyStrings = false,
+            ErrorMessageResourceType = typeof(ErrorMessages),
+            ErrorMessageResourceName = nameof(ErrorMessages.Required))]
+        public int Price { get; set; }
 
 
-        
-        
+
     }
 }

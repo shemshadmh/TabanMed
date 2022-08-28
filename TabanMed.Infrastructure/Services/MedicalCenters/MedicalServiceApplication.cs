@@ -46,6 +46,7 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
                     {
                         Id = medicalService.Id,
                         ParentId = medicalService.ParentId,
+                        Price = medicalService.Price,
                         FaTitle = medicalService.MedicalServiceTranslations!
                             .Where(medicalServiceTranslation => medicalServiceTranslation.LanguageId == AppConstants.FaLanguageLcid)
                             .Select(medicalServiceTranslation => medicalServiceTranslation.Title)
@@ -86,7 +87,7 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
                     return operation.Failed(ErrorMessages.DuplicatedRecord);
 
                 var entity = await _mapper.From(medicalServiceDto).AdaptToTypeAsync<MedicalService>();
-
+                entity.Price = medicalServiceDto.Price;
                 entity.MedicalServiceTranslations = new List<MedicalServiceTranslation>()
                 {
                     new()
@@ -141,9 +142,16 @@ namespace TabanMed.Infrastructure.Services.MedicalCenters
                        && medicalServiceTranslation.MedicalServiceId != medicalServiceDto.Id))
                     return operation.Failed(ErrorMessages.DuplicatedRecord);
 
+
+                var medicalService = await _dbContext.MedicalServices
+                    .FirstOrDefaultAsync(medicalService => medicalService.Id == medicalServiceDto.Id);
+                medicalService.Price = medicalServiceDto.Price;
+
                 var translationsList = await _dbContext.MedicalServiceTranslations
                     .Where(medicalServiceTranslation => medicalServiceTranslation.MedicalServiceId == medicalServiceDto.Id)
                     .ToListAsync();
+
+                
 
                 foreach (var medicalServiceTranslation in translationsList)
                 {

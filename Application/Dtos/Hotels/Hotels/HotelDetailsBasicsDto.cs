@@ -60,12 +60,16 @@ namespace Application.Dtos.Hotels.Hotels
         public IFormFile? HotelPic { get; set; } = null!;
 
 
+        [Display(ResourceType = typeof(DataDictionary),
+            Name = nameof(DataDictionary.PriceInDollar))]
+        [Required(ErrorMessageResourceType = typeof(ErrorMessages),
+            ErrorMessageResourceName = nameof(ErrorMessages.Required))]
+        public int Price { get; set; }
 
 
 
 
 
-        
 
         #region Private properties
 

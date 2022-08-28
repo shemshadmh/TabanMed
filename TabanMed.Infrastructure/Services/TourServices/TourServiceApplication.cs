@@ -44,6 +44,7 @@ namespace TabanMed.Infrastructure.Services.TourServices
                         tourServiceTranslation.LanguageId == _currentServices.LanguageId)
                     .Select(tourServiceTranslation => new TourServiceListItemDto()
                     {
+                        Price = tourServiceTranslation.TourService.Price,
                         Id = tourServiceTranslation.TourServiceId,
                         Title = tourServiceTranslation.Title,
                         Description = tourServiceTranslation.Description
@@ -70,7 +71,7 @@ namespace TabanMed.Infrastructure.Services.TourServices
                     return operation.Failed(ErrorMessages.DuplicatedRecord);
 
                 var entity = await _mapper.From(createTourServiceDto).AdaptToTypeAsync<TourService>();
-
+                entity.Price = createTourServiceDto.Price;
                 entity.TourServiceTranslation = new List<TourServiceTranslation>()
                 {
                     new()
@@ -127,6 +128,7 @@ namespace TabanMed.Infrastructure.Services.TourServices
                     .Select(tourService => new EditTourServicesDto()
                     {
                         Id = tourService.Id,
+                        Price = tourService.Price,
                         FaTitle = tourService.TourServiceTranslation!
                             .Where(tourServiceTranslation => tourServiceTranslation.LanguageId == AppConstants.FaLanguageLcid)
                             .Select(tourServiceTranslation => tourServiceTranslation.Title)
@@ -186,7 +188,7 @@ namespace TabanMed.Infrastructure.Services.TourServices
 
                 #region Update prop
 
-                
+                tourService.Price = model.Price;
 
                 tourService.TourServiceTranslation!
                     .FirstOrDefault(x =>

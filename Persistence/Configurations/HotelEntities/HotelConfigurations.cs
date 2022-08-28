@@ -32,6 +32,10 @@ namespace Persistence.Configurations.HotelEntities
                 .HasMaxLength(ModelConstants.Hotel.WebsiteAddressMaxLength)
                 .IsRequired(false);
 
+            builder.Property(tourService => tourService.Price)
+                .HasColumnType(ModelConstants.Shared.SmallIntColumnType)
+                .IsRequired();
+
             // Relations
             builder.HasOne(hotel => hotel.City)
                 .WithMany(city => city.Hotels)

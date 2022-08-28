@@ -81,7 +81,7 @@ namespace TabanMed.Infrastructure.Services.Hotels
 
                 var entity = await _mapper.From(model).AdaptToTypeAsync<Hotel>();
                 entity.ImageUrl = savedPhotoPath;
-
+                entity.Price = model.Price;
                 entity.HotelTranslations = new List<HotelTranslation>()
                 {
                     new ()
@@ -125,6 +125,7 @@ namespace TabanMed.Infrastructure.Services.Hotels
                         Stars = hotel.Stars,
                         CallInformation = hotel.CallInformation,
                         WebsiteAddress = hotel.WebsiteAddress,
+                        Price = hotel.Price,
                         CityId = hotel.CityId,
                         HotelTranslationDto = hotel.HotelTranslations!
                             .Select(hotelTranslation => new HotelTranslationDto()
@@ -366,6 +367,7 @@ namespace TabanMed.Infrastructure.Services.Hotels
                         Id = hotel.Id,
                         CallInformation = hotel.CallInformation,
                         Stars = hotel.Stars,
+                        Price = hotel.Price,
                         WebsiteAddress = hotel.WebsiteAddress,
                         ImageUrl = Path.Combine(Path.AltDirectorySeparatorChar.ToString(), hotel.ImageUrl)
                     })
@@ -411,6 +413,7 @@ namespace TabanMed.Infrastructure.Services.Hotels
                 hotel.CallInformation= model.CallInformation;
                 hotel.Stars= model.Stars;
                 hotel.WebsiteAddress = model.WebsiteAddress;
+                hotel.Price = model.Price;
 
                 _dbContext.Hotels.Update(hotel);
                 await _dbContext.SaveChangesAsync();

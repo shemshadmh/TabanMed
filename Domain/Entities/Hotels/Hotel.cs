@@ -12,6 +12,7 @@ namespace Domain.Entities.Hotels
         public int Stars { get; set; }
         public string? CallInformation { get; set; }
         public string? WebsiteAddress { get; set; }
+        public int Price { get; set; }
 
         #region Relations
 

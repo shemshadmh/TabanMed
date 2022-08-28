@@ -16,7 +16,11 @@ namespace Persistence.Configurations.TourServicesEntities
         {
             builder.HasKey(tourService => tourService.Id);
 
-            
+            builder.Property(tourService => tourService.Price)
+                .HasColumnType(ModelConstants.Shared.SmallIntColumnType)
+                .IsRequired();
+
+
         }
     }
 }

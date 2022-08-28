@@ -43,6 +43,8 @@
                         <select class="form-control" asp-for="Stars" asp-items="@(new SelectList(new List<int>(){1,2,3,4,5}))"></select>
                     </div>
 
+                    
+                    
                     <div class="col-md-4 form-group">
                         <label asp-for="About"></label>
                         <textarea rows="5" class="form-control" asp-for="About"></textarea>
@@ -57,20 +59,24 @@
                         <label class="control-label required" asp-for="HotelPic"></label>
                         <div class="form-group">
                             <img class="show_preview_img mw-100 h-50"
-                             src="/images/NoImage.png" />
+                                 src="/images/NoImage.png" />
                         </div>
                         <div class="form-group">
                             <input id="inputfile" class="form-control previewImg"
-                               asp-for="HotelPic"
-                               oninput="setCustomValidity('')"
-                               accept=".jpg,.jpeg,.png"
-                               type="file">
+                                   asp-for="HotelPic"
+                                   oninput="setCustomValidity('')"
+                                   accept=".jpg,.jpeg,.png"
+                                   type="file">
                         </div>
                     </div>
-
-                    <div class="col form-group">
-                        <button type="submit" class="btn btn-block btn-success">@UIElements.AddNewHotel</button>
+                    <div class="col-md-4 form-group">
+                        <label asp-for="Price"></label>
+                        <input class="form-control" asp-for="Price" />
                     </div>
+                    
+                </div>
+                <div class="col form-group">
+                    <button type="submit" class="btn btn-block btn-success">@UIElements.AddNewHotel</button>
                 </div>
             </form>
         </div>

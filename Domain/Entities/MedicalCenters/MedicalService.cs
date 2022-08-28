@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using Domain.Entities.MedicalCenters.Translation;
 
 namespace Domain.Entities.MedicalCenters
@@ -10,7 +6,7 @@ namespace Domain.Entities.MedicalCenters
     public class MedicalService
     {
         public int Id { get; set; }
-
+        public int Price { get; set; }
 
         #region Relations
 

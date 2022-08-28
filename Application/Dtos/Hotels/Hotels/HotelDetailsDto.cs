@@ -6,6 +6,7 @@ public class HotelDetailsDto
     public int Stars { get; set; }
     public string? CallInformation { get; set; }
     public string? WebsiteAddress { get; set; }
+    public int Price { get; set; }
     public int CityId { get; set; }
     public string CityName { get; set; } = null!;
 

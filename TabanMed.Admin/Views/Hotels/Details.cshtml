@@ -1,6 +1,7 @@
 ﻿@using Application.Dtos.Application
 @using Application.Dtos.Hotels.Hotels
 @using Application.Extensions
+@using Resources.DataDictionary
 @model HotelDetailsDto
 
 @{
@@ -36,6 +37,9 @@
                     <br />
                     <strong>@UIElements.City</strong>:
                     <label class="card-title m-t-10">@Model.CityName </label>
+                    <br />
+                    <strong>@DataDictionary.PriceInDollar</strong>:
+                    <label class="card-title m-t-10">@Model.Price </label>
                     <br />
 
                 </div>
