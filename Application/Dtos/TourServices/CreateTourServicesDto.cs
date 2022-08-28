@@ -75,14 +75,7 @@ namespace Application.Dtos.TourServices
             ErrorMessageResourceName = nameof(ErrorMessages.MaxLength))]
         public string? AfDescription { get; set; }
 
-        [Display(ResourceType = typeof(DataDictionary),
-            Name = nameof(DataDictionary.PriceInDollar))]
-        [Required(AllowEmptyStrings = false,
-            ErrorMessageResourceType = typeof(ErrorMessages),
-            ErrorMessageResourceName = nameof(ErrorMessages.Required))]
-        [Range(0, 32760,
-            ErrorMessageResourceType = typeof(ErrorMessages),
-            ErrorMessageResourceName = nameof(ErrorMessages.Required))]
-        public int Price { get; set; }
+        
+        
     }
 }

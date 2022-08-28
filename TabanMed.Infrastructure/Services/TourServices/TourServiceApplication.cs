@@ -46,7 +46,6 @@ namespace TabanMed.Infrastructure.Services.TourServices
                     {
                         Id = tourServiceTranslation.TourServiceId,
                         Title = tourServiceTranslation.Title,
-                        Price = tourServiceTranslation.TourService.Price,
                         Description = tourServiceTranslation.Description
                     })
                     .ToListAsync();
@@ -128,7 +127,6 @@ namespace TabanMed.Infrastructure.Services.TourServices
                     .Select(tourService => new EditTourServicesDto()
                     {
                         Id = tourService.Id,
-                        Price = tourService.Price,
                         FaTitle = tourService.TourServiceTranslation!
                             .Where(tourServiceTranslation => tourServiceTranslation.LanguageId == AppConstants.FaLanguageLcid)
                             .Select(tourServiceTranslation => tourServiceTranslation.Title)
@@ -188,7 +186,7 @@ namespace TabanMed.Infrastructure.Services.TourServices
 
                 #region Update prop
 
-                tourService.Price = model.Price;
+                
 
                 tourService.TourServiceTranslation!
                     .FirstOrDefault(x =>

@@ -14,8 +14,7 @@ namespace Application.Dtos.TourServices
             Name = nameof(DataDictionary.Description))]
         public string? Description { get; set; }
 
-        [Display(ResourceType = typeof(DataDictionary),
-            Name = nameof(DataDictionary.Price))]
-        public decimal Price { get; set; }
+        
+        
     }
 }

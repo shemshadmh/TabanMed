@@ -16,7 +16,7 @@
                 </div>
                 @if (Model?.AllFacilities != null && Model.AllFacilities.Count > 0)
                 {
-                    <form asp-controller="Hotels" asp-action="EditHotelFacilities" method="post"
+                    <form asp-controller="HotelFacilities" asp-action="EditHotelFacilities" method="post"
                           id="hotel-facility-edit-form"
                           data-ajax="true" data-ajax-begin=""
                           data-ajax-complete="HotelDetails.methods.createFacilityCompleteCallback">

@@ -69,7 +69,6 @@
     {
         columns.Bound(tourService => tourService.Title);
         columns.Bound(tourService => tourService.Description);
-        columns.Bound(tourService => tourService.Price);
         columns.Bound(tourService => tourService.Id)
             .ClientTemplate($"<a class='btn btn-warning text-white' href='{Url.Action("Edit")}/#:Id#'>{UIElements.Edit}</a>")
             .Width(20)
